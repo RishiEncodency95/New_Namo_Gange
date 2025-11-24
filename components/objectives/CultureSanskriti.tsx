@@ -22,7 +22,6 @@ interface Initiative {
 }
 
 const initiatives: Initiative[] = [
-
   {
     title: "Arogya Sangoshti",
     image: ourIni15,
@@ -97,25 +96,49 @@ const initiatives: Initiative[] = [
 
 const CultureSanskriti = () => {
   return (
-    <section className="py-4 bg-gray-50">
+    <section className="mb-8 bg-gray-50">
+      <div
+        className="w-full bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/objectives/culture1.jpg')" }}
+      >
+        {/* Overlay */}
+        <div className="bg-black/40 w-full h-full py-10 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-xl md:text-2xl font-medium text-white">
+              Culture <span className="">Sanskriti</span>
+            </h2>
+
+            <p className="text-sm md:text-base text-white mt-1">
+              <Link
+                href="/"
+                className="text-[#DF562C] font-medium hover:underline"
+              >
+                Home
+              </Link>{" "}
+              - Culture Sanskriti
+            </p>
+          </div>
+        </div>
+      </div>
       <div className="w-full px-6 lg:px-10 text-center">
         {/* HEADER */}
-        <h2 className="text-lg md:text-xl font-semibold bg-white rounded text-gray-900 mb-6 py-4 px-6 shadow-sm">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-900 py-4">
           <span>
             Culture{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
               Sanskriti
             </span>
           </span>
-
-          <span className="block text-sm md:text-base text-gray-600 mt-1">
-            <Link href="/" className="text-[#DF562C] hover:underline">
-              Home
-            </Link>{" "}
-            - Culture Sanskriti
-          </span>
         </h2>
 
+        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
+          Culture Sanskriti celebrates the rich heritage, values, and traditions
+          that shape our identity. It focuses on preserving ancient wisdom,
+          promoting cultural awareness, and nurturing a deep connection to art,
+          rituals, and spirituality. Through knowledge, devotion, and shared
+          experiences, we strive to keep our cultural roots alive for future
+          generations.
+        </p>
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
           {initiatives.map((item, i) => (

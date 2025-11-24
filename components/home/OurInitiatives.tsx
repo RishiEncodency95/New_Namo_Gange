@@ -2,8 +2,6 @@
 import React from "react";
 import Image, { StaticImageData } from "next/image"; // ✅ import StaticImageData
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import ourIni1 from "@/public/OurInitiatives/ourIni1.png";
 import ourIni2 from "@/public/OurInitiatives/ourIni2.png";
 import ourIni3 from "@/public/OurInitiatives/ourIni3.png";
@@ -210,21 +208,20 @@ const initiatives: Initiative[] = [
 
 const OurInitiatives = () => {
   return (
-    <section className="relative py-4 md:py-6 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
+    <section className="relative py-4 md:py-6 bg-white overflow-hidden">
       <div className="w-full px-6 lg:px-10 text-center">
         {/* ========== Section Header ========== */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-lg md:text-xl font-semibold text-gray-900 mb-4"
-        >
+        <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
           Our{" "}
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Initiatives
           </span>
-        </motion.h2>
+        </h2>
+        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
+          Our initiatives focus on creating meaningful change through service,
+          awareness, and community support. Each program is designed to uplift
+          society, protect culture, and promote sustainable living.
+        </p>
 
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">

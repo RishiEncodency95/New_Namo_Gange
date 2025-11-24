@@ -39,6 +39,13 @@ const objectives = [
       "We support women’s education, equality, and empowerment — fostering confidence, leadership, and independence in every woman.",
     link: "/objectives/women",
   },
+  {
+    title: "Moksha Sewa",
+    image: WomenIcon,
+    description:
+      "Moksha Sewa is devoted to serving humanity through spiritual upliftment, compassion, and selfless service — guiding individuals toward inner peace, purity.",
+    link: "/objectives/women",
+  },
 ];
 
 const ObjectiveOfTrust = () => {
@@ -46,26 +53,25 @@ const ObjectiveOfTrust = () => {
     <section className="relative py-4 md:py-8 lg:py-8 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-0  lg:px-0 text-center">
         {/* Section Header */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-3"
-        >
+        <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-3">
           Objective of{" "}
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Trust
           </span>
-        </motion.h2>
+        </h2>
 
         {/* ✨ Tagline under the header */}
-        <p className="text-sm md:text-base text-gray-600 italic mb-10">
+        <p className="text-sm md:text-[15px] text-gray-800 italic mb-5">
           “Serving Humanity, Preserving Nature, Awakening Divinity.”
         </p>
-
+        {/* <p className="w-full md:w-2/3 pb-8 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
+          The goal of Trust is to build a strong connection with our users
+          through openness, safety, and reliability. We want to create a place
+          where everyone feels confident that their interests are our top
+          priority. We promise to keep your trust in every step we take.
+        </p> */}
         {/* Objective Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {objectives.map((item, i) => (
             <motion.div
               key={i}
@@ -110,7 +116,7 @@ const ObjectiveOfTrust = () => {
               {/* Read More Button */}
               <Link href={item.link}>
                 <button
-                  className="mt-6 relative overflow-hidden px-6 py-1.5 text-xs lg:text-sm md:text-sm text-white font-normal 
+                  className="mt-4 relative overflow-hidden px-6 py-1.5 text-xs lg:text-sm md:text-sm text-white font-normal 
                 shadow-md bg-[#0C55A0] cursor-pointer
                hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
                 >

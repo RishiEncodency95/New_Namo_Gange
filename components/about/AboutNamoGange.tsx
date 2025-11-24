@@ -48,24 +48,17 @@ const AboutNamoGange = () => {
   ];
 
   return (
-    <div
-      className="min-h-screen bg-gray-50 text-gray-800"
-      // style={{
-      //   backgroundImage:
-      //     "url('https://www.transparenttextures.com/patterns/white-paper.png')",
-      // backgroundImage: "url('/ourActivities/ourActivities5.jpg') ",
-      // }}
-    >
+    <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Header */}
       <div
-        className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/ourActivities/ourActivities5.jpg')" }}
+        className="w-full bg-cover bg-center bg-no-repeat "
+        style={{ backgroundImage: "url('/about/ab7.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/60 w-full h-full py-10 md:py-16">
+        <div className="bg-black/30 w-full h-full flex items-center py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
-              Health <span className="">Wellness</span>
+            <h2 className="text-xl md:text-3xl font-semibold text-white">
+              About <span className="">Us</span>
             </h2>
 
             <p className="text-sm md:text-base text-white mt-1">
@@ -75,7 +68,7 @@ const AboutNamoGange = () => {
               >
                 Home
               </Link>{" "}
-              - Health Wellness
+              - About Us
             </p>
           </div>
         </div>
@@ -86,33 +79,34 @@ const AboutNamoGange = () => {
           About <span className="text-[#DF562C]">Namo Gange</span>
         </h1>
 
-        <p className="italic  text-sm md:text-[15px] max-w-2xl mx-auto">
-          “Protect Gaumata. Feed the Needy. Spread Vedic Wisdom. Serve Humanity.
-          Reawaken Bharat’s Soul.”
+        <p className="italic text-sm md:text-[15px] max-w-3xl mx-auto text-gray-700">
+          “Through Health & Wellness, Kala & Sanskriti, Women Empowerment,
+          Moksha Sewa, Ann Seva, Health Camps, and Cleaned the Ganga River — we
+          strive to heal, inspire, and transform communities.”
         </p>
       </div>
       {/* Intro */}
-      <div className="max-w-7xl mx-auto bg-white shadow-md rounded p-6 my-8 leading-relaxed">
-        <p className="mb-4 text-normal text-sm md:text-[15px]">
-          <span className="font-medium text-[#DF562C]">Krishnayan</span> draws
-          its essence from the <span className="">Shreemad Bhagavad Gita</span>,
-          carrying the divine philosophy of{" "}
-          <span className="font-medium">Lord Krishna</span>. It is not just an
-          institution but a{" "}
-          <span className="text-[#DF562C] font-medium">sacred movement</span>{" "}
-          built upon the principles of{" "}
-          <span className="">
-            seva (service), daan (charity), and dharma (righteous duty)
-          </span>
-          .
+
+      <div className="max-w-7xl mx-auto bg-white shadow-md rounded p-6 my-8 leading-relaxed space-y-4">
+        <p className="text-sm md:text-[15px] text-gray-700">
+          <span className="font-medium text-[#DF562C]">Namo Gange</span> is a
+          non-profit organization established by a group of like-minded
+          individuals, supported by dedicated devotees and volunteers. With the
+          blessings of His Holiness Acharya Jagdish Ji Maharaj, and the guidance
+          of Shri Vijay Sharma, Shri Awadesh Sharma, Shri Brijesh Sharma, Shri
+          Dinesh Rathore, Shri Ravi Malla, Shri Ved Priya Pandey, Shri Rajesh
+          Aggarwal, and Shri Anoop Sharma, the trust was founded on{" "}
+          <span className="font-medium">30th March 2015</span>.
         </p>
-        <p className="text-normal text-sm md:text-[15px]">
-          Guided by Krishna’s timeless values, Krishnayan is a living testament
-          to Bharat’s spiritual heritage. Every step here honors{" "}
-          <span className="text-[#DF562C] font-medium">parmarth seva</span> —
-          dedicated service to{" "}
-          <span className="">Gaumata, Sanatan Dharma,</span> and the soul of
-          Bharat.
+
+        <p className="text-sm md:text-[15px] text-gray-700">
+          The <span className="font-medium text-[#DF562C]">Namo Gange</span>{" "}
+          Trust is proudly registered under the Government of India’s portal
+          <span className="font-medium"> "NGO Darpan"</span>, which functions
+          under
+          <span className="font-medium"> NITI Aayog</span> (National Institution
+          for Transforming India). This registration affirms our commitment to
+          transparency, service, and social welfare.
         </p>
       </div>
 
@@ -122,7 +116,7 @@ const AboutNamoGange = () => {
           Our Core Pillars of Service
         </h2>
 
-        <div className="space-y-6">
+        <div className="space-y-6 md:pb-8 lg:pb-8">
           {pillars.map((pillar, i) => (
             <div
               key={i}

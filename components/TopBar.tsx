@@ -71,12 +71,12 @@ const TopBar: React.FC = () => {
             Join With Us
           </button>
 
-          <button
+          {/* <button
             onClick={() => router.push("/donate")}
             className="px-4 py-1.5 border border-[#DF562C] text-[#DF562C] hover:bg-[#DF562C] hover:text-white transition "
           >
             Donate Now
-          </button>
+          </button> */}
 
           <button
             onClick={handleLogin}

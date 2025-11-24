@@ -33,7 +33,7 @@ export default function Footer() {
           whileInView="show"
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl font-bold text-white mb-3">
+          <h2 className="text-2xl font-semibold text-white mb-3">
             Namo Gange Trust
           </h2>
 
@@ -145,8 +145,11 @@ export default function Footer() {
 
           <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 text-[#f36b2a] mt-1" />
-              <span>45/6, East Patel Nagar, New Delhi - 110008</span>
+              <MapPin className="w-14 h-14 text-[#f36b2a] mt-1" />
+              <span>
+                12/52, Site - 2, Sunrise Industrial Area, Mohan Nagar,
+                Sahibabad, Ghaziabad, Uttar Pradesh 201007
+              </span>
             </li>
 
             <li className="flex items-center gap-3">
@@ -162,7 +165,7 @@ export default function Footer() {
             <li className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-[#f36b2a]" />
               <a href="tel:+911234567890" className="hover:text-[#f36b2a]">
-                +91 12345 67890
+                +91 96549 00525
               </a>
             </li>
           </ul>

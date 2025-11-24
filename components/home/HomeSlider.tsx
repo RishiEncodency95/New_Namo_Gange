@@ -7,10 +7,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const sliderImages = [
   "/home/banner1.jpg",
-  "/home/bann2.jpg",
-  "/home/bann3.jpg",
-  // "/home/bann4.jpg",
-  // "/home/bann5.jpg",
+  // "/home/bann2.jpg",
+  // "/home/bann3.jpg",
+  // "/home/banner2.jpg",
+  // "/home/banner3.jpg",
+  "/home/b1.jpg",
+  // "/home/b2.jpg",
+  // "/home/b3.jpg",
+  // "/home/b4.jpg",
+  "/home/b5.jpg",
+  "/home/b6.jpg",
+  "/home/b7.jpg",
 ];
 
 const HomeSlider = () => {

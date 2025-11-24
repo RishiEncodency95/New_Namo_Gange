@@ -6,7 +6,7 @@ import { CalendarDays, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import News1 from "@/public/newsUpdate/newsUpdate1.jpg";
 import News3 from "@/public/newsUpdate/news3.jpg";
-import News2 from "@/public/newsUpdate/news2.jpg";
+import News2 from "@/public/newsUpdate/news1.jpg";
 
 const newsData = [
   {

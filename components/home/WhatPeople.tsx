@@ -112,17 +112,16 @@ const WhatPeople = () => {
     <section className="relative py-4 md:py-6  overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 lg:px-0 text-center">
         {/* ===== Section Header ===== */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-lg md:text-xl lg:text-xl font-semibold text-gray-900 mb-4"
-        >
+        <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-gray-900 mb-4">
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Testimonials
           </span>
-        </motion.h2>
+        </h2>
+        <p className="w-full md:w-2/3 pb-8 mx-auto text-center text-gray-600 leading-relaxed">
+          Our testimonials reflect the trust and appreciation of the people we
+          serve. Each story highlights the positive impact of our initiatives
+          and the meaningful change we strive to bring in society.
+        </p>
 
         {/* ===== Slider ===== */}
         <Slider ref={sliderRef} {...settings}>

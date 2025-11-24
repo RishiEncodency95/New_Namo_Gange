@@ -74,25 +74,47 @@ const initiatives: Initiative[] = [
 
 const WomenEmpowerment = () => {
   return (
-    <section className="py-4 bg-gray-50">
+    <section className="pb-8 bg-gray-50">
+      <div
+        className="w-full bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/objectives/women1.jpg')" }}
+      >
+        {/* Overlay */}
+        <div className="bg-black/10 w-full h-full py-10 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-xl md:text-2xl font-medium text-white">
+              Women <span className="">Empowerment</span>
+            </h2>
+
+            <p className="text-sm md:text-base text-white mt-1">
+              <Link
+                href="/"
+                className="text-[#DF562C] font-medium hover:underline"
+              >
+                Home
+              </Link>{" "}
+              - Women Empowerment
+            </p>
+          </div>
+        </div>
+      </div>
       <div className="w-full px-6 lg:px-10 text-center">
         {/* HEADER */}
-        <h2 className="text-lg md:text-xl font-semibold bg-white rounded text-gray-900 mb-6 py-4 px-6 shadow-sm">
+        <h2 className="text-lg md:text-xl font-semibold  text-gray-900  py-4">
           <span>
             Women{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
               Empowerment
             </span>
           </span>
-
-          <span className="block text-sm md:text-base text-gray-600 mt-1">
-            <Link href="/" className="text-[#DF562C] hover:underline">
-              Home
-            </Link>{" "}
-            - Women Empowerment
-          </span>
         </h2>
-
+        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
+          Women Empowerment is about uplifting women through education,
+          opportunity, and equal rights. It focuses on building confidence,
+          nurturing leadership, and creating an environment where every woman
+          can grow, inspire, and achieve her full potential. By empowering
+          women, we strengthen families, communities, and the nation.
+        </p>
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
           {initiatives.map((item, i) => (

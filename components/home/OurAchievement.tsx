@@ -53,19 +53,18 @@ const OurAchievement = () => {
     <section className="relative py-4 md:py-6 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 lg:px-0">
         {/* Header */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-lg md:text-xl lg:text-xl font-semibold text-center text-gray-900 mb-4"
-        >
+        <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-center text-gray-900 mb-4">
           Our{" "}
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Achievement
           </span>
-        </motion.h2>
-
+        </h2>
+        <p className="w-full md:w-2/3 pb-8 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
+          Our achievements reflect our commitment to meaningful social impact.
+          Through consistent efforts, dedicated teams, and strong community
+          support, we have successfully launched programs that uplift lives,
+          preserve culture, and promote sustainable development.
+        </p>
         {/* Activities List */}
         <div className="space-y-3 md:space-y-5">
           {activities.map((activity, i) => (
@@ -82,19 +81,6 @@ const OurAchievement = () => {
                 i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
               } items-center gap-5 md:gap-10 lg:gap-10`}
             >
-              {/* Image Section */}
-              {/* <div className="flex-1 relative group">
-           
-                <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-
-                <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl">
-                  <Image
-                    src={activity.image}
-                    alt={activity.title}
-                    className="object-fit w-full h-54 md:h-75  transform group-hover:scale-103 transition-transform duration-700 ease-in-out"
-                  />
-                </div>
-              </div> */}
               <div className="flex-1 relative group w-full">
                 {/* Gradient glow */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>

@@ -82,11 +82,11 @@ const HealthWellness = () => {
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/ourActivities/ourActivities5.jpg')",
+          backgroundImage: "url('/objectives/health1.jpg')",
         }}
       >
         {/* Overlay */}
-        <div className="bg-black/60 w-full h-full py-10 md:py-16">
+        <div className="bg-black/30 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white">
               Health <span className="">Wellness</span>
@@ -104,9 +104,9 @@ const HealthWellness = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mb-8 text-center">
+      <div className="max-w-7xl mx-auto text-center">
         {/* HEADER */}
-        <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 py-8 px-6 ">
+        <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 py-4 ">
           <span>
             Health{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
@@ -114,9 +114,16 @@ const HealthWellness = () => {
             </span>
           </span>
         </h2>
+        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
+          Health Wellness is a commitment to nurturing the body, mind, and
+          spirit through natural healing, balanced living, and conscious
+          lifestyle choices. Our focus is on promoting preventive care,
+          traditional wellness practices, and holistic health solutions that
+          strengthen individuals and uplift the community.
+        </p>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 pb-8">
           {initiatives.map((item, i) => (
             <div
               key={i}
