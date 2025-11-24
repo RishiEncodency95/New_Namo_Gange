@@ -106,7 +106,7 @@ const page = () => {
       </div>
 
       {/* ------------------ TITLE + PARAGRAPH ------------------ */}
-      <div className="w-full max-w-3xl mx-auto px-6 lg:px-10 text-center mt-6 mb-2">
+      <div className="w-full max-w-6xl mx-auto px-6 lg:px-10 text-center mt-6 mb-2">
         <h2 className="text-lg md:text-xl font-semibold text-gray-900 py-4">
           Our{" "}
           <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
@@ -114,7 +114,7 @@ const page = () => {
           </span>
         </h2>
 
-        <p className="w-full md:w-2/3 mx-auto pb-6 text-sm md:text-[15px] text-gray-700 leading-relaxed">
+        <p className="w-full  pb-6 text-sm md:text-[15px] text-gray-700 leading-relaxed">
           Our missions are dedicated to uplifting communities through sustainable
           development, cultural preservation, health awareness, and holistic
           well-being. Each mission is crafted with purpose, compassion, and a
@@ -123,7 +123,7 @@ const page = () => {
       </div>
 
       {/* ------------------ GRID ------------------ */}
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {missions.map((item, i) => (
           <div
             key={i}
