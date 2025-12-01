@@ -56,6 +56,38 @@ const NewsUpdate = () => {
           <p className="text-[#f36b2a] text-sm font-medium">Our Blog</p>
         </motion.div>
 
+        <div className="flex justify-center w-full ">
+          <div
+            className="
+            w-full   mx-auto py-5
+      relative 
+      overflow-hidden
+      text-center
+    "
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+
+            {/* Gradient Top Highlight Line */}
+            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
+              Stay informed with the latest updates, highlights, and impactful
+              stories from our Trust. Through our{" "}
+              <span className="font-semibold text-[#DF562C]">news updates</span>{" "}
+              and{" "}
+              <span className="font-semibold text-[#1e7ed3]">
+                blog articles
+              </span>
+              , we share important initiatives, community achievements, upcoming
+              programs, and inspiring efforts shaping positive change. Each
+              update is crafted to keep you connected, aware, and engaged with
+              our mission. As we continue working towards social welfare,
+              environmental protection, and cultural preservation, we aim to
+              provide transparent, meaningful, and insightful information that
+              strengthens your trust and deepens your connection with our
+              growing community.
+            </p>
+          </div>
+        </div>
+
         {/* News Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {newsData.map((item, i) => (

@@ -36,17 +36,25 @@ export default function SpeakerButton() {
       {/* Button */}
       <button
         onClick={toggleMute}
-        className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition flex items-center justify-center"
+        className="
+    w-10 h-10 rounded-full
+    bg-white/30 backdrop-blur-md
+    shadow-md shadow-black/10
+    hover:bg-white/40 hover:shadow-lg
+    active:scale-95
+    transition-all duration-300
+    flex items-center justify-center
+  "
       >
         {isMuted ? (
-          <VolumeX size={24} className="text-[#DF562C]" />
+          <VolumeX size={24} className="text-red-600" />
         ) : (
           <Volume2 size={24} className="text-[#0C55A0]" />
         )}
       </button>
 
       {/* Sound Wave Animation (shows only when not muted) */}
-      {!isMuted && (
+      {/* {!isMuted && (
         <motion.span
           className="absolute right-[-5px] h-3 w-3 rounded-full border-2 border-[#0C55A0]"
           animate={{
@@ -59,7 +67,7 @@ export default function SpeakerButton() {
             ease: "easeInOut",
           }}
         />
-      )}
+      )} */}
     </div>
   );
 }

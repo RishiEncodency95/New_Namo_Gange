@@ -18,7 +18,7 @@ const MokshaVoyage = () => {
             </span>
           </h2>
 
-          <div className="space-y-3 text-gray-700 text-base md:text-sm leading-relaxed">
+          <div className="space-y-4 text-gray-700 text-base md:text-sm leading-relaxed">
             <p className="text-sm md:text-lg lg:text-lg text-gray-500 italic mb-3">
               “A soulful journey from self to salvation — आत्मा से मोक्ष तक की
               यात्रा”
@@ -57,12 +57,51 @@ const MokshaVoyage = () => {
               and <span className="font-normal text-[#DF562C]">liberation</span>
               .
             </p>
+
+            {/* ⭐ NEW PARAGRAPH 1 */}
+            <p className="text-sm md:text-[14px]">
+              The voyage brings together seekers, spiritual masters, yogic
+              practitioners, and nature lovers from across the world. It
+              celebrates the ancient wisdom of India — where the human soul
+              discovers its purpose through{" "}
+              <span className="text-[#1e7ed3] font-medium">
+                meditation, devotion,
+              </span>{" "}
+              and{" "}
+              <span className="text-[#DF562C] font-medium">
+                self-realization
+              </span>
+              . Through collective participation, the journey becomes a sacred
+              celebration of unity, humanity, and divine consciousness.
+            </p>
+
+            {/* ⭐ NEW PARAGRAPH 2 */}
+            <p className="text-sm md:text-[14px]">
+              Moksha Voyage also emphasizes the importance of living in balance
+              with the environment. By encouraging sustainable practices,
+              mindful living, and ecological responsibility, it reminds us that{" "}
+              <span className="font-normal text-gray-900">
+                serving nature is serving the Creator
+              </span>
+              . Every participant becomes a messenger of hope, carrying forward
+              a vision of a cleaner, kinder, and spiritually awakened world.
+            </p>
+
+            {/* ⭐ NEW PARAGRAPH 3 */}
+            {/* <p className="text-sm md:text-[14px]">
+              As this journey unfolds, it inspires individuals to transform from
+              within — to leave behind negativity, embrace inner strength, and
+              walk towards the light of truth. It is a call to rediscover our
+              roots, reconnect with our soul, and rise towards{" "}
+              <span className="text-[#DF562C] font-medium">moksha</span> — the
+              eternal state of bliss and freedom.
+            </p> */}
           </div>
 
           {/* Read More Button */}
           <Link href="/about">
             <button
-              className="mt-4 md:mt-8 lg:mt-8 relative overflow-hidden px-4 md:px-6 py-2 text-[12px] md:text-sm text-white font-normal 
+              className="mt-4 md:mt-6 lg:mt-6 relative rounded overflow-hidden px-4 md:px-6 py-2 text-[12px] md:text-sm text-white font-normal 
                shadow-md bg-[#0C55A0] cursor-pointer
                hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
             >
@@ -83,7 +122,7 @@ const MokshaVoyage = () => {
             <Image
               src={Moksha}
               alt="About Namo Gange Trust"
-              className="w-full md:h-96 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+              className="w-full md:h-106 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
             />
           </div>
 

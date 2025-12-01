@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Globe } from "lucide-react";
+import { Languages } from "lucide-react"; // New clean icon
 import { motion, AnimatePresence } from "framer-motion";
 import Portal from "./Portal";
 
@@ -46,9 +46,15 @@ export default function LanguageSwitcher() {
       {/* Button */}
       <button
         ref={btnRef}
-        className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition"
+        className="
+          p-2 rounded-full 
+          bg-white/25 backdrop-blur-md
+          hover:bg-white/40
+          transition shadow-sm 
+          border border-white/40
+        "
       >
-        <Globe size={22} className="text-[#0C55A0]" />
+        <Languages size={22} className="text-[#0C55A0]" />
       </button>
 
       {/* DROPDOWN IN PORTAL */}

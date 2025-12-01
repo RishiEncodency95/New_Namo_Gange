@@ -49,7 +49,14 @@ const NAV_ITEMS: NavItem[] = [
       { label: "Resent Updates", href: "/communication/latestNews" },
     ],
   },
-  { label: "MOKSHA SEWA", href: "/mokshaSewa" },
+  // { label: "MOKSHA SEWA", href: "/mokshaSewa" },
+  {
+    label: "SEWA",
+    dropdown: [
+      { label: "Moksha Sewa", href: "/sewa/mokshaSewa" },
+      { label: "Ann Sewa", href: "/sewa/annSewa" },
+    ],
+  },
   {
     label: "MEDIA",
     dropdown: [
@@ -57,8 +64,9 @@ const NAV_ITEMS: NavItem[] = [
       { label: "Videos Gallery", href: "/gallery/videos" },
     ],
   },
-  { label: "CONTACT", href: "/contact" },
+  { label: "SUPPORT", href: "/support" },
   { label: "CAREER", href: "/career" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 const NavBar: React.FC = () => {
@@ -105,12 +113,12 @@ const NavBar: React.FC = () => {
 
                 {/* DESKTOP DROPDOWN */}
                 {item.dropdown && (
-                  <div className="absolute left-0 mt-0 w-50 bg-white text-gray-800 rounded-md shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                  <div className="absolute left-0 mt-0 w-50 bg-white text-gray-800 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                     {item.dropdown.map((drop) => (
                       <button
                         key={drop.label}
                         onClick={() => handleNavigate(drop.href, drop.label)}
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 hover:rounded"
                       >
                         {drop.label}
                       </button>

@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import HealthIcon from "@/public/objectives/health.png";
 import NatureIcon from "@/public/objectives/nature.png";
 import CultureIcon from "@/public/objectives/culture.png";
@@ -61,69 +60,106 @@ const ObjectiveOfTrust = () => {
         </h2>
 
         {/* ✨ Tagline under the header */}
-        <p className="text-sm md:text-[15px] text-gray-800 italic mb-5">
+        <p className="text-sm md:text-[15px] text-medium mb-2 text-gray-800 italic">
           “Serving Humanity, Preserving Nature, Awakening Divinity.”
         </p>
-        {/* <p className="w-full md:w-2/3 pb-8 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
-          The goal of Trust is to build a strong connection with our users
-          through openness, safety, and reliability. We want to create a place
-          where everyone feels confident that their interests are our top
-          priority. We promise to keep your trust in every step we take.
-        </p> */}
-        {/* Objective Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {objectives.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                duration: 0.8,
-                ease: "easeOut",
-                delay: i * 0.15,
-              }}
-              viewport={{ once: true }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 12px 25px rgba(30,126,211,0.15)",
-              }}
-              className="relative bg-white rounded-2xl shadow-md hover:shadow-2xl 
-                         transition-all duration-500 p-4 flex flex-col items-center text-center
-                         border border-transparent hover:border-[#1e7ed3]/40"
-            >
-              {/* Gradient Glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#f36b2a]/10 to-[#1e7ed3]/10 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10"></div>
 
+        <div className="flex justify-center w-full ">
+          <div
+            className="
+            w-full   mx-auto
+      bg-white py-6
+      relative 
+      overflow-hidden
+      text-center
+    "
+          >
+            <div className="absolute top-1 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+
+            {/* Gradient Top Highlight Line */}
+            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
+              The goal of our Trust is to build a strong, meaningful, and
+              lasting connection with our community through{" "}
+              <span className="font-semibold text-[#DF562C]">openness</span>,{" "}
+              <span className="font-semibold text-[#1e7ed3]">safety</span>, and{" "}
+              <span className="font-semibold text-gray-900">reliability</span>.
+              We strive to create an environment where every individual feels
+              valued, respected, empowered, and confident that their well-being
+              and interests remain our highest priority. With every initiative
+              we undertake, we stay dedicated to upholding your{" "}
+              <span className="font-semibold text-[#DF562C]">trust</span> and
+              strengthening the bond that unites us as a community.
+            </p>
+          </div>
+        </div>
+
+        {/* Objective Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {objectives.map((item, i) => (
+            <div
+              key={i}
+              className="
+        bg-white 
+        rounded-xl 
+        border border-gray-200 
+        shadow-sm 
+        hover:shadow-xl 
+        transition-all 
+        p-6 
+        flex flex-col 
+        items-center 
+        text-center
+      "
+            >
               {/* Icon */}
-              <div className="w-25 h-25 md:w-28 md:h-28 lg:w-30 lg:h-30 mx-auto mb-5 rounded-full bg-gradient-to-tr from-[#f36b2a]/10 to-[#1e7ed3]/10 flex items-center justify-center shadow-inner hover:scale-105 transition-transform duration-700">
+              <div
+                className="
+          w-24 h-24 
+          md:w-28 md:h-28 
+          flex items-center justify-center 
+          rounded-full 
+          bg-gray-50 
+          border border-gray-200 
+          shadow-inner 
+          mb-4
+        "
+              >
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="w-18 h-18  md:w-20 md:h-20 lg:w-22 lg:h-22  object-contain"
+                  className="w-14 h-14 md:w-16 md:h-16 object-contain"
                 />
               </div>
 
               {/* Title */}
-              <h3 className="text-sm md:text-[1rem] lg:text-lg font-medium text-gray-900 mb-3 hover:text-[#1e7ed3] transition-colors duration-300">
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
                 {item.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 text-xs md:text-sm lg:text-sm  leading-relaxed mb-4 line-clamp-4">
+              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
                 {item.description}
               </p>
 
               {/* Read More Button */}
               <Link href={item.link}>
                 <button
-                  className="mt-4 relative overflow-hidden px-6 py-1.5 text-xs lg:text-sm md:text-sm text-white font-normal 
-                shadow-md bg-[#0C55A0] cursor-pointer
-               hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
+                  className="
+            px-5 py-1.5
+            text-sm 
+            font-medium 
+            text-white 
+            rounded-md
+            bg-[#0C55A0]
+            hover:bg-[#08467c]
+            transition
+            shadow-sm
+          "
                 >
-                  Read More...
+                  Read More
                 </button>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

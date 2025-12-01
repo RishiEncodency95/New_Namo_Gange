@@ -117,11 +117,48 @@ const WhatPeople = () => {
             Testimonials
           </span>
         </h2>
-        <p className="w-full md:w-2/3 pb-8 mx-auto text-center text-gray-600 leading-relaxed">
-          Our testimonials reflect the trust and appreciation of the people we
-          serve. Each story highlights the positive impact of our initiatives
-          and the meaningful change we strive to bring in society.
-        </p>
+        <div className="flex justify-center w-full mb-6">
+          <div
+            className="
+      w-full 
+      bg-white
+      py-6
+      relative 
+      overflow-hidden
+      text-center
+    "
+          >
+            {/* Decorative Top Accent Line */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+
+            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal mb-3">
+              Our initiatives focus on creating meaningful change through{" "}
+              <span className="font-semibold text-[#DF562C]">service</span>,{" "}
+              <span className="font-semibold text-[#1e7ed3]">awareness</span>,
+              and{" "}
+              <span className="font-semibold text-gray-900">
+                community support
+              </span>
+              . Each program is thoughtfully designed to uplift society, protect
+              culture, and promote sustainable living for future generations. We
+              strive to create a harmonious connection between people and nature
+              by nurturing values of{" "}
+              <span className="font-semibold text-[#1e7ed3]">compassion</span>,{" "}
+              <span className="font-semibold text-[#DF562C]">
+                responsibility
+              </span>
+              , and{" "}
+              <span className="font-semibold text-gray-900">
+                conscious living
+              </span>
+              . Guided by this purpose, our initiatives empower individuals and
+              communities to contribute towards a more balanced, inclusive, and
+              spiritually enriched world.
+            </p>
+            {/* ⭐ NEW PARAGRAPH — ADDED FOR MORE DEPTH */}
+            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal"></p>
+          </div>
+        </div>
 
         {/* ===== Slider ===== */}
         <Slider ref={sliderRef} {...settings}>
