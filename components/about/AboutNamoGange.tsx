@@ -52,10 +52,10 @@ const AboutNamoGange = () => {
       {/* Header */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat "
-        style={{ backgroundImage: "url('/about/ab7.jpg')" }}
+        style={{ backgroundImage: "url('/about/aboutus.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/30 w-full h-full flex items-center py-10 md:py-16">
+        <div className="bg-black/20 w-full h-full flex items-center py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-3xl font-semibold text-white">
               About <span className="">Us</span>
@@ -85,9 +85,10 @@ const AboutNamoGange = () => {
           strive to heal, inspire, and transform communities.”
         </p>
       </div>
-      {/* Intro */}
+      <div className=" w-full md:max-w-7xl mx-auto h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-      <div className="max-w-7xl mx-auto bg-white shadow-md rounded p-6 my-8 leading-relaxed space-y-4">
+      {/* Intro */}
+      <div className="max-w-7xl mx-auto py-4 leading-relaxed space-y-4">
         <p className="text-sm md:text-[15px] text-gray-700">
           <span className="font-medium text-[#DF562C]">Namo Gange</span> is a
           non-profit organization established by a group of like-minded

@@ -78,7 +78,7 @@ const initiatives: Initiative[] = [
 
 const HealthWellness = () => {
   return (
-    <section className=" bg-gray-50">
+    <section className="bg-gray-50">
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{
@@ -104,48 +104,77 @@ const HealthWellness = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto text-center">
+      <div className=" w-full md:max-w-7xl mx-auto text-center">
         {/* HEADER */}
-        <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 py-4 ">
-          <span>
-            Health{" "}
-            <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-              Wellness
+        <div className="">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Health{" "}
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                Wellness
+              </span>
             </span>
-          </span>
-        </h2>
-        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            “Promoting a healthier tomorrow through mindful living, holistic
+            care, and collective well-being.”
+          </p>
+        </div>
+        <div className=" w-full md:max-w-7xl mx-auto h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
           Health Wellness is a commitment to nurturing the body, mind, and
           spirit through natural healing, balanced living, and conscious
           lifestyle choices. Our focus is on promoting preventive care,
           traditional wellness practices, and holistic health solutions that
-          strengthen individuals and uplift the community.
+          strengthen individuals and uplift the community. We encourage people
+          to adopt mindful habits, embrace physical fitness, and develop
+          emotional resilience for a healthier and happier life. Through
+          awareness programs, health camps, and wellness initiatives, we aim to
+          empower every individual with the knowledge and support needed to
+          achieve long-term well-being. By combining ancient wisdom with modern
+          health approaches, we strive to create a harmonious environment where
+          wellness becomes a way of life for all.
         </p>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-4">
           {initiatives.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded shadow-md border border-gray-100 hover:border-[#0C55A0]/40 transition p-4 flex flex-col items-center text-center"
+              className="group bg-white rounded-xl shadow-sm border border-gray-200 
+                 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
+                 p-5 flex flex-col items-center text-center"
             >
-              {/* Image */}
-              <div className="w-full h-28 mb-4 flex items-center justify-center bg-gradient-to-tr from-[#DF562C]/10 to-[#0C55A0]/10 shadow-inner overflow-hidden">
+              {/* Image Section */}
+              <div
+                className="w-full h-28 mb-4 flex items-center justify-center 
+                      rounded-md bg-gray-50
+                      overflow-hidden shadow-inner"
+              >
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="object-contain w-auto h-auto"
+                  className="object-contain max-h-24 w-auto transition-transform duration-300
+                     group-hover:scale-105"
                 />
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
+              <h3 className="text-gray-800 font-semibold text-sm mb-2 line-clamp-2">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-4">
                 {item.description}
               </p>
 
               {/* Button */}
-              <Link href={item.link} className="w-full">
-                <button className="w-full px-3 py-1.5 text-sm bg-[#0C55A0] text-white  hover:bg-sky-600 transition">
+              <Link href={item.link} className="w-full mt-auto">
+                <button
+                  className="w-full px-3 py-1.5 text-sm font-medium rounded
+                     bg-[#0C55A0] text-white shadow-sm 
+                     hover:bg-[#0a4786] active:scale-95 transition-all"
+                >
                   Read More
                 </button>
               </Link>

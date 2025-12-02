@@ -82,7 +82,7 @@ const initiatives: Initiative[] = [
 
 const NatureEnvironment = () => {
   return (
-    <section className="mb-8 bg-gray-50">
+    <section className="bg-gray-50">
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/objectives/nature2.jpg')" }}
@@ -106,48 +106,78 @@ const NatureEnvironment = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-6 lg:px-10 text-center">
+
+      <div className="w-full  px-6 lg:px-10 text-center">
         {/* HEADER */}
-        <h2 className="text-lg md:text-xl font-semibold  text-gray-900  py-4">
-          <span>
-            Nature{" "}
-            <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-              Environment
+        <div className="">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Nature{" "}
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                Environment
+              </span>
             </span>
-          </span>
-        </h2>
-        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
-          Nature Environment focuses on protecting the Earth’s natural balance
-          through conservation, awareness, and sustainable living. We work to
-          preserve forests, rivers, wildlife, and natural resources, ensuring a
-          cleaner, greener, and healthier planet for future generations. By
-          nurturing nature, we nurture life itself.
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            “Protecting nature, preserving balance — for a cleaner, greener
+            tomorrow.”
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+
+        <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
+          Nature Environment is dedicated to preserving the Earth’s natural
+          harmony by promoting conservation, awareness, and responsible living.
+          Our mission extends beyond protecting forests, rivers, and wildlife —
+          it includes restoring ecosystems, reducing pollution, and inspiring
+          communities to adopt eco-friendly habits that safeguard the planet.
+          Through tree plantation drives, cleanliness campaigns, water
+          conservation programs, and educational outreach, we aim to create a
+          cleaner, greener, and healthier environment for generations to come.
+          We believe that when we protect nature, we protect life itself —
+          nurturing a future where humans and the environment thrive together in
+          balance, respect, and sustainability.
         </p>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-4">
           {initiatives.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded shadow-md border border-gray-100 hover:border-[#0C55A0]/40 transition p-4 flex flex-col items-center text-center"
+              className="group bg-white rounded-xl shadow-sm border border-gray-200 
+                 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
+                 p-5 flex flex-col items-center text-center"
             >
-              {/* Image */}
-              <div className="w-full h-28 mb-4 flex items-center justify-center bg-gradient-to-tr from-[#DF562C]/10 to-[#0C55A0]/10 shadow-inner overflow-hidden">
+              {/* Image Section */}
+              <div
+                className="w-full h-28 mb-4 flex items-center justify-center 
+                      rounded-md bg-gray-50
+                      overflow-hidden shadow-inner"
+              >
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="object-contain w-auto h-auto"
+                  className="object-contain max-h-24 w-auto transition-transform duration-300
+                     group-hover:scale-105"
                 />
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
+              <h3 className="text-gray-800 font-semibold text-sm mb-2 line-clamp-2">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-4">
                 {item.description}
               </p>
 
               {/* Button */}
-              <Link href={item.link} className="w-full">
-                <button className="w-full px-3 py-1.5 text-sm bg-[#0C55A0] text-white rounded hover:bg-sky-600 transition">
+              <Link href={item.link} className="w-full mt-auto">
+                <button
+                  className="w-full px-3 py-1.5 text-sm font-medium rounded
+                     bg-[#0C55A0] text-white shadow-sm 
+                     hover:bg-[#0a4786] active:scale-95 transition-all"
+                >
                   Read More
                 </button>
               </Link>

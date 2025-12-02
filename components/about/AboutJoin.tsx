@@ -23,7 +23,7 @@ function AboutJoin() {
 
       <Link href="/joinAsVolunteer">
         <button
-          className="relative overflow-hidden group border border-[#DF562C] text-[#DF562C] 
+          className="relative overflow-hidden group border rounded border-[#DF562C] text-[#DF562C] 
              font-medium text-sm sm:text-base px-6 sm:px-8 py-1.5 sm:py-1
              shadow-md transition-all duration-500"
         >
