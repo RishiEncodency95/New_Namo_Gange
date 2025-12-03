@@ -13,7 +13,6 @@ const donationOptions: Record<
     { label: "₹1100 – Full Ann Seva", amount: 1100 },
     { label: "Custom Amount", amount: "custom" },
   ],
-
   "Moksha Seva": [
     { label: "₹2100 – Last Rites Support", amount: 2100 },
     { label: "₹5100 – Complete Moksha Seva", amount: 5100 },
@@ -22,7 +21,7 @@ const donationOptions: Record<
   ],
 };
 
-/* ----- Types for Form ----- */
+/* ----- Form Types ----- */
 interface DonationFormData {
   fullName: string;
   email: string;
@@ -64,53 +63,73 @@ const initialForm: DonationFormData = {
 export default function DonationForm() {
   const [form, setForm] = useState(initialForm);
 
-  /* ----- Handle Input Change ----- */
+  /* --------------------- HANDLE CHANGE ----------------------- */
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    const target = e.target;
+    const { name, value } = target;
 
-    // Auto-reset package & amount if seva type changes
+    // checkbox
+    if (target instanceof HTMLInputElement && target.type === "checkbox") {
+      setForm((prev) => ({ ...prev, [name]: target.checked }));
+      return;
+    }
+
+    /* --- When Seva Type Changes → Reset Package & Amount --- */
     if (name === "sevaType") {
       setForm((prev) => ({
         ...prev,
+        sevaType: value,
         donationPackage: "",
         amount: "",
       }));
+      return;
     }
 
-    // When donation package changes → auto-fill amount
+    /* --- When Donation Package Changes → Set Amount --- */
     if (name === "donationPackage") {
-      const selected = donationOptions[form.sevaType]?.find(
-        (pkg) => pkg.label === value
+      const selectedPkg = donationOptions[form.sevaType]?.find(
+        (p) => p.label === value
       );
 
-      if (selected) {
+      if (selectedPkg) {
         setForm((prev) => ({
           ...prev,
-          amount: selected.amount === "custom" ? "" : String(selected.amount),
+          donationPackage: value,
+          amount:
+            selectedPkg.amount === "custom"
+              ? "" // allow typing custom
+              : String(selectedPkg.amount),
         }));
       }
+      return;
     }
+
+    /* --- Normal Input Fields --- */
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  /* --------------------- SUBMIT FORM ----------------------- */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Donation Submitted!");
-    console.log(form);
+
+    if (!form.amount) {
+      alert("Please enter donation amount");
+      return;
+    }
+
+    console.log("Donation Submitted:", form);
+    alert("Donation Submitted Successfully!");
   };
 
   return (
-    <section className="w-full bg-gray-50 px-6 lg:px-10 ">
+    <section className="w-full bg-gray-50 px-6 lg:px-10">
       {/* HEADER */}
       <div className="text-center">
-        <h2 className="text-lg md:text-xl   font-semibold rounded text-gray-900 mt-4">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-4">
           <span>
             Our{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
@@ -120,51 +139,47 @@ export default function DonationForm() {
         </h2>
 
         <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
-          "Your contribution helps us serve the needy, support social welfare
-          initiatives, and bring meaningful change to countless lives. Every
-          donation, big or small, becomes a step toward compassion, dignity, and
-          a brighter future for all."
+          "Your support strengthens our mission and helps serve those in need
+          with compassion and dignity."
         </p>
       </div>
 
-      <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+      <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+
       <div className="w-full flex justify-center">
-        <div
-          className="w-full md:w-[80%] bg-white border border-gray-200 rounded-xl 
-            shadow-sm hover:shadow-md transition-all duration-300 
-            p-6 md:p-8 my-6 "
-        >
-          <h2 className="text-lg md:text-xl font-medium text-center text-gray-800 mb-6 underline underline-offset-2">
+        <div className="w-full md:w-[80%] bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all p-6 md:p-8 my-6">
+          <h2 className="text-lg md:text-xl font-medium text-center text-gray-800 mb-6 underline underline-offset-4">
             Support Through{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
               Ann Sewa / Moksha Sewa
             </span>
           </h2>
 
+          {/* FORM */}
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
-            {/* Full Name */}
+            {/* Reusable Input Fields */}
             <InputField
               label="Full Name *"
               name="fullName"
               value={form.fullName}
               onChange={handleChange}
               placeholder="Enter full name"
+              required
             />
 
-            {/* Email */}
             <InputField
               label="Email *"
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="Enter your email"
+              required
+              placeholder="Email address"
             />
 
-            {/* Phone */}
             <InputField
               label="Phone *"
               name="phone"
@@ -179,10 +194,10 @@ export default function DonationForm() {
                   },
                 })
               }
-              placeholder="10-digit mobile"
+              required
+              placeholder="10-digit number"
             />
 
-            {/* Gender */}
             <SelectField
               label="Gender"
               name="gender"
@@ -191,12 +206,12 @@ export default function DonationForm() {
               options={["Male", "Female", "Other"]}
             />
 
-            {/* Seva Type */}
             <SelectField
               label="Choose Sewa *"
               name="sevaType"
               value={form.sevaType}
               onChange={handleChange}
+              required
               options={["Ann Seva", "Moksha Seva"]}
             />
 
@@ -208,12 +223,14 @@ export default function DonationForm() {
                 value={form.donationPackage}
                 onChange={handleChange}
                 disabled={!form.sevaType}
+                required
                 className="w-full border rounded-lg px-3 py-2 mt-1 text-sm disabled:bg-gray-100"
               >
                 <option value="">Select Package</option>
+
                 {form.sevaType &&
-                  donationOptions[form.sevaType].map((pkg, i) => (
-                    <option key={i} value={pkg.label}>
+                  donationOptions[form.sevaType].map((pkg, index) => (
+                    <option key={index} value={pkg.label}>
                       {pkg.label}
                     </option>
                   ))}
@@ -222,12 +239,13 @@ export default function DonationForm() {
 
             {/* Amount */}
             <InputField
-              label="Donation Amount (₹) *"
+              label="Amount (₹) *"
               type="number"
               name="amount"
               value={form.amount}
               onChange={handleChange}
-              placeholder="Enter amount"
+              required
+              placeholder="Enter donation amount"
             />
 
             {/* PAN */}
@@ -239,44 +257,45 @@ export default function DonationForm() {
               placeholder="For 80G receipt"
             />
 
-            {/* Country */}
+            {/* Address Details */}
             <InputField
               label="Country *"
               name="country"
               value={form.country}
               onChange={handleChange}
-              placeholder="India"
+              required
+              placeholder="Country"
             />
 
-            {/* State */}
             <InputField
               label="State *"
               name="state"
               value={form.state}
               onChange={handleChange}
-              placeholder="Your state"
+              required
+              placeholder="State"
             />
 
-            {/* City */}
             <InputField
               label="City *"
               name="city"
               value={form.city}
               onChange={handleChange}
-              placeholder="Your city"
+              required
+              placeholder="City"
             />
 
-            {/* Address */}
+            {/* Full Address */}
             <div className="md:col-span-2">
               <label className="text-sm font-medium">Full Address *</label>
               <textarea
                 name="address"
                 value={form.address}
                 onChange={handleChange}
-                required
                 rows={3}
+                required
                 className="w-full border rounded-lg px-3 py-2 mt-1 text-sm"
-                placeholder="Enter your address"
+                placeholder="Enter complete address"
               />
             </div>
 
@@ -289,12 +308,12 @@ export default function DonationForm() {
                 onChange={handleChange}
                 rows={4}
                 className="w-full border rounded-lg px-3 py-2 mt-1 text-sm"
-                placeholder="Write your message here"
-              ></textarea>
+                placeholder="Write your message"
+              />
             </div>
 
             {/* Anonymous */}
-            <div className="flex items-center gap-2 md:col-span-2">
+            <div className="flex gap-2 items-center md:col-span-2">
               <input
                 type="checkbox"
                 name="anonymous"
@@ -304,6 +323,7 @@ export default function DonationForm() {
               <label className="text-sm">Donate anonymously</label>
             </div>
 
+            {/* Submit */}
             <div className="md:col-span-2 text-center mt-2">
               <button
                 type="submit"
@@ -319,7 +339,7 @@ export default function DonationForm() {
   );
 }
 
-/*  REUSABLE INPUT COMPONENTS */
+/* --------------------- REUSABLE COMPONENTS ----------------------- */
 const InputField = ({
   label,
   ...props
