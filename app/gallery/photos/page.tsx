@@ -56,9 +56,9 @@ export default function EventsPage() {
         style={{ backgroundImage: "url('/home/image1.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/30 w-full h-full py-10 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
+        <div className="bg-black/20 w-full h-full py-10 md:py-16">
+          <div className="w-full px-4 text-center">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Photos Gallery
             </h2>
             <p className="text-sm md:text-base text-white mt-1">
@@ -73,37 +73,52 @@ export default function EventsPage() {
           </div>
         </div>
       </div>
-      <h1 className="text-lg md:text-xl lg:text-xl font-medium text-center py-6 ">
-        Our Activities & Events
-      </h1>
+      <div className="w-full  px-6 lg:px-10 text-center">
+        <div className="text-center">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Our Activities
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                & Events
+              </span>
+            </span>
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            "Our activities and events bring communities together through
+            culture, spirituality, health awareness, and meaningful social
+            service."
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-      <div className="max-w-7xl mb-6 mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {categories.map((cat) => (
-          <Link
-            key={cat.id}
-            href={`/gallery/photos/${cat.id}`}
-            className="group block bg-white shadow-md hover:shadow-lg rounded overflow-hidden transition"
-          >
-            <div className="relative">
-              <Image
-                src={cat.img}
-                alt={cat.title}
-                width={400}
-                height={300}
-                className="w-full h-56 object-cover transition-transform duration-300"
-              />
-              {/* <div className="absolute bottom-0 left-0 right-0 bg-orange-100 py-2 text-center">
+        <div className="w-full mb-6  grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              href={`/gallery/photos/${cat.id}`}
+              className="group block bg-white shadow-md hover:shadow-lg rounded overflow-hidden transition"
+            >
+              <div className="relative">
+                <Image
+                  src={cat.img}
+                  alt={cat.title}
+                  width={400}
+                  height={300}
+                  className="w-full h-56 object-cover transition-transform duration-300"
+                />
+                {/* <div className="absolute bottom-0 left-0 right-0 bg-orange-100 py-2 text-center">
                 <h3 className="font-semibold text-black text-base">
                   {cat.title}
                 </h3>
               </div> */}
-            </div>
-            <div className="flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm">
-              <p className="font-medium">{cat.title}</p>
-              <p className="flex items-center gap-1">📅 {cat.date}</p>
-            </div>
-          </Link>
-        ))}
+              </div>
+              <div className="flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm">
+                <p className="font-medium">{cat.title}</p>
+                <p className="flex items-center gap-1">📅 {cat.date}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

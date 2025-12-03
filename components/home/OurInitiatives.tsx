@@ -217,6 +217,11 @@ const OurInitiatives = () => {
             Initiatives
           </span>
         </h2>
+        <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+          “Creating positive change through service, awareness, and sustainable
+          community development.”
+        </p>
+
         <div className="flex justify-center w-full mt-2">
           <div
             className="
@@ -234,13 +239,9 @@ const OurInitiatives = () => {
               service, awareness, and community support. Each program is
               designed to uplift society, protect culture, and promote
               sustainable living while encouraging unity, responsibility,
-              compassion, and long-term positive transformation.
-            </p>
-
-            {/* ⭐ NEW PARAGRAPH — ADDED FOR MORE DEPTH */}
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
-              We strive to create a harmonious connection between people and
-              nature by nurturing values of{" "}
+              compassion, and long-term positive transformation. We strive to
+              create a harmonious connection between people and nature by
+              nurturing values of{" "}
               <span className="font-semibold text-[#1e7ed3]">compassion</span>,{" "}
               <span className="font-semibold text-[#DF562C]">
                 responsibility
@@ -257,7 +258,7 @@ const OurInitiatives = () => {
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {initiatives.map((item, i) => (
             <div
               key={i}

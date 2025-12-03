@@ -74,15 +74,15 @@ const initiatives: Initiative[] = [
 
 const WomenEmpowerment = () => {
   return (
-    <section className="pb-8 bg-gray-50">
+    <section className="bg-gray-50">
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/objectives/women1.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/10 w-full h-full py-10 md:py-16">
+        <div className="bg-black/20 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Women <span className="">Empowerment</span>
             </h2>
 
@@ -100,45 +100,74 @@ const WomenEmpowerment = () => {
       </div>
       <div className="w-full px-6 lg:px-10 text-center">
         {/* HEADER */}
-        <h2 className="text-lg md:text-xl font-semibold  text-gray-900  py-4">
-          <span>
-            Women{" "}
-            <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-              Empowerment
+        <div className="">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Women{" "}
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                Empowerment
+              </span>
             </span>
-          </span>
-        </h2>
-        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
-          Women Empowerment is about uplifting women through education,
-          opportunity, and equal rights. It focuses on building confidence,
-          nurturing leadership, and creating an environment where every woman
-          can grow, inspire, and achieve her full potential. By empowering
-          women, we strengthen families, communities, and the nation.
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            “Empowering women to rise with confidence, dignity, and equal
+            opportunity.”
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
+          Women’s Empowerment is a powerful movement dedicated to uplifting
+          women through education, opportunities, and equal rights. It focuses
+          on building confidence, nurturing leadership qualities, and creating
+          safe spaces where women can voice their aspirations freely. By
+          enabling access to skill development, financial independence, and
+          decision-making roles, we strive to ensure that every woman has the
+          freedom to grow, inspire, and achieve her fullest potential. Empowered
+          women contribute not only to the progress of their families and
+          communities but also lay the foundation for a stronger, more
+          compassionate, and inclusive society. When a woman rises, an entire
+          generation rises with her — creating lasting change for the world.
         </p>
+
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-4">
           {initiatives.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded shadow-md border border-gray-100 hover:border-[#0C55A0]/40 transition p-4 flex flex-col items-center text-center"
+              className="group bg-white rounded-xl shadow-sm border border-gray-200 
+                 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
+                 p-5 flex flex-col items-center text-center"
             >
-              {/* Image */}
-              <div className="w-full h-28 mb-4 flex items-center justify-center bg-gradient-to-tr from-[#DF562C]/10 to-[#0C55A0]/10 shadow-inner overflow-hidden">
+              {/* Image Section */}
+              <div
+                className="w-full h-28 mb-4 flex items-center justify-center 
+                      rounded-md bg-gray-50
+                      overflow-hidden shadow-inner"
+              >
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="object-contain w-auto h-auto"
+                  className="object-contain max-h-24 w-auto transition-transform duration-300
+                     group-hover:scale-105"
                 />
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
+              <h3 className="text-gray-800 font-semibold text-sm mb-2 line-clamp-2">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-4">
                 {item.description}
               </p>
 
               {/* Button */}
-              <Link href={item.link} className="w-full">
-                <button className="w-full px-3 py-1.5 text-sm bg-[#0C55A0] text-white rounded hover:bg-sky-600 transition">
+              <Link href={item.link} className="w-full mt-auto">
+                <button
+                  className="w-full px-3 py-1.5 text-sm font-medium rounded
+                     bg-[#0C55A0] text-white shadow-sm 
+                     hover:bg-[#0a4786] active:scale-95 transition-all"
+                >
                   Read More
                 </button>
               </Link>

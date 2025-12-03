@@ -88,7 +88,7 @@ const HealthWellness = () => {
         {/* Overlay */}
         <div className="bg-black/30 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Health <span className="">Wellness</span>
             </h2>
 
@@ -104,7 +104,7 @@ const HealthWellness = () => {
           </div>
         </div>
       </div>
-      <div className=" w-full md:max-w-7xl mx-auto text-center">
+      <div className="w-full  px-6 lg:px-10 text-center">
         {/* HEADER */}
         <div className="">
           <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
@@ -120,7 +120,7 @@ const HealthWellness = () => {
             care, and collective well-being.”
           </p>
         </div>
-        <div className=" w-full md:max-w-7xl mx-auto h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
         <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
           Health Wellness is a commitment to nurturing the body, mind, and
           spirit through natural healing, balanced living, and conscious

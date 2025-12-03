@@ -96,7 +96,7 @@ const initiatives: Initiative[] = [
 
 const CultureSanskriti = () => {
   return (
-    <section className="mb-8 bg-gray-50">
+    <section className="bg-gray-50">
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/objectives/culture1.jpg')" }}
@@ -104,7 +104,7 @@ const CultureSanskriti = () => {
         {/* Overlay */}
         <div className="bg-black/40 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Culture <span className="">Sanskriti</span>
             </h2>
 
@@ -122,47 +122,76 @@ const CultureSanskriti = () => {
       </div>
       <div className="w-full px-6 lg:px-10 text-center">
         {/* HEADER */}
-        <h2 className="text-lg md:text-xl font-semibold text-gray-900 py-4">
-          <span>
-            Culture{" "}
-            <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-              Sanskriti
-            </span>
-          </span>
-        </h2>
 
-        <p className="w-full md:w-2/3 pb-6 mx-auto text-sm md:text-[15px] text-center text-gray-800 leading-relaxed">
-          Culture Sanskriti celebrates the rich heritage, values, and traditions
-          that shape our identity. It focuses on preserving ancient wisdom,
-          promoting cultural awareness, and nurturing a deep connection to art,
-          rituals, and spirituality. Through knowledge, devotion, and shared
-          experiences, we strive to keep our cultural roots alive for future
-          generations.
+        <div className="">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Culture{" "}
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                Sanskriti
+              </span>
+            </span>
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            “Preserving our roots, celebrating our heritage, and nurturing
+            cultural harmony.”
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
+          Culture Sanskriti celebrates the profound heritage, timeless values,
+          and vibrant traditions that have shaped our civilization for
+          centuries. It seeks to preserve ancient wisdom, revive traditional
+          practices, and promote cultural awareness among all generations.
+          Through festivals, arts, literature, rituals, and spiritual teachings,
+          we strengthen the bond between individuals and their cultural
+          identity. By encouraging participation in cultural programs,
+          preserving folk arts, supporting artisans, and sharing stories of our
+          rich past, we help nurture a deep sense of pride and belonging. Our
+          mission is to ensure that these priceless traditions continue to
+          thrive, inspire, and guide humanity, creating a bridge between the
+          wisdom of yesterday and the aspirations of tomorrow.
         </p>
+
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-4">
           {initiatives.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded shadow-md border border-gray-100 hover:border-[#0C55A0]/40 transition p-4 flex flex-col items-center text-center"
+              className="group bg-white rounded-xl shadow-sm border border-gray-200 
+                 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
+                 p-5 flex flex-col items-center text-center"
             >
-              {/* Image */}
-              <div className="w-full h-28 mb-4 flex items-center justify-center bg-gradient-to-tr from-[#DF562C]/10 to-[#0C55A0]/10 shadow-inner overflow-hidden">
+              {/* Image Section */}
+              <div
+                className="w-full h-28 mb-4 flex items-center justify-center 
+                      rounded-md bg-gray-50
+                      overflow-hidden shadow-inner"
+              >
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="object-contain w-auto h-auto"
+                  className="object-contain max-h-24 w-auto transition-transform duration-300
+                     group-hover:scale-105"
                 />
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">
+              <h3 className="text-gray-800 font-semibold text-sm mb-2 line-clamp-2">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-4">
                 {item.description}
               </p>
 
               {/* Button */}
-              <Link href={item.link} className="w-full">
-                <button className="w-full px-3 py-1.5 text-sm bg-[#0C55A0] text-white rounded hover:bg-sky-600 transition">
+              <Link href={item.link} className="w-full mt-auto">
+                <button
+                  className="w-full px-3 py-1.5 text-sm font-medium rounded
+                     bg-[#0C55A0] text-white shadow-sm 
+                     hover:bg-[#0a4786] active:scale-95 transition-all"
+                >
                   Read More
                 </button>
               </Link>

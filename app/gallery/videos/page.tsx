@@ -39,9 +39,9 @@ export default function VideoGallery() {
       >
         {/* Overlay */}
         <div className="bg-black/30 w-full h-full py-10 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
-              Videos
+          <div className="w-full px-4 text-center">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+              Videos{" "}
             </h2>
             <p className="text-sm md:text-base text-white mt-1">
               <Link
@@ -56,10 +56,23 @@ export default function VideoGallery() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-lg md:text-xl lg:text-xl font-medium text-center mt-6 ">
-          Videos Gallery
-        </h1>
+      <div className="w-full  px-6 lg:px-10 text-center">
+        <div className="">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Videos{" "}
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                Gallery
+              </span>
+            </span>
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            "Explore moments captured through our video gallery, showcasing
+            inspiring events, social initiatives, cultural programs, and the
+            impactful work we do for the community."
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
         {/* ===== Video Grid ===== */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 py-6">
@@ -85,10 +98,10 @@ export default function VideoGallery() {
 
               {/* Title + Date */}
               <div className="py-3 px-4 text-center bg-white">
-                <h3 className="text-[#DF562C] font-medium text-base mb-2">
+                <h3 className="text-gray-700 font-medium text-base mb-2">
                   {video.title}
                 </h3>
-                <p className="text-sm text-gray-700">📅 {video.date}</p>
+                <p className="text-sm text-gray-800">📅 {video.date}</p>
               </div>
             </motion.div>
           ))}

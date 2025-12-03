@@ -27,7 +27,9 @@ export default function BlogPage() {
         {/* Overlay */}
         <div className="bg-black/20 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">Blog</h2>
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
+              Our Blogs
+            </h2>
             <p className="text-sm md:text-base text-white mt-1">
               <Link
                 href="/"
@@ -35,23 +37,41 @@ export default function BlogPage() {
               >
                 Home
               </Link>{" "}
-              - Blog
+              - Blogs
             </p>
           </div>
         </div>
       </div>
 
-      <div className="py-8">
-        <h1 className="text-lg md:text-xl lg:text-xl font-medium text-center mb-6 ">
-          Our Activities & Events
-        </h1>
+      <div className="w-full px-6 lg:px-10 text-center">
+        <div className="">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Our{" "}
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                Blogs
+              </span>
+            </span>
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            "Each event reflects our mission to uplift society through
+            spirituality, health, culture, environmental awareness, and
+            community empowerment."
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
         {/* 🔍 SEARCH BAR */}
-        <div className="max-w-7xl mx-auto">
-          <div className="relative">
+        <div className="w-full flex justify-end mt-2">
+          <div className="relative w-full md:w-[60%] lg:w-[40%] xl:w-[30%]">
             <input
               type="text"
-              placeholder="Search Here..."
-              className="w-full pl-12 pr-4 py-3 rounded-full shadow-md border border-gray-200 focus:outline-none"
+              placeholder="Search here..."
+              className="w-full pl-12 pr-4 p-1.5 md:py-2.5 lg:py-2.5
+                 rounded-xl border border-gray-300 
+                 shadow-sm focus:shadow-md 
+                 focus:border-[#0C55A0] 
+                 transition-all duration-200 
+                 text-sm md:text-base"
             />
             <Search
               size={20}
@@ -61,11 +81,11 @@ export default function BlogPage() {
         </div>
 
         {/* 🔥 BLOG GRID */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-8">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-2">
           {currentBlogs.map((blog) => (
             <div
               key={blog.id}
-              className="bg-white rounded shadow-md hover:shadow-xl transition overflow-hidden"
+              className="bg-white rounded-md shadow-md hover:shadow-xl transition overflow-hidden"
             >
               {/* IMAGE */}
               <div className="relative w-full h-48">
@@ -117,35 +137,37 @@ export default function BlogPage() {
         </div>
 
         {/* 🔵 PAGINATION */}
-        <div className="flex justify-center gap-3 mt-8">
+        <div className="flex justify-center gap-2 py-6">
           <button
-            className="px-3 py-1 border rounded-full bg-white hover:bg-gray-100"
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((p) => p - 1)}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white border hover:bg-gray-100 disabled:opacity-40"
           >
-            &lt;
+            ‹
           </button>
 
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`px-4 py-2 rounded-full ${
-                currentPage === i + 1
-                  ? "bg-[#7a0d0d] text-white"
-                  : "bg-white hover:bg-gray-200"
-              }`}
+              className={`w-9 h-9 flex items-center justify-center rounded-full font-medium transition-all
+      ${
+        currentPage === i + 1
+          ? "bg-[#0C55A0] text-white shadow-md"
+          : "bg-white border hover:bg-gray-100"
+      }
+    `}
             >
               {i + 1}
             </button>
           ))}
 
           <button
-            className="px-3 py-1 border rounded-full bg-white hover:bg-gray-100"
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage((p) => p + 1)}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white border hover:bg-gray-100 disabled:opacity-40"
           >
-            &gt;
+            ›
           </button>
         </div>
       </div>

@@ -49,7 +49,7 @@ const Support = () => {
     <section className="w-full md:max-w-7xl mx-auto relative py-4 md:py-6 overflow-hidden">
       <div className=" w-full lg:px-0">
         {/* Header */}
-        <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4 text-center">
+        <h2 className="text-xl md:text-2xl font-medium text-gray-900 mb-4 text-center">
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             {" "}
             Join the Mission
@@ -86,18 +86,15 @@ const Support = () => {
       <h1 className="text-center mb-2 text-xl font-medium">
         Please Complete the Support Form
       </h1>
-      <div
-        className="w-full md:max-w-6xl mx-auto bg-white border border-gray-200 
-rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
-      >
+      <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-2 lg:px-6 lg:py-5 md:p-10">
         {/* ========== FORM GRID START ========== */}
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {/* Full Name */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">
+          <div className="flex flex-col ">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Full Name *
             </label>
             <input
@@ -106,28 +103,30 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
               value={form.name}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="Enter your full name"
             />
           </div>
 
           {/* Email */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">Email *</label>
+            <label className="text-sm font-medium text-gray-600 mb-1">
+              Email *
+            </label>
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="Enter your email"
             />
           </div>
 
           {/* Phone */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Mobile Number *
             </label>
             <input
@@ -145,14 +144,14 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
                 })
               }
               required
-              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="10-digit mobile number"
             />
           </div>
 
           {/* Gender */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Gender *
             </label>
             <select
@@ -160,7 +159,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
               value={form.gender}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             >
               <option value="">Select gender</option>
               <option value="Male">Male</option>
@@ -171,7 +170,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
 
           {/* Age Group */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Age Group *
             </label>
             <select
@@ -179,7 +178,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
               value={form.ageGroup}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             >
               <option value="">Select age group</option>
               <option value="Below 18">Below 18</option>
@@ -191,7 +190,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
 
           {/* Support Type */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Support Type *
             </label>
             <select
@@ -199,7 +198,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
               value={form.supportType}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             >
               <option value="">Select support type</option>
               <option value="Volunteer">Volunteer</option>
@@ -212,7 +211,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
 
           {/* Address */}
           <div className="flex flex-col md:col-span-2 lg:col-span-2">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Full Address *
             </label>
             <textarea
@@ -221,20 +220,22 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
               onChange={handleChange}
               required
               rows={1}
-              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="Enter your complete address"
             />
           </div>
 
           {/* State */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">State *</label>
+            <label className="text-sm font-medium text-gray-600 mb-1">
+              State *
+            </label>
             <select
               name="state"
               value={form.state}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
+              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
             >
               <option value="">Select State</option>
               <option value="Uttar Pradesh">Uttar Pradesh</option>
@@ -256,13 +257,15 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
 
           {/* City */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700">City *</label>
+            <label className="text-sm font-medium text-gray-600 mb-1">
+              City *
+            </label>
             <select
               name="city"
               value={form.city}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
+              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
             >
               <option value="">Select City</option>
 
@@ -288,7 +291,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
 
           {/* Contribution */}
           <div className="flex flex-col ">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Preferred Contribution *
             </label>
             <select
@@ -296,7 +299,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
               value={form.contribution}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             >
               <option value="">Choose contribution</option>
               <option value="Time">Time (Volunteering)</option>
@@ -308,7 +311,7 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
 
           {/* Message */}
           <div className="flex flex-col md:col-span-2 lg:col-span-4">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-600 mb-1">
               Message / Reason to Support *
             </label>
             <textarea
@@ -317,16 +320,16 @@ rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 md:p-10"
               onChange={handleChange}
               required
               rows={4}
-              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="Write your message"
             />
           </div>
 
           {/* Submit */}
-          <div className="md:col-span-2 mt-3 lg:col-span-4 flex justify-center">
+          <div className="md:col-span-2 mt-2 lg:col-span-4 flex justify-center">
             <button
               type="submit"
-              className="px-8 py-2 bg-[#DF562C] text-white font-semibold text-sm rounded-lg shadow hover:bg-orange-600 transition duration-200"
+              className="px-8 py-2 bg-[#0C55A0] hover:bg-[#08467c] text-white font-medium text-sm md:text-[15px] lg:text-[15px] rounded-md shadow transition duration-200"
             >
               Submit Support Form
             </button>

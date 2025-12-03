@@ -54,13 +54,13 @@ export default function NewsletterPage() {
   const [viewImage, setViewImage] = useState<string | null>(null);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50">
       {/* 📌 Banner */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/home/Newsletter.jpg')" }}
       >
-        <div className="bg-black/30 w-full h-full py-14">
+        <div className="bg-black/20 w-full h-full py-14">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-2xl font-semibold text-white">Newsletter</h2>
             <p className="text-white mt-1">
@@ -76,17 +76,32 @@ export default function NewsletterPage() {
         </div>
       </div>
 
-      {/* 📌 Newsletter Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <h3 className="text-center text-xl font-semibold  mb-8">
-          Monthly Newsletter Collection
-        </h3>
+      <div className="w-full p-2 lg:px-6 text-center">
+        {/* HEADER */}
+        <div className="">
+          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+            <span>
+              Newsletter{" "}
+              <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+                Collection
+              </span>
+            </span>
+          </h2>
+          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            “Explore our monthly newsletters capturing key updates, activities,
+            and inspiring moments from our mission-driven journey.”
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      {/* 📌 Newsletter Grid */}
+      <div className="w-full p-2 lg:px-6 py-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {newsletters.map((item) => (
             <div
               key={item.id}
-              className="bg-white shadow-lg rounded overflow-hidden hover:shadow-2xl transition"
+              className="bg-white shadow-lg rounded-md overflow-hidden hover:shadow-2xl transition"
             >
               {/* Thumbnail */}
               <Image

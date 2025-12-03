@@ -15,7 +15,7 @@ const page = () => {
         {/* Overlay */}
         <div className="bg-black/30 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Get In Touch
             </h2>
           </div>

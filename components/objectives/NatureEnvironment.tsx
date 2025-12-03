@@ -90,7 +90,7 @@ const NatureEnvironment = () => {
         {/* Overlay */}
         <div className="bg-black/30 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white">
+            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Nature <span className="">Environment</span>
             </h2>
 
@@ -123,7 +123,7 @@ const NatureEnvironment = () => {
             tomorrow.”
           </p>
         </div>
-        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <div className=" w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
         <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
           Nature Environment is dedicated to preserving the Earth’s natural
