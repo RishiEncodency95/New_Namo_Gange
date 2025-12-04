@@ -165,7 +165,7 @@ const AboutNGTrust = () => {
 
             <Link href="/joinAsVolunteer">
               <button
-                className="relative overflow-hidden px-4 py-1 rounded md:px-6 md:py-2 lg:px-6 lg:py-2 text-xs md:text-sm lg:text-sm text-white font-medium 
+                className="relative overflow-hidden px-4 py-1 rounded md:px-6 py-1 md:py-1.5 lg:px-6 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
                    shadow-md bg-[#DF562C] hover:bg-orange-600
                   hover:shadow-lg transition-all duration-300"
               >
@@ -242,7 +242,7 @@ const AboutNGTrust = () => {
             </p>
             <Link href="/joinAsVolunteer">
               <button
-                className="relative overflow-hidden rounded px-4 py-1 md:px-6 md:py-2 lg:px-6 lg:py-2 text-xs md:text-sm lg:text-sm text-white font-medium 
+                className="relative overflow-hidden rounded px-4 md:px-6 py-1 md:py-1.5 lg:px-6 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
                    shadow-md bg-[#DF562C] hover:bg-orange-600
                   hover:shadow-lg transition-all duration-300"
               >

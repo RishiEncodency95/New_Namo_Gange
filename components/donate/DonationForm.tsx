@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 
-/* ----- Dynamic Donation Packages Based on Sewa ----- */
 const donationOptions: Record<
   string,
   { label: string; amount: number | "custom" }[]
@@ -21,7 +20,6 @@ const donationOptions: Record<
   ],
 };
 
-/* ----- Form Types ----- */
 interface DonationFormData {
   fullName: string;
   email: string;
@@ -31,11 +29,9 @@ interface DonationFormData {
   state: string;
   city: string;
   address: string;
-
   sevaType: string;
   donationPackage: string;
   amount: string;
-
   pan: string;
   message: string;
   anonymous: boolean;
@@ -50,11 +46,9 @@ const initialForm: DonationFormData = {
   state: "",
   city: "",
   address: "",
-
   sevaType: "",
   donationPackage: "",
   amount: "",
-
   pan: "",
   message: "",
   anonymous: false,
@@ -63,22 +57,24 @@ const initialForm: DonationFormData = {
 export default function DonationForm() {
   const [form, setForm] = useState(initialForm);
 
-  /* --------------------- HANDLE CHANGE ----------------------- */
+  /* ------------------------- HANDLE CHANGE ------------------------ */
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    const target = e.target;
-    const { name, value } = target;
+    const { name, value, type } = e.target;
 
-    // checkbox
-    if (target instanceof HTMLInputElement && target.type === "checkbox") {
-      setForm((prev) => ({ ...prev, [name]: target.checked }));
+    // Checkbox
+    if (type === "checkbox") {
+      setForm((prev) => ({
+        ...prev,
+        [name]: (e.target as HTMLInputElement).checked,
+      }));
       return;
     }
 
-    /* --- When Seva Type Changes → Reset Package & Amount --- */
+    // When SEWA changes
     if (name === "sevaType") {
       setForm((prev) => ({
         ...prev,
@@ -89,148 +85,161 @@ export default function DonationForm() {
       return;
     }
 
-    /* --- When Donation Package Changes → Set Amount --- */
+    // When PACKAGE changes → auto-set amount
     if (name === "donationPackage") {
-      const selectedPkg = donationOptions[form.sevaType]?.find(
-        (p) => p.label === value
+      const selected = donationOptions[form.sevaType]?.find(
+        (pkg) => pkg.label === value
       );
 
-      if (selectedPkg) {
-        setForm((prev) => ({
-          ...prev,
-          donationPackage: value,
-          amount:
-            selectedPkg.amount === "custom"
-              ? "" // allow typing custom
-              : String(selectedPkg.amount),
-        }));
-      }
+      setForm((prev) => ({
+        ...prev,
+        donationPackage: value,
+        amount:
+          selected?.amount === "custom" ? "" : String(selected?.amount || ""),
+      }));
       return;
     }
 
-    /* --- Normal Input Fields --- */
+    // Normal input
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  /* --------------------- SUBMIT FORM ----------------------- */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!form.amount) {
-      alert("Please enter donation amount");
-      return;
-    }
-
-    console.log("Donation Submitted:", form);
     alert("Donation Submitted Successfully!");
+    console.log(form);
   };
 
   return (
-    <section className="w-full bg-gray-50 px-6 lg:px-10">
+    <section className="w-full bg-gray-50 px-6 lg:px-10 py-6">
       {/* HEADER */}
-      <div className="text-center">
-        <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-4">
-          <span>
-            Our{" "}
-            <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-              Donate
-            </span>
+      <div className="text-center mb-4">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-900">
+          Our{" "}
+          <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+            Donate
           </span>
         </h2>
 
-        <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
-          "Your support strengthens our mission and helps serve those in need
-          with compassion and dignity."
+        <p className="text-gray-600 text-xs md:text-sm italic mt-1">
+          "Your support strengthens our mission and uplifts those in need."
         </p>
       </div>
 
-      <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+      <div className="h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] mb-6" />
 
+      {/* FORM CONTAINER */}
       <div className="w-full flex justify-center">
-        <div className="w-full md:w-[80%] bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all p-6 md:p-8 my-6">
-          <h2 className="text-lg md:text-xl font-medium text-center text-gray-800 mb-6 underline underline-offset-4">
+        <div className="w-full md:w-[80%] bg-white border border-gray-300 rounded-xl shadow p-6 md:p-8">
+          <h2 className="text-lg md:text-xl font-medium text-center mb-6 underline underline-offset-4">
             Support Through{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-              Ann Sewa / Moksha Sewa
+              Ann Seva / Moksha Seva
             </span>
           </h2>
 
           {/* FORM */}
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-3 gap-2"
           >
-            {/* Reusable Input Fields */}
-            <InputField
-              label="Full Name *"
-              name="fullName"
-              value={form.fullName}
-              onChange={handleChange}
-              placeholder="Enter full name"
-              required
-            />
+            {/* Full Name */}
+            <div>
+              <label className="text-sm font-medium">Full Name *</label>
+              <input
+                name="fullName"
+                value={form.fullName}
+                onChange={handleChange}
+                required
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="Enter full name"
+              />
+            </div>
 
-            <InputField
-              label="Email *"
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              placeholder="Email address"
-            />
+            {/* Email */}
+            <div>
+              <label className="text-sm font-medium">Email *</label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="Enter email"
+              />
+            </div>
 
-            <InputField
-              label="Phone *"
-              name="phone"
-              maxLength={10}
-              value={form.phone}
-              onChange={(e) =>
-                handleChange({
-                  ...e,
-                  target: {
-                    ...e.target,
-                    value: e.target.value.replace(/\D/g, ""),
-                  },
-                })
-              }
-              required
-              placeholder="10-digit number"
-            />
+            {/* Phone */}
+            <div>
+              <label className="text-sm font-medium">Phone *</label>
+              <input
+                type="text"
+                maxLength={10}
+                name="phone"
+                required
+                value={form.phone}
+                onChange={(e) =>
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: e.target.value.replace(/\D/g, ""),
+                    },
+                  })
+                }
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="10-digit number"
+              />
+            </div>
 
-            <SelectField
-              label="Gender"
-              name="gender"
-              value={form.gender}
-              onChange={handleChange}
-              options={["Male", "Female", "Other"]}
-            />
+            {/* Gender */}
+            <div>
+              <label className="text-sm font-medium">Gender</label>
+              <select
+                name="gender"
+                value={form.gender}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+              >
+                <option value="">Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
 
-            <SelectField
-              label="Choose Sewa *"
-              name="sevaType"
-              value={form.sevaType}
-              onChange={handleChange}
-              required
-              options={["Ann Seva", "Moksha Seva"]}
-            />
+            {/* Sewa Type */}
+            <div>
+              <label className="text-sm font-medium">Choose Sewa *</label>
+              <select
+                name="sevaType"
+                required
+                value={form.sevaType}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+              >
+                <option value="">Select Sewa</option>
+                <option>Ann Seva</option>
+                <option>Moksha Seva</option>
+              </select>
+            </div>
 
             {/* Donation Package */}
             <div>
               <label className="text-sm font-medium">Donation Package *</label>
               <select
                 name="donationPackage"
+                required
+                disabled={!form.sevaType}
                 value={form.donationPackage}
                 onChange={handleChange}
-                disabled={!form.sevaType}
-                required
-                className="w-full border rounded-lg px-3 py-2 mt-1 text-sm disabled:bg-gray-100"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm disabled:bg-gray-100"
               >
                 <option value="">Select Package</option>
-
                 {form.sevaType &&
-                  donationOptions[form.sevaType].map((pkg, index) => (
-                    <option key={index} value={pkg.label}>
+                  donationOptions[form.sevaType].map((pkg, i) => (
+                    <option key={i} value={pkg.label}>
                       {pkg.label}
                     </option>
                   ))}
@@ -238,64 +247,81 @@ export default function DonationForm() {
             </div>
 
             {/* Amount */}
-            <InputField
-              label="Amount (₹) *"
-              type="number"
-              name="amount"
-              value={form.amount}
-              onChange={handleChange}
-              required
-              placeholder="Enter donation amount"
-            />
+            <div>
+              <label className="text-sm font-medium">Amount (₹) *</label>
+              <input
+                type="number"
+                name="amount"
+                required
+                value={form.amount}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="Enter amount"
+              />
+            </div>
 
             {/* PAN */}
-            <InputField
-              label="PAN Number (Optional)"
-              name="pan"
-              value={form.pan}
-              onChange={handleChange}
-              placeholder="For 80G receipt"
-            />
+            <div>
+              <label className="text-sm font-medium">PAN (Optional)</label>
+              <input
+                name="pan"
+                value={form.pan}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="For 80G receipt"
+              />
+            </div>
 
-            {/* Address Details */}
-            <InputField
-              label="Country *"
-              name="country"
-              value={form.country}
-              onChange={handleChange}
-              required
-              placeholder="Country"
-            />
+            {/* Country */}
+            <div>
+              <label className="text-sm font-medium">Country *</label>
+              <input
+                name="country"
+                required
+                value={form.country}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="India"
+              />
+            </div>
 
-            <InputField
-              label="State *"
-              name="state"
-              value={form.state}
-              onChange={handleChange}
-              required
-              placeholder="State"
-            />
+            {/* State */}
+            <div>
+              <label className="text-sm font-medium">State *</label>
+              <input
+                name="state"
+                required
+                value={form.state}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="State"
+              />
+            </div>
 
-            <InputField
-              label="City *"
-              name="city"
-              value={form.city}
-              onChange={handleChange}
-              required
-              placeholder="City"
-            />
+            {/* City */}
+            <div>
+              <label className="text-sm font-medium">City *</label>
+              <input
+                name="city"
+                required
+                value={form.city}
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="City"
+              />
+            </div>
 
-            {/* Full Address */}
-            <div className="md:col-span-2">
+            {/* Address */}
+            <div className="md:col-span-1">
               <label className="text-sm font-medium">Full Address *</label>
               <textarea
                 name="address"
+                required
+                rows={1}
                 value={form.address}
                 onChange={handleChange}
-                rows={3}
-                required
-                className="w-full border rounded-lg px-3 py-2 mt-1 text-sm"
-                placeholder="Enter complete address"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                placeholder="Complete address"
               />
             </div>
 
@@ -304,16 +330,16 @@ export default function DonationForm() {
               <label className="text-sm font-medium">Message (Optional)</label>
               <textarea
                 name="message"
+                rows={3}
                 value={form.message}
                 onChange={handleChange}
-                rows={4}
-                className="w-full border rounded-lg px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm"
                 placeholder="Write your message"
               />
             </div>
 
             {/* Anonymous */}
-            <div className="flex gap-2 items-center md:col-span-2">
+            <div className="flex items-center gap-2 md:col-span-2">
               <input
                 type="checkbox"
                 name="anonymous"
@@ -324,10 +350,10 @@ export default function DonationForm() {
             </div>
 
             {/* Submit */}
-            <div className="md:col-span-2 text-center mt-2">
+            <div className="md:col-span-3 text-center mt-2">
               <button
                 type="submit"
-                className="px-6 py-3 bg-[#DF562C] text-white text-sm font-semibold rounded-lg shadow hover:bg-orange-600 transition"
+                className="px-6 py-1.5 md:py-2.5 lg:py-2.5 bg-[#DF562C] text-white rounded text-sm font-semibold shadow hover:bg-orange-600"
               >
                 Proceed to Donate
               </button>
@@ -338,41 +364,3 @@ export default function DonationForm() {
     </section>
   );
 }
-
-/* --------------------- REUSABLE COMPONENTS ----------------------- */
-const InputField = ({
-  label,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) => (
-  <div>
-    <label className="text-sm font-medium">{label}</label>
-    <input
-      {...props}
-      className="w-full border rounded-lg px-3 py-2 mt-1 text-sm"
-    />
-  </div>
-);
-
-const SelectField = ({
-  label,
-  options,
-  ...props
-}: React.SelectHTMLAttributes<HTMLSelectElement> & {
-  label: string;
-  options: string[];
-}) => (
-  <div>
-    <label className="text-sm font-medium">{label}</label>
-    <select
-      {...props}
-      className="w-full border rounded-lg px-3 py-2 mt-1 text-sm"
-    >
-      <option value="">Select</option>
-      {options.map((opt, i) => (
-        <option key={i} value={opt}>
-          {opt}
-        </option>
-      ))}
-    </select>
-  </div>
-);

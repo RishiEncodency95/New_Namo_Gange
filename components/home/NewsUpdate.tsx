@@ -130,7 +130,7 @@ const NewsUpdate = () => {
                 </p>
 
                 <button
-                  className="mt-4 relative overflow-hidden px-6 py-1 md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-normal 
+                  className="mt-4 relative rounded overflow-hidden px-6 py-1 md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-normal 
                shadow-md bg-[#0C55A0] cursor-pointer
                hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
                 >

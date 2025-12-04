@@ -73,71 +73,72 @@ const AboutNamoGange = () => {
           </div>
         </div>
       </div>
+      <div className="w-full px-2 md:px-8 lg:px-8">
+        <div className="w-full mt-4 text-center">
+          <h1 className="text-sm md:text-xl font-medium  mb-3">
+            About <span className="text-[#DF562C]">Namo Gange</span>
+          </h1>
 
-      <div className="max-w-7xl mx-auto px-4 mt-8 text-center">
-        <h1 className="text-sm md:text-xl font-medium  mb-3">
-          About <span className="text-[#DF562C]">Namo Gange</span>
-        </h1>
+          <p className="italic text-sm md:text-[15px] max-w-3xl mx-auto text-gray-700">
+            “Through Health & Wellness, Kala & Sanskriti, Women Empowerment,
+            Moksha Sewa, Ann Seva, Health Camps, and Cleaned the Ganga River —
+            we strive to heal, inspire, and transform communities.”
+          </p>
+        </div>
+        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-        <p className="italic text-sm md:text-[15px] max-w-3xl mx-auto text-gray-700">
-          “Through Health & Wellness, Kala & Sanskriti, Women Empowerment,
-          Moksha Sewa, Ann Seva, Health Camps, and Cleaned the Ganga River — we
-          strive to heal, inspire, and transform communities.”
-        </p>
-      </div>
-      <div className=" w-full md:max-w-7xl mx-auto h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        {/* Intro */}
+        <div className="w-full py-4 leading-relaxed space-y-4">
+          <p className="text-sm md:text-[15px] text-gray-700">
+            <span className="font-medium text-[#DF562C]">Namo Gange</span> is a
+            non-profit organization established by a group of like-minded
+            individuals, supported by dedicated devotees and volunteers. With
+            the blessings of His Holiness Acharya Jagdish Ji Maharaj, and the
+            guidance of Shri Vijay Sharma, Shri Awadesh Sharma, Shri Brijesh
+            Sharma, Shri Dinesh Rathore, Shri Ravi Malla, Shri Ved Priya Pandey,
+            Shri Rajesh Aggarwal, and Shri Anoop Sharma, the trust was founded
+            on <span className="font-medium">30th March 2015</span>.
+          </p>
 
-      {/* Intro */}
-      <div className="max-w-7xl mx-auto py-4 leading-relaxed space-y-4">
-        <p className="text-sm md:text-[15px] text-gray-700">
-          <span className="font-medium text-[#DF562C]">Namo Gange</span> is a
-          non-profit organization established by a group of like-minded
-          individuals, supported by dedicated devotees and volunteers. With the
-          blessings of His Holiness Acharya Jagdish Ji Maharaj, and the guidance
-          of Shri Vijay Sharma, Shri Awadesh Sharma, Shri Brijesh Sharma, Shri
-          Dinesh Rathore, Shri Ravi Malla, Shri Ved Priya Pandey, Shri Rajesh
-          Aggarwal, and Shri Anoop Sharma, the trust was founded on{" "}
-          <span className="font-medium">30th March 2015</span>.
-        </p>
+          <p className="text-sm md:text-[15px] text-gray-700">
+            The <span className="font-medium text-[#DF562C]">Namo Gange</span>{" "}
+            Trust is proudly registered under the Government of India’s portal
+            <span className="font-medium"> "NGO Darpan"</span>, which functions
+            under
+            <span className="font-medium"> NITI Aayog</span> (National
+            Institution for Transforming India). This registration affirms our
+            commitment to transparency, service, and social welfare.
+          </p>
+        </div>
 
-        <p className="text-sm md:text-[15px] text-gray-700">
-          The <span className="font-medium text-[#DF562C]">Namo Gange</span>{" "}
-          Trust is proudly registered under the Government of India’s portal
-          <span className="font-medium"> "NGO Darpan"</span>, which functions
-          under
-          <span className="font-medium"> NITI Aayog</span> (National Institution
-          for Transforming India). This registration affirms our commitment to
-          transparency, service, and social welfare.
-        </p>
-      </div>
+        {/* Core Pillars */}
+        <div className="w-full">
+          <h2 className="text-base md:text-lg lg:text-lg font-medium text-[#DF562C] border-b-1 border-[#DF562C] inline-block mb-6">
+            Our Core Pillars of Service
+          </h2>
 
-      {/* Core Pillars */}
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-base md:text-lg lg:text-lg font-medium text-[#DF562C] border-b-1 border-[#DF562C] inline-block mb-6">
-          Our Core Pillars of Service
-        </h2>
-
-        <div className="space-y-6 md:pb-8 lg:pb-8">
-          {pillars.map((pillar, i) => (
-            <div
-              key={i}
-              className="bg-white shadow-md rounded p-6 hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                {pillar.icon}
-                <h3 className="text-sm md:text-lg font-normal text-[#DF562C]">
-                  {pillar.title}
-                </h3>
+          <div className="space-y-6 md:pb-8 lg:pb-8">
+            {pillars.map((pillar, i) => (
+              <div
+                key={i}
+                className="bg-white shadow-md rounded p-6 hover:shadow-lg transition-shadow duration-300"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  {pillar.icon}
+                  <h3 className="text-sm md:text-lg font-normal text-[#DF562C]">
+                    {pillar.title}
+                  </h3>
+                </div>
+                <ul className="list-disc list-inside space-y-1 text-gray-700">
+                  {pillar.points.map((point, index) => (
+                    <li key={index} className="text-[15px]">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="list-disc list-inside space-y-1 text-gray-700">
-                {pillar.points.map((point, index) => (
-                  <li key={index} className="text-[15px]">
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -149,7 +149,7 @@ const ObjectiveOfTrust = () => {
             text-sm 
             font-medium 
             text-white 
-            rounded-md
+            rounded
             bg-[#0C55A0]
             hover:bg-[#08467c]
             transition
