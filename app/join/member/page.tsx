@@ -10,10 +10,10 @@ const page = () => {
     <div>
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/volunteer.jpg')" }}
+        style={{ backgroundImage: "url('/banner/member.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/30 w-full h-full py-10 md:py-16">
+        <div className="bg-black/0 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Get In Touch
@@ -86,9 +86,10 @@ const page = () => {
                 </span>
               </p>
 
-              <button 
-              onClick={() => router.push("/join/memberForm")}
-              className="mt-3 bg-[#ff6600] hover:bg-[#cc5200] text-white px-5 py-2 rounded text-sm font-semibold">
+              <button
+                onClick={() => router.push("/join/memberForm")}
+                className="mt-3 bg-[#ff6600] hover:bg-[#cc5200] text-white px-5 py-2 rounded text-sm font-semibold"
+              >
                 REGISTER NOW
               </button>
             </div>
@@ -105,9 +106,10 @@ const page = () => {
                 </span>
               </p>
 
-              <button 
-              onClick={() => router.push("/join/memberForm")}
-              className="mt-3 bg-[#ff6600] hover:bg-[#cc5200] text-white px-5 py-2 rounded text-sm font-semibold">
+              <button
+                onClick={() => router.push("/join/memberForm")}
+                className="mt-3 bg-[#ff6600] hover:bg-[#cc5200] text-white px-5 py-2 rounded text-sm font-semibold"
+              >
                 REGISTER NOW
               </button>
             </div>
@@ -125,8 +127,9 @@ const page = () => {
               </p>
 
               <button
-              onClick={() => router.push("/join/memberForm")}
-               className="mt-3 bg-[#ff6600] hover:bg-[#cc5200] text-white px-5 py-2 rounded text-sm font-semibold">
+                onClick={() => router.push("/join/memberForm")}
+                className="mt-3 bg-[#ff6600] hover:bg-[#cc5200] text-white px-5 py-2 rounded text-sm font-semibold"
+              >
                 REGISTER NOW
               </button>
             </div>
@@ -198,8 +201,9 @@ const page = () => {
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="text-center">
                   <button
-                  onClick={() => router.push("/join/memberForm")}
-                   className="bg-[#ff6600] hover:bg-[#cc5200] text-white px-6 py-2 rounded text-sm font-semibold">
+                    onClick={() => router.push("/join/memberForm")}
+                    className="bg-[#ff6600] hover:bg-[#cc5200] text-white px-6 py-2 rounded text-sm font-semibold"
+                  >
                     REGISTER NOW
                   </button>
                 </div>

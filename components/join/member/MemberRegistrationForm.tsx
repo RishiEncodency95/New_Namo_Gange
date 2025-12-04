@@ -9,10 +9,10 @@ const MemberRegistrationForm = () => {
     <div>
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/volunteer.png')" }}
+        style={{ backgroundImage: "url('/banner/member.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/30 w-full h-full py-10 md:py-16">
+        <div className="bg-black/0 w-full h-full py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               Membership Registration
@@ -56,10 +56,7 @@ const MemberRegistrationForm = () => {
               Your involvement strengthens initiatives that support education,
               healthcare, environmental conservation, women empowerment, youth
               guidance, and the preservation of our nation’s spiritual and
-              cultural heritage. Every contribution you make — whether through
-              time, skills, resources, or awareness — creates a ripple of
-              positive transformation that touches lives far beyond what can be
-              seen.
+              cultural heritage.
             </p>
           </div>
         </div>

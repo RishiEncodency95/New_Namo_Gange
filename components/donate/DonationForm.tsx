@@ -111,26 +111,10 @@ export default function DonationForm() {
   };
 
   return (
-    <section className="w-full bg-gray-50 px-6 lg:px-10 py-6">
-      {/* HEADER */}
-      <div className="text-center mb-4">
-        <h2 className="text-lg md:text-xl font-semibold text-gray-900">
-          Our{" "}
-          <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-            Donate
-          </span>
-        </h2>
-
-        <p className="text-gray-600 text-xs md:text-sm italic mt-1">
-          "Your support strengthens our mission and uplifts those in need."
-        </p>
-      </div>
-
-      <div className="h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] mb-6" />
-
+    <section className="w-full md:w-[65%] bg-gray-50 ">
       {/* FORM CONTAINER */}
       <div className="w-full flex justify-center">
-        <div className="w-full md:w-[80%] bg-white border border-gray-300 rounded-xl shadow p-6 md:p-8">
+        <div className="w-full bg-white border border-gray-300 rounded-xl shadow p-6 md:p-8">
           <h2 className="text-lg md:text-xl font-medium text-center mb-6 underline underline-offset-4">
             Support Through{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
@@ -151,7 +135,8 @@ export default function DonationForm() {
                 value={form.fullName}
                 onChange={handleChange}
                 required
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="Enter full name"
               />
             </div>
@@ -165,7 +150,8 @@ export default function DonationForm() {
                 required
                 value={form.email}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="Enter email"
               />
             </div>
@@ -188,7 +174,8 @@ export default function DonationForm() {
                     },
                   })
                 }
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="10-digit number"
               />
             </div>
@@ -200,7 +187,8 @@ export default function DonationForm() {
                 name="gender"
                 value={form.gender}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
               >
                 <option value="">Select</option>
                 <option>Male</option>
@@ -217,7 +205,8 @@ export default function DonationForm() {
                 required
                 value={form.sevaType}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
               >
                 <option value="">Select Sewa</option>
                 <option>Ann Seva</option>
@@ -255,7 +244,8 @@ export default function DonationForm() {
                 required
                 value={form.amount}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="Enter amount"
               />
             </div>
@@ -267,7 +257,8 @@ export default function DonationForm() {
                 name="pan"
                 value={form.pan}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="For 80G receipt"
               />
             </div>
@@ -280,7 +271,8 @@ export default function DonationForm() {
                 required
                 value={form.country}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="India"
               />
             </div>
@@ -293,7 +285,8 @@ export default function DonationForm() {
                 required
                 value={form.state}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="State"
               />
             </div>
@@ -306,7 +299,8 @@ export default function DonationForm() {
                 required
                 value={form.city}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="City"
               />
             </div>
@@ -320,20 +314,22 @@ export default function DonationForm() {
                 rows={1}
                 value={form.address}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="Complete address"
               />
             </div>
 
             {/* Message */}
-            <div className="md:col-span-2">
+            <div className="md:col-span-3">
               <label className="text-sm font-medium">Message (Optional)</label>
               <textarea
                 name="message"
-                rows={3}
+                rows={4}
                 value={form.message}
                 onChange={handleChange}
-                className="w-full border rounded px-3 py-2 mt-1 text-sm"
+                className="w-full border rounded px-3 py-2 mt-1 text-sm 
+             focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="Write your message"
               />
             </div>
