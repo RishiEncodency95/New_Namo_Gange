@@ -55,7 +55,7 @@ const Support = () => {
             Join the Mission
           </span>
         </h2>
-        <div className="flex justify-center w-full mb-6">
+        <div className="flex justify-center w-full">
           <div
             className="
       w-full 
@@ -68,7 +68,7 @@ const Support = () => {
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal mb-3">
+            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
               Each milestone we achieve brings us closer to a more
               compassionate, environmentally balanced society. Our programs are
               growing thanks to the dedication of volunteers, partners, and
@@ -83,10 +83,10 @@ const Support = () => {
           </div>
         </div>
       </div>
-      <h1 className="text-center mb-2 text-xl font-medium">
+      <h1 className="text-center text-xl font-medium mb-2">
         Please Complete the Support Form
       </h1>
-      <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-2 lg:px-6 lg:py-5 md:p-10">
+      <div className="w-full bg-white border border-gray-200 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-2 lg:px-6 lg:py-5 md:p-10">
         {/* ========== FORM GRID START ========== */}
         <form
           onSubmit={handleSubmit}

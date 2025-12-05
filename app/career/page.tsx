@@ -11,7 +11,7 @@ export default function MokshaSewaPage() {
       {/* ================= BANNER ================= */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/career.jpeg')" }}
+        style={{ backgroundImage: "url('/banner/career.png')" }}
       >
         <div className="bg-black/20 py-12 md:py-20">
           <div className="w-full px-4 text-center">
