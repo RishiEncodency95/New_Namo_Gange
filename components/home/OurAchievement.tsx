@@ -63,8 +63,8 @@ const activities = [
 
 const OurAchievement = () => {
   return (
-    <section className="relative py-4 md:py-6 bg-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 lg:px-0">
+    <section className="w-full relative py-4 md:py-6 bg-gray-50 overflow-hidden">
+      <div className=" px-4 lg:px-6 md:px-6">
         {/* Header */}
         <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-center text-gray-900 mb-4">
           Our{" "}
@@ -74,18 +74,12 @@ const OurAchievement = () => {
         </h2>
         <div className="flex justify-center w-full mb-6">
           <div
-            className="
-      w-full 
-      py-6
-      relative 
-      overflow-hidden
-      text-center
-    "
+            className=" w-full py-6 relative overflow-hidden text-center"
           >
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal mb-3">
+            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal mb-3">
               Each milestone achieved by our Trust is a step toward creating a
               more compassionate and environmentally balanced society. Our
               initiatives continue to grow with the collective support of
@@ -103,15 +97,8 @@ const OurAchievement = () => {
         {/* Activities List */}
         <div className="space-y-3 md:space-y-5">
           {activities.map((activity, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{
-                opacity: 0,
-                x: i % 2 === 0 ? -80 : 80,
-              }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
               className={`flex flex-col ${
                 i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
               } items-center gap-5 md:gap-10 lg:gap-10`}
@@ -134,7 +121,7 @@ const OurAchievement = () => {
                 <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-1">
                   {activity.title}
                 </h3>
-                <p className="text-gray-700 text-start text-xs md:text-sm lg:text-sm  leading-relaxed mb-6">
+                <p className="text-gray-700 text-justify text-xs md:text-sm lg:text-sm  leading-relaxed mb-6">
                   {activity.text}
                 </p>
 
@@ -148,7 +135,7 @@ const OurAchievement = () => {
                 </button>
                 {/* </Link> */}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

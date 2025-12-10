@@ -23,21 +23,26 @@ const HomeSlider = () => {
 
         console.log("🔥 Full API Response:", res.data);
 
-        const activeBanners = res.data?.banners?.filter(
+        // ✅ SAFELY extract banners array
+        const bannersList = res.data?.banners || [];
+
+        // ✅ ONLY Active status filter
+        const activeBanners = bannersList.filter(
           (b: any) => b.status === "Active"
         );
 
-        const formatted = activeBanners?.map((b: any) => ({
+        console.log("✅ Only Active Banners:", activeBanners);
+
+        // ✅ Format for slider
+        const formatted = activeBanners.map((b: any) => ({
           image: b.image,
           title: b.title,
           link: b.link,
         }));
 
-        console.log("🖼 Final Banner List:", formatted);
+        console.log("🖼 Final Banner List (Formatted):", formatted);
 
-        if (Array.isArray(formatted) && formatted.length > 0) {
-          setBanners(formatted);
-        }
+        setBanners(formatted);
       } catch (error) {
         console.error("❌ Slider API Error:", error);
       }
@@ -57,7 +62,7 @@ const HomeSlider = () => {
     fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false, // custom arrows use karenge
+    arrows: false,
     pauseOnHover: false,
   };
 
@@ -123,20 +128,7 @@ const HomeSlider = () => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="
-    inline-block
-    px-5 py-1 md:px-6 md:py-1.5
-    text-sm md:text-base 
-    font-semibold 
-    text-white 
-    bg-[#DF562C] 
-    rounded
-    shadow-md 
-    hover:bg-orange-600 
-    hover:shadow-lg 
-    transition-all 
-    duration-300
-  "
+                  className="inline-block px-5 py-1 md:px-6 md:py-1.5 text-sm md:text-base font-semibold text-white  bg-[#DF562C]  rounded shadow-md hover:bg-orange-600  hover:shadow-lg transition-all  duration-300 "
                 >
                   Donate Now
                 </Link>
@@ -144,21 +136,18 @@ const HomeSlider = () => {
             </div>
           </div>
         ))}
+        {banners.length === 0 && (
+          <div className="relative flex items-center justify-center w-full h-[220px] md:h-[550px] lg:h-[535px]">
+            <p className="text-center py-20 text-gray-500 text-sm md:text-base">
+              No active banners found
+            </p>
+          </div>
+        )}
       </Slider>
 
-      {/* (OPTIONAL) TEXT OVERLAY — uncomment if needed */}
-
-      {/* <div className="absolute right-5 top-30 md:right-16 md:bottom-16 z-30 max-w-xl">
-        <h2 className="text-white text-xl md:text-3xl font-bold leading-snug drop-shadow-xl">
-          WOULD YOU CARE TO SPARE JUST ONE DAY’S WORTH OF{" "}
-          <span className="text-yellow-400">EARNING OR TIME</span> AND
-          CONTRIBUTE TO SOCIAL IMPACT?
-        </h2>
-      </div> */}
-
       {/* ORANGE CARD SECTION BELOW SLIDER */}
-      <div className="relative bottom-0 md:bottom-10  left-1/2 -translate-x-1/2 w-full max-w-7xl px-2 md:px-4 z-30">
-        <div className="bg-[#DF562C] text-white grid grid-cols-1 md:grid-cols-3  overflow-hidden">
+      <div className="relative bottom-0 md:bottom-10  left-1/2 -translate-x-1/2 w-full px-2 md:px-6 z-30">
+        <div className="bg-[#DF562C] text-white grid grid-cols-1 md:grid-cols-3 rounded-xs overflow-hidden">
           {/* 1 — CSR HEADS */}
           <div className="px-2 py-2 md:px-4 md:py-4 lg:px-4 lg:py-4 border-b md:border-b-0 md:border-r border-white/40 flex gap-4">
             <div className="text-2xl md:text-4xl lg:text-4xl">🤝</div>

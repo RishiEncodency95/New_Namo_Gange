@@ -50,13 +50,13 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   // { label: "MOKSHA SEWA", href: "/mokshaSewa" },
-  {
-    label: "SEWA",
-    dropdown: [
-      { label: "Moksha Sewa", href: "/sewa/mokshaSewa" },
-      { label: "Ann Sewa", href: "/sewa/annSewa" },
-    ],
-  },
+  // {
+  //   label: "SEWA",
+  //   dropdown: [
+  //     { label: "Moksha Sewa", href: "/sewa/mokshaSewa" },
+  //     { label: "Ann Sewa", href: "/sewa/annSewa" },
+  //   ],
+  // },
   {
     label: "MEDIA",
     dropdown: [

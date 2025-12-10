@@ -194,7 +194,9 @@ export default function LatestNewsPage() {
                 📅 {item.date} &nbsp; | &nbsp; 📰 {item.publisher}
               </p>
 
-              <p className="text-gray-700 mt-3 line-clamp-4">{item.desc}</p>
+              <p className="text-gray-700 text-justify mt-3 line-clamp-4">
+                {item.desc}
+              </p>
 
               <button
                 className=" px-3 md:px-6 lg:px-6 py-1 md:py-1.5 lg:py-1.5 mt-3 text-sm font-medium rounded

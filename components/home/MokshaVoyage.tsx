@@ -7,19 +7,19 @@ import Moksha from "@/public/home/gangaji.jpg";
 
 const MokshaVoyage = () => {
   return (
-    <section className="relative mt-3 py-2 md:py-4 lg:py-4  bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+    <section className="relative mt-3 py-2 md:py-4 lg:py-4 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
+      <div className="w-full px-2 md:px-6 lg:px-6 flex flex-col md:flex-row items-center gap-12">
         {/* ================= LEFT SIDE TEXT ================= */}
         <div className="flex-1">
-          <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-[1rem] text-center md:text-xl lg:text-xl font-semibold text-gray-900 mb-6 leading-tight">
             Moksha{" "}
             <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
               Voyage
             </span>
           </h2>
 
-          <div className="space-y-4 text-gray-700 text-base md:text-sm leading-relaxed">
-            <p className="text-sm md:text-lg lg:text-lg text-gray-500 italic mb-3">
+          <div className="space-y-2 text-gray-700 text-base md:text-sm leading-relaxed text-justify">
+            <p className="text-sm md:text-lg lg:text-lg text-gray-500 italic mb-3 text-center">
               “A soulful journey from self to salvation — आत्मा से मोक्ष तक की
               यात्रा”
             </p>
@@ -58,7 +58,6 @@ const MokshaVoyage = () => {
               .
             </p>
 
-            {/* ⭐ NEW PARAGRAPH 1 */}
             <p className="text-sm md:text-[14px]">
               The voyage brings together seekers, spiritual masters, yogic
               practitioners, and nature lovers from across the world. It
@@ -75,7 +74,6 @@ const MokshaVoyage = () => {
               celebration of unity, humanity, and divine consciousness.
             </p>
 
-            {/* ⭐ NEW PARAGRAPH 2 */}
             <p className="text-sm md:text-[14px]">
               Moksha Voyage also emphasizes the importance of living in balance
               with the environment. By encouraging sustainable practices,
@@ -86,22 +84,12 @@ const MokshaVoyage = () => {
               . Every participant becomes a messenger of hope, carrying forward
               a vision of a cleaner, kinder, and spiritually awakened world.
             </p>
-
-            {/* ⭐ NEW PARAGRAPH 3 */}
-            {/* <p className="text-sm md:text-[14px]">
-              As this journey unfolds, it inspires individuals to transform from
-              within — to leave behind negativity, embrace inner strength, and
-              walk towards the light of truth. It is a call to rediscover our
-              roots, reconnect with our soul, and rise towards{" "}
-              <span className="text-[#DF562C] font-medium">moksha</span> — the
-              eternal state of bliss and freedom.
-            </p> */}
           </div>
 
           {/* Read More Button */}
           <Link href="/about">
             <button
-              className="mt-4 md:mt-6 lg:mt-6 relative rounded overflow-hidden px-4 md:px-6 py-2 text-[12px] md:text-sm text-white font-normal 
+              className="mt-4 md:mt-6 lg:mt-5 relative rounded overflow-hidden px-4 md:px-6 py-2 text-[12px] md:text-sm text-white font-normal 
                shadow-md bg-[#0C55A0] cursor-pointer
                hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
             >

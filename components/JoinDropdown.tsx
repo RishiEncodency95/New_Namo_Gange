@@ -62,18 +62,9 @@ const JoinDropdown: React.FC = () => {
       <button
         ref={btnRef}
         onClick={toggleOpen}
-        className="
-          flex items-center space-x-1.5 
-          px-4 py-2 
-          border border-[#DF562C] 
-          text-white 
-          bg-[#DF562C] 
-          hover:bg-[#c94b26] 
-          transition 
-          shadow-md
-      "
+        className=" flex items-center space-x-1.5 px-4 py-2  border border-[#0C55A0] rounded-xs text-white  bg-[#0C55A0] hover:bg-sky-600 hover:border-sky-600  transition shadow-md"
       >
-        <span className="font-medium text-sm">Join With Us</span>
+        <span className="font-medium text-sm">Join Us</span>
         <ChevronDown
           size={16}
           className={`transition ${isJoinOpen ? "rotate-180" : "rotate-0"}`}

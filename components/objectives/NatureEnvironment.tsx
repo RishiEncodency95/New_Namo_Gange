@@ -107,7 +107,7 @@ const NatureEnvironment = () => {
         </div>
       </div>
 
-      <div className="w-full  px-6 lg:px-10 text-center">
+      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
         {/* HEADER */}
         <div className="">
           <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
@@ -125,7 +125,7 @@ const NatureEnvironment = () => {
         </div>
         <div className=" w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-        <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
+        <p className="w-full pb-6 text-sm md:text-[15px] text-justify text-center text-gray-800 leading-relaxed mt-3">
           Nature Environment is dedicated to preserving the Earth’s natural
           harmony by promoting conservation, awareness, and responsible living.
           Our mission extends beyond protecting forests, rivers, and wildlife —

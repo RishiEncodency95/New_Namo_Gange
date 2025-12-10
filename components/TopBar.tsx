@@ -27,15 +27,7 @@ const TopBar: React.FC = () => {
 
   return (
     <div className="hidden sm:block w-full bg-white shadow-sm">
-      <div
-        className="
-          max-w-7xl mx-auto 
-          flex flex-col md:flex-row 
-          items-center md:items-center 
-          justify-between 
-          px-4 py-0.5 gap-4
-        "
-      >
+      <div className="w-full flex flex-col md:flex-row items-center md:items-center justify-between  px-6 py-0.5 gap-4 ">
         {/* ================= LOGO ================= */}
         <div className="flex justify-center md:justify-start w-full md:w-auto">
           <Image
@@ -48,19 +40,32 @@ const TopBar: React.FC = () => {
 
         {/* ================= ACTION BUTTONS ================= */}
         <div className="flex items-center gap-3 w-full mt-6 md:w-auto justify-center md:justify-end">
+          <button
+            onClick={handleLogin}
+            className=" flex items-center space-x-1.5 px-4 py-2 text-sm rounded-xs border border-[#DF562C] text-white bg-[#DF562C] hover:bg-[#c94b26]  transition  shadow-md "
+          >
+            Ann Sewa
+          </button>
+          <button
+            onClick={handleLogin}
+            className=" flex items-center space-x-1.5 px-4 py-2 text-sm rounded-xs border border-[#DF562C] text-white bg-[#DF562C] hover:bg-[#c94b26]  transition  shadow-md "
+          >
+            Moksha Sewa
+          </button>
           {/* JOIN WITH US DROPDOWN */}
           <JoinDropdown />
 
           {/* LOGIN BUTTON */}
           <button
             onClick={handleLogin}
-            className="px-4 py-2 bg-[#0C55A0] text-white hover:bg-sky-600 transition "
+            // className="space-x-1.5 px-4 py-2 text-sm  bg-[#0C55A0] text-white hover:bg-sky-600 transition "
+            className=" flex items-center space-x-1.5 px-4 py-2 text-sm border border-[#0C55A0] font-medium rounded-xs text-white bg-[#0C55A0] hover:bg-sky-600 hover:border-sky-600 transition  shadow-md "
           >
             Login
           </button>
 
           {/* PROFILE ICON */}
-          <Link
+          {/* <Link
             href="/auth/profile"
             className="
               flex items-center space-x-2 
@@ -72,11 +77,11 @@ const TopBar: React.FC = () => {
           >
             <User size={20} className="text-white" />
             <span className="font-medium ">Profile</span>
-          </Link>
+          </Link> */}
 
           {/* AUDIO + LANGUAGE SELECTORS */}
           <SpeakerButton />
-          <LanguageSwitcher />
+          {/* <LanguageSwitcher /> */}
         </div>
       </div>
     </div>

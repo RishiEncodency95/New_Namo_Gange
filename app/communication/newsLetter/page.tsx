@@ -76,7 +76,7 @@ export default function NewsletterPage() {
         </div>
       </div>
 
-      <div className="w-full p-2 lg:px-6 text-center">
+      <div className="w-full p-2 md:px-6 lg:px-6 text-center">
         {/* HEADER */}
         <div className="">
           <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">

@@ -109,29 +109,24 @@ const WhatPeople = () => {
   };
 
   return (
-    <section className="relative py-4 md:py-6  overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 lg:px-0 text-center">
+    <section className="w-full relative py-4 md:py-6  overflow-hidden">
+      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
         {/* ===== Section Header ===== */}
-        <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-gray-900 mb-4">
+        <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-gray-900">
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Testimonials
           </span>
         </h2>
+        {/* <p className="text-gray-600 text-sm md:text-[15px] mb-3 italic leading-relaxed">
+          “Creating positive change through service, awareness, and sustainable
+          community development.”
+        </p> */}
         <div className="flex justify-center w-full mb-6">
-          <div
-            className="
-      w-full 
-      bg-white
-      py-6
-      relative 
-      overflow-hidden
-      text-center
-    "
-          >
+          <div className=" w-full bg-white py-4 relative overflow-hidden text-center ">
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal mb-3">
+            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal mb-3">
               Our initiatives focus on creating meaningful change through{" "}
               <span className="font-semibold text-[#DF562C]">service</span>,{" "}
               <span className="font-semibold text-[#1e7ed3]">awareness</span>,

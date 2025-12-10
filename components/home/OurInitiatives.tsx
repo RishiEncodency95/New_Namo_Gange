@@ -209,7 +209,7 @@ const initiatives: Initiative[] = [
 const OurInitiatives = () => {
   return (
     <section className="relative py-4 md:py-6 bg-white overflow-hidden">
-      <div className="w-full px-6 lg:px-10 text-center">
+      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
         {/* ========== Section Header ========== */}
         <h2 className="text-lg md:text-xl font-semibold text-gray-900">
           Our{" "}
@@ -223,18 +223,9 @@ const OurInitiatives = () => {
         </p>
 
         <div className="flex justify-center w-full mt-2">
-          <div
-            className="
-            w-full md:max-w-8xl mx-auto
-            bg-white py-6
-            relative 
-            overflow-hidden
-            text-center
-    "
-          >
+          <div className="w-full md:max-w-8xl mx-auto  bg-white py-6 relative overflow-hidden text-cente ">
             <div className="absolute top-1 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-            {/* Gradient Top Highlight Line */}
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
+            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal">
               Our initiatives focus on creating meaningful change through
               service, awareness, and community support. Each program is
               designed to uplift society, protect culture, and promote

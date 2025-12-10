@@ -106,7 +106,7 @@ const MokshaSewa = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-6 lg:px-10 text-center">
+      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
         {/* HEADER */}
 
         <div className="">
@@ -125,7 +125,7 @@ const MokshaSewa = () => {
           </p>
         </div>
         <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-        <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
+        <p className="w-full pb-6 text-sm text-justify md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
           Moksha Sewa is devoted to serving humanity through compassion,
           spiritual guidance, and selfless support. Rooted deeply in the
           timeless principles of Sanatana Dharma, it encourages individuals to

@@ -50,7 +50,7 @@ const objectives = [
 const ObjectiveOfTrust = () => {
   return (
     <section className="relative py-4 md:py-8 lg:py-8 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-0  lg:px-0 text-center">
+      <div className="w-full mx-auto px-2 md:px-6 lg:px-6 md:px-0  lg:px-0 text-center">
         {/* Section Header */}
         <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-3">
           Objective of{" "}
@@ -65,15 +65,7 @@ const ObjectiveOfTrust = () => {
         </p>
 
         <div className="flex justify-center w-full ">
-          <div
-            className="
-            w-full   mx-auto
-      bg-white py-6
-      relative 
-      overflow-hidden
-      text-center
-    "
-          >
+          <div className=" w-full   mx-auto bg-white py-6  relative   overflow-hidden text-justify">
             <div className="absolute top-1 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
             {/* Gradient Top Highlight Line */}
@@ -98,32 +90,10 @@ const ObjectiveOfTrust = () => {
           {objectives.map((item, i) => (
             <div
               key={i}
-              className="
-        bg-white 
-        rounded-xl 
-        border border-gray-200 
-        shadow-sm 
-        hover:shadow-xl 
-        transition-all 
-        p-6 
-        flex flex-col 
-        items-center 
-        text-center
-      "
+              className="bg-white  rounded-xl border border-gray-200  shadow-sm  hover:shadow-xl transition-all p-6 flex flex-col items-center text-center "
             >
               {/* Icon */}
-              <div
-                className="
-          w-24 h-24 
-          md:w-28 md:h-28 
-          flex items-center justify-center 
-          rounded-full 
-          bg-gray-50 
-          border border-gray-200 
-          shadow-inner 
-          mb-4
-        "
-              >
+              <div className=" w-24 h-24  md:w-28 md:h-28 flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -143,19 +113,7 @@ const ObjectiveOfTrust = () => {
 
               {/* Read More Button */}
               <Link href={item.link}>
-                <button
-                  className="
-            px-5 py-1.5
-            text-sm 
-            font-medium 
-            text-white 
-            rounded
-            bg-[#0C55A0]
-            hover:bg-[#08467c]
-            transition
-            shadow-sm
-          "
-                >
+                <button className=" px-5 py-1.5 text-sm font-medium text-white rounded bg-[#0C55A0] hover:bg-[#08467c] transition shadow-sm ">
                   Read More
                 </button>
               </Link>

@@ -46,7 +46,7 @@ const Support = () => {
     alert("Support Form Submitted Successfully!");
   };
   return (
-    <section className="w-full md:max-w-7xl mx-auto relative py-4 md:py-6 overflow-hidden">
+    <section className="w-full px-2 md:px-6 lg:px-6 relative py-4 md:py-6 overflow-hidden">
       <div className=" w-full lg:px-0">
         {/* Header */}
         <h2 className="text-xl md:text-2xl font-medium text-gray-900 mb-4 text-center">
@@ -68,7 +68,7 @@ const Support = () => {
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
+            <p className="text-gray-700 text-sm text-justify md:text-[15px] leading-relaxed font-normal">
               Each milestone we achieve brings us closer to a more
               compassionate, environmentally balanced society. Our programs are
               growing thanks to the dedication of volunteers, partners, and
@@ -95,7 +95,7 @@ const Support = () => {
           {/* Full Name */}
           <div className="flex flex-col ">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Full Name *
+              Full Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -111,7 +111,7 @@ const Support = () => {
           {/* Email */}
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Email *
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -127,7 +127,7 @@ const Support = () => {
           {/* Phone */}
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Mobile Number *
+              Mobile Number <span className="text-red-500">*</span> 
             </label>
             <input
               type="tel"
@@ -152,7 +152,7 @@ const Support = () => {
           {/* Gender */}
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Gender *
+              Gender <span className="text-red-500">*</span>
             </label>
             <select
               name="gender"
@@ -171,27 +171,22 @@ const Support = () => {
           {/* Age Group */}
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Age Group *
+              DOB <span className="text-red-500">*</span>
             </label>
-            <select
+            <input
+              type="date"
               name="ageGroup"
               value={form.ageGroup}
               onChange={handleChange}
               required
               className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
-            >
-              <option value="">Select age group</option>
-              <option value="Below 18">Below 18</option>
-              <option value="18-30">18 - 30</option>
-              <option value="31-50">31 - 50</option>
-              <option value="Above 50">Above 50</option>
-            </select>
+            />
           </div>
 
           {/* Support Type */}
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Support Type *
+              Support Type <span className="text-red-500">*</span>
             </label>
             <select
               name="supportType"
@@ -212,7 +207,7 @@ const Support = () => {
           {/* Address */}
           <div className="flex flex-col md:col-span-2 lg:col-span-2">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Full Address *
+              Full Address <span className="text-red-500">*</span>
             </label>
             <textarea
               name="address"
@@ -228,7 +223,7 @@ const Support = () => {
           {/* State */}
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              State *
+              State <span className="text-red-500">*</span>
             </label>
             <select
               name="state"
@@ -258,7 +253,7 @@ const Support = () => {
           {/* City */}
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              City *
+              City <span className="text-red-500">*</span>
             </label>
             <select
               name="city"
@@ -292,7 +287,7 @@ const Support = () => {
           {/* Contribution */}
           <div className="flex flex-col ">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Preferred Contribution *
+              Preferred Contribution <span className="text-red-500">*</span>
             </label>
             <select
               name="contribution"
@@ -312,7 +307,8 @@ const Support = () => {
           {/* Message */}
           <div className="flex flex-col md:col-span-2 lg:col-span-4">
             <label className="text-sm font-medium text-gray-600 mb-1">
-              Message / Reason to Support *
+              Message / Reason to Support{" "}
+              <span className="text-red-500">*</span>
             </label>
             <textarea
               name="message"

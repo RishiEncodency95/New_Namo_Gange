@@ -92,7 +92,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className="w-full  px-6 lg:px-10 text-center">
+      <div className="w-full px-2 md:px-6 lg:px-6 text-center">
         {/* HEADER */}
         <div className="">
           <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
@@ -110,7 +110,7 @@ const page = () => {
           </p>
         </div>
         <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-        <p className="w-full pb-6 text-sm md:text-[15px] text-center text-gray-800 leading-relaxed mt-3">
+        <p className="w-full pb-6 text-sm text-justify md:text-[15px] text-gray-800 leading-relaxed mt-3">
           Our events and initiatives are designed to bring people together for a
           healthier, happier, and more spiritually enriched life. Each program
           focuses on spreading awareness, encouraging mindful living, and

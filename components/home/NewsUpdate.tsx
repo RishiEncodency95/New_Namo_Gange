@@ -37,38 +37,25 @@ const newsData = [
 
 const NewsUpdate = () => {
   return (
-    <section className="relative py-4 md:py-6 bg-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 lg:px-0">
+    <section className="w-full relative py-4 md:py-6 bg-gray-50 overflow-hidden">
+      <div className="w-full px-4 md:px-6 lg:px-6">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-center mb-4"
-        >
+        <div className="text-center mb-4">
           <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2">
             News{" "}
             <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
               Updates
             </span>
           </h2>
-          <p className="text-[#f36b2a] text-sm font-medium">Our Blog</p>
-        </motion.div>
+          {/* <p className="text-[#f36b2a] text-sm font-medium">Our Blog</p> */}
+        </div>
 
         <div className="flex justify-center w-full ">
-          <div
-            className="
-            w-full   mx-auto py-5
-      relative 
-      overflow-hidden
-      text-center
-    "
-          >
+          <div className=" w-full mx-auto py-5 relative overflow-hidden text-center ">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
             {/* Gradient Top Highlight Line */}
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
+            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal">
               Stay informed with the latest updates, highlights, and impactful
               stories from our Trust. Through our{" "}
               <span className="font-semibold text-[#DF562C]">news updates</span>{" "}
@@ -125,8 +112,8 @@ const NewsUpdate = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 text-xs md:text-sm mb-3 line-clamp-4 leading-relaxed">
-                  {item.description}
+                <p className="text-gray-600 text-justisy text-xs md:text-sm mb-3 line-clamp-4 leading-relaxed">
+                  {item.description} 
                 </p>
 
                 <button

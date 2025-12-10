@@ -3,15 +3,18 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import AboutNGTrust3 from "@/public/home/we.jpg";
 import MissionImg from "@/public/home/mission1.jpg";
 import VisionImg from "@/public/home/vision1.jpg";
 
 const AboutNGTrust = () => {
+  // ✅ ONLY FOR THIS SECTION – COMMON P STYLE
+  const paraStyle =
+    "text-gray-700 text-[13px] md:text-[14px] leading-relaxed font-normal text-justify";
+
   return (
     <section className="relative py-4 md:py-6 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 lg:px-0 flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10">
+      <div className="w-full px-4 md:px-6 lg:px-6 flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10">
         {/* ================= LEFT SIDE TEXT ================= */}
         <div className="flex-1">
           <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-4 leading-tight">
@@ -21,25 +24,25 @@ const AboutNGTrust = () => {
             </span>
           </h2>
 
-          <div className="space-y-4 text-gray-700 text-[15px] md:text-[15px] leading-relaxed">
-            <p>
-              <span className="font-semibold text-gray-900">
+          <div className="space-y-2">
+            <p className={paraStyle}>
+              <span className="font-medium text-gray-900">
                 Namo Gange Trust
               </span>{" "}
               is wholeheartedly dedicated to the sacred mission of protecting,
               restoring, and uplifting the divine river Ganga — a lifeline that
               nurtures millions. Through continuous social initiatives, the
               trust champions the vision of{" "}
-              <span className="font-medium text-[#DF562C]">Aviral</span>{" "}
+              <span className="font-normal text-[#DF562C]">Aviral</span>{" "}
               (continuous flow) and{" "}
-              <span className="font-medium text-[#1e7ed3]">Nirmal Ganga</span>{" "}
+              <span className="font-normal text-[#1e7ed3]">Nirmal Ganga</span>{" "}
               (clean, pure Ganga), ensuring that the river remains a symbol of
               purity, heritage, and spiritual strength for generations to come.
             </p>
 
-            <p>
+            <p className={paraStyle}>
               Our mission expands across multifaceted domains including{" "}
-              <span className="font-semibold text-gray-900">
+              <span className="font-normal text-gray-900">
                 Spiritual, Educational, Healthcare, Environmental, and Cultural
                 programs
               </span>{" "}
@@ -49,31 +52,9 @@ const AboutNGTrust = () => {
               and morality.
             </p>
 
-            {/* <p>
-              The trust continuously organizes campaigns, workshops, awareness
-              drives, and large-scale social events that encourage individuals
-              to adopt mindful living and sustainable practices. Whether it's
-              promoting yoga, natural healing, environmental conservation, or
-              cultural preservation, each effort reflects our commitment to
-              holistic well-being.
-            </p> */}
-            {/* 
-            <p>
-              Guided by a passionate team of{" "}
-              <span className="font-medium text-[#DF562C]">
-                Trustees, Sevaks, and Volunteers
-              </span>
-              , our journey is rooted in compassion, service, and unwavering
-              devotion. Together, we work towards shaping a society that
-              respects nature, values culture, and embraces humanity as one
-              family. With every initiative, we move a step closer to creating a
-              spiritually awakened, environmentally responsible, and socially
-              harmonious world.
-            </p> */}
-
-            <p>
+            <p className={paraStyle}>
               At its core,{" "}
-              <span className="font-semibold text-gray-900">
+              <span className="font-normal text-gray-900">
                 Namo Gange Trust
               </span>{" "}
               serves as a bridge between tradition and modernity — inspiring
@@ -92,63 +73,46 @@ const AboutNGTrust = () => {
         </div>
 
         {/* ================= RIGHT SIDE IMAGE ================= */}
-        <motion.div
-          initial={{ opacity: 0, x: 80 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="flex-1 relative"
-        >
+        <div className="flex-1 relative">
           <div className="overflow-hidden rounded shadow-lg md:mt-6 hover:shadow-xl transition-all duration-500">
             <Image
               src={AboutNGTrust3}
               alt="About Namo Gange Trust"
-              className="w-full  md:h-96 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+              className="w-full md:h-96 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
             />
           </div>
 
-          {/* Gradient Glow Effect */}
-          <div
-            className="absolute -inset-3 bg-gradient-to-r 
-              from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 
-              blur-2xl rounded-3xl -z-10 opacity-70"
-          ></div>
-        </motion.div>
+          <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded-3xl -z-10 opacity-70"></div>
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-2">
-        {/* ================== MISSION SECTION ================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10"
-        >
-          {/* LEFT IMAGE */}
+      {/* ================== MISSION SECTION ================== */}
+      <div className="w-full px-4 lg:px-6 mt-2">
+        <div className="flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10">
           <div className="flex-1 relative">
             <div className="overflow-hidden rounded shadow-lg hover:shadow-2xl transition-all duration-500">
               <Image
                 src={MissionImg}
                 alt="Mission - Namo Gange Trust"
-                className="w-full  md:h-80 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+                className="w-full md:h-80 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
               />
             </div>
             <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>
           </div>
 
-          {/* RIGHT TEXT */}
           <div className="flex-1">
-            <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 lg:mb-6 leading-tight">
+            <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 leading-tight">
               OUR{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#1e7ed3] bg-clip-text text-transparent">
                 MISSION
               </span>
             </h2>
-            <h4 className="text-[#DF562C] text-[1rem] md:text-lg lg:text-lg font-semibold mb-3">
+
+            <h4 className="text-[#DF562C] text-[1rem] md:text-lg font-semibold mb-3">
               सर्वे भवन्तु सुखिनः
             </h4>
-            <p className="text-gray-700 text-sm leading-relaxed mb-6">
+
+            <p className={paraStyle}>
               Our mission is to support and promote Indian ideology{" "}
               <span className="font-medium text-gray-900">
                 सर्वे भवन्तु सुखिनः
@@ -157,33 +121,19 @@ const AboutNGTrust = () => {
               peace, and harmony, without boundaries of caste, creed, or color.
               Inspired by this timeless Vedic mantra, we strive to cultivate a
               global culture rooted in compassion, mutual respect, and universal
-              well-being. Through our spiritual, social, and environmental
-              initiatives, we aim to build a world where humanity flourishes
-              together — where no one is left behind, where nature is honored,
-              and where unity becomes our collective strength and guiding light.
+              well-being.
             </p>
 
             <Link href="/joinAsVolunteer">
-              <button
-                className="relative overflow-hidden px-4 py-1 rounded md:px-6 py-1 md:py-1.5 lg:px-6 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
-                   shadow-md bg-[#DF562C] hover:bg-orange-600
-                  hover:shadow-lg transition-all duration-300"
-              >
+              <button className="mt-4 relative overflow-hidden px-4 py-1 rounded md:px-6 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
                 Join As Volunteer
               </button>
             </Link>
           </div>
-        </motion.div>
+        </div>
 
         {/* ================== VISION SECTION ================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row-reverse items-center mt-2 gap-5 md:gap-10 lg:gap-10"
-        >
-          {/* RIGHT IMAGE */}
+        <div className="flex flex-col md:flex-row-reverse items-center mt-2 gap-5 md:gap-10 lg:gap-10">
           <div className="flex-1 relative">
             <div className="overflow-hidden rounded shadow-lg hover:shadow-2xl transition-all duration-500">
               <Image
@@ -195,15 +145,15 @@ const AboutNGTrust = () => {
             <div className="absolute -inset-3 bg-gradient-to-l from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>
           </div>
 
-          {/* LEFT TEXT */}
           <div className="flex-1 md:mt-2">
-            <h2 className="text-[1rem] md:text-xl md:mt-2 lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 lg:mb-6 leading-tight">
+            <h2 className="text-[1rem] md:text-xl md:mt-2 text-center lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 leading-tight">
               OUR{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#1e7ed3] bg-clip-text text-transparent">
                 VISION
               </span>
             </h2>
-            <p className="text-gray-700 text-sm leading-relaxed mb-6">
+
+            <p className={paraStyle}>
               Our vision is to educate and inspire people for a{" "}
               <span className="font-medium text-[#1e7ed3]">
                 peaceful, healthy
@@ -217,40 +167,37 @@ const AboutNGTrust = () => {
                 “Holy Ganga” and water conservation.
               </span>
             </p>
-            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+
+            <p className={paraStyle}>
               We aim to build a society where individuals live in harmony with
               nature, guided by values of{" "}
               <span className="font-medium text-[#1e7ed3]">compassion</span>,{" "}
               <span className="font-medium text-[#DF562C]">selflessness</span>,
               and{" "}
-              <span className="font-medium text-gray-900]">
+              <span className="font-medium text-gray-900">
                 spiritual awareness.
               </span>
-              Our goal is to create an environment that nurtures physical
-              well-being, mental clarity, and cultural unity.
             </p>
-            <p className="text-gray-700 text-sm leading-relaxed mb-6">
+
+            <p className={paraStyle}>
               With a focus on sustainability, social responsibility, and
               community growth, we strive to empower people to contribute
               towards a{" "}
               <span className="font-medium text-[#1e7ed3]">cleaner</span>,{" "}
               <span className="font-medium text-[#DF562C]">greener</span>, and{" "}
-              <span className="font-medium text-gray-900]">
+              <span className="font-medium text-gray-900">
                 spiritually enriched
               </span>{" "}
               future for the entire world.
             </p>
+
             <Link href="/joinAsVolunteer">
-              <button
-                className="relative overflow-hidden rounded px-4 md:px-6 py-1 md:py-1.5 lg:px-6 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
-                   shadow-md bg-[#DF562C] hover:bg-orange-600
-                  hover:shadow-lg transition-all duration-300"
-              >
+              <button className="mt-4 relative overflow-hidden rounded px-4 md:px-6 py-1 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
                 Join As Volunteer
               </button>
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
