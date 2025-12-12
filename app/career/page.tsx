@@ -258,7 +258,7 @@ export default function MokshaSewaPage() {
                     <input
                       type="text"
                       readOnly
-                      value={selectedJob?.title}
+                      // value={selectedJob?.title}
                       className="border rounded-lg px-4 py-2 text-sm bg-gray-100"
                     />
                   </div>
