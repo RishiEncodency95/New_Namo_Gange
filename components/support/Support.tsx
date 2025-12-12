@@ -194,7 +194,7 @@ const Support = () => {
         {/* ========== FORM GRID START ========== */}
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3"
         >
           {/* Full Name (col 1) */}
           <div className="flex flex-col ">
@@ -207,7 +207,7 @@ const Support = () => {
               value={form.name}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="Enter your full name"
             />
           </div>
@@ -224,7 +224,7 @@ const Support = () => {
               onChange={handleChange}
               required
               disabled={isEmailVerified}
-              className={`border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none ${
+              className={`border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none ${
                 isEmailVerified ? "bg-gray-100" : ""
               }`}
               placeholder="Enter your email"
@@ -239,7 +239,7 @@ const Support = () => {
                 : "Email Status"}
             </label>
             <div
-              className={`flex items-center justify-between border rounded px-2 py-1.5 text-sm transition duration-300 ${
+              className={`flex items-center justify-between border rounded px-2 py-1 text-sm transition duration-300 ${
                 isEmailVerified
                   ? "bg-green-100 text-green-700 border-green-300"
                   : "bg-gray-50 border-gray-300"
@@ -306,7 +306,7 @@ const Support = () => {
               onChange={handlePhoneChange} // Use the number-only handler
               required
               disabled={isPhoneVerified}
-              className={`border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none ${
+              className={`border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none ${
                 isPhoneVerified ? "bg-gray-100" : ""
               }`}
               placeholder="10-digit mobile number"
@@ -321,7 +321,7 @@ const Support = () => {
                 : "Mobile Status"}
             </label>
             <div
-              className={`flex items-center justify-between border rounded px-2 py-1.5 text-sm transition duration-300 ${
+              className={`flex items-center justify-between border rounded px-2 py-1 text-sm transition duration-300 ${
                 isPhoneVerified
                   ? "bg-green-100 text-green-700 border-green-300"
                   : "bg-gray-50 border-gray-300"
@@ -385,7 +385,7 @@ const Support = () => {
               value={form.gender}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             >
               <option value="">Select gender</option>
               <option value="Male">Male</option>
@@ -405,7 +405,7 @@ const Support = () => {
               value={form.ageGroup}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             />
           </div>
 
@@ -419,7 +419,7 @@ const Support = () => {
               value={form.supportType}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             >
               <option value="">Select support type</option>
               <option value="Volunteer">Volunteer</option>
@@ -441,7 +441,7 @@ const Support = () => {
               onChange={handleChange}
               required
               rows={1}
-              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="Enter your complete address"
             />
           </div>
@@ -456,7 +456,7 @@ const Support = () => {
               value={form.state}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
+              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
             >
               <option value="">Select State</option>
               <option value="Uttar Pradesh">Uttar Pradesh</option>
@@ -476,7 +476,7 @@ const Support = () => {
               value={form.city}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
+              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none bg-white"
             >
               <option value="">Select City</option>
 
@@ -497,7 +497,7 @@ const Support = () => {
               value={form.contribution}
               onChange={handleChange}
               required
-              className="border rounded px-3 py-2 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
             >
               <option value="">Choose contribution</option>
               <option value="Time">Time (Volunteering)</option>
@@ -519,7 +519,7 @@ const Support = () => {
               onChange={handleChange}
               required
               rows={4}
-              className="border rounded px-3 py-2 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
+              className="border rounded px-3 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-[#1e7ed3] outline-none"
               placeholder="Write your message"
             />
           </div>
@@ -529,7 +529,7 @@ const Support = () => {
             <button
               type="submit"
               disabled={!isPhoneVerified || !isEmailVerified || !isFormComplete} // Both must be verified
-              className={`px-8 py-2 font-medium text-sm md:text-[15px] lg:text-[15px] rounded-md shadow transition duration-200 ${
+              className={`px-8 py-1.5 font-medium text-sm md:text-[15px] lg:text-[15px] rounded-md shadow transition duration-200 ${
                 !isPhoneVerified || !isEmailVerified || !isFormComplete
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-[#0C55A0] hover:bg-[#08467c] text-white"
