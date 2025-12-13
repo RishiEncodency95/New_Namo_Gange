@@ -14,35 +14,34 @@ function WhatsappSVG(props) {
 
 /* MAIN COMPONENT */
 export default function FloatingContactWidget() {
+  const ICON_SIZE = 22;
+
   return (
-    <div className="hidden md:flex fixed left-1 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
-      {/* Mail */}
+    <div className="hidden md:flex fixed left-2 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
       <SocialIcon
         label="Mail_Us"
         href="mailto:info@namogange.org"
         Icon={Mail}
         color="text-blue-600"
-        size={20}
+        size={ICON_SIZE}
         delay={0}
       />
 
-      {/* Phone */}
       <SocialIcon
         label="Call_Us"
         href="tel:+919654900525"
         Icon={Phone}
         color="text-green-600"
-        size={20}
+        size={ICON_SIZE}
         delay={0.2}
       />
 
-      {/* WhatsApp (BIGGER & SPECIAL LOOK) */}
       <SocialIcon
         label="Whatsapp"
         href="https://wa.me/919654900525"
         Icon={WhatsappSVG}
         color="text-green-500"
-        size={30}
+        size={ICON_SIZE}
         delay={0.4}
       />
     </div>
@@ -81,14 +80,11 @@ function SocialIcon({
 
       {/* Icon Button */}
       <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
         className="rounded-full bg-white/90 backdrop-blur-sm shadow-xl border border-gray-200 
-                   flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
+             flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
         style={{
-          width: size + 16,
-          height: size + 16,
+          width: size + 14,
+          height: size + 14,
         }}
       >
         <Icon
