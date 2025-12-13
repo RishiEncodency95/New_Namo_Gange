@@ -1,19 +1,7 @@
 "use client";
 
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import {
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  User,
-  MessageSquare,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin,
-  Youtube,
-} from "lucide-react";
+import { Mail, MapPin, Phone, Send, User, MessageSquare } from "lucide-react";
 
 interface ContactFormData {
   name: string;
@@ -62,100 +50,66 @@ const Contact: React.FC = () => {
           </p>
         </div>
         <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <p className="w-full pb-6 text-sm md:text-[15px] text-justify text-gray-800 leading-relaxed mt-3">
+          At Namo Gange Trust, we believe in building meaningful connections
+          rooted in service, compassion, and shared purpose. We welcome
+          individuals who wish to associate with us not merely to participate,
+          but to contribute selflessly towards initiatives in health, culture,
+          education, environmental care, and community upliftment. By connecting
+          with us, you become part of a collective journey dedicated to social
+          responsibility, personal growth through service, and creating a
+          positive impact for society with sincerity and integrity.
+        </p>
 
         {/* ====== Contact Section ====== */}
         <div className="w-full mt-2 md:mt-5 lg:mt-5 grid grid-cols-1 lg:grid-cols-2 gap-10 ">
-          {/* ---- Info Section ---- */}
-          <div className="space-y-6 bg-white/70 backdrop-blur-md border border-white/40 shadow-lg rounded p-8 text-left">
-            <h3 className="text-xl font-medium text-gray-800 mb-4">
-              Contact Information
-            </h3>
-
-            <div className="space-y-4 text-gray-700">
-              <div className="flex items-start gap-3">
-                <div className="bg-[#f36b2a]/10 p-3 rounded-xl">
-                  <MapPin className="text-[#f36b2a] w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-medium">Address</h4>
-                  <p className="text-sm">
-                    12/52, Site - 2, Sunrise Industrial Area, Mohan Nagar,
-                    Sahibabad, Ghaziabad, Uttar Pradesh 201007
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="bg-[#1e7ed3]/10 p-3 rounded-xl">
-                  <Phone className="text-[#1e7ed3] w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-medium">Phone</h4>
-                  <p className="text-sm">+91 96549 00525</p>
-                  <p className="text-sm">+91 7830241288</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="bg-[#f36b2a]/10 p-3 rounded-xl">
-                  <Mail className="text-[#f36b2a] w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-medium">Email</h4>
-                  <p className="text-sm">info@namogange.org</p>
-                  {/* <p className="text-sm">care@krishnayan.com</p> */}
-                </div>
+          {/* ---- Single Contact Card ---- */}
+          <div className="bg-gradient-to-r from-[#4141b8] to-[#063D8E] text-white rounded p-6 md:p-8 shadow-xl w-full text-left">
+            {/* Logo + Title */}
+            <div className="flex items-center gap-4 mb-5">
+              <img
+                src="/logo.png" // 👉 apna logo yaha path me daal dena
+                alt="Namo Gange Trust"
+                className="w-18 h-18 bg-white rounded-full p-2 object-contain"
+              />
+              <div>
+                <h3 className="text-xl font-semibold tracking-wide">
+                  Namo Gange Trust
+                </h3>
+                <p className="text-sm opacity-90">
+                  Service • Compassion • Commitment
+                </p>
               </div>
             </div>
 
-            {/* ===== Social Icons (Hardcoded) ===== */}
-            <div className="pt-6">
-              <h4 className="font-medium text-gray-800 mb-2">Follow Us</h4>
-              <div className="flex gap-4">
-                <a
-                  href="https://www.facebook.com/NamogangeTrust/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full text-[#1877F2] bg-gray-100 hover:bg-[#1877F2] hover:text-white transition-all"
-                >
-                  <Facebook className="w-5 h-5 " />
-                </a>
+            {/* Phone */}
+            <div className="flex items-start gap-3 mb-4">
+              <Phone className="w-5 h-5 mt-1 opacity-90" />
+              <div>
+                <p className="font-medium">Phone</p>
+                <p className="text-sm opacity-90">+91 96549 00525</p>
+                <p className="text-sm opacity-90">+91 78302 41288</p>
+              </div>
+            </div>
 
-                <a
-                  href="https://x.com/namogange"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full text-[#1DA1F2] bg-gray-100 hover:bg-[#1DA1F2] hover:text-white transition-all"
-                >
-                  <Twitter className="w-5 h-5" />
-                </a>
+            {/* Email */}
+            <div className="flex items-start gap-3 mb-4">
+              <Mail className="w-5 h-5 mt-1 opacity-90" />
+              <div>
+                <p className="font-medium">Email</p>
+                <p className="text-sm opacity-90">info@namogange.org</p>
+              </div>
+            </div>
 
-                <a
-                  href="https://www.instagram.com/namogangetrust/?hl=en"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full text-[#E1306C] bg-gray-100 hover:bg-[#E1306C] hover:text-white transition-all"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/company/namo-gange-trust/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full text-[#0077B5] bg-gray-100 hover:bg-[#0077B5] hover:text-white transition-all"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-
-                <a
-                  href="https://www.youtube.com/channel/UCkAQ_M8x5l3DvrH_VtuoiSA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full text-red-500 bg-gray-100 hover:bg-red-600 hover:text-white transition-all"
-                >
-                  <Youtube className="w-5 h-5" />
-                </a>
+            {/* Address */}
+            <div className="flex items-start gap-3">
+              <MapPin className="w-5 h-5 mt-1 opacity-90" />
+              <div>
+                <p className="font-medium">Office Address</p>
+                <p className="text-sm opacity-90 leading-relaxed">
+                  12/52, Site-2, Sunrise Industrial Area, Mohan Nagar,
+                  Sahibabad, Ghaziabad, Uttar Pradesh – 201007
+                </p>
               </div>
             </div>
           </div>
