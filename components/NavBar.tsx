@@ -50,6 +50,13 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
+    label: "EVENTS",
+    dropdown: [
+      { label: "Upcoming Events", href: "/event/upcoming" },
+      { label: "Past Events", href: "/event/past" },
+    ],
+  },
+  {
     label: "COMMUNICATION",
     dropdown: [
       { label: "Newsletters", href: "/communication/newsLetter" },
@@ -57,8 +64,6 @@ const NAV_ITEMS: NavItem[] = [
       { label: "Resent Updates", href: "/communication/latestNews" },
     ],
   },
-  // { label: "MOKSHA SEWA", href: "/mokshaSewa" },
-
   {
     label: "MEDIA",
     dropdown: [
