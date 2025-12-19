@@ -129,7 +129,7 @@ const UpcomingEvent = () => {
 
                 <Link href={activity.link}>
                   <button
-                    className=" relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
+                    className=" relative overflow-hidden px-2  md:px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
                      shadow-md bg-[#0C55A0] cursor-pointer
                      hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
                   >
