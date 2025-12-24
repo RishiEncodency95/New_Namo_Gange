@@ -786,7 +786,9 @@ const MemberRegistrationForm = () => {
               </h4>
 
               <hr className="w-full border-t-1 border-gray-300 mt-2 mb-4" />
-
+              <label className="text-sm font-normal">
+                Profile Picture <span className="text-red-500">*</span>
+              </label>
               <div className="flex md:w-[50%] items-center rounded border px-3 py-1  bg-white focus-within:border-[#DF562C] transition-colors">
                 <input
                   type="file"

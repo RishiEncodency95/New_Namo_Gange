@@ -42,13 +42,13 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   { label: "OUR INITIATIVES", href: "/initiatives" },
-  {
-    label: "ACTIVITIES",
-    dropdown: [
-      { label: "Our Events", href: "/activities/events" },
-      { label: "Our Missions", href: "/activities/missions" },
-    ],
-  },
+  // {
+  //   label: "ACTIVITIES",
+  //   dropdown: [
+  //     { label: "Our Events", href: "/activities/events" },
+  //     { label: "Our Missions", href: "/activities/missions" },
+  //   ],
+  // },
   {
     label: "EVENTS",
     dropdown: [
