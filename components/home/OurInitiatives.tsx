@@ -25,7 +25,7 @@ import ourIni20 from "@/public/OurInitiatives/ourIni20.png";
 import ourIni21 from "@/public/OurInitiatives/ourIni21.png";
 import ourIni22 from "@/public/OurInitiatives/ourIni22.png";
 import ourIni23 from "@/public/OurInitiatives/ourIni23.png";
-import ourIni24 from "@/public/OurInitiatives/ourIni24.png";
+import ourIni24 from "@/public/OurInitiatives/ourIni6.png";
 
 // ✅ Fixed Interface Type
 interface Initiative {
@@ -37,171 +37,171 @@ interface Initiative {
 
 const initiatives: Initiative[] = [
   {
-    title: "ICOA",
+    title: "Moksha Sewa",
     image: ourIni1,
     description:
-      "International Council of AYUSH (ICOA) promotes holistic wellness and traditional health systems worldwide.",
+      "A spiritual service initiative dedicated to supporting last rites, dignity in departure, and compassionate care for souls on their final journey.",
     link: "/initiatives/icoa",
   },
   {
-    title: "Ministry of AYUSH",
+    title: "Meri Beti Mera Abhiman",
     image: ourIni2,
     description:
-      "We work with the Ministry of AYUSH to support the integration of Ayurveda, Yoga, and natural medicine.",
+      "An empowering social movement that celebrates girl children, promotes education, and upholds dignity, equality, and self-respect for daughters.",
     link: "/initiatives/ayush",
   },
   {
     title: "Arogya Mantra",
     image: ourIni3,
     description:
-      "Arogya Mantra is India’s leading holistic health awareness platform promoting Ayurveda and wellness.",
+      "A national health awareness platform spreading knowledge of Ayurveda, yoga, and holistic living for a healthier and balanced lifestyle.",
     link: "/initiatives/arogya-mantra",
   },
   {
-    title: "Yogshala Expo 2024",
+    title: "The Yogshala Expo",
     image: ourIni4,
     description:
-      "An international wellness expo uniting yoga, Ayurveda, and health experts to inspire healthy living.",
+      "An international wellness expo bringing together yoga, Ayurveda, healthcare experts, and innovators to inspire conscious living.",
     link: "/initiatives/yogshala-expo",
   },
   {
-    title: "Yogshala Expo 2025",
+    title: "The Yogshala Jobs",
     image: ourIni5,
     description:
-      "8th edition of the International Health & Wellness Expo – promoting holistic wellbeing globally.",
+      "A career and employment initiative connecting skilled wellness professionals with opportunities in yoga, health, and holistic industries.",
     link: "/initiatives/yogshala2025",
   },
   {
     title: "Swachh Bharat Sankalp",
-    image: ourIni6,
+    image: ourIni7,
     description:
-      "Our contribution to the national Swachh Bharat Mission, spreading cleanliness awareness across India.",
+      "A cleanliness and sanitation drive supporting the Swachh Bharat Mission through public awareness, participation, and responsible action.",
     link: "/initiatives/swachh-bharat",
   },
   {
     title: "ICA",
-    image: ourIni7,
+    image: ourIni8,
     description:
-      "Indian Contemporary Art (ICA) celebrates cultural heritage and creativity through art and exhibitions.",
+      "Indian Contemporary Art platform promoting creativity, cultural heritage, and artistic expression through exhibitions and events.",
     link: "/initiatives/ica",
   },
   {
     title: "Acharya Ji",
-    image: ourIni8,
+    image: ourIni9,
     description:
-      "Acharya Ji Online is a trusted spiritual platform guiding individuals toward self-awareness and peace.",
+      "A spiritual guidance initiative offering teachings, wisdom, and inner awareness to help individuals walk the path of peace and self-realization.",
     link: "/initiatives/acharya",
   },
   {
     title: "Aviral Ganga",
-    image: ourIni9,
+    image: ourIni10,
     description:
-      "Dedicated to restoring and preserving the sacred Ganga through social campaigns and awareness.",
+      "A sacred mission focused on preserving the uninterrupted flow and purity of River Ganga through awareness, action, and community participation.",
     link: "/initiatives/aviral-ganga",
   },
   {
     title: "Arogya Film Festival",
-    image: ourIni10,
+    image: ourIni11,
     description:
-      "Celebrating health and wellness through meaningful cinema and short films focused on Ayurveda and yoga.",
+      "A unique film festival highlighting stories of health, wellness, yoga, and Ayurveda through impactful cinema and creative storytelling.",
     link: "/initiatives/film-festival",
   },
   {
     title: "Indo Himalayan Expo",
-    image: ourIni11,
+    image: ourIni12,
     description:
-      "An event connecting the Himalayan states with the world through trade, culture, and wellness.",
+      "An international platform showcasing Himalayan culture, wellness, trade, tourism, and sustainable development opportunities.",
     link: "/initiatives/himalayan-expo",
   },
   {
     title: "Anna Sewa",
-    image: ourIni12,
+    image: ourIni13,
     description:
-      "A noble initiative providing food to the needy, promoting the value of selfless service and compassion.",
+      "A humanitarian food service initiative ensuring nourishment for the needy while promoting compassion, sharing, and selfless service.",
     link: "/initiatives/anna-Sewa",
   },
   {
     title: "NGT Farms",
-    image: ourIni13,
+    image: ourIni14,
     description:
-      "Empowering organic farming through education, sustainability, and rural development initiatives.",
+      "A sustainable agriculture initiative supporting organic farming, rural empowerment, and eco-friendly cultivation practices.",
     link: "/initiatives/farms",
   },
   {
     title: "Grand Master of Yoga",
-    image: ourIni14,
+    image: ourIni15,
     description:
-      "Recognizing yoga masters worldwide for spreading the ancient Indian practice for better living.",
+      "An सम्मान initiative recognizing global yoga masters for preserving, teaching, and spreading the ancient science of yoga.",
     link: "/initiatives/grandmaster",
   },
   {
     title: "Arogya Sangoshti",
-    image: ourIni15,
+    image: ourIni16,
     description:
-      "A platform for dialogue among Ayurvedic experts to share knowledge and innovations in natural healing.",
+      "A knowledge-sharing forum bringing together Ayurvedic scholars and experts to discuss innovations in natural healing systems.",
     link: "/initiatives/sangoshti",
   },
   {
     title: "Rangshala",
-    image: ourIni16,
+    image: ourIni17,
     description:
-      "Celebrating Indian art, drama, and folk culture through live performances and creative events.",
+      "A cultural platform celebrating Indian theatre, folk arts, music, and drama to preserve and promote traditional creativity.",
     link: "/initiatives/rangshala",
   },
   {
     title: "Ayush Mitra",
-    image: ourIni17,
+    image: ourIni18,
     description:
-      "A volunteer program that empowers youth to promote wellness and holistic health in local communities.",
+      "A youth-driven volunteer initiative encouraging community participation in promoting wellness, yoga, and preventive healthcare.",
     link: "/initiatives/ayushmitra",
   },
   {
     title: "Vaidyashala",
-    image: ourIni18,
+    image: ourIni19,
     description:
-      "An initiative to revive ancient Ayurveda practices and support affordable herbal treatments.",
+      "An Ayurveda revival initiative supporting traditional practitioners and making natural treatments accessible and affordable.",
     link: "/initiatives/vaidyashala",
   },
   {
     title: "Global Eco-Tech Expo",
-    image: ourIni19,
+    image: ourIni20,
     description:
-      "A sustainable technology platform promoting eco-friendly solutions for future innovation.",
+      "A global exhibition platform promoting eco-friendly technologies, sustainability, and innovative solutions for a greener future.",
     link: "/initiatives/ecotech",
   },
   {
     title: "Ayush Abhinandan",
-    image: ourIni20,
+    image: ourIni21,
     description:
-      "Honoring excellence in the field of Ayurveda, Yoga, and holistic healing science.",
+      "An honor and recognition initiative celebrating excellence in Ayurveda, yoga, wellness, and holistic health sciences.",
     link: "/initiatives/abhinandan",
   },
   {
     title: "MP Development Expo",
-    image: ourIni21,
+    image: ourIni22,
     description:
-      "Promoting Madhya Pradesh’s culture, industry, and wellness opportunities through exhibitions.",
+      "A development-focused expo highlighting Madhya Pradesh’s culture, industry, investment, and wellness opportunities.",
     link: "/initiatives/mp-development",
   },
   {
     title: "Shrimad Bhagwat Katha",
-    image: ourIni22,
+    image: ourIni23,
     description:
-      "Spiritual discourses spreading wisdom from the Bhagwat Gita to inspire peace and devotion.",
+      "Spiritual discourses sharing divine wisdom from Shrimad Bhagwat to inspire devotion, morality, and inner transformation.",
     link: "/initiatives/katha",
   },
   {
-    title: "Fitness Through Yoga",
-    image: ourIni23,
+    title: "The Yogshala Clinic",
+    image: ourIni24,
     description:
-      "Encouraging modern fitness through the timeless science of yoga for balance and vitality.",
+      "A wellness clinic integrating yoga therapy and modern fitness practices to promote balance, vitality, and holistic health.",
     link: "/initiatives/fitness",
   },
   {
-    title: "NGT Wellness Program",
+    title: "International Health & Wellness",
     image: ourIni24,
     description:
-      "Corporate and community wellness programs promoting stress-free, balanced living.",
+      "Comprehensive wellness programs designed for communities and corporates to promote stress-free and balanced living.",
     link: "/initiatives/wellness",
   },
 ];
@@ -249,7 +249,7 @@ const OurInitiatives = () => {
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-2">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-2">
           {initiatives.map((item, i) => (
             <div
               key={i}
@@ -257,7 +257,6 @@ const OurInitiatives = () => {
                  hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
                  p-3 flex flex-col items-center text-center"
             >
-              {/* Image Section */}
               <div
                 className="w-full mb-4 flex items-center justify-center 
                       rounded-md bg-gray-50
@@ -266,30 +265,80 @@ const OurInitiatives = () => {
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="object-contain h-16 w-16 md:h-30 md:w-30 w-auto transition-transform duration-300
+                  className="object-contain h-16 md:h-32 md:w-32 w-auto transition-transform duration-300
                      group-hover:scale-105"
                 />
               </div>
 
-              {/* Description */}
-              <h3 className="text-gray-800 font-semibold text-sm mb-2 line-clamp-2">
+              <h3 className="text-gray-800 font-semibold text-sm md:text-[15px] mb-2 line-clamp-1">
                 {item.title}
               </h3>
 
-              <p className="text-gray-600 text-xs leading-relaxed mb-4 line-clamp-4">
+              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
                 {item.description}
               </p>
 
-              {/* Button */}
               <Link href={item.link} className="w-full mt-auto">
                 <button
                   className="w-full px-3 py-1.5 text-sm font-medium rounded
                      bg-[#0C55A0] text-white shadow-sm 
                      hover:bg-[#0a4786] active:scale-95 transition-all"
                 >
-                  Read More
+                  Read More...
                 </button>
               </Link>
+            </div>
+          ))}
+        </div> */}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {initiatives.map((item, i) => (
+            <div
+              key={i}
+              className="
+        group relative bg-white rounded-2xl border border-gray-200
+        shadow-sm hover:shadow-xl transition-all duration-300
+        flex flex-col overflow-hidden
+      "
+            >
+              {/* IMAGE */}
+              <div className="w-full h-28 md:h-36 flex items-center justify-center bg-gray-50">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  className="
+            object-contain h-16 md:h-34 md:w-34 w-auto
+            transition-transform duration-300
+            group-hover:scale-110
+          "
+                />
+              </div>
+
+              {/* CONTENT */}
+              <div className="flex flex-col flex-1 py-3 px-2 text-center">
+                <h3 className="text-gray-900 font-semibold text-sm md:text-[15px] mb-1 line-clamp-1">
+                  {item.title}
+                </h3>
+
+                <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
+                  {item.description}
+                </p>
+
+                {/* CTA */}
+                <Link href={item.link} className="mt-auto">
+                  <div
+                    className="
+              w-full text-center py-1.5 rounded-lg
+              text-sm font-medium text-[#0C55A0]
+              border border-[#0C55A0]/30
+              hover:bg-[#0C55A0] hover:text-white
+              transition-all duration-300
+            "
+                  >
+                    Explore →
+                  </div>
+                </Link>
+              </div>
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -24,87 +25,116 @@ import Person12 from "@/public/people/people12.jpg";
 const people = [
   {
     name: "Dr. Jaideep Arya",
-    title: "Bright future, must promote in every corner of India.",
+    title:
+      "This visionary initiative holds a bright future and deserves to be promoted and embraced in every corner of India.",
     image: Person1,
   },
   {
     name: "Dr. Ishwar V. Basavaraddi",
-    title: "Excellent initiative! My best wishes for continued success.",
+    title:
+      "An excellent and inspiring initiative. My sincere best wishes for its continued growth, success, and positive impact.",
     image: Person2,
   },
   {
     name: "Dr. Vachaspati",
-    title: "The Namo Gange Trust is doing divine service through awareness.",
+    title:
+      "The Namo Gange Trust is performing truly divine service by spreading awareness rooted in spirituality, culture, and values.",
     image: Person3,
   },
   {
     name: "Sandeep Marwah",
-    title: "What a pleasure to be associated with such noble work!",
+    title:
+      "It is a pleasure and an honour to be associated with such noble work that contributes meaningfully to society.",
     image: Person4,
   },
   {
     name: "Khyati Nayak",
-    title: "A great platform to spread awareness about holistic living.",
+    title:
+      "A remarkable platform dedicated to spreading awareness about holistic living, wellness, and conscious lifestyles.",
     image: Person5,
   },
   {
     name: "Dr. Preeti Chhabra",
-    title: "Excellent! I would love to see this mission grow across India.",
+    title:
+      "Excellent initiative! I truly look forward to seeing this meaningful mission expand and touch lives across India.",
     image: Person6,
   },
   {
     name: "Satya Sharma",
-    title: "Namo Gange offers exceptional opportunities to serve humanity.",
+    title:
+      "Namo Gange offers exceptional opportunities for individuals to serve humanity with compassion and purpose.",
     image: Person7,
   },
   {
     name: "Padma Shri Bharat Bhushan",
     title:
-      "I had an incredible experience — a perfect blend of tradition and modernity.",
+      "I had an incredible and enriching experience that beautifully blended timeless traditions with modern perspectives.",
     image: Person8,
   },
   {
     name: "Wafa-El-Hedeny",
     title:
-      "The Yogshala is a wonderful effort for global wellness and harmony.",
+      "The Yogshala is a wonderful global initiative promoting wellness, harmony, and a balanced way of life.",
     image: Person9,
   },
   {
     name: "Dr. Sambit Patra",
-    title: "Honoured to be part of this mission towards spiritual awakening.",
+    title:
+      "I am honoured to be part of this inspiring mission dedicated to spiritual awareness and national upliftment.",
     image: Person10,
   },
   {
     name: "Shripad Yesso Naik",
-    title: "My heartfelt greetings for this remarkable national initiative.",
+    title:
+      "My heartfelt greetings and best wishes for this remarkable national initiative with a powerful social vision.",
     image: Person11,
   },
   {
     name: "Dr. Harsh Vardhan",
-    title: "My best wishes and congratulations to the Namo Gange family.",
+    title:
+      "My sincere congratulations and best wishes to the entire Namo Gange family for their commendable efforts.",
     image: Person12,
   },
 ];
+const PrevArrow = ({ onClick }: any) => (
+  <button
+    onClick={onClick}
+    className="absolute left-2 top-1/2 -translate-y-1/2 z-20
+    bg-white/70 hover:bg-white text-gray-700 p-2 rounded-full shadow transition"
+  >
+    <ChevronLeft size={18} />
+  </button>
+);
+
+const NextArrow = ({ onClick }: any) => (
+  <button
+    onClick={onClick}
+    className="absolute right-2 top-1/2 -translate-y-1/2 z-20
+    bg-white/70 hover:bg-white text-gray-700 p-2 rounded-full shadow transition"
+  >
+    <ChevronRight size={18} />
+  </button>
+);
 
 const WhatPeople = () => {
   const sliderRef = useRef<any>(null);
 
-  const settings = {
+  const sliderSettings = {
     dots: false,
     infinite: true,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    speed: 800,
+    speed: 600,
     slidesToShow: 5,
     slidesToScroll: 1,
-    pauseOnHover: true,
-    arrows: false,
-    initialSlide: 0,
+    autoplay: true,
+    autoplaySpeed: 3500,
+    pauseOnHover: false,
+    arrows: true,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
     responsive: [
-      { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-      { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-      { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-      { breakpoint: 1280, settings: { slidesToShow: 4, slidesToScroll: 1 } },
+      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
     ],
   };
 
@@ -117,10 +147,10 @@ const WhatPeople = () => {
             Testimonials
           </span>
         </h2>
-        {/* <p className="text-gray-600 text-sm md:text-[15px] mb-3 italic leading-relaxed">
+        <p className="text-gray-600 text-sm md:text-[15px] mb-3 italic leading-relaxed">
           “Creating positive change through service, awareness, and sustainable
           community development.”
-        </p> */}
+        </p>
         <div className="flex justify-center w-full mb-6">
           <div className=" w-full bg-white py-4 relative overflow-hidden text-center ">
             {/* Decorative Top Accent Line */}
@@ -156,7 +186,7 @@ const WhatPeople = () => {
         </div>
 
         {/* ===== Slider ===== */}
-        <Slider ref={sliderRef} {...settings}>
+        <Slider ref={sliderRef} {...sliderSettings}>
           {people.map((person, i) => (
             <motion.div
               key={i}
@@ -168,29 +198,23 @@ const WhatPeople = () => {
             >
               <div
                 className="relative bg-white rounded-2xl border border-gray-100 shadow-md 
-                           transition-all duration-500 p-4 flex flex-col items-center overflow-hidden
-                           hover:-translate-y-2 hover:shadow-2xl hover:border-transparent 
-                           hover:bg-gradient-to-br hover:from-white hover:to-[#f4f8fb]
-                           before:absolute before:inset-0 before:rounded-2xl before:p-[2px]
-                           before:bg-gradient-to-r 
-                           before:opacity-0 hover:before:opacity-100 before:-z-10 before:transition-all before:duration-500
-                           h-[290px]"
+                p-4 flex flex-col items-center overflow-hidden
+                hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
               >
-                {/* Profile Image */}
-                <div className="overflow-hidden rounded w-full h-36 md:h-34 mb-4 shadow-sm transition-all duration-500">
+                {/* ✅ FIXED IMAGE */}
+                <div className="relative w-full h-56 mb-4 overflow-hidden rounded-md">
                   <Image
                     src={person.image}
                     alt={person.name}
-                    className="object-fit w-full h-full rounded-md hover:scale-110 transition-transform duration-700 ease-in-out"
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </div>
 
-                {/* Name */}
-                <h3 className="text-sm md:text-base lg:text-base font-semibold text-gray-900 mb-2 hover:text-[#1e7ed3] transition-colors duration-300 text-center">
+                <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-2 text-center">
                   {person.name}
                 </h3>
 
-                {/* Description */}
                 <p className="text-gray-600 text-sm leading-relaxed text-center line-clamp-3">
                   {person.title}
                 </p>

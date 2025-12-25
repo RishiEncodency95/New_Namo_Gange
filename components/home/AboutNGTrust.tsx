@@ -4,8 +4,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AboutNGTrust3 from "@/public/home/how_we.png";
-import MissionImg from "@/public/home/mission1.jpg";
-import VisionImg from "@/public/home/our_vision.png";
+import MissionImg from "@/public/home/mission1.png";
+import VisionImg from "@/public/home/our_vision.jpeg";
 
 const AboutNGTrust = () => {
   // ✅ ONLY FOR THIS SECTION – COMMON P STYLE
@@ -24,51 +24,56 @@ const AboutNGTrust = () => {
             </span>
           </h2>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <p className={paraStyle}>
               <span className="font-medium text-gray-900">
                 Namo Gange Trust
               </span>{" "}
               is wholeheartedly dedicated to the sacred mission of protecting,
-              restoring, and uplifting the divine river Ganga — a lifeline that
-              nurtures millions. Through continuous social initiatives, the
-              trust champions the vision of{" "}
+              restoring, and uplifting the divine river Ganga—a lifeline that
+              sustains millions of lives across the nation. Through continuous
+              and impactful social initiatives, the Trust actively champions the
+              vision of{" "}
               <span className="font-normal text-[#DF562C]">Aviral</span>{" "}
-              (continuous flow) and{" "}
+              (uninterrupted flow) and{" "}
               <span className="font-normal text-[#1e7ed3]">Nirmal Ganga</span>{" "}
-              (clean, pure Ganga), ensuring that the river remains a symbol of
-              purity, heritage, and spiritual strength for generations to come.
+              (clean and pure Ganga), ensuring that the river continues to
+              symbolize purity, cultural heritage, and spiritual strength for
+              generations to come.
             </p>
 
             <p className={paraStyle}>
-              Our mission expands across multifaceted domains including{" "}
+              The mission of the Trust extends across diverse and interconnected
+              domains, including{" "}
               <span className="font-normal text-gray-900">
-                Spiritual, Educational, Healthcare, Environmental, and Cultural
-                programs
-              </span>{" "}
-              that empower communities and inspire collective responsibility.
-              These initiatives are designed not only to promote ecological
-              balance but also to deepen human connection with nature, culture,
-              and morality.
+                spiritual upliftment, education, healthcare, environmental
+                protection, and cultural preservation
+              </span>
+              . These initiatives are thoughtfully designed to empower
+              communities, encourage collective responsibility, and promote
+              sustainable development. By fostering ecological balance and
+              social harmony, the Trust strives to deepen the human connection
+              with nature, culture, and moral values.
             </p>
 
-            <p className={paraStyle}>
+            {/* <p className={paraStyle}>
               At its core,{" "}
               <span className="font-normal text-gray-900">
                 Namo Gange Trust
               </span>{" "}
-              serves as a bridge between tradition and modernity — inspiring
-              individuals to walk the path of{" "}
+              serves as a meaningful bridge between timeless traditions and
+              modern societal needs. It inspires individuals to walk the path of{" "}
               <span className="font-medium text-[#1e7ed3]">
-                peace, purity, and awareness
+                peace, purity, and conscious awareness
               </span>{" "}
-              while contributing towards{" "}
+              while actively contributing towards{" "}
               <span className="font-medium text-[#DF562C]">
                 a cleaner, healthier, and more compassionate India
               </span>
-              . It is not just an organization; it is a movement of hearts
-              united for the greater good of humanity and Mother Earth.
-            </p>
+              . More than just an organization, the Trust represents a
+              collective movement—uniting hearts and minds in service of
+              humanity, nature, and Mother Earth.
+            </p> */}
           </div>
         </div>
 
@@ -78,7 +83,7 @@ const AboutNGTrust = () => {
             <Image
               src={AboutNGTrust3}
               alt="About Namo Gange Trust"
-              className="w-full md:h-96 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+              className="w-full md:h-90 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
             />
           </div>
 
@@ -94,7 +99,7 @@ const AboutNGTrust = () => {
               <Image
                 src={MissionImg}
                 alt="Mission - Namo Gange Trust"
-                className="w-full md:h-80 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+                className="w-full md:h-90 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
               />
             </div>
             <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>
@@ -139,7 +144,7 @@ const AboutNGTrust = () => {
               <Image
                 src={VisionImg}
                 alt="Vision - Namo Gange Trust"
-                className="w-full md:h-80 object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
+                className="w-full md:h-90  object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
               />
             </div>
             <div className="absolute -inset-3 bg-gradient-to-l from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>

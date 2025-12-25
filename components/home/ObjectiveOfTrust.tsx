@@ -6,8 +6,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import HealthIcon from "@/public/objectives/health.png";
 import NatureIcon from "@/public/objectives/nature.png";
-import CultureIcon from "@/public/objectives/culture.png";
+import CultureIcon from "@/public/objectives/kala.png";
 import WomenIcon from "@/public/objectives/women.png";
+import MokshaIcon from "@/public/objectives/moksha.png";
 
 const objectives = [
   {
@@ -40,7 +41,7 @@ const objectives = [
   },
   {
     title: "Moksha Sewa",
-    image: WomenIcon,
+    image: MokshaIcon,
     description:
       "Moksha Sewa is devoted to serving humanity through spiritual upliftment, compassion, and selfless service — guiding individuals toward inner peace, purity.",
     link: "/objectives/women",
@@ -97,7 +98,7 @@ const ObjectiveOfTrust = () => {
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="w-14 h-14 md:w-32 md:h-32 object-contain"
+                  className="w-14 h-14 md:w-38 md:h-38 p-2 rounded-full border object-cover"
                 />
               </div>
 
