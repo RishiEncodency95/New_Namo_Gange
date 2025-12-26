@@ -92,7 +92,7 @@ const NewsUpdate = () => {
                 <Image
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-32 md:h-46 lg:h-52 object-fit transition-transform duration-700 ease-in-out hover:scale-110"
+                  className="w-full h-32 md:h-50 lg:h-58 object-cover transition-transform duration-700 ease-in-out hover:scale-110"
                 />
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>

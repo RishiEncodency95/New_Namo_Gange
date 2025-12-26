@@ -3,26 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
-import Logo from "@/public/logo.png"; // 👈 logo path check kar lena
+import Logo from "@/public/footer-logo.png"; // 👈 logo path check kar lena
 
 export default function Footer() {
   return (
     <footer className="bg-[#0b0b0b] text-gray-300 border-t border-white/10">
       {/* ================= MAIN FOOTER ================= */}
-      <div className="max-w-7xl mx-auto px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
+      <div className="w-full px-4 py-4 md:py-12  lg:py-12 md:px-12 lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start text-center">
           {/* ===== Column 1: Logo + About ===== */}
           <div>
             <Image
               src={Logo}
               alt="Namo Gange Trust"
-              className="w-44 mb-4 bg-white p-2 rounded-md"
+              className="w-48 mb-4"
               priority
             />
 
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-400 leading-relaxed text-justify">
               Namo Gange Trust is committed to promoting Ayurveda, Yoga,
-              holistic wellness, and sustainable living for a healthier,
+              Holistic Wellness, and sustainable living for a Healthier,
               conscious, and compassionate society.
             </p>
           </div>
@@ -80,9 +80,9 @@ export default function Footer() {
             </h3>
 
             <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3">
+              <li className="flex items-start gap-1">
                 <MapPin className="w-15 h-15 text-[#DF562C] mt-1" />
-                <span className="text-gray-400 leading-relaxed">
+                <span className="text-gray-400 leading-relaxed text-justify">
                   12/52, Site-2, Sunrise Industrial Area, Mohan Nagar,
                   Sahibabad, Ghaziabad, Uttar Pradesh – 201007
                 </span>

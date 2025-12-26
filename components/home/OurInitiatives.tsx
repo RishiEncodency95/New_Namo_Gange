@@ -15,7 +15,7 @@ import ourIni10 from "@/public/OurInitiatives/ourIni10.png";
 import ourIni11 from "@/public/OurInitiatives/ourIni11.png";
 import ourIni12 from "@/public/OurInitiatives/ourIni12.png";
 import ourIni13 from "@/public/OurInitiatives/ourIni13.png";
-import ourIni14 from "@/public/OurInitiatives/ourIni14.png";
+import ourIni14 from "@/public/OurInitiatives/NGF.png";
 import ourIni15 from "@/public/OurInitiatives/ourIni15.png";
 import ourIni16 from "@/public/OurInitiatives/ourIni16.png";
 import ourIni17 from "@/public/OurInitiatives/ourIni17.png";
@@ -157,7 +157,7 @@ const initiatives: Initiative[] = [
     link: "/initiatives/ayushmitra",
   },
   {
-    title: "Vaidyashala",
+    title: "Vaidhyashala",
     image: ourIni19,
     description:
       "An Ayurveda revival initiative supporting traditional practitioners and making natural treatments accessible and affordable.",
@@ -171,7 +171,7 @@ const initiatives: Initiative[] = [
     link: "/initiatives/ecotech",
   },
   {
-    title: "Ayush Abhinandan",
+    title: "Ayush Abhinandanam",
     image: ourIni21,
     description:
       "An honor and recognition initiative celebrating excellence in Ayurveda, yoga, wellness, and holistic health sciences.",
