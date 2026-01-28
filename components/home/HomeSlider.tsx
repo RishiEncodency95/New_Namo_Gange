@@ -15,6 +15,7 @@ interface Banner {
 
 const HomeSlider = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSliderImages = async () => {
@@ -24,7 +25,7 @@ const HomeSlider = () => {
         console.log("🔥 Full API Response:", res.data);
 
         // ✅ SAFELY extract banners array
-        const bannersList = res.data?.banners || [];
+        const bannersList = res?.data?.data || [];
 
         // ✅ ONLY Active status filter
         const activeBanners = bannersList.filter(
@@ -45,6 +46,8 @@ const HomeSlider = () => {
         setBanners(formatted);
       } catch (error) {
         console.error("❌ Slider API Error:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -68,53 +71,56 @@ const HomeSlider = () => {
 
   return (
     <div className="relative w-full overflow-hidden">
-   
       {/* MAIN SLIDER */}
-      <Slider ref={sliderRef} {...settings}>
-  {banners.map((item, i) => (
-    <div key={i}>
-      <div className="relative w-full h-[220px] md:h-[515px]">
-        
-        {/* IMAGE AS LINK */}
-        <Link
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute inset-0 z-10"
-        >
-          <Image
-            src={item.image}
-            alt={`slide-${i}`}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover cursor-pointer"
-          />
-        </Link>
+      {loading ? (
+        <div className="relative flex items-center justify-center w-full h-[220px] md:h-[515px] bg-gray-100">
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-[#DF562C] rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <Slider ref={sliderRef} {...settings}>
+          {banners.map((item, i) => (
+            <div key={i}>
+              <div className="relative w-full h-[220px] md:h-[515px]">
+                {/* IMAGE AS LINK */}
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-10"
+                >
+                  <Image
+                    src={item.image}
+                    alt={`slide-${i}`}
+                    fill
+                    sizes="100vw"
+                    priority
+                    className="object-cover cursor-pointer"
+                  />
+                </Link>
 
-        {/* OPTIONAL OVERLAY CONTENT (TEXT / BUTTON) */}
-        {/* If you want only image clickable, keep this minimal */}
-        <div className="pointer-events-none absolute bottom-6 right-6 md:right-12 z-20 flex flex-col items-end gap-3 max-w-xl">
-          {/* Example title if needed later */}
-          {/* 
+                {/* OPTIONAL OVERLAY CONTENT (TEXT / BUTTON) */}
+                {/* If you want only image clickable, keep this minimal */}
+                <div className="pointer-events-none absolute bottom-6 right-6 md:right-12 z-20 flex flex-col items-end gap-3 max-w-xl">
+                  {/* Example title if needed later */}
+                  {/* 
           <h2 className="text-white text-lg md:text-4xl font-medium drop-shadow-xl">
             {item.title}
           </h2> 
           */}
-        </div>
-      </div>
-    </div>
-  ))}
+                </div>
+              </div>
+            </div>
+          ))}
 
-  {banners.length === 0 && (
-    <div className="relative flex items-center justify-center w-full h-[220px] md:h-[550px]">
-      <p className="text-center py-20 text-gray-500 text-sm md:text-base">
-        No active banners found
-      </p>
-    </div>
-  )}
-</Slider>
-
+          {banners.length === 0 && (
+            <div className="relative flex items-center justify-center w-full h-[220px] md:h-[550px]">
+              <p className="text-center py-20 text-gray-500 text-sm md:text-base">
+                No active banners found
+              </p>
+            </div>
+          )}
+        </Slider>
+      )}
 
       {/* ORANGE CARD SECTION BELOW SLIDER */}
       <div className="relative bottom-0 md:bottom-10  left-1/2 -translate-x-1/2 w-full px-2 md:px-12 z-30">

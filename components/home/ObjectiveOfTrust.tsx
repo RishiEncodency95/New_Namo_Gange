@@ -1,54 +1,53 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import HealthIcon from "@/public/objectives/health.png";
-import NatureIcon from "@/public/objectives/nature.png";
-import CultureIcon from "@/public/objectives/kala.png";
-import WomenIcon from "@/public/objectives/women.png";
-import MokshaIcon from "@/public/objectives/moksha.png";
+import axiosClient from "@/lib/axiosClient";
+// import { motion } from "framer-motion";
+// import HealthIcon from "@/public/objectives/health.png";
+// import NatureIcon from "@/public/objectives/nature.png";
+// import CultureIcon from "@/public/objectives/kala.png";
+// import WomenIcon from "@/public/objectives/women.png";
+// import MokshaIcon from "@/public/objectives/moksha.png";
 
-const objectives = [
-  {
-    title: "Health & Wellness",
-    image: HealthIcon,
-    description:
-      "We spread awareness of holistic health and well-being through Yoga, Ayurveda, and wellness programs like Arogya Sangoshti and film festivals.",
-    link: "/objectives/health",
-  },
-  {
-    title: "Nature & Environment",
-    image: NatureIcon,
-    description:
-      "We work passionately to protect and preserve nature — focusing on a clean, green, and sustainable future while restoring the purity of the holy Ganga.",
-    link: "/objectives/nature",
-  },
-  {
-    title: "Kala & Sanskriti",
-    image: CultureIcon,
-    description:
-      "We promote India’s rich art and culture through live events, painting, dance, and photography competitions to connect the youth with traditions.",
-    link: "/objectives/culture",
-  },
-  {
-    title: "Women Empowerment",
-    image: WomenIcon,
-    description:
-      "We support women’s education, equality, and empowerment — fostering confidence, leadership, and independence in every woman.",
-    link: "/objectives/women",
-  },
-  {
-    title: "Moksha Sewa",
-    image: MokshaIcon,
-    description:
-      "Moksha Sewa is devoted to serving humanity through spiritual upliftment, compassion, and selfless service — guiding individuals toward inner peace, purity.",
-    link: "/objectives/women",
-  },
-];
+interface Objective {
+  _id: string;
+  title: string;
+  image: string;
+  description: string;
+  link: string;
+}
 
 const ObjectiveOfTrust = () => {
+  const [objectives, setObjectives] = useState<Objective[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchObjectives = async () => {
+      try {
+        const res = await axiosClient.get("/objectives");
+        if (res.data && Array.isArray(res.data.data)) {
+          const fetchedData = res.data.data
+            .filter((item: any) => item.status === "Active")
+            .map((item: any) => ({
+              _id: item._id,
+              title: item.title,
+              image: item.image,
+              description: item.desc,
+              link: item.slug ? `/objectives/${item.slug}` : "#",
+            }));
+          setObjectives(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching objectives:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchObjectives();
+  }, []);
   return (
     <section className="relative py-4 md:py-8 lg:py-8 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
       <div className="w-full mx-auto px-2 md:px-12 lg:px-12 text-center">
@@ -87,40 +86,75 @@ const ObjectiveOfTrust = () => {
         </div>
 
         {/* Objective Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
-          {objectives.map((item, i) => (
-            <div
-              key={i}
-              className="bg-white  rounded-xl border border-gray-200  shadow-sm  hover:shadow-xl transition-all p-3 flex flex-col items-center text-center "
-            >
-              {/* Icon */}
-              <div className="flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  className="w-14 h-14 md:w-38 md:h-38 p-2 rounded-full border object-cover"
-                />
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl border border-gray-200 shadow-sm p-3 flex flex-col items-center text-center animate-pulse min-h-[320px]"
+              >
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gray-200 mb-4 mt-4"></div>
+                <div className="h-5 bg-gray-200 rounded w-3/4 mb-3"></div>
+                <div className="w-full space-y-2 mb-4 px-2">
+                  <div className="h-3 bg-gray-200 rounded w-full"></div>
+                  <div className="h-3 bg-gray-200 rounded w-5/6 mx-auto"></div>
+                  <div className="h-3 bg-gray-200 rounded w-4/5 mx-auto"></div>
+                </div>
+                <div className="h-9 bg-gray-200 rounded w-28 mt-auto mb-2"></div>
               </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
+            {objectives.map((item, i) => (
+              <div
+                key={item?._id || i}
+                className="bg-white  rounded-xl border border-gray-200  shadow-sm  hover:shadow-xl transition-all p-3 flex flex-col items-center text-center "
+              >
+                {/* Icon */}
+                <div className="flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
+                  <Image
+                    src={
+                      item?.image?.startsWith("http")
+                        ? item.image
+                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.image}`
+                    }
+                    alt={item.title}
+                    width={100}
+                    height={100}
+                    className="w-14 h-14 md:w-38 md:h-38 p-2 rounded-full border object-cover"
+                  />
+                </div>
 
-              {/* Title */}
-              <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
-                {item.title}
-              </h3>
+                {/* Title */}
+                <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
+                  {item?.title}
+                </h3>
 
-              {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 text-justify line-clamp-4">
-                {item.description}
-              </p>
+                {/* Description */}
+                <div
+                  className="text-gray-600 text-sm leading-relaxed mb-1 text-justify line-clamp-4"
+                  dangerouslySetInnerHTML={{ __html: item?.description }}
+                />
 
-              {/* Read More Button */}
-              <Link href={item.link}>
-                <button className=" px-5 py-1.5 text-sm font-medium text-white rounded bg-[#0C55A0] hover:bg-[#08467c] transition shadow-sm ">
-                  Read More...
-                </button>
-              </Link>
-            </div>
-          ))}
-        </div>
+                {/* Read More Button */}
+                <Link href={item?.link || "#"} className="flex justify-end">
+                  <span
+                    className="
+      text-sm font-medium
+      text-[#0C55A0]
+      hover:text-[#08467c]
+      hover:underline
+      transition
+    "
+                  >
+                    Read More →
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
