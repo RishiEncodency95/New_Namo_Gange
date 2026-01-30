@@ -60,4 +60,15 @@ export const apiService = {
       return [];
     }
   },
+
+  getObjectiveBySlug: async (slug: string): Promise<ObjectiveFromAPI | null> => {
+    try {
+      const response = await axiosClient.get(`/objectives/${slug}`);
+      // The API might return the object directly or nested.
+      return response.data?.data || response.data || null;
+    } catch (error) {
+      console.error(`Error fetching objective with slug ${slug}:`, error);
+      return null;
+    }
+  },
 };

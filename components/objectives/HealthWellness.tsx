@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
-import Image, { StaticImageData } from "next/image";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import axiosClient from "@/lib/axiosClient";
 import ourIni1 from "@/public/OurInitiatives/ourIni1.png";
 import ourIni2 from "@/public/OurInitiatives/ourIni2.png";
 import ourIni3 from "@/public/OurInitiatives/ourIni3.png";
@@ -14,12 +15,12 @@ import ourIni9 from "@/public/OurInitiatives/ourIni9.png";
 
 interface Initiative {
   title: string;
-  image: StaticImageData | string;
+  image: string;
   description: string;
   link: string;
 }
 
-const initiatives: Initiative[] = [
+const initiatives1: Initiative[] = [
   {
     title: "ICOA",
     image: ourIni1,
@@ -77,6 +78,41 @@ const initiatives: Initiative[] = [
 ];
 
 const HealthWellness = () => {
+  const [initiatives, setInitiatives] = useState<Initiative[]>(initiatives1);
+
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      try {
+        const res = await axiosClient.get("/initiatives");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const fetchedData = res.data.data
+            .filter(
+              (item: any) =>
+                item.status === "Active" &&
+                item.objective_catagory === "Health & Wellness"
+            )
+            .map((item: any) => {
+              let description = item.desc || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                title: item.title,
+                image: item.image,
+                description: description.replace(/<[^>]+>/g, ""),
+                link: item.slug ? `/initiatives/${item.slug}` : "#",
+              };
+            });
+          setInitiatives(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching initiatives for Health Wellness:", error);
+      }
+    };
+
+    fetchInitiatives();
+  }, []);
+
   return (
     <section className="bg-gray-50">
       <div
@@ -152,7 +188,12 @@ const HealthWellness = () => {
                       overflow-hidden shadow-inner"
               >
                 <Image
-                  src={item.image}
+                  src={item.image?.startsWith("http")
+                    ? item.image
+                    : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.image}`
+                  }
+                  width={100}
+                  height={100}
                   alt={item.title}
                   className="object-contain max-h-24 w-auto transition-transform duration-300
                      group-hover:scale-105"

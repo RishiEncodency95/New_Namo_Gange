@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
-import Image, { StaticImageData } from "next/image"; // ✅ import StaticImageData
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import axiosClient from "@/lib/axiosClient";
 import ourIni15 from "@/public/OurInitiatives/ourIni15.png";
 import ourIni16 from "@/public/OurInitiatives/ourIni16.png";
 import ourIni17 from "@/public/OurInitiatives/ourIni17.png";
@@ -12,16 +13,14 @@ import ourIni21 from "@/public/OurInitiatives/ourIni21.png";
 import ourIni22 from "@/public/OurInitiatives/ourIni22.png";
 import ourIni23 from "@/public/OurInitiatives/ourIni23.png";
 import ourIni24 from "@/public/OurInitiatives/ourIni24.png";
-
-// ✅ Fixed Interface Type
 interface Initiative {
   title: string;
-  image: StaticImageData | string; // <---- FIXED HERE
+  image: string;
   description: string;
   link: string;
 }
 
-const initiatives: Initiative[] = [
+const initiatives1: Initiative[] = [
   {
     title: "Arogya Sangoshti",
     image: ourIni15,
@@ -95,6 +94,41 @@ const initiatives: Initiative[] = [
 ];
 
 const CultureSanskriti = () => {
+  const [initiatives, setInitiatives] = useState<Initiative[]>(initiatives1);
+
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      try {
+        const res = await axiosClient.get("/initiatives");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const fetchedData = res.data.data
+            .filter(
+              (item: any) =>
+                item.status === "Active" &&
+                item.objective_catagory === "Kala & Sanskriti"
+            )
+            .map((item: any) => {
+              let description = item.desc || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                title: item.title,
+                image: item.image,
+                description: description.replace(/<[^>]+>/g, ""),
+                link: item.slug ? `/initiatives/${item.slug}` : "#",
+              };
+            });
+          setInitiatives(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching initiatives for Culture Sanskriti:", error);
+      }
+    };
+
+    fetchInitiatives();
+  }, []);
+
   return (
     <section className="bg-gray-50">
       <div
@@ -169,7 +203,12 @@ const CultureSanskriti = () => {
                       overflow-hidden shadow-inner"
               >
                 <Image
-                  src={item.image}
+                  src={item.image?.startsWith("http")
+                    ? item.image
+                    : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.image}`
+                  }
+                  width={100}
+                  height={100}
                   alt={item.title}
                   className="object-contain max-h-24 w-auto transition-transform duration-300
                      group-hover:scale-105"

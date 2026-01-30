@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import OurActivities1 from "@/public/event/organicexpo.jpg";
 import OurActivities2 from "@/public/event/arogya.jpg";
 import OurActivities3 from "@/public/ourActivities/ourActivities3.jpg";
+import axiosClient from "@/lib/axiosClient";
 // import OurActivities4 from "@/public/ourActivities/ourActivities4.jpg";
 
 const activities = [
@@ -35,6 +36,47 @@ const activities = [
 ];
 
 const UpcomingEvent = () => {
+  const [upcomingEvents, setUpcomingEvents] = useState<any[]>(activities);
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      try {
+        const res = await axiosClient.get("/events");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const currentDate = new Date();
+          currentDate.setHours(0, 0, 0, 0); // To compare dates only
+
+          const fetchedData = res.data.data
+            .filter((item: any) => {
+              // Assuming the API provides a 'startDate' field for events
+              const eventDate = new Date(item.start_date);
+              return item.status === "Active" && eventDate >= currentDate;
+            })
+            .sort((a: any, b: any) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime())
+            .map((item: any) => {
+              let description = item.description || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                title: item.name,
+                image: item.image,
+                text: description.replace(/<[^>]+>/g, ""),
+                link: item.link,
+              };
+            });
+          if (fetchedData.length > 0) {
+            setUpcomingEvents(fetchedData);
+          }
+        }
+      }
+      catch (error) {
+        console.error("Error fetching upcoming events:", error);
+      }
+    };
+
+    fetchInitiatives();
+  }, []);
+
   return (
     <section className="bg-[#f6f6f9] pb-16">
       {/* ------------------ BANNER ------------------ */}
@@ -92,12 +134,11 @@ const UpcomingEvent = () => {
 
         {/* Activities List */}
         <div className="space-y-3 md:space-y-5">
-          {activities.map((activity, i) => (
+          {upcomingEvents.map((activity, i) => (
             <div
               key={i}
-              className={`relative flex flex-col ${
-                i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-              } items-center p-2 md:p-6 rounded-xl gap-5 md:gap-10 lg:gap-10
+              className={`relative flex flex-col ${i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+                } items-center p-2 md:p-6 rounded-xl gap-5 md:gap-10 lg:gap-10
           bg-white
           border border-transparent
           shadow-sm
@@ -111,8 +152,15 @@ const UpcomingEvent = () => {
 
                 <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl w-full">
                   <Image
-                    src={activity.image}
+                    src={typeof activity.image === "string"
+                      ? activity.image.startsWith("http")
+                        ? activity.image
+                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${activity.image}`
+                      : activity.image
+                    }
                     alt={activity.title}
+                    width={624}
+                    height={300}
                     className="w-full h-auto md:h-[300] object-fit group-hover:scale-103 transition-transform duration-700 ease-in-out"
                   />
                 </div>
@@ -127,7 +175,7 @@ const UpcomingEvent = () => {
                   {activity.text}
                 </p>
 
-                <Link href={activity.link}>
+                <Link href={activity.link} target="_blank" rel="noopener noreferrer">
                   <button
                     className=" relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
                      shadow-md bg-[#0C55A0] cursor-pointer

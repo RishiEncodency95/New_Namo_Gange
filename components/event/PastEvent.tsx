@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import ourIni1 from "@/public/OurInitiatives/ourIni1.png";
@@ -11,6 +11,7 @@ import ourIni6 from "@/public/OurInitiatives/ourIni6.png";
 import ourIni7 from "@/public/OurInitiatives/ourIni7.png";
 import ourIni8 from "@/public/OurInitiatives/ourIni8.png";
 import ourIni9 from "@/public/OurInitiatives/ourIni9.png";
+import axiosClient from "@/lib/axiosClient";
 
 /* ================= TYPES ================= */
 interface PastEvent {
@@ -91,6 +92,50 @@ const formatDate = (date: string) =>
   });
 
 const PastEvent = () => {
+  const [pastEvents, setPastEvents] = useState<PastEvent[]>(events);
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      try {
+        const res = await axiosClient.get("/events");
+        if (res.data && Array.isArray(res.data.data)) {
+          const parser = new DOMParser();
+          const currentDate = new Date();
+          currentDate.setHours(0, 0, 0, 0); // To compare dates only
+
+          const fetchedData = res.data.data
+            .filter((item: any) => {
+              // Assuming the API provides a 'startDate' field for events
+              const eventDate = new Date(item.start_date);
+              return item.status === "Active" && eventDate < currentDate;
+            })
+            .sort((a: any, b: any) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime())
+            .map((item: any) => {
+              let description = item.description || "";
+              const decoded = parser.parseFromString(description, "text/html");
+              description = decoded.body.textContent || "";
+              return {
+                id: item._id,
+                title: item.name,
+                image: item.image,
+                fromDate: item.start_date,
+                toDate: item.end_date,
+                text: description.replace(/<[^>]+>/g, ""),
+                link: item.link,
+              };
+            });
+          if (fetchedData.length > 0) {
+            setPastEvents(fetchedData);
+          }
+        }
+      }
+      catch (error) {
+        console.error("Error fetching upcoming events:", error);
+      }
+    };
+
+    fetchInitiatives();
+  }, []);
+
   return (
     <section className="bg-[#f6f6f9] pb-16">
       {/* ------------------ BANNER ------------------ */}
@@ -147,7 +192,7 @@ const PastEvent = () => {
 
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {events.map((item) => (
+          {pastEvents.map((item) => (
             <div
               key={item.id}
               className="bg-white rounded-xl border border-gray-200 shadow-sm
