@@ -35,9 +35,15 @@ const newsData = [
       "Through skill training and education programs, we empower women to lead independent, confident, and sustainable lives — building stronger families and communities for the future.",
   },
 ];
-
+interface Blog {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+  date: string;
+}
 const NewsUpdate = () => {
-  const [blogs, setBlogs] = React.useState([]);
+  const [blogs, setBlogs] = React.useState<Blog[]>([]);
   const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {

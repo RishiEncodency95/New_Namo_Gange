@@ -175,9 +175,9 @@ export default function LatestNewsPage() {
         Latest News and <span className="text-[#7a0d0d]">Updates</span>
       </h2>
       <p className="text-gray-600 text-sm text-center md:text-[15px] italic leading-relaxed">
-        "Stay connected with our latest activities, inspiring stories, and
+        Stay connected with our latest activities, inspiring stories, and
         important updates that reflect our ongoing mission toward social
-        upliftment and community well-being."
+        upliftment and community well-being.
       </p>
 
       <div className=" w-full  h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
