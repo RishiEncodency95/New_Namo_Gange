@@ -101,49 +101,47 @@ export default function BlogSlugPage() {
         </div>
       </div>
 
-    
-     {/* ================= FEATURE IMAGE ================= */}
-<div className="w-full max-w-5xl mx-auto mt-6">
-  {/* Image */}
-  <div className="w-full h-[260px] md:h-[380px] overflow-hidden rounded-md">
-    <Image
-      src={blog.image}
-      alt={blog.title}
-      width={1200}
-      height={700}
-      className="w-full h-full object-cover"
-      priority
-    />
-  </div>
+      {/* ================= FEATURE IMAGE ================= */}
+      <div className="w-full max-w-5xl mx-auto mt-6">
+        {/* Image */}
+        <div className="w-full h-[260px] md:h-[380px] overflow-hidden rounded-md">
+          <Image
+            src={blog.image}
+            alt={blog.title}
+            width={1200}
+            height={700}
+            className="w-full h-full object-cover"
+            priority
+          />
+        </div>
 
-  {/* Meta Content BELOW image */}
-  <div className="px-2 md:px-0 mt-6">
-    {/* Category */}
-    <span className="inline-block bg-[#7a0d0d] text-white px-3 py-1 rounded-full text-xs uppercase">
-      {blog.category}
-    </span>
+        {/* Meta Content BELOW image */}
+        <div className="px-2 md:px-0 mt-6">
+          {/* Category */}
+          <span className="inline-block bg-[#7a0d0d] text-white px-3 py-1 rounded-full text-xs uppercase">
+            {blog.category}
+          </span>
 
-    {/* Title */}
-    <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mt-4 leading-snug">
-      {blog.title}
-    </h1>
+          {/* Title */}
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mt-4 leading-snug">
+            {blog.title}
+          </h1>
 
-    {/* Author + Date */}
-    <p className="text-sm text-gray-600 mt-2">
-      By{" "}
-      <span className="font-medium">
-        {blog.author || "Krishnayan Team"}
-      </span>{" "}
-      •{" "}
-      {new Date(blog.createdAt).toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })}
-    </p>
-  </div>
-</div>
-
+          {/* Author + Date */}
+          <p className="text-sm text-gray-600 mt-2">
+            By{" "}
+            <span className="font-medium">
+              {blog.author || "Krishnayan Team"}
+            </span>{" "}
+            •{" "}
+            {new Date(blog.createdAt).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </p>
+        </div>
+      </div>
 
       {/* ================= BLOG CONTENT ================= */}
       <div className="max-w-5xl mx-auto px-4 py-2 md:py-6 lg:py-6 bg-white shadow-sm my-4 rounded-md">
