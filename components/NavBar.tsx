@@ -2,12 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import {
-  ChevronDown,
-  ChevronUp,
-  Home,
-  X,
-} from "lucide-react";
+import { ChevronDown, ChevronUp, Home, X } from "lucide-react";
 import logo from "@/public/logo.png";
 import { useRouter } from "next/navigation";
 import axiosClient from "@/lib/axiosClient";
@@ -44,7 +39,7 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    label: "COMMUNICATION",
+    label: "UPDATES",
     dropdown: [
       { label: "News Letters", href: "/communication/newsLetter" },
       { label: "Our Blogs", href: "/communication/blog" },
@@ -71,7 +66,9 @@ const NavBar: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   // 🔥 OBJECTIVES API STATE
-  const [objectiveDropdown, setObjectiveDropdown] = useState<DropdownItem[]>([]);
+  const [objectiveDropdown, setObjectiveDropdown] = useState<DropdownItem[]>(
+    []
+  );
 
   /* ================= FETCH OBJECTIVES ================= */
   useEffect(() => {
@@ -196,9 +193,7 @@ const NavBar: React.FC = () => {
                     <button
                       className={`w-full flex items-center justify-between px-4 py-1
                         ${
-                          active === item.label
-                            ? "bg-[#DF562C] text-white"
-                            : ""
+                          active === item.label ? "bg-[#DF562C] text-white" : ""
                         }`}
                       onClick={() => {
                         if (item.href) handleNavigate(item.href, item.label);
@@ -230,9 +225,7 @@ const NavBar: React.FC = () => {
                       ).map((drop) => (
                         <button
                           key={drop.label}
-                          onClick={() =>
-                            handleNavigate(drop.href, drop.label)
-                          }
+                          onClick={() => handleNavigate(drop.href, drop.label)}
                           className="ml-6 block text-left py-1 text-[12px] hover:text-[#DF562C]"
                         >
                           {drop.label}
