@@ -31,7 +31,7 @@ export default function EventsPage() {
           .sort(
             (a: CategoryItem, b: CategoryItem) => a.order_by - b.order_by
           );
-// console.log("🔥 Active Categories...",activeCategories );
+        // console.log("🔥 Active Categories...",activeCategories );
         setCategories(activeCategories);
       } catch (error) {
         console.error("❌ Category Image API Error:", error);
@@ -102,7 +102,7 @@ export default function EventsPage() {
                 </div>
               </div>
             ))}
-{/* category-image  */}
+          {/* category-image  */}
           {/* ===== DATA ===== */}
           {!loading &&
             categories.map((cat) => (
