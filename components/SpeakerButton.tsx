@@ -37,8 +37,8 @@ export default function SpeakerButton() {
       <button
         onClick={toggleMute}
         className="
-    w-10 h-10 rounded-full
-    bg-white/30 backdrop-blur-md
+    w-7 h-7 rounded-full
+    bg-white backdrop-blur-md
     shadow-md shadow-black/10
     hover:bg-white/40 hover:shadow-lg
     active:scale-95
@@ -47,9 +47,9 @@ export default function SpeakerButton() {
   "
       >
         {isMuted ? (
-          <VolumeX size={24} className="text-red-600" />
+          <VolumeX size={18} className="text-red-600" />
         ) : (
-          <Volume2 size={24} className="text-[#0C55A0]" />
+          <Volume2 size={18} className="text-[#0C55A0]" />
         )}
       </button>
 

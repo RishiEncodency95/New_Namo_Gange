@@ -46,41 +46,6 @@ const TopBar: React.FC = () => {
           >
             Ann Sewa
           </button>
-          <button
-            onClick={handleLogin}
-            className=" flex items-center space-x-1.5 px-4 py-2 text-sm rounded-sm border border-[#DF562C] text-white bg-[#DF562C] hover:bg-[#c94b26]  transition  shadow-md "
-          >
-            Moksha Sewa
-          </button>
-          {/* JOIN WITH US DROPDOWN */}
-          <JoinDropdown />
-
-          {/* LOGIN BUTTON */}
-          <button
-            onClick={handleLogin}
-            className=" flex items-center space-x-1.5 px-4 py-2 text-sm border border-[#0C55A0] font-medium rounded-sm text-white bg-[#0C55A0] hover:bg-sky-600 hover:border-sky-600 transition  shadow-md "
-          >
-            Login
-          </button>
-
-          {/* PROFILE ICON */}
-          {/* <Link
-            href="/auth/profile"
-            className="
-              flex items-center space-x-2 
-              px-4 py-2
-              bg-[#0C55A0] text-white hover:bg-sky-600
-              transition 
-              shadow-sm
-            "
-          >
-            <User size={20} className="text-white" />
-            <span className="font-medium ">Profile</span>
-          </Link> */}
-
-          {/* AUDIO + LANGUAGE SELECTORS */}
-          <SpeakerButton />
-          {/* <LanguageSwitcher /> */}
         </div>
       </div>
     </div>

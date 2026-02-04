@@ -93,19 +93,19 @@ const Blog = () => {
 
       {/* ================= CONTENT ================= */}
       <div className="w-full px-2 md:px-12 lg:px-12 text-center">
-        <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-4">
+        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight mt-2">
           Our{" "}
           <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
             Blogs
           </span>
         </h2>
 
-        <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+        <p className="text-gray-600 py-1 text-[13px] md:text-sm italic leading-relaxed">
           "Each event reflects our mission to uplift society through
           spirituality, health, culture, and community empowerment."
         </p>
 
-        <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <div className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
         <div>
           <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
@@ -123,7 +123,7 @@ const Blog = () => {
 
         {/* ================= SEARCH ================= */}
         <div className="w-full flex justify-end mt-2">
-          <div className="relative w-full md:w-[60%] lg:w-[40%] xl:w-[30%]">
+          <div className="relative w-full md:w-[20%] lg:w-[20%] ">
             <input
               value={search}
               onChange={(e) => {
@@ -132,7 +132,7 @@ const Blog = () => {
               }}
               type="text"
               placeholder="Search here..."
-              className="w-full pl-12 pr-4 p-2 rounded-xl border border-gray-300
+              className="w-full pl-12 pr-4 px-4 py-1 rounded-lg border border-gray-300
             shadow-sm focus:border-[#0C55A0] text-sm md:text-base"
             />
             <Search
@@ -151,14 +151,14 @@ const Blog = () => {
           <p className="text-center text-gray-500 mt-6">No blogs found.</p>
         )}
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-4">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mt-2 md:mt-4">
           {currentBlogs.map((blog) => (
             <div
               key={blog._id}
               className="bg-white rounded-md shadow-md hover:shadow-xl transition overflow-hidden"
             >
               {/* IMAGE */}
-              <div className="relative w-full h-48">
+              <div className="relative w-full h-30 md:h-48">
                 <Image
                   src={blog.image}
                   alt={blog.title}
@@ -180,12 +180,12 @@ const Blog = () => {
                   </span>
                 </div>
 
-                <h3 className="mt-2 font-semibold text-gray-800 text-lg line-clamp-2">
+                <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
                   {blog.title}
                 </h3>
 
                 <p
-                  className="text-sm text-gray-600 mt-2 line-clamp-3"
+                  className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4"
                   dangerouslySetInnerHTML={{
                     __html: blog.description,
                   }}
@@ -193,7 +193,7 @@ const Blog = () => {
 
                 <Link
                   href={`/communication/blog/${blog.slug}`}
-                  className="inline-block mt-3 text-xs font-medium text-[#7a0d0d] hover:underline tracking-wide"
+                  className="inline-block mt-1 md:mt-2 text-xs font-medium text-[#7a0d0d] hover:underline tracking-wide"
                 >
                   READ MORE →
                 </Link>
@@ -203,11 +203,11 @@ const Blog = () => {
         </div>
 
         {/* ================= PAGINATION ================= */}
-        <div className="flex justify-center gap-2 py-6">
+        <div className="flex justify-center gap-2 py-2 md:py-6">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((p) => p - 1)}
-            className="w-9 h-9 flex items-center justify-center rounded-full 
+            className="w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-full 
   bg-white border hover:bg-gray-100 disabled:opacity-40"
           >
             ‹
@@ -217,11 +217,11 @@ const Blog = () => {
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`w-9 h-9 flex items-center justify-center rounded-full font-medium transition-all
+              className={`w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-full font-medium transition-all
       ${
         currentPage === i + 1
-          ? "bg-[#0C55A0] text-white shadow-md"
-          : "bg-white border hover:bg-gray-100"
+          ? "bg-[#0C55A0] text-white text-xs md:text-sm shadow-md"
+          : "bg-white border hover:bg-gray-100 text-xs md:text-sm"
       }`}
             >
               {i + 1}
@@ -231,7 +231,7 @@ const Blog = () => {
           <button
             disabled={currentPage === totalPages || totalPages === 1}
             onClick={() => setCurrentPage((p) => p + 1)}
-            className="w-9 h-9 flex items-center justify-center rounded-full 
+            className="w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-full 
   bg-white border hover:bg-gray-100 disabled:opacity-40"
           >
             ›

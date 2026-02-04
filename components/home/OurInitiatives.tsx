@@ -13,7 +13,7 @@ interface Initiative {
   link: string;
 }
 
-const OurInitiatives = () => {
+const   OurInitiatives = () => {
   const [initiativeList, setInitiativeList] = useState<Initiative[]>([]);
 
   useEffect(() => {
@@ -24,7 +24,11 @@ const OurInitiatives = () => {
           const parser = new DOMParser();
           const fetchedData = res.data.data
             .filter((item: any) => item.status === "Active")
-            .sort((a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+            .sort(
+              (a: any, b: any) =>
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime()
+            )
             .map((item: any) => {
               let description = item.desc || "";
               const decoded = parser.parseFromString(description, "text/html");
@@ -38,8 +42,7 @@ const OurInitiatives = () => {
             });
           setInitiativeList(fetchedData);
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.error("Error fetching initiatives:", error);
       }
     };
@@ -51,21 +54,21 @@ const OurInitiatives = () => {
     <section className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
       <div className="w-full text-center">
         {/* ========== Section Header ========== */}
-        <h2 className="text-lg md:text-xl font-semibold text-gray-900">
+        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
           Our{" "}
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Initiatives
           </span>
         </h2>
-        <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+        <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
           “Creating positive change through service, awareness, and sustainable
           community development.”
         </p>
 
         <div className="flex justify-center w-full mt-2">
-          <div className="w-full md:max-w-8xl mx-auto  bg-white py-6 relative overflow-hidden text-cente ">
+          <div className="w-full  bg-white py-6 relative overflow-hidden text-cente ">
             <div className="absolute top-1 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal">
+            <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
               Our initiatives focus on creating meaningful change through
               service, awareness, and community support. Each program is
               designed to uplift society, protect culture, and promote
@@ -73,12 +76,10 @@ const OurInitiatives = () => {
               compassion, and long-term positive transformation. We strive to
               create a harmonious connection between people and nature by
               nurturing values of{" "}
-              <span className="font-semibold text-[#1e7ed3]">compassion</span>,{" "}
-              <span className="font-semibold text-[#DF562C]">
-                responsibility
-              </span>
+              <span className="font-medium text-[#1e7ed3]">compassion</span>,{" "}
+              <span className="font-medium text-[#DF562C]">responsibility</span>
               , and{" "}
-              <span className="font-semibold text-gray-900">
+              <span className="font-medium text-gray-900">
                 conscious living
               </span>
               . Guided by this purpose, our initiatives empower individuals and
@@ -88,50 +89,7 @@ const OurInitiatives = () => {
           </div>
         </div>
 
-        {/* GRID */}
-        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-2">
-          {initiatives.map((item, i) => (
-            <div
-              key={i}
-              className="group bg-white rounded-xl shadow-sm border border-gray-200 
-                 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 
-                 p-3 flex flex-col items-center text-center"
-            >
-              <div
-                className="w-full mb-4 flex items-center justify-center 
-                      rounded-md bg-gray-50
-                      overflow-hidden shadow-inner"
-              >
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  className="object-contain h-16 md:h-32 md:w-32 w-auto transition-transform duration-300
-                     group-hover:scale-105"
-                />
-              </div>
-
-              <h3 className="text-gray-800 font-semibold text-sm md:text-[15px] mb-2 line-clamp-1">
-                {item.title}
-              </h3>
-
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                {item.description}
-              </p>
-
-              <Link href={item.link} className="w-full mt-auto">
-                <button
-                  className="w-full px-3 py-1.5 text-sm font-medium rounded
-                     bg-[#0C55A0] text-white shadow-sm 
-                     hover:bg-[#0a4786] active:scale-95 transition-all"
-                >
-                  Read More...
-                </button>
-              </Link>
-            </div>
-          ))}
-        </div> */}
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
           {initiativeList.map((item, i) => (
             <div
               key={i}
@@ -149,7 +107,7 @@ const OurInitiatives = () => {
                   width={100}
                   height={100}
                   className="
-            object-contain h-16 md:h-34 md:w-34 w-auto
+            object-contain h-14 md:h-30 md:w-30 w-auto
             transition-transform duration-300
             group-hover:scale-110
           "
@@ -157,8 +115,8 @@ const OurInitiatives = () => {
               </div>
 
               {/* CONTENT */}
-              <div className="flex flex-col flex-1 py-3 px-2 text-center">
-                <h3 className="text-gray-900 font-semibold text-sm md:text-[15px] mb-1 line-clamp-1">
+              <div className="flex flex-col flex-1 py-1 md:py-2 px-2 text-center">
+                <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
                   {item.title}
                 </h3>
 
@@ -170,8 +128,8 @@ const OurInitiatives = () => {
                 <Link href={item.link} className="mt-auto">
                   <div
                     className="
-              w-full text-center py-1.5 rounded-lg
-              text-sm font-medium text-[#0C55A0]
+              w-full text-center py-1 md:py-1.5 rounded-lg
+             text-xs md:text-sm font-medium text-[#0C55A0]
               border border-[#0C55A0]/30
               hover:bg-[#0C55A0] hover:text-white
               transition-all duration-300

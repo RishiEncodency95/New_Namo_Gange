@@ -65,116 +65,119 @@ const NewsLetter = () => {
 
   return (
     <div className="bg-gray-50">
-    {/* ================= BANNER ================= */}
-    <div
-      className="w-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/home/Newsletter.jpg')" }}
-    >
-      <div className="bg-black/20 w-full h-full md:h-[250px] py-14">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-semibold text-white">News Letter</h2>
-          <p className="text-white mt-1">
-            <Link
-              href="/"
-              className="text-[#DF562C] font-medium hover:underline"
-            >
-              Home
-            </Link>{" "}
-            / News Letter
+      {/* ================= BANNER ================= */}
+      <div
+        className="w-full bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/home/Newsletter.jpg')" }}
+      >
+        <div className="bg-black/20 w-full h-full md:h-[250px] py-14">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-2xl font-semibold text-white">News Letter</h2>
+            <p className="text-white mt-1">
+              <Link
+                href="/"
+                className="text-[#DF562C] font-medium hover:underline"
+              >
+                Home
+              </Link>{" "}
+              / News Letter
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
+        {/* ================= HEADER ================= */}
+        <div className="w-full text-center">
+          <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+            News Letter{" "}
+            <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
+              Collection
+            </span>
+          </h2>
+
+          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
+            “Explore our monthly newsletters capturing key updates, activities,
+            and inspiring moments from our mission-driven journey.”
           </p>
+
+          <div className="w-full h-1 mt-1 md:mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+          <div>
+            <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+              This initiative reflects a deep commitment to spiritual awareness,
+              cultural values, and selfless service. Rooted in the eternal grace
+              of
+              <strong> Maa Gange and Lord Krishna</strong>, it seeks to inspire
+              individuals toward inner awakening, compassion, and conscious
+              living. Through thoughtful guidance, reflective teachings, and
+              value-based initiatives, this journey encourages people to
+              reconnect with the timeless wisdom of Sanatan Dharma and apply it
+              meaningfully in everyday life.
+            </p>
+          </div>
+        </div>
+
+        {/* ================= GRID ================= */}
+        <div className="w-full py-1 md:py-3">
+          {loading && (
+            <p className="text-center text-gray-500">Loading newsletters...</p>
+          )}
+
+          {!loading && newsletters.length === 0 && (
+            <p className="text-center text-gray-500">
+              No newsletters available.
+            </p>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {newsletters.map((item) => (
+              <div
+                key={item._id}
+                className="bg-white shadow-lg rounded-md overflow-hidden hover:shadow-2xl transition"
+              >
+                {/* Thumbnail */}
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={100}
+                  height={100}
+                  className="w-full h-40 md:h-70 object-cover"
+                />
+
+                {/* Buttons */}
+                <div className="flex justify-center gap-6 mt-3">
+                  {/* VIEW → NEW TAB (SHOW PDF) */}
+                  <button
+                    onClick={() => openPdfInNewTab(item.pdf)}
+                    className="text-xs md:text-sm font-medium text-gray-600 hover:underline"
+                  >
+                    VIEW
+                  </button>
+
+                  {/* DOWNLOAD → DOWNLOAD ONLY */}
+                  <a
+                    href={item.pdf}
+                    download
+                    className="text-xs md:text-sm font-medium text-blue-800 hover:underline"
+                  >
+                    DOWNLOAD
+                  </a>
+                </div>
+
+                {/* Month */}
+                <h4 className="text-center text-sm md:text-[15px] py-1 font-normal md:font-medium text-gray-800">
+                  {formatMonthYear(item.monthYear)}
+                </h4>
+
+                <p className="text-center text-xs text-gray-600 mb-4">
+                  {item.title}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-
-    {/* ================= HEADER ================= */}
-    <div className="w-full p-2 md:px-6 lg:px-6 text-center">
-      <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-4">
-        News Letter{" "}
-        <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
-          Collection
-        </span>
-      </h2>
-
-      <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
-        “Explore our monthly newsletters capturing key updates, activities,
-        and inspiring moments from our mission-driven journey.”
-      </p>
-
-      <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-      <div>
-         <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2">
-           Acharya Jagdishji Maharaj is a revered spiritual guide whose life
-           and teachings continue to inspire countless individuals on the path
-           of inner awakening and self-realization. Blessed by the divine grace
-           of
-           <strong> Maa Gange and Lord Krishna</strong>, he embodies a rare
-           harmony of spiritual wisdom, compassion, and disciplined living.
-           Renowned as a profound philosopher and an eloquent Bhagwat
-           Kathavachak, Acharya Ji has dedicated his life to spreading the
-           timeless values of Sanatan Dharma through wisdom-filled discourses
-           and soulful storytelling.
-         </p>
-       </div>
-    </div>
-
-    {/* ================= GRID ================= */}
-    <div className="w-full p-2 lg:px-6 py-6">
-      {loading && (
-        <p className="text-center text-gray-500">Loading newsletters...</p>
-      )}
-
-      {!loading && newsletters.length === 0 && (
-        <p className="text-center text-gray-500">No newsletters available.</p>
-      )}
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {newsletters.map((item) => (
-          <div
-            key={item._id}
-            className="bg-white shadow-lg rounded-md overflow-hidden hover:shadow-2xl transition"
-          >
-            {/* Thumbnail */}
-            <Image
-              src={item.image}
-              alt={item.title}
-              width={400}
-              height={500}
-              className="w-full h-80 object-cover"
-            />
-
-            {/* Buttons */}
-            <div className="flex justify-center gap-6 mt-3">
-              {/* VIEW → NEW TAB (SHOW PDF) */}
-              <button
-                onClick={() => openPdfInNewTab(item.pdf)}
-                className="text-sm font-medium text-gray-600 hover:underline"
-              >
-                VIEW
-              </button>
-
-              {/* DOWNLOAD → DOWNLOAD ONLY */}
-              <a
-                href={item.pdf}
-                download
-                className="text-sm font-medium text-blue-800 hover:underline"
-              >
-                DOWNLOAD
-              </a>
-            </div>
-
-            {/* Month */}
-            <h4 className="text-center mt-2 font-semibold text-gray-800">
-              {formatMonthYear(item.monthYear)}
-            </h4>
-
-            <p className="text-center text-xs text-gray-600 mb-4">
-              {item.title}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
   );
 };
 

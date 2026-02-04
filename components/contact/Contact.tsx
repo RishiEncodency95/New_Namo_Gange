@@ -82,17 +82,17 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-50 ">
-        <div className="w-full px-4 md:px-6 lg:px-6 text-center">
+      <div className="relative bg-gray-50 py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
+        <div className="w-full  text-center">
           <div>
-            <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-4">
+            <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
               Let’s{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
                 Connect
               </span>
             </h2>
 
-            <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+            <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
               "Have a question, feedback, or want to collaborate? We’d love to
               hear from you. Fill out the form below, and our team will get back
               to you soon."
@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
 
           <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-          <p className="w-full pb-6 text-sm md:text-[15px] text-justify text-gray-800 leading-relaxed mt-3">
+          <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             At Namo Gange Trust, we believe in building meaningful connections
             rooted in service, compassion, and shared purpose. By connecting
             with us, you become part of a collective journey dedicated to social
@@ -109,7 +109,7 @@ const Contact: React.FC = () => {
           </p>
 
           {/* ================= CONTACT SECTION ================= */}
-          <div className="w-full mt-2 md:mt-5 grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="w-full mt-2 md:mt-5 grid grid-cols-1 lg:grid-cols-2 gap-2 g md:gap-10">
             {/* -------- CONTACT INFO CARD -------- */}
             <div className="bg-gradient-to-r from-[#4141b8] to-[#063D8E] text-white rounded p-6 md:p-8 shadow-xl text-left">
               <div className="flex items-center gap-4 mb-5">
@@ -119,7 +119,9 @@ const Contact: React.FC = () => {
                   className="w-18 h-18 bg-white rounded-full p-2 object-contain"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold">Namo Gange Trust</h3>
+                  <h3 className="text-lg font-medium md:text-xl md:font-semibold">
+                    Namo Gange Trust
+                  </h3>
                   <p className="text-sm opacity-90">
                     Service • Compassion • Commitment
                   </p>
@@ -129,7 +131,9 @@ const Contact: React.FC = () => {
               <div className="flex items-start gap-3 mb-4">
                 <Phone className="w-5 h-5 mt-1 opacity-90" />
                 <div>
-                  <p className="font-medium">Phone</p>
+                  <p className="text-[15px] md:text-lg font-normal md:font-medium">
+                    Phone
+                  </p>
                   <p className="text-sm opacity-90">+91 96549 00525</p>
                   <p className="text-sm opacity-90">+91 78302 41288</p>
                 </div>
@@ -138,7 +142,9 @@ const Contact: React.FC = () => {
               <div className="flex items-start gap-3 mb-4">
                 <Mail className="w-5 h-5 mt-1 opacity-90" />
                 <div>
-                  <p className="font-medium">Email</p>
+                  <p className="text-[15px] md:text-lg font-normal md:font-medium">
+                    Email
+                  </p>
                   <p className="text-sm opacity-90">info@namogange.org</p>
                 </div>
               </div>
@@ -146,7 +152,9 @@ const Contact: React.FC = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-1 opacity-90" />
                 <div>
-                  <p className="font-medium">Office Address</p>
+                  <p className="text-[15px] md:text-lg font-normal md:font-medium">
+                    Office Address
+                  </p>
                   <p className="text-sm opacity-90 leading-relaxed">
                     12/52, Site-2, Sunrise Industrial Area, Mohan Nagar,
                     Sahibabad, Ghaziabad, Uttar Pradesh – 201007
@@ -160,7 +168,7 @@ const Contact: React.FC = () => {
               onSubmit={handleSubmit}
               className="bg-white/80 backdrop-blur-lg border border-white/40 shadow-xl rounded p-8 flex flex-col justify-between"
             >
-              <h3 className="text-xl font-medium text-gray-800 mb-4">
+              <h3 className="text-lg md:text-xl font-normal md:font-medium text-gray-800 mb-4">
                 Send Us a Message
               </h3>
 

@@ -69,10 +69,10 @@ const Career = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-4 md:px-6  lg:px-6 text-center">
+      <div className="w-full relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden text-center">
         {/* HEADER */}
         <div className="">
-          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             <span>
               Our{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
@@ -80,7 +80,7 @@ const Career = () => {
               </span>
             </span>
           </h2>
-          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+          <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             "Explore meaningful career opportunities where passion meets
             purpose, and contribute to impactful social, cultural,
             environmental, and community-driven initiatives."
@@ -88,7 +88,7 @@ const Career = () => {
         </div>
         <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-        <p className="w-full pb-6 text-sm md:text-[15px] text-justify text-gray-800 leading-relaxed mt-3">
+        <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
           At Namo Gange Trust, we believe in creating meaningful career
           opportunities where passion meets purpose. Our work environment
           encourages individuals to grow, innovate, and contribute to impactful
@@ -101,7 +101,7 @@ const Career = () => {
       {/* ===== NO CURRENT VACANCY MESSAGE ===== */}
       <div className="w-full py-6 px-6">
         <div className="bg-[#0C55A0] rounded-xl py-8 px-6 md:px-12 text-center">
-          <h2 className="text-xl md:text-2xl font-semibold text-white">
+          <h2 className="text-lg md:text-2xl font-medium md:font-semibold text-white">
             Career Opportunities
           </h2>
 
@@ -136,7 +136,7 @@ const Career = () => {
                  transition-all flex flex-col justify-between h-full"
           >
             {/* Job Title */}
-            <h3 className="text-lg font-semibold text-[#0C55A0] mb-2">
+            <h3 className="text-sm md:text-lg font-medium md:font-semibold text-[#0C55A0] mb-2">
               {job.title}
             </h3>
 
@@ -156,7 +156,7 @@ const Career = () => {
             </div>
 
             {/* Description */}
-            <div className="mt-3 text-sm text-gray-700 text-justify space-y-1 leading-relaxed flex-1">
+            <div className="mt-3 text-xs md:text-sm text-gray-700 text-justify space-y-1 leading-relaxed flex-1">
               {job.desc.map((line, i) => (
                 <p key={i}>• {line}</p>
               ))}
@@ -164,14 +164,32 @@ const Career = () => {
 
             {/* BUTTON */}
             <button
-              className="mt-5 w-full bg-[#0C55A0] hover:bg-[#08467c] text-white py-2 rounded-md text-sm shadow transition"
-              onClick={() => {
-                setSelectedJob(job);
-                setOpenModal(true);
-              }}
-            >
-              Apply
-            </button>
+  onClick={() => {
+    setSelectedJob(job);
+    setOpenModal(true);
+  }}
+  className="
+    w-1/2 md:w-full
+    mx-auto md:mx-0
+    mt-3 md:mt-5
+    py-1 md:py-1.5
+    text-xs md:text-sm
+    font-medium
+    rounded-md
+    bg-[#0C55A0]
+    text-white
+    shadow-sm
+    transition-all duration-300
+    hover:bg-[#08467c]
+    hover:shadow-md
+    active:scale-[0.98]
+    focus:outline-none
+    focus:ring-2 focus:ring-[#0C55A0]/40
+  "
+>
+  Apply Now
+</button>
+
           </div>
         ))}
       </div>

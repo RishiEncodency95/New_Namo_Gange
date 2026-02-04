@@ -108,7 +108,11 @@ const PastEvent = () => {
               const eventDate = new Date(item.start_date);
               return item.status === "Active" && eventDate < currentDate;
             })
-            .sort((a: any, b: any) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime())
+            .sort(
+              (a: any, b: any) =>
+                new Date(a.start_date).getTime() -
+                new Date(b.start_date).getTime()
+            )
             .map((item: any) => {
               let description = item.description || "";
               const decoded = parser.parseFromString(description, "text/html");
@@ -127,8 +131,7 @@ const PastEvent = () => {
             setPastEvents(fetchedData);
           }
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.error("Error fetching upcoming events:", error);
       }
     };
@@ -137,7 +140,7 @@ const PastEvent = () => {
   }, []);
 
   return (
-    <section className="bg-[#f6f6f9] pb-16">
+    <section className="bg-[#f6f6f9] py-2 md:py-4">
       {/* ------------------ BANNER ------------------ */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
@@ -165,7 +168,7 @@ const PastEvent = () => {
       <div className="w-full px-2 md:px-12  lg:px-12 text-center">
         {/* HEADER */}
         <div className="">
-          <h2 className="text-lg md:text-xl font-semibold  rounded text-gray-900 mt-4 ">
+          <h2 className="text-sm text-center md:text-lg lg:text-lg mt-1 font-medium text-gray-900 leading-tight">
             <span>
               Explore Our{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
@@ -173,14 +176,14 @@ const PastEvent = () => {
               </span>
             </span>
           </h2>
-          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
             "Each past event stands as a milestone of our commitment to service,
             spirituality, and community upliftment—creating lasting impact
             across health, culture, and environmental awareness."
           </p>
         </div>
-        <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-        <p className="w-full pb:2 md:pb-10 text-sm md:text-[15px] text-justify text-gray-800 leading-relaxed mt-3">
+        <div className=" w-full  h-1 md:mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <p className="text-gray-700 py-1 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
           Our past events stand as meaningful milestones in our journey of
           service and social commitment. Each initiative reflects our dedication
           to spiritual well-being, healthy living, cultural preservation,
@@ -191,7 +194,7 @@ const PastEvent = () => {
         </p>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
           {pastEvents.map((item) => (
             <div
               key={item.id}
@@ -207,19 +210,32 @@ const PastEvent = () => {
               </div>
 
               <div className="text-center flex flex-col flex-1">
-                <h5 className="text-sm md:text-[15px] font-medium text-gray-900 mb-2">
+                <h5 className="font-normal text-sm md:text-base text-gray-900 mb-2">
                   {item.title}
                 </h5>
 
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-sm text-gray-600 mb-3 md:mb-4">
                   {formatDate(item.fromDate)} – {formatDate(item.toDate)}
                 </p>
 
                 <Link
                   href={item.link}
-                  className="mt-auto px-2 pb-2 md:px-5 md:pb-4"
+                  className="mt-auto px-2 pb-2 md:px-5 md:pb-4 flex justify-center md:block"
                 >
-                  <button className="w-full py-1.5 text-sm font-medium  rounded-md bg-[#0C55A0] text-white hover:bg-[#0a4786] transition">
+                  <button
+                    className="
+      w-1/2 md:w-full
+      md:py-1.5
+      py-1
+      text-xs md:text-sm
+      font-medium
+      rounded-md
+      bg-[#0C55A0]
+      text-white
+      hover:bg-[#0a4786]
+      transition
+    "
+                  >
                     View Details
                   </button>
                 </Link>

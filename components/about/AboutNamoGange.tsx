@@ -112,7 +112,7 @@ const AboutNamoGange = () => {
       >
         {/* Overlay */}
         <div className="bg-black/20 w-full h-full md:h-[250px] flex items-center py-10 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 text-center">
+          <div className="w-full px-4 text-center">
             <h2 className="text-xl md:text-3xl font-semibold text-white">
               About <span className="">Us</span>
             </h2>
@@ -131,11 +131,11 @@ const AboutNamoGange = () => {
       </div>
       <div className="w-full px-2 md:px-12  lg:px-12">
         <div className="w-full mt-4 text-center">
-          <h1 className="text-sm md:text-xl font-medium">
+          <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             About <span className="text-[#DF562C]">Namo Gange</span>
-          </h1>
+          </h2>
 
-          <p className="italic text-sm md:text-[15px] w-full text-gray-700">
+          <p className="text-[13px] md:text-[15px] text-medium text-gray-800 italic">
             “We serve communities through wellness, culture, women empowerment,
             compassionate service, and environmental care.”
           </p>
@@ -143,8 +143,8 @@ const AboutNamoGange = () => {
         <div className=" w-full  h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
         {/* Intro */}
-        <div className="w-full py-4 leading-relaxed space-y-4">
-          <p className="text-sm md:text-[15px] text-gray-700">
+        <div className="w-full py-1 md:py-2 leading-relaxed space-y-2">
+          <p className="text-gray-700 text-xs md:text-[15px] leading-relaxed font-normal">
             <span className="font-medium text-[#DF562C]">Namo Gange</span> is a
             non-profit organization established by a group of like-minded
             individuals, supported by dedicated devotees and volunteers. With
@@ -158,31 +158,31 @@ const AboutNamoGange = () => {
       </div>
       <AboutNGTrust />
       {/* TrustBodies code */}
-      <div className="w-full px-2 md:px-12 lg:px-12">
-        <div className="w-full mt-4 text-center">
-          <h1 className="text-sm md:text-xl font-medium">
+      <div className="w-full py-1 md:py-3 px-2 md:px-12 lg:px-12">
+        <div className="w-full py-1 text-center">
+          <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             Trust <span className="text-[#DF562C]">Bodies</span>
-          </h1>
+          </h2>
 
-          <p className="italic text-sm md:text-[15px] w-full text-gray-700">
+          <p className="text-[13px] md:text-[15px] text-medium text-gray-800 italic">
             “Organizations united in service, spirituality, and social
             upliftment.”
           </p>
         </div>
 
-        <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <div className="w-full h-1  bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-        <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2 text-justify">
+        <p className="text-gray-700 text-xs md:text-[15px] leading-relaxed font-normal py-1">
           The Trust Bodies guided by{" "}
-          <span className="font-normal text-[#DF562C]">
+          <span className="font-medium text-[#DF562C]">
             Acharya Jagdishji Maharaj
           </span>{" "}
           work with a shared vision of spiritual growth and social
           responsibility. Inspired by the divine blessings of{" "}
-          <span className="font-normal text-[#DF562C]">Maa Ganga</span> and{" "}
-          <span className="font-normal text-[#1e7ed3]">Lord Krishna</span>,
+          <span className="font-medium text-[#DF562C]">Maa Ganga</span> and{" "}
+          <span className="font-medium text-[#1e7ed3]">Lord Krishna</span>,
           these trusts are dedicated to preserving{" "}
-          <span className="font-normal text-[#DF562C]">Dharma</span>, promoting
+          <span className="font-medium text-[#DF562C]">Dharma</span>, promoting
           cultural values, and serving humanity through education, awareness,
           and seva. With a foundation rooted in faith and compassion, the Trust
           Bodies continue to strengthen society by uniting spirituality with
@@ -193,8 +193,9 @@ const AboutNamoGange = () => {
           {trustBodies.map((activity, i) => (
             <div
               key={i}
-              className={`flex flex-col w-full ${i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                } items-center gap-5 md:gap-10 lg:gap-10`}
+              className={`flex flex-col w-full ${
+                i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+              } items-center gap-5 md:gap-10 lg:gap-10`}
             >
               <div className="flex w-full md:w-[30%] relative group ">
                 {/* Gradient glow */}
@@ -219,7 +220,7 @@ const AboutNamoGange = () => {
 
               {/* Text Section */}
               <div className="flex flex-col w-full md:w-[70%] text-center md:text-left">
-                <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-1">
+                <h3 className="text-sm md:text-lg font-normal text-gray-900">
                   {activity.title}
                 </h3>
                 <p className="text-gray-700 text-justify text-xs md:text-sm lg:text-sm  leading-relaxed mb-6">
