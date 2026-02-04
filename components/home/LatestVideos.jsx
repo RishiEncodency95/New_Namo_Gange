@@ -50,20 +50,14 @@ export default function LatestVideos() {
     <section className="w-full px-2 py-2 md:py-4 md:px-12 lg:px-12">
       {/* ===== Header ===== */}
       <div className="flex items-center gap-2 mb-4">
-        <FaYoutube className="text-red-600 text-2xl" />
-        <h2 className="text-xl font-semibold text-gray-800">
+        <FaYoutube className="text-red-600 text-lg md:text-2xl" />
+        <h2 className="text-sm md:text-xl font-normal md:font-medium text-gray-800">
           Latest Videos
         </h2>
       </div>
 
       {/* ===== ONE GRID – ALL 4 VIDEOS ===== */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-          gap: "20px",
-        }}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* PLAYLIST VIDEOS (2) */}
         {playlistIndexes.map((index) => (
           <div

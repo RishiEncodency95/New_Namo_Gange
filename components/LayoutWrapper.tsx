@@ -1,42 +1,52 @@
 "use client";
 import { useEffect, useState, ReactNode, useRef } from "react";
 import Footer from "./Footer";
-import TopBar from "./TopBar";
 import NavBar from "./NavBar";
-import SuperTopBar from  "./SuperTopBar"
+import SuperTopBar from "./SuperTopBar";
 
 interface LayoutWrapperProps {
   children: ReactNode;
 }
 
 export default function LayoutWrapper({ children }: LayoutWrapperProps) {
-  const [hideTop, setHideTop] = useState<boolean>(false);
-  const [topHeight, setTopHeight] = useState<number>(0);
+  const [hideTop, setHideTop] = useState(false);
+  const [topHeight, setTopHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const topRef = useRef<HTMLDivElement | null>(null);
 
-  // Get TopBar height dynamically
+  /* ================= GET SUPER TOP BAR HEIGHT ================= */
   useEffect(() => {
-    if (topRef.current) {
-      setTopHeight(topRef.current.offsetHeight);
-    }
+    if (!topRef.current) return;
 
-    const observer = new ResizeObserver(() => {
-      if (topRef.current) {
-        setTopHeight(topRef.current.offsetHeight);
-      }
-    });
+    const updateHeight = () => {
+      setTopHeight(topRef.current?.offsetHeight || 0);
+    };
 
-    if (topRef.current) observer.observe(topRef.current);
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(topRef.current);
 
     return () => observer.disconnect();
   }, []);
 
-  // Hide TopBar on scroll
+  /* ================= DETECT MOBILE / DESKTOP ================= */
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Tailwind md breakpoint
+    };
+
+    handleResize(); // initial
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  /* ================= HIDE TOP BAR ON SCROLL ================= */
   useEffect(() => {
     const handleScroll = () => {
-      const y = window.scrollY;
-      setHideTop(y > 60);
+      setHideTop(window.scrollY > 60);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -45,45 +55,42 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* ================= FIXED HEADER ================= */}
-      <div className="fixed top-0 left-0 w-full z-40">
-        {/* ---------- TOPBAR ---------- */}
-        <div
-          ref={topRef}
-          className={`
-            w-full bg-white shadow-sm 
-            transition-transform duration-300
-            ${hideTop ? "-translate-y-full" : "translate-y-0"}
-          `}
-        >
-          <SuperTopBar/>
-          <TopBar />
-        </div>
+      {/* ================= SUPER TOP BAR ================= */}
+      <div
+        ref={topRef}
+        className={`
+          fixed top-0 left-0 w-full
+          z-[100]
+          transition-transform duration-300
+          ${hideTop ? "-translate-y-full" : "translate-y-0"}
+        `}
+      >
+        <SuperTopBar />
+      </div>
 
-        {/* ---------- NAVBAR (ALWAYS BELOW TOPBAR) ---------- */}
-        <div
-          className={`
-            fixed left-0 w-full bg-white shadow-md
-            transition-all duration-300
-          `}
-          style={{
-            top: hideTop ? 0 : topHeight, // Dynamic height applied here
-          }}
-        >
-          <NavBar />
-        </div>
+      {/* ================= NAVBAR ================= */}
+      <div
+        className="fixed left-0 w-full z-[50]"
+        style={{
+          top: hideTop ? 0 : topHeight,
+        }}
+      >
+        <NavBar />
       </div>
 
       {/* ================= PAGE CONTENT ================= */}
       <main
         className="flex-1 w-full transition-all duration-300"
         style={{
-          paddingTop: topHeight + 42, // TopBar + Navbar
+          paddingTop: isMobile
+            ? topHeight + 50 // 📱 Mobile
+            : topHeight + 80, // 💻 Desktop
         }}
       >
         {children}
       </main>
 
+      {/* ================= FOOTER ================= */}
       <Footer />
     </div>
   );

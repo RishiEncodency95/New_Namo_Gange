@@ -170,7 +170,7 @@ export default function LatestNewsPage() {
   });
 
   return (
-    <div >
+    <div>
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/home/Newsletter.jpg')" }}
@@ -194,118 +194,117 @@ export default function LatestNewsPage() {
         </div>
       </div>
 
-<div className="w-full bg-gray-50 px-8">
-      {/* ---------- HEADING ---------- */}
-      <h2 className="text-lg md:text-xl font-semibold  text-center rounded text-gray-900 pt-2">
-        Latest News and <span className="text-[#7a0d0d]">Updates</span>
-      </h2>
-      <p className="text-gray-600 text-sm text-center md:text-[15px] italic leading-relaxed">
-        Stay connected with our latest activities, inspiring stories, and
-        important updates that reflect our ongoing mission toward social
-        upliftment and community well-being.
-      </p>
+      <div className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-gray-50 overflow-hidden">
+        {/* ---------- HEADING ---------- */}
+        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+          Latest News and <span className="text-[#7a0d0d]">Updates</span>
+        </h2>
+        <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
+          Stay connected with our latest activities, inspiring stories, and
+          important updates that reflect our ongoing mission toward social
+          upliftment and community well-being.
+        </p>
 
-      <div className=" w-full  h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
-      <div>
-           <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2">
-             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
-             and teachings continue to inspire countless individuals on the path
-             of inner awakening and self-realization. Blessed by the divine grace
-             of
-             <strong> Maa Gange and Lord Krishna</strong>, he embodies a rare
-             harmony of spiritual wisdom, compassion, and disciplined living.
-             Renowned as a profound philosopher and an eloquent Bhagwat
-             Kathavachak, Acharya Ji has dedicated his life to spreading the
-             timeless values of Sanatan Dharma through wisdom-filled discourses
-             and soulful storytelling.
-           </p>
-         </div>
+        <div className=" w-full  h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
+        <div>
+          <p className="text-gray-700 mt-1 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
+            This initiative reflects a deep commitment to spiritual awareness,
+            cultural values, and selfless service. Rooted in the eternal grace
+            of
+            <strong> Maa Gange and Lord Krishna</strong>, it seeks to inspire
+            individuals toward inner awakening, compassion, and conscious
+            living. Through thoughtful guidance, reflective teachings, and
+            value-based initiatives, this journey encourages people to reconnect
+            with the timeless wisdom of Sanatan Dharma and apply it meaningfully
+            in everyday life.
+          </p>
+        </div>
 
-      {/* ---------- FILTERS ---------- */}
-      <div className="w-full flex flex-col md:flex-row justify-between gap-4 mt-2">
-        <select
-          className="border px-2 py-1.5 rounded bg-white w-48 shadow"
-          value={publisherFilter}
-          onChange={(e) => setPublisherFilter(e.target.value)}
-        >
-          <option value="">Publisher Wise</option>
-          {publishers.map((pub: any) => (
-            <option key={pub._id} value={pub.name}>
-              {pub.name}
-            </option>
-          ))}
-        </select>
-
-        <input
-          type="text"
-          placeholder="Search here..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border px-2 py-1.5 rounded px-5 w-full md:w-80 shadow"
-        />
-      </div>
-
-      {/* ---------- NEWS LIST ---------- */}
-      <div className="w-full space-y-6 py-2">
-        {filteredNews.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white rounded-lg shadow-md p-4 md:p-6 flex flex-col md:flex-row gap-6 border"
+        {/* ---------- FILTERS ---------- */}
+        <div className="w-full flex flex-col md:flex-row justify-between gap-4 mt-2">
+          <select
+            className="w-full border px-2 py-1 md:py-1.5 rounded bg-white md:w-48 shadow"
+            value={publisherFilter}
+            onChange={(e) => setPublisherFilter(e.target.value)}
           >
-            {/* LEFT IMAGE */}
-            <div className="md:w-1/3 w-full h-56 relative rounded-md overflow-hidden">
-              <Image
-                src={
-                  item.img?.startsWith("http")
-                    ? item.img
-                    : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.img}`
-                }
-                alt={item.title}
-                fill
-                className="object-cover"
-              />
-            </div>
+            <option value="">Publisher Wise</option>
+            {publishers.map((pub: any) => (
+              <option key={pub._id} value={pub.name}>
+                {pub.name}
+              </option>
+            ))}
+          </select>
 
-            {/* RIGHT CONTENT */}
-            <div className="flex-1">
-              <div className="flex justify-between items-start">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {item.title}
-                </h3>
+          <input
+            type="text"
+            placeholder="Search here..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border px-2 py-1 md:py-1.5 rounded md:px-5 w-full md:w-80 shadow"
+          />
+        </div>
 
-                <div className="w-24 h-10 relative">
-                  <Image
-                    src={item.logo}
-                    alt={item.publisher}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+        {/* ---------- NEWS LIST ---------- */}
+        <div className="w-full space-y-6 py-2">
+          {filteredNews.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-lg shadow-md p-2 md:p-6 flex flex-col md:flex-row gap-6 border"
+            >
+              {/* LEFT IMAGE */}
+              <div className="md:w-1/3 w-full h-30 md:h-45 relative rounded-md overflow-hidden">
+                <Image
+                  src={
+                    item.img?.startsWith("http")
+                      ? item.img
+                      : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.img}`
+                  }
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
 
-              <p className="text-sm text-gray-600 mt-2">
-                📅 {item.date} &nbsp; | &nbsp; 📰 {item.publisher}
-              </p>
+              {/* RIGHT CONTENT */}
+              <div className="flex-1">
+                <div className="flex justify-between items-start">
+                  <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
+                    {item.title}
+                  </h3>
 
-              <p className="text-gray-700 text-justify mt-3 line-clamp-4">
-                {item.desc}
-              </p>
+                  <div className="w-24 h-6 relative">
+                    <Image
+                      src={item.logo}
+                      alt={item.publisher}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
 
-              {/* <button
+                <p className="text-xs md:text-sm text-gray-600 mt-2">
+                  📅 {item.date} &nbsp; | &nbsp; 📰 {item.publisher}
+                </p>
+
+                <p className="text-gray-800 text-xs md:text-sm text-justify mt-3 line-clamp-4">
+                  {item.desc}
+                </p>
+
+                {/* <button
                 className=" px-3 md:px-6 lg:px-6 py-1 md:py-1.5 lg:py-1.5 mt-3 text-sm font-medium rounded
                      bg-[#0C55A0] text-white shadow-sm 
                      hover:bg-[#0a4786] active:scale-95 transition-all"
               >
                 Read More
               </button> */}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {filteredNews.length === 0 && (
-        <p className="text-center text-gray-600 mt-10">No results found...</p>
-      )}
+        {filteredNews.length === 0 && (
+          <p className="text-center text-gray-600 mt-10">No results found...</p>
+        )}
       </div>
     </div>
   );

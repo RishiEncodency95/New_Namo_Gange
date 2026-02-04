@@ -79,22 +79,22 @@ const Videos = () => {
     </div>
 
     {/* ================= CONTENT ================= */}
-    <div className="w-full px-4 md:px-6 lg:px-6 text-center">
-      <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-4">
+    <div className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white text-center">
+    <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
         Videos{" "}
         <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
           Gallery
         </span>
       </h2>
 
-      <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+      <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
         "Explore moments captured through our video gallery, showcasing
         inspiring events, social initiatives, and cultural programs."
       </p>
 
       <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
       <div>
-        <p className="text-gray-700 leading-relaxed text-sm md:text-[15px] mt-2">
+      <p className="mt-1 text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
           Acharya Jagdishji Maharaj is a revered spiritual guide whose life
           and teachings continue to inspire countless individuals on the path
           of inner awakening and self-realization. Blessed by the divine grace
@@ -109,7 +109,7 @@ const Videos = () => {
       </div>
 
       {/* ================= VIDEO GRID ================= */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 py-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 py-2 md:py-6">
         {/* ===== LOADING SKELETON ===== */}
         {loading &&
           Array.from({ length: 6 }).map((_, i) => (
@@ -149,10 +149,10 @@ const Videos = () => {
 
               {/* Title + Date */}
               <div className="py-3 px-4 text-center bg-white">
-                <h3 className="text-gray-700 font-medium text-base mb-1">
+              <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
                   {video.title}
                 </h3>
-                <p className="text-sm text-gray-800">
+                <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
                   📅 {new Date(video.date).toLocaleDateString()}
                 </p>
               </div>

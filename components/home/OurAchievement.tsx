@@ -80,7 +80,11 @@ const OurAchievement = () => {
           const parser = new DOMParser();
           const fetchedData = res.data.data
             .filter((item: any) => item.status === "Active")
-            .sort((a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+            .sort(
+              (a: any, b: any) =>
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime()
+            )
             .map((item: any) => {
               let description = item.desc || "";
               const decoded = parser.parseFromString(description, "text/html");
@@ -94,7 +98,6 @@ const OurAchievement = () => {
           if (fetchedData.length > 0) {
             setAchievements(fetchedData);
           }
-
         }
       } catch (error) {
         console.error("Error fetching achievements:", error);
@@ -110,18 +113,21 @@ const OurAchievement = () => {
     <section className="w-full relative py-1.5 md:py-3 bg-gray-50 overflow-hidden">
       <div className=" px-2 lg:px-12 md:px-12">
         {/* Header */}
-        <h2 className="text-lg md:text-xl lg:text-xl font-semibold text-center text-gray-900 mb-4">
+        <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 text-center leading-tight">
           Our{" "}
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Achievement
           </span>
         </h2>
+        <p className="text-[13px] md:text-[15px] text-center text-medium text-gray-800 italic py-1">
+          “Serving Humanity, Preserving Nature, Awakening Divinity.”
+        </p>
         <div className="flex justify-center w-full mb-6">
-          <div className=" w-full py-6 relative overflow-hidden text-center">
+          <div className=" w-full py-2 relative overflow-hidden text-center">
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal">
+            <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
               Each milestone achieved by our Trust is a step toward creating a
               more compassionate and environmentally balanced society. Our
               initiatives continue to grow with the collective support of
@@ -141,8 +147,9 @@ const OurAchievement = () => {
           {achievements.map((activity, i) => (
             <div
               key={i}
-              className={`flex flex-col ${i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                } items-center gap-5 md:gap-10 lg:gap-10`}
+              className={`flex flex-col ${
+                i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+              } items-center gap-1 md:gap-10 lg:gap-10`}
             >
               <div className="flex-1 relative group w-full">
                 {/* Gradient glow */}
@@ -150,26 +157,27 @@ const OurAchievement = () => {
 
                 <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl w-full">
                   <Image
-                    src={typeof activity.image === "string"
-                      ? activity.image.startsWith("http")
-                        ? activity.image
-                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${activity.image}`
-                      : activity.image
+                    src={
+                      typeof activity.image === "string"
+                        ? activity.image.startsWith("http")
+                          ? activity.image
+                          : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${activity.image}`
+                        : activity.image
                     }
                     alt={activity.title}
                     width={100}
                     height={100}
-                    className="w-full md:h-78 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+                    className="w-full md:h-75 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
                   />
                 </div>
               </div>
 
               {/* Text Section */}
               <div className="flex-1 text-center md:text-left">
-                <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-1">
+                <h3 className="text-base md:text-xl font-normal text-gray-900">
                   {activity.title}
                 </h3>
-                <p className="text-gray-700 text-justify text-xs md:text-sm lg:text-sm  leading-relaxed mb-6">
+                <p className="text-gray-700 py-0 md:py-4 text-justify text-xs md:text-sm lg:text-sm  leading-relaxed">
                   {activity.text}
                 </p>
 

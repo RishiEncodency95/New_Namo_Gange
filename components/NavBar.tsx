@@ -1,11 +1,13 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { ChevronDown, ChevronUp, Home, X } from "lucide-react";
+import { ChevronDown, ChevronUp, X } from "lucide-react";
 import logo from "@/public/logo.png";
 import { useRouter } from "next/navigation";
 import axiosClient from "@/lib/axiosClient";
+import Link from "next/link";
+import { FaBars } from "react-icons/fa";
+import SpeakerButton from "./SpeakerButton";
 
 /* ================= TYPES ================= */
 interface DropdownItem {
@@ -23,14 +25,8 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: "HOME", href: "/" },
   { label: "ABOUT US", href: "/about" },
-
-  {
-    label: "OBJECTIVES",
-    dropdown: [], // 🔥 API se fill hoga
-  },
-
+  { label: "OBJECTIVES", dropdown: [] },
   { label: "INITIATIVES", href: "/initiatives" },
-
   {
     label: "EVENTS",
     dropdown: [
@@ -64,8 +60,6 @@ const NavBar: React.FC = () => {
   const [active, setActive] = useState("HOME");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-
-  // 🔥 OBJECTIVES API STATE
   const [objectiveDropdown, setObjectiveDropdown] = useState<DropdownItem[]>(
     []
   );
@@ -75,22 +69,20 @@ const NavBar: React.FC = () => {
     const fetchObjectives = async () => {
       try {
         const res = await axiosClient.get("/objectives");
-
-        if (res.data && Array.isArray(res.data.data)) {
-          const list = res.data.data
-            .filter((item: any) => item.status === "Active")
-            .map((item: any) => ({
-              label: item.title,
-              href: `/objectives/${item.slug}`,
-            }));
-
-          setObjectiveDropdown(list);
+        if (Array.isArray(res.data?.data)) {
+          setObjectiveDropdown(
+            res.data.data
+              .filter((i: any) => i.status === "Active")
+              .map((i: any) => ({
+                label: i.title,
+                href: `/objectives/${i.slug}`,
+              }))
+          );
         }
-      } catch (error) {
-        console.error("❌ Objectives API Error:", error);
+      } catch (e) {
+        console.error("Objectives API error", e);
       }
     };
-
     fetchObjectives();
   }, []);
 
@@ -104,97 +96,105 @@ const NavBar: React.FC = () => {
 
   return (
     <>
-      {/* ======================= DESKTOP ======================= */}
-      <nav className="hidden md:block bg-[#063D8E] text-white shadow">
-        <div className="w-full flex items-center justify-between h-11 text-sm px-12 font-normal">
-          <div className="flex w-full items-center justify-between">
-            {NAV_ITEMS.map((item) => (
-              <div key={item.label} className="relative group">
-                {/* MAIN BUTTON */}
-                <button
-                  onClick={() => {
-                    if (item.href) handleNavigate(item.href, item.label);
-                    else setActive(item.label);
-                  }}
-                  className={`flex items-center gap-1 px-2 py-3 transition
-                    ${
-                      active === item.label
-                        ? "bg-[#DF562C] text-white"
-                        : "hover:text-gray-200"
-                    }`}
-                >
-                  {item.label === "HOME" && <Home size={16} />}
-                  {item.label}
-                  {item.dropdown && <ChevronDown size={14} />}
-                </button>
-
-                {/* DROPDOWN */}
-                {item.dropdown && (
-                  <div className="absolute left-0 mt-0 w-50 bg-white text-gray-800 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                    {(item.label === "OBJECTIVES"
-                      ? objectiveDropdown
-                      : item.dropdown
-                    ).map((drop) => (
-                      <button
-                        key={drop.label}
-                        onClick={() => handleNavigate(drop.href, drop.label)}
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 hover:rounded"
-                      >
-                        {drop.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* DONATE BUTTON */}
-          <div className="items-center justify-center bg-[#DF562C]">
-            <button
-              onClick={() => router.push("/donate")}
-              className="flex items-center gap-2 px-10 h-11 bg-[#DF562C] text-white text-base font-semibold hover:bg-[#c44b22] transition"
+      {/* ================= DESKTOP ================= */}
+      <nav className="hidden md:block bg-white shadow-sm">
+        <div className="w-full px-10">
+          <div className="flex items-center justify-between h-20 text-sm font-medium">
+            {/* LOGO */}
+            <Link
+              href="/"
+              onClick={() => {
+                setActive("HOME");
+                setMobileOpen(false);
+                setOpenDropdown(null);
+              }}
             >
-              DONATE <span className="text-lg">🤝🏻</span>
-            </button>
+              <Image src={logo} alt="Namo Gange" width={170} priority />
+            </Link>
+
+            {/* MENU */}
+            <div className="flex items-center gap-6">
+              {NAV_ITEMS.map((item) => (
+                <div key={item.label} className="relative group">
+                  {/* PARENT BUTTON */}
+                  <button
+                    onClick={() => {
+                      if (item.href) {
+                        handleNavigate(item.href, item.label);
+                      }
+                      // ❌ dropdown parent ko active nahi banate
+                    }}
+                    className={`flex items-center gap-1 py-2 transition-all
+                      ${
+                        active === item.label
+                          ? "text-[#DF562C] font-semibold border-b-2 border-[#DF562C]"
+                          : "text-gray-700 hover:text-[#DF562C]"
+                      }`}
+                  >
+                    {item.label}
+                    {item.dropdown && <ChevronDown size={14} />}
+                  </button>
+
+                  {/* DROPDOWN */}
+                  {item.dropdown && (
+                    <div className="absolute left-0 top-full mt-3 min-w-[220px] bg-white rounded-md shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                      {(item.label === "OBJECTIVES"
+                        ? objectiveDropdown
+                        : item.dropdown
+                      ).map((drop) => (
+                        <button
+                          key={drop.label}
+                          onClick={() => {
+                            setActive(item.label); // ✅ parent active only after select
+                            handleNavigate(drop.href, item.label);
+                          }}
+                          className="w-full text-left px-5 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#DF562C]"
+                        >
+                          {drop.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
 
-      {/* ======================= MOBILE ======================= */}
-      <nav className="md:hidden bg-white border-b shadow-sm">
-        <div className="flex items-center justify-between px-4 py-3">
-          <Image src={logo} width={120} alt="logo" />
-
-          <button onClick={() => setMobileOpen(true)}>
-            <div className="space-y-1.5">
-              <span className="block w-7 h-1 bg-black"></span>
-              <span className="block w-7 h-1 bg-black"></span>
-              <span className="block w-7 h-1 bg-black"></span>
-            </div>
+      {/* ================= MOBILE ================= */}
+      <nav className="md:hidden bg-white shadow-sm">
+        <div className="flex items-center justify-between px-2 py-1">
+          <Image src={logo} width={100} alt="logo" />
+          <SpeakerButton />
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="p-2 rounded-md hover:bg-gray-100 transition"
+            aria-label="Open menu"
+          >
+            <FaBars size={22} className="text-gray-700" />
           </button>
         </div>
 
         {mobileOpen && (
           <div className="fixed inset-0 bg-black/40 z-50">
-            <div className="w-[80%] bg-white h-full shadow-lg p-5 overflow-y-auto">
-              {/* HEADER */}
-              <div className="flex justify-between items-center mb-4">
-                <Image src={logo} width={120} alt="logo" />
+            <div className="w-[80%] bg-white h-full px-4 py-1 overflow-y-auto">
+              <div className="flex justify-between items-center  mb-2">
+                <Image src={logo} width={100} alt="logo" />
                 <button onClick={() => setMobileOpen(false)}>
-                  <X size={32} />
+                  <X size={22} />
                 </button>
               </div>
 
-              {/* MENU */}
-              <div className="flex flex-col gap-2 text-[#063D8E] font-medium text-[13px]">
+              <div className="flex flex-col gap-2 text-[#063D8E] border-t border-gray-300 font-medium text-[13px]">
                 {NAV_ITEMS.map((item) => (
                   <div key={item.label}>
                     <button
-                      className={`w-full flex items-center justify-between px-4 py-1
-                        ${
-                          active === item.label ? "bg-[#DF562C] text-white" : ""
-                        }`}
+                      className={`w-full flex items-center justify-between px-4 py-1 ${
+                        active === item.label
+                          ? "bg-[#DF562C] text-white rounded"
+                          : ""
+                      }`}
                       onClick={() => {
                         if (item.href) handleNavigate(item.href, item.label);
                         if (item.dropdown)
@@ -203,11 +203,7 @@ const NavBar: React.FC = () => {
                           );
                       }}
                     >
-                      <span className="flex items-center gap-2">
-                        {item.label === "HOME" && <Home size={16} />}
-                        {item.label}
-                      </span>
-
+                      {item.label}
                       {item.dropdown &&
                         (openDropdown === item.label ? (
                           <ChevronUp size={18} />
@@ -216,7 +212,6 @@ const NavBar: React.FC = () => {
                         ))}
                     </button>
 
-                    {/* MOBILE DROPDOWN */}
                     {item.dropdown &&
                       openDropdown === item.label &&
                       (item.label === "OBJECTIVES"
@@ -225,7 +220,10 @@ const NavBar: React.FC = () => {
                       ).map((drop) => (
                         <button
                           key={drop.label}
-                          onClick={() => handleNavigate(drop.href, drop.label)}
+                          onClick={() => {
+                            setActive(item.label);
+                            handleNavigate(drop.href, item.label);
+                          }}
                           className="ml-6 block text-left py-1 text-[12px] hover:text-[#DF562C]"
                         >
                           {drop.label}
@@ -233,6 +231,114 @@ const NavBar: React.FC = () => {
                       ))}
                   </div>
                 ))}
+                <div className="py-2 border-t border-gray-200 pt-2 flex flex-col gap-4 text-sm">
+                  {/* Donate */}
+                  <button
+                    onClick={() => handleNavigate("/donate", "DONATE")}
+                    className="
+    w-full bg-[#DF562C] text-white py-1
+    rounded font-semibold tracking-wide
+    shadow-sm active:scale-[0.98] transition
+  "
+                  >
+                    Donate
+                  </button>
+
+                  {/* SEWA */}
+                  <div className="border rounded overflow-hidden">
+                    <button
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === "SEWA" ? null : "SEWA")
+                      }
+                      className="
+      w-full flex justify-between items-center
+      px-4 py-1 font-medium text-gray-800
+      bg-gray-50
+    "
+                    >
+                      Sewa
+                      {openDropdown === "SEWA" ? (
+                        <ChevronUp size={16} />
+                      ) : (
+                        <ChevronDown size={16} />
+                      )}
+                    </button>
+
+                    {openDropdown === "SEWA" && (
+                      <div className="bg-white flex flex-col text-[13px]">
+                        <button
+                          onClick={() =>
+                            handleNavigate("/sewa/ann-sewa", "SEWA")
+                          }
+                          className="px-6 py-1 text-left hover:bg-gray-100"
+                        >
+                          Ann Sewa
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleNavigate("/sewa/moksha-sewa", "SEWA")
+                          }
+                          className="px-6 py-1 text-left hover:bg-gray-100"
+                        >
+                          Moksha Sewa
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* JOIN US */}
+                  <div className="border rounded overflow-hidden">
+                    <button
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === "JOIN" ? null : "JOIN")
+                      }
+                      className="
+      w-full flex justify-between items-center
+      px-4 py-1 font-medium text-gray-800
+      bg-gray-50
+    "
+                    >
+                      Join Us
+                      {openDropdown === "JOIN" ? (
+                        <ChevronUp size={16} />
+                      ) : (
+                        <ChevronDown size={16} />
+                      )}
+                    </button>
+
+                    {openDropdown === "JOIN" && (
+                      <div className="bg-white flex flex-col text-[13px]">
+                        <button
+                          onClick={() =>
+                            handleNavigate("/join/volunteer", "JOIN")
+                          }
+                          className="px-6 py-1 text-left hover:bg-gray-100"
+                        >
+                          Join as Volunteer
+                        </button>
+                        <button
+                          onClick={() => handleNavigate("/join/member", "JOIN")}
+                          className="px-6 py-1 text-left hover:bg-gray-100"
+                        >
+                          Become a Member
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* LOGIN */}
+                  <button
+                    onClick={() => handleNavigate("/auth/login", "LOGIN")}
+                    className="
+    w-full border border-[#DF562C] text-[#DF562C]
+    py-1 rounded font-semibold
+    hover:bg-[#DF562C] hover:text-white
+    transition
+  "
+                  >
+                    Login
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -16,32 +16,30 @@ interface CategoryItem {
 }
 
 const photos = () => {
-    const [categories, setCategories] = useState<CategoryItem[]>([]);
-    const [loading, setLoading] = useState(true);
-  
-    /* ================= FETCH CATEGORY IMAGES ================= */
-    useEffect(() => {
-      const fetchCategories = async () => {
-        try {
-          const res = await axiosClient.get("/category-image");
-          const data = res?.data?.data || [];
-  
-          const activeCategories = data
-            .filter((item: CategoryItem) => item.status === "Active")
-            .sort(
-              (a: CategoryItem, b: CategoryItem) => a.order_by - b.order_by
-            );
-          // console.log("🔥 Active Categories...",activeCategories );
-          setCategories(activeCategories);
-        } catch (error) {
-          console.error("❌ Category Image API Error:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchCategories();
-    }, []);
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  /* ================= FETCH CATEGORY IMAGES ================= */
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axiosClient.get("/category-image");
+        const data = res?.data?.data || [];
+
+        const activeCategories = data
+          .filter((item: CategoryItem) => item.status === "Active")
+          .sort((a: CategoryItem, b: CategoryItem) => a.order_by - b.order_by);
+        // console.log("🔥 Active Categories...",activeCategories );
+        setCategories(activeCategories);
+      } catch (error) {
+        console.error("❌ Category Image API Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
   return (
     <section className="w-full bg-gray-50">
       {/* ================= HERO ================= */}
@@ -68,15 +66,15 @@ const photos = () => {
       </div>
 
       {/* ================= CONTENT ================= */}
-      <div className="w-full px-4 md:px-6 lg:px-6 text-center">
+      <div className="w-full relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12 text-center">
         <div className="text-center">
-          <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-4">
+        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             Our Photos{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
               & Gallery
             </span>
           </h2>
-          <p className="text-gray-600 text-sm md:text-[15px] italic leading-relaxed">
+          <p className="text-gray-600 text-[13px] md:text-sm italic leading-relaxed">
             "Our activities and events bring communities together through
             culture, spirituality, health awareness, and meaningful social
             service."
@@ -100,7 +98,7 @@ const photos = () => {
         </div>
 
         {/* ================= GRID ================= */}
-        <div className="w-full mb-6 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+        <div className="w-full py-2 md:py-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-6 ">
           {/* ===== LOADING ===== */}
           {loading &&
             Array.from({ length: 8 }).map((_, i) => (
@@ -137,8 +135,7 @@ const photos = () => {
                 <div className="flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm">
                   <p className="font-medium">{cat.title}</p>
                   <p className="flex items-center gap-1">
-                    📅{" "}
-                    {new Date(cat.createdAt).toLocaleDateString("en-GB")}
+                    📅 {new Date(cat.createdAt).toLocaleDateString("en-GB")}
                   </p>
                 </div>
               </Link>
@@ -146,7 +143,7 @@ const photos = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default photos
+export default photos;

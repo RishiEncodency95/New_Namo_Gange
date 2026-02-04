@@ -50,37 +50,37 @@ const ObjectiveOfTrust = () => {
     fetchObjectives();
   }, []);
   return (
-    <section className="relative py-4 md:py-8 lg:py-8 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
+    <section className="relative py-2 md:py-6 lg:py-6 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
       <div className="w-full mx-auto px-2 md:px-12 lg:px-12 text-center">
         {/* Section Header */}
-        <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-3">
-          Objective of{" "}
+        <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+          Objective Of{" "}
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text text-transparent">
             Trust
           </span>
         </h2>
 
         {/* ✨ Tagline under the header */}
-        <p className="text-sm md:text-[15px] text-medium mb-2 text-gray-800 italic">
+        <p className="text-[13px] md:text-[15px] text-medium text-gray-800 italic py-1">
           “Serving Humanity, Preserving Nature, Awakening Divinity.”
         </p>
 
         <div className="flex justify-center w-full ">
-          <div className=" w-full   mx-auto bg-white py-6  relative   overflow-hidden text-justify">
+          <div className=" w-full   mx-auto bg-white py-3 md:py-4  relative   overflow-hidden text-justify">
             <div className="absolute top-1 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
             {/* Gradient Top Highlight Line */}
-            <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
+            <p className="text-gray-700 text-xs md:text-[15px] leading-relaxed font-normal">
               The goal of our Trust is to build a strong, meaningful, and
               lasting connection with our community through{" "}
-              <span className="font-semibold text-[#DF562C]">openness</span>,{" "}
-              <span className="font-semibold text-[#1e7ed3]">safety</span>, and{" "}
-              <span className="font-semibold text-gray-900">reliability</span>.
-              We strive to create an environment where every individual feels
+              <span className="font-medium text-[#DF562C]">openness</span>,{" "}
+              <span className="font-medium text-[#1e7ed3]">safety</span>, and{" "}
+              <span className="font-medium text-gray-900">reliability</span>. We
+              strive to create an environment where every individual feels
               valued, respected, empowered, and confident that their well-being
               and interests remain our highest priority. With every initiative
               we undertake, we stay dedicated to upholding your{" "}
-              <span className="font-semibold text-[#DF562C]">trust</span> and
+              <span className="font-medium text-[#DF562C]">trust</span> and
               strengthening the bond that unites us as a community.
             </p>
           </div>
@@ -106,51 +106,103 @@ const ObjectiveOfTrust = () => {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1 md:gap-3">
             {objectives.map((item, i) => (
               <div
                 key={item?._id || i}
-                className="bg-white  rounded-xl border border-gray-200  shadow-sm  hover:shadow-xl transition-all p-3 flex flex-col items-center text-center "
+                className="
+        group
+        bg-white
+        rounded-2xl
+        border border-gray-200
+        shadow-sm
+        hover:shadow-xl
+        hover:-translate-y-1
+        transition-all duration-300
+        p-4
+        flex flex-col
+        text-center
+      "
               >
-                {/* Icon */}
-                <div className="flex items-center justify-center  rounded-full bg-gray-50   border border-gray-200 shadow-inner  mb-4 ">
-                  <Image
-                    src={typeof item.logo === "string" ?
-                      item?.logo?.startsWith("http")
-                        ? item.logo
-                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.logo}`
-                      : item.image
-                    }
-                    alt={item.title}
-                    width={100}
-                    height={100}
-                    className="w-14 h-14 md:w-38 md:h-38 p-2 rounded-full border object-cover"
-                  />
+                {/* ===== ICON ===== */}
+                <div className="flex justify-center mb:1 md:mb-2">
+                  <div
+                    className="
+            flex items-center justify-center
+            rounded-full
+            bg-gray-50
+            border border-gray-200
+            shadow-inner
+            transition-all duration-300
+            group-hover:scale-105
+          "
+                  >
+                    <Image
+                      src={
+                        typeof item.logo === "string"
+                          ? item?.logo?.startsWith("http")
+                            ? item.logo
+                            : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.logo}`
+                          : item.image
+                      }
+                      alt={item.title}
+                      width={100}
+                      height={100}
+                      className="
+              w-20 h-20 md:w-24 md:h-24
+              p-2
+              rounded-full
+              object-cover
+            "
+                    />
+                  </div>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
+                {/* ===== TITLE ===== */}
+                <h3
+                  className="
+          text-sm md:text-base
+          font-medium
+          text-gray-900
+          md:py-2 py-1
+          tracking-wide
+        "
+                >
                   {item?.title}
                 </h3>
 
-                {/* Description */}
+                {/* ===== DESCRIPTION ===== */}
                 <div
-                  className="text-gray-600 text-sm leading-relaxed mb-1 text-justify line-clamp-4"
+                  className="
+          text-gray-600
+          text-xs md:text-sm
+          leading-relaxed
+          text-justify
+          line-clamp-4
+        "
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 />
 
-                {/* Read More Button */}
-                <Link href={item?.link || "#"} className="flex justify-end">
+                {/* ===== READ MORE ===== */}
+                <Link
+                  href={item?.link || "#"}
+                  className=" flex justify-end mt-1"
+                >
                   <span
                     className="
-      text-sm font-medium
-      text-[#0C55A0]
-      hover:text-[#08467c]
-      hover:underline
-      transition
-    "
+            text-sm
+            font-normal
+            text-[#0C55A0]
+            hover:text-[#08467c]
+            inline-flex items-center gap-1
+            transition-all
+            group-hover:underline
+          "
                   >
-                    Read More →
+                    Read More
+                    <span className="transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
                   </span>
                 </Link>
               </div>

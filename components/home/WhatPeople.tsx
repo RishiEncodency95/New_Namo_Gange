@@ -22,7 +22,6 @@ import axiosClient from "@/lib/axiosClient";
 // import Person11 from "@/public/people/people11.jpg";
 // import Person12 from "@/public/people/people12.jpg";
 
-
 // const people = [
 //   {
 //     name: "Dr. Jaideep Arya",
@@ -178,15 +177,15 @@ const WhatPeople = () => {
   };
 
   return (
-    <section className="w-full relative py-4 md:py-6  overflow-hidden">
+    <section className="w-full relative py-2 md:py-6  overflow-hidden">
       <div className="w-full px-2 md:px-12  lg:px-12 text-center">
         {/* ===== Section Header ===== */}
-        <h2 className="text-lg md:text-xl lg:text-xl font-semibold mb-2 text-gray-900">
+        <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
           <span className="bg-gradient-to-r from-[#f36b2a] to-[#1e7ed3] bg-clip-text  text-transparent">
             Testimonials
           </span>
         </h2>
-        <p className="text-gray-600 text-sm md:text-[15px] mb-3 italic leading-relaxed">
+        <p className="text-[13px] md:text-[15px] text-medium text-gray-800 italic py-1">
           “Creating positive change through service, awareness, and sustainable
           community development.”
         </p>
@@ -195,24 +194,21 @@ const WhatPeople = () => {
             {/* Decorative Top Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-            <p className="text-gray-700 text-sm md:text-[15px] text-justify leading-relaxed font-normal mb-3">
+            <p className="text-gray-700 text-xs md:text-[15px] leading-relaxed font-normal">
               Our initiatives focus on creating meaningful change through{" "}
-              <span className="font-semibold text-[#DF562C]">service</span>,{" "}
-              <span className="font-semibold text-[#1e7ed3]">awareness</span>,
-              and{" "}
-              <span className="font-semibold text-gray-900">
+              <span className="font-medium text-[#DF562C]">service</span>,{" "}
+              <span className="font-medium text-[#1e7ed3]">awareness</span>, and{" "}
+              <span className="font-medium text-gray-900">
                 community support
               </span>
               . Each program is thoughtfully designed to uplift society, protect
               culture, and promote sustainable living for future generations. We
               strive to create a harmonious connection between people and nature
               by nurturing values of{" "}
-              <span className="font-semibold text-[#1e7ed3]">compassion</span>,{" "}
-              <span className="font-semibold text-[#DF562C]">
-                responsibility
-              </span>
+              <span className="font-medium text-[#1e7ed3]">compassion</span>,{" "}
+              <span className="font-medium text-[#DF562C]">responsibility</span>
               , and{" "}
-              <span className="font-semibold text-gray-900">
+              <span className="font-medium text-gray-900">
                 conscious living
               </span>
               . Guided by this purpose, our initiatives empower individuals and
@@ -241,23 +237,24 @@ const WhatPeople = () => {
                 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
               >
                 {/* ✅ FIXED IMAGE */}
-                <div className="relative w-full h-56 mb-4 overflow-hidden rounded-md">
+                <div className="relative w-full h-56  overflow-hidden rounded-md">
                   <Image
-                    src={person.image?.startsWith("http")
-                      ? person.image
-                      : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${person.image}`
+                    src={
+                      person.image?.startsWith("http")
+                        ? person.image
+                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${person.image}`
                     }
                     alt={person.name}
                     fill
-                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    className="object-fit transition-transform duration-700 hover:scale-105"
                   />
                 </div>
 
-                <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-2 text-center">
+                <h3 className="py-1 md:py-2 text-sm md:text-base font-medium text-gray-900 text-center">
                   {person.name}
                 </h3>
 
-                <p className="text-gray-600 text-sm leading-relaxed text-center line-clamp-3">
+                <p className="text-gray-600 text-xs md:text-sm text-justify leading-relaxed text-center line-clamp-3">
                   {person.desc}
                 </p>
               </div>

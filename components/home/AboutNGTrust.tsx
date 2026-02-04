@@ -10,21 +10,21 @@ import VisionImg from "@/public/home/our_vision.jpeg";
 const AboutNGTrust = () => {
   // ✅ ONLY FOR THIS SECTION – COMMON P STYLE
   const paraStyle =
-    "text-gray-700 text-[13px] md:text-[14px] leading-relaxed font-normal text-justify";
+    "text-gray-700 text-xs md:text-[14px] leading-relaxed font-normal text-justify";
 
   return (
-    <section className="relative py-1.5 md:py-3 px-4 md:px-12 lg:px-12 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
+    <section className="relative py-1.5 md:py-2 px-4 md:px-12 lg:px-12 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
       <div className="w-full  flex flex-col md:flex-row items-center gap-5 md:gap-10 lg:gap-10">
         {/* ================= LEFT SIDE TEXT ================= */}
         <div className="flex-1">
-          <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-4 leading-tight">
+          <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 mb-2 leading-tight">
             Who{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#1e7ed3] bg-clip-text text-transparent">
               We Are
             </span>
           </h2>
 
-          <div className="space-y-3">
+          <div className="space-y-2 ">
             <p className={paraStyle}>
               <span className="font-medium text-gray-900">
                 Namo Gange Trust
@@ -55,25 +55,6 @@ const AboutNGTrust = () => {
               social harmony, the Trust strives to deepen the human connection
               with nature, culture, and moral values.
             </p>
-
-            {/* <p className={paraStyle}>
-              At its core,{" "}
-              <span className="font-normal text-gray-900">
-                Namo Gange Trust
-              </span>{" "}
-              serves as a meaningful bridge between timeless traditions and
-              modern societal needs. It inspires individuals to walk the path of{" "}
-              <span className="font-medium text-[#1e7ed3]">
-                peace, purity, and conscious awareness
-              </span>{" "}
-              while actively contributing towards{" "}
-              <span className="font-medium text-[#DF562C]">
-                a cleaner, healthier, and more compassionate India
-              </span>
-              . More than just an organization, the Trust represents a
-              collective movement—uniting hearts and minds in service of
-              humanity, nature, and Mother Earth.
-            </p> */}
           </div>
         </div>
 
@@ -83,7 +64,7 @@ const AboutNGTrust = () => {
             <Image
               src={AboutNGTrust3}
               alt="About Namo Gange Trust"
-              className="w-full md:h-90 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+              className="w-full md:h-85 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
             />
           </div>
 
@@ -99,27 +80,27 @@ const AboutNGTrust = () => {
               <Image
                 src={MissionImg}
                 alt="Mission - Namo Gange Trust"
-                className="w-full md:h-90 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
+                className="w-full md:h-85 object-cover hover:scale-103 transition-transform duration-700 ease-in-out"
               />
             </div>
             <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>
           </div>
 
           <div className="flex-1">
-            <h2 className="text-[1rem] md:text-xl lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 leading-tight">
+            <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
               OUR{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#1e7ed3] bg-clip-text text-transparent">
                 MISSION
               </span>
             </h2>
 
-            <h4 className="text-[#DF562C] text-[1rem] md:text-lg font-semibold mb-3">
+            <h4 className="text-[#DF562C] text-sm md:text-lg lg:text-lg font-medium py-1 md:py-3">
               सर्वे भवन्तु सुखिनः
             </h4>
 
             <p className={paraStyle}>
               Our mission is to support and promote Indian ideology{" "}
-              <span className="font-medium text-gray-900">
+              <span className="font-medium text-[#DF562C]">
                 सर्वे भवन्तु सुखिनः
               </span>{" "}
               — may each and every member of the world family live with health,
@@ -130,7 +111,7 @@ const AboutNGTrust = () => {
             </p>
 
             <Link href="/joinAsVolunteer">
-              <button className="mt-4 relative overflow-hidden px-4 py-1 rounded md:px-6 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
+              <button className="mt-2 md:mt-4 relative overflow-hidden px-4 py-1 rounded md:px-6 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
                 Join As Volunteer
               </button>
             </Link>
@@ -144,14 +125,14 @@ const AboutNGTrust = () => {
               <Image
                 src={VisionImg}
                 alt="Vision - Namo Gange Trust"
-                className="w-full md:h-90  object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
+                className="w-full md:h-85  object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
               />
             </div>
             <div className="absolute -inset-3 bg-gradient-to-l from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded -z-10 opacity-70"></div>
           </div>
 
           <div className="flex-1 md:mt-2">
-            <h2 className="text-[1rem] md:text-xl md:mt-2 text-center lg:text-xl font-semibold text-gray-900 mb-2 md:mb-6 leading-tight">
+            <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 mb-2 leading-tight">
               OUR{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#1e7ed3] bg-clip-text text-transparent">
                 VISION
@@ -197,7 +178,7 @@ const AboutNGTrust = () => {
             </p>
 
             <Link href="/joinAsVolunteer">
-              <button className="mt-4 relative overflow-hidden rounded px-4 md:px-6 py-1 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
+              <button className="mt-2 md:mt-4 relative overflow-hidden rounded px-4 md:px-6 py-1 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
                 Join As Volunteer
               </button>
             </Link>
