@@ -2,86 +2,18 @@
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import ourIni1 from "@/public/OurInitiatives/ourIni1.png";
-import ourIni2 from "@/public/OurInitiatives/ourIni2.png";
-import ourIni3 from "@/public/OurInitiatives/ourIni3.png";
-import ourIni4 from "@/public/OurInitiatives/ourIni4.png";
-import ourIni5 from "@/public/OurInitiatives/ourIni5.png";
-import ourIni6 from "@/public/OurInitiatives/ourIni6.png";
-import ourIni7 from "@/public/OurInitiatives/ourIni7.png";
-import ourIni8 from "@/public/OurInitiatives/ourIni8.png";
-import ourIni9 from "@/public/OurInitiatives/ourIni9.png";
+
 import axiosClient from "@/lib/axiosClient";
 
 /* ================= TYPES ================= */
-interface PastEvent {
-  id: number;
+interface PastEventType {
+  id: string;
   title: string;
   image: string;
   fromDate: string;
   toDate: string;
-  link: string;
+  link?: string;
 }
-
-/* ================= DATA ================= */
-const events: PastEvent[] = [
-  {
-    id: 1,
-    title: "India Health Expo 2026",
-    image: "/event/arogya.jpg",
-    fromDate: "2026-08-21",
-    toDate: "2026-08-23",
-    link: "/events/india-health-expo-2026",
-  },
-  {
-    id: 2,
-    title: "Yogshala Wellness Summit",
-    image: "/event/arogya.jpg",
-    fromDate: "2025-03-10",
-    toDate: "2025-03-12",
-    link: "/events/yogshala-wellness",
-  },
-  {
-    id: 3,
-    title: "Ganga Safai Abhiyan",
-    image: "/event/arogya.jpg",
-    fromDate: "2025-06-05",
-    toDate: "2025-06-05",
-    link: "/events/ganga-safai",
-  },
-  {
-    id: 4,
-    title: "Arogya Mantra Health Camp",
-    image: "/event/arogya.jpg",
-    fromDate: "2025-04-18",
-    toDate: "2025-04-20",
-    link: "/events/arogya-mantra-camp",
-  },
-  {
-    id: 5,
-    title: "Organic & Natural Expo",
-    image: "/event/arogya.jpg",
-    fromDate: "2025-09-12",
-    toDate: "2025-09-14",
-    link: "/events/organic-expo",
-  },
-  {
-    id: 6,
-    title: "International Yoga Day Celebration",
-    image: "/event/arogya.jpg",
-    fromDate: "2025-06-21",
-    toDate: "2025-06-21",
-    link: "/events/international-yoga-day",
-  },
-  {
-    id: 7,
-    title: "Ayurveda Awareness Program",
-    image: "/event/arogya.jpg",
-    fromDate: "2025-07-08",
-    toDate: "2025-07-09",
-    link: "/events/ayurveda-awareness",
-  },
-];
 
 /* ================= HELPERS ================= */
 const formatDate = (date: string) =>
@@ -92,52 +24,67 @@ const formatDate = (date: string) =>
   });
 
 const PastEvent = () => {
-  const [pastEvents, setPastEvents] = useState<PastEvent[]>(events);
+  const [pastEvents, setPastEvents] = useState<PastEventType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
-    const fetchInitiatives = async () => {
+    const fetchEvents = async () => {
       try {
         const res = await axiosClient.get("/events");
-        if (res.data && Array.isArray(res.data.data)) {
-          const parser = new DOMParser();
-          const currentDate = new Date();
-          currentDate.setHours(0, 0, 0, 0); // To compare dates only
+        const data = res?.data?.data || [];
 
-          const fetchedData = res.data.data
-            .filter((item: any) => {
-              // Assuming the API provides a 'startDate' field for events
-              const eventDate = new Date(item.start_date);
-              return item.status === "Active" && eventDate < currentDate;
-            })
-            .sort(
-              (a: any, b: any) =>
-                new Date(a.start_date).getTime() -
-                new Date(b.start_date).getTime()
-            )
-            .map((item: any) => {
-              let description = item.description || "";
-              const decoded = parser.parseFromString(description, "text/html");
-              description = decoded.body.textContent || "";
-              return {
-                id: item._id,
-                title: item.name,
-                image: item.image,
-                fromDate: item.start_date,
-                toDate: item.end_date,
-                text: description.replace(/<[^>]+>/g, ""),
-                link: item.link,
-              };
-            });
-          if (fetchedData.length > 0) {
-            setPastEvents(fetchedData);
-          }
-        }
+        const today = new Date();
+        const todayDateOnly = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate(),
+        );
+
+        const filteredEvents: PastEventType[] = data
+          .filter((item: any) => {
+            if (!item.end_date) return false;
+
+            const end = new Date(item.end_date);
+            const endDateOnly = new Date(
+              end.getFullYear(),
+              end.getMonth(),
+              end.getDate(),
+            );
+
+            return (
+              item.status === "Active" && endDateOnly < todayDateOnly // ✅ ONLY COMPLETED EVENTS
+            );
+          })
+          .sort(
+            (a: any, b: any) =>
+              new Date(b.start_date).getTime() -
+              new Date(a.start_date).getTime(),
+          )
+          .map((item: any) => ({
+            id: item._id,
+            title: item.name,
+            image: item.image,
+            fromDate: item.start_date,
+            toDate: item.end_date,
+            link: item.link,
+          }));
+
+        setPastEvents(filteredEvents);
       } catch (error) {
-        console.error("Error fetching upcoming events:", error);
+        console.error("Error fetching past events:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchInitiatives();
+    fetchEvents();
   }, []);
+
+  const stripHtmlTags = (html: string = ""): string => {
+    if (typeof window === "undefined") return html;
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
 
   return (
     <section className="bg-[#f6f6f9] py-2 md:py-4">

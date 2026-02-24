@@ -11,6 +11,7 @@ interface Initiative {
   image: string;
   desc: string;
   link: string;
+  image_alt?: string;
 }
 
 const   OurInitiatives = () => {
@@ -37,9 +38,11 @@ const   OurInitiatives = () => {
                 title: item.title,
                 image: item.image,
                 desc: description.replace(/<[^>]+>/g, ""),
+                image_alt: item?.image_alt || item.title,
                 link: item.slug ? `/initiatives/${item.slug}` : "#",
               };
             });
+            console.log("setInitiativeList...",fetchedData)
           setInitiativeList(fetchedData);
         }
       } catch (error) {
@@ -49,6 +52,12 @@ const   OurInitiatives = () => {
 
     fetchInitiatives();
   }, []);
+
+   const stripHtmlTags = (html: string = ""): string => {
+    if (typeof window === "undefined") return html;
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
 
   return (
     <section className="relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
@@ -121,7 +130,7 @@ const   OurInitiatives = () => {
                 </h3>
 
                 <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
-                  {item.desc}
+                  {stripHtmlTags(item?.desc)}
                 </p>
 
                 {/* CTA */}

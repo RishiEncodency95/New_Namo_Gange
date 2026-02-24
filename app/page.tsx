@@ -45,4 +45,3 @@ const page = () => {
 };
 
 export default page;
-g

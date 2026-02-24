@@ -6,11 +6,32 @@ import Link from "next/link";
 import axiosClient from "@/lib/axiosClient";
 
 /* ================= TYPES ================= */
+
+interface InitiativeApi {
+  title: string;
+  image: string;
+  desc: string;
+  slug?: string;
+  status: string;
+  objective_catagory?: string;
+  logo_alt?: string;
+}
+
+interface ObjectiveApi {
+  title: string;
+  slug: string;
+  image: string;
+  desc: string;
+  meta_desc?: string;
+  status: string;
+}
+
 interface Initiative {
   title: string;
   image: string;
   description: string;
   link: string;
+  logo_alt?: string;
 }
 
 interface Objective {
@@ -18,11 +39,12 @@ interface Objective {
   slug: string;
   image: string;
   desc: string;
-  meta_desc: string;
+  meta_desc?: string;
   status: string;
 }
 
 /* ================= LOADING ================= */
+
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center min-h-[60vh]">
     <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#DF562C]"></div>
@@ -30,6 +52,7 @@ const LoadingSpinner = () => (
 );
 
 /* ================= SLUG HELPER ================= */
+
 const toSlug = (value: string) =>
   value
     .toLowerCase()
@@ -41,31 +64,32 @@ const toSlug = (value: string) =>
 export default function ObjectiveSlugClient({ slug }: { slug: string }) {
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
   const [objective, setObjective] = useState<Objective | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  /* ================= FETCH INITIATIVES ================= */
+  /* ================= FETCH DATA ================= */
+
   useEffect(() => {
     if (!slug) return;
 
     const fetchData = async () => {
       try {
-        /* ===== API 1: INITIATIVES ===== */
+        /* ===== INITIATIVES ===== */
         const res1 = await axiosClient.get("/initiatives");
-        const data1 = res1?.data?.data || [];
+        const data1: InitiativeApi[] = res1?.data?.data || [];
 
         const parser = new DOMParser();
 
-        const filteredInitiatives = data1
+        const filteredInitiatives: Initiative[] = data1
           .filter(
-            (item: any) =>
+            (item) =>
               item.status === "Active" &&
               item.objective_catagory &&
-              toSlug(item.objective_catagory) === slug,
+              toSlug(item.objective_catagory) === slug
           )
-          .map((item: any) => {
+          .map((item) => {
             const decoded = parser.parseFromString(
               item.desc || "",
-              "text/html",
+              "text/html"
             );
 
             return {
@@ -73,17 +97,18 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
               image: item.image,
               description: decoded.body.textContent?.trim() || "",
               link: item.slug ? `/initiatives/${item.slug}` : "#",
+              logo_alt: item.logo_alt,
             };
           });
 
         setInitiatives(filteredInitiatives);
 
-        /* ===== API 2: OBJECTIVES ===== */
+        /* ===== OBJECTIVES ===== */
         const res2 = await axiosClient.get("/objectives");
-        const data2 = res2?.data?.data || [];
+        const data2: ObjectiveApi[] = res2?.data?.data || [];
 
         const matchedObjective = data2.find(
-          (item: any) => item.status === "Active" && item.slug === slug,
+          (item) => item.status === "Active" && item.slug === slug
         );
 
         setObjective(matchedObjective || null);
@@ -97,7 +122,14 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
     fetchData();
   }, [slug]);
 
-  /* ================= LOADING STATE ================= */
+  const stripHtmlTags = (html: string = ""): string => {
+    if (typeof window === "undefined") return html;
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
+
+  /* ================= LOADING ================= */
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -116,7 +148,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
         <div className="bg-black/20 w-full h-full md:h-[250px] py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center text-white">
             <h2 className="text-xl md:text-2xl font-medium uppercase">
-              {slug?.replace(/-/g, " ")}
+              {slug.replace(/-/g, " ")}
             </h2>
             <p className="text-sm md:text-base mt-1">
               <Link
@@ -127,7 +159,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
               </Link>{" "}
               -{" "}
               {slug
-                ?.replace(/-/g, " ")
+                .replace(/-/g, " ")
                 .replace(/\b\w/g, (char) => char.toUpperCase())}
             </p>
           </div>
@@ -136,9 +168,9 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
 
       {/* ================= CONTENT ================= */}
       <div className="w-full px-2 md:px-12 lg:px-12 text-center">
-        <h1 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+        <h1 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
           {slug
-            ?.replace(/-/g, " ")
+            .replace(/-/g, " ")
             .replace(/\b\w/g, (char) => char.toUpperCase())}
         </h1>
 
@@ -149,9 +181,9 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
 
         <div className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
 
-        {/* ===== META DESC FROM OBJECTIVES API ===== */}
+        {/* ===== OBJECTIVE DESCRIPTION ===== */}
         <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal mt-1">
-          {objective?.desc.replace(/<[^>]+>/g, "")}
+          {stripHtmlTags(objective?.desc || "")}
         </p>
 
         {/* ================= GRID ================= */}
@@ -170,10 +202,14 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
               >
                 <div className="w-full h-28 md:h-36 flex items-center justify-center bg-gray-50">
                   <Image
-                    src={item.image}
+                    src={
+                      item.image?.startsWith("http")
+                        ? item.image
+                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
+                    }
                     width={100}
                     height={100}
-                    alt={item.title}
+                    alt={item.logo_alt || item.title}
                     className="object-contain h-14 md:h-30 md:w-30 w-auto
                     transition-transform duration-300
                     group-hover:scale-110"
