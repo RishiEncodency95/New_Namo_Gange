@@ -13,6 +13,7 @@ interface Newsletter {
   pdf: string;
   order_by: number;
   status: string;
+  image_alt?: string;
 }
 
 const NewsLetter = () => {
@@ -30,7 +31,7 @@ const NewsLetter = () => {
           .filter((item: Newsletter) => item.status === "Active")
           .sort(
             (a: Newsletter, b: Newsletter) =>
-              (a.order_by ?? 0) - (b.order_by ?? 0)
+              (a.order_by ?? 0) - (b.order_by ?? 0),
           );
 
         setNewsletters(activeData);
@@ -50,14 +51,14 @@ const NewsLetter = () => {
     const [year, month] = value.split("-");
     return new Date(Number(year), Number(month) - 1).toLocaleDateString(
       "en-US",
-      { month: "long", year: "numeric" }
+      { month: "long", year: "numeric" },
     );
   };
 
   // 🔥 VIEW PDF IN NEW TAB (GOOGLE DOCS VIEWER)
   const openPdfInNewTab = (pdfUrl: string) => {
     const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
-      pdfUrl
+      pdfUrl,
     )}&embedded=true`;
 
     window.open(viewerUrl, "_blank", "noopener,noreferrer");
@@ -137,8 +138,14 @@ const NewsLetter = () => {
               >
                 {/* Thumbnail */}
                 <Image
-                  src={item.image}
-                  alt={item.title}
+                  // src={item.image}
+                  // alt={item?.image_alt}
+                  src={
+                    item.image?.startsWith("http")
+                      ? item.image
+                      : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
+                  }
+                  alt={item?.image_alt || item.title}
                   width={100}
                   height={100}
                   className="w-full h-40 md:h-70 object-cover"

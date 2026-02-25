@@ -2,87 +2,102 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-import OurActivities1 from "@/public/event/organicexpo.jpg";
-import OurActivities2 from "@/public/event/arogya.jpg";
-import OurActivities3 from "@/public/ourActivities/ourActivities3.jpg";
 import axiosClient from "@/lib/axiosClient";
-// import OurActivities4 from "@/public/ourActivities/ourActivities4.jpg";
 
-const activities = [
-  {
-    title: "5th Organic Expo",
-    text: `Organic Expo is India’s leading platform for brands and businesses driving the organic and sustainable revolution. This is the ideal showcase for certified organic product manufacturers, natural food and beverage brands, eco-fashion and textile producers, clean beauty and wellness companies, agri-tech innovators, herbal and ayurvedic product makers, green startups, NGOs, and government initiatives aligned with eco-conscious goals.
-
-    If your offerings support a healthier planet and lifestyle — from organic farming solutions to sustainable consumer goods — this is your opportunity to connect with B2B buyers, conscious consumers, wellness professionals, retailers, and decision-makers.`,
-    image: OurActivities1,
-    link: "https://organicexpo.namogangewellness.com/",
-  },
-
-  {
-    title: "16th Arogya Sangoshthi",
-    text: `Arogya Sangoshthi promote wisdom of East. The aim of our Arogya Sangoshthi is to provide a common platform for researchers, academician, scholars, professionals, and young researchers and aspirants to discuss and present their views and vision on emerging issues related to lifestyle disorders and the role of the Indian system of medicine to cure & prevention. Our aim is to make the AYUSH system popular by organizing and conducting activities like seminars, conferences, health workshops, health exhibitions, health shows, health camps, health pavilions, etc.`,
-    image: OurActivities2,
-    link: "https://sangoshthi.namogange.org/",
-  },
-
-  {
-    title: "9th Health & Wellness",
-    text: `Experience the future of healthcare at India Health 2025, proudly presented by the organizers of Arab Health, one of the world’s most influential healthcare exhibitions. Scheduled to take place from August 21–23, 2026, at the iconic Bharat Mandapam, New Delhi (formerly Pragati Maidan), this landmark event brings together the brightest minds, leading innovators, and key decision-makers from across the global healthcare ecosystem.
-`,
-    image: OurActivities3,
-    link: "https://ihwe.namogangewellness.com/",
-  },
-];
+interface EventType {
+  title: string;
+  image: string;
+  text: string;
+  link?: string;
+  image_alt?: string;
+}
 
 const UpcomingEvent = () => {
-  const [upcomingEvents, setUpcomingEvents] = useState<any[]>(activities);
+  const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
-    const fetchInitiatives = async () => {
+    const fetchEvents = async () => {
       try {
         const res = await axiosClient.get("/events");
-        if (res.data && Array.isArray(res.data.data)) {
-          const parser = new DOMParser();
-          const currentDate = new Date();
-          currentDate.setHours(0, 0, 0, 0); // To compare dates only
+        const data = res?.data?.data || [];
 
-          const fetchedData = res.data.data
-            .filter((item: any) => {
-              // Assuming the API provides a 'startDate' field for events
-              const eventDate = new Date(item.start_date);
-              return item.status === "Active" && eventDate >= currentDate;
-            })
-            .sort(
-              (a: any, b: any) =>
-                new Date(a.start_date).getTime() -
-                new Date(b.start_date).getTime()
-            )
-            .map((item: any) => {
-              let description = item.description || "";
-              const decoded = parser.parseFromString(description, "text/html");
-              description = decoded.body.textContent || "";
-              return {
-                title: item.name,
-                image: item.image,
-                text: description.replace(/<[^>]+>/g, ""),
-                link: item.link,
-              };
-            });
-          if (fetchedData.length > 0) {
-            setUpcomingEvents(fetchedData);
-          }
-        }
+        const parser = new DOMParser();
+
+        // Today date (date only, no time)
+        const today = new Date();
+        const todayDateOnly = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate(),
+        );
+
+        const filteredEvents = data
+          .filter((item: any) => {
+            if (!item.start_date || !item.end_date) return false;
+
+            const start = new Date(item.start_date);
+            const end = new Date(item.end_date);
+
+            const startDateOnly = new Date(
+              start.getFullYear(),
+              start.getMonth(),
+              start.getDate(),
+            );
+
+            const endDateOnly = new Date(
+              end.getFullYear(),
+              end.getMonth(),
+              end.getDate(),
+            );
+
+            return (
+              item.status === "Active" &&
+              (startDateOnly >= todayDateOnly || // future event
+                (startDateOnly <= todayDateOnly &&
+                  endDateOnly >= todayDateOnly)) // ongoing event
+            );
+          })
+          .sort(
+            (a: any, b: any) =>
+              new Date(a.start_date).getTime() -
+              new Date(b.start_date).getTime(),
+          )
+          .map((item: any) => {
+            const decoded = parser.parseFromString(
+              item.description || "",
+              "text/html",
+            );
+
+            return {
+              title: item.name,
+              image: item.image,
+              text: decoded.body.textContent || "",
+              link: item.link,
+              image_alt: item.image_alt,
+            };
+          });
+
+        setUpcomingEvents(filteredEvents);
       } catch (error) {
         console.error("Error fetching upcoming events:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchInitiatives();
+    fetchEvents();
   }, []);
+
+  const stripHtmlTags = (html: string = ""): string => {
+    if (typeof window === "undefined") return html;
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
 
   return (
     <section className="bg-[#f6f6f9] pb-8">
-      {/* ------------------ BANNER ------------------ */}
+      {/* ----------- STATIC DESIGN SAME ----------- */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/home/events.jpg')" }}
@@ -134,68 +149,72 @@ const UpcomingEvent = () => {
           spiritual gatherings, every event offers a platform to learn, connect,
           and contribute.
         </p>
+        {/* STATIC HEADER SAME */}
 
         {/* Activities List */}
         <div className="space-y-2 md:space-y-4">
-          {upcomingEvents.map((activity, i) => (
-            <div
-              key={i}
-              className={`relative flex flex-col ${
-                i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-              } items-center p-2  rounded-xl gap-5 md:gap-10 lg:gap-10
-          bg-white
-          border border-transparent
-          shadow-sm
-          transition-all duration-500
-          hover:shadow-xl
-          hover:border-[#0C55A0]/30`}
-            >
-              <div className="flex-1 relative group w-full">
-                {/* Gradient glow */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+          {loading ? (
+            <div className="text-gray-500 py-6">Loading events...</div>
+          ) : upcomingEvents.length === 0 ? (
+            <div className="text-gray-500 py-6">
+              No upcoming events available.
+            </div>
+          ) : (
+            upcomingEvents.map((activity, i) => (
+              <div
+                key={i}
+                className={`relative flex flex-col ${
+                  i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+                } items-center p-2 rounded-xl gap-5 md:gap-10 lg:gap-10
+                bg-white border border-transparent shadow-sm transition-all duration-500
+                hover:shadow-xl hover:border-[#0C55A0]/30`}
+              >
+                <div className="flex-1 relative group w-full">
+                  <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
 
-                <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl w-full">
-                  <Image
-                    src={
-                      typeof activity.image === "string"
-                        ? activity.image.startsWith("http")
+                  <div className="overflow-hidden rounded shadow-lg bg-white/50 backdrop-blur-sm border border-gray-100 transition-all duration-700 group-hover:shadow-2xl w-full">
+                    <Image
+                      src={
+                        activity.image?.startsWith("http")
                           ? activity.image
-                          : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${activity.image}`
-                        : activity.image
-                    }
-                    alt={activity.title}
-                    width={100}
-                    height={100}
-                    className="w-full h-auto md:h-[300] object-fit group-hover:scale-103 transition-transform duration-700 ease-in-out"
-                  />
+                          : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${activity.image}`
+                      }
+                      alt={activity.image_alt || activity.title}
+                      width={800}
+                      height={500}
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-gray-900 font-normal md:font-medium text-sm md:text-base md:mb-1 line-clamp-1">
+                    {activity.title}
+                  </h3>
+
+                  <p className="text-gray-700 text-justify text-xs md:text-sm lg:text-sm leading-relaxed mb-2 md:mb-6">
+                    {stripHtmlTags(activity.text)}
+                  </p>
+
+                  {activity.link && (
+                    <Link
+                      href={activity.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button
+                        className="relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
+                        shadow-md bg-[#0C55A0] cursor-pointer
+                        hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
+                      >
+                        Learn More...
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
-
-              {/* Text Section */}
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-gray-900 font-normal md:font-medium text-sm md:text-base md:mb-1 line-clamp-1">
-                  {activity.title}
-                </h3>
-                <p className="text-gray-700 text-justify text-xs md:text-sm lg:text-sm  leading-relaxed mb-2 md:mb-6">
-                  {activity.text}
-                </p>
-
-                <Link
-                  href={activity.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button
-                    className=" relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white font-medium 
-                     shadow-md bg-[#0C55A0] cursor-pointer
-                     hover:bg-sky-700 hover:shadow-lg transition-all duration-300"
-                  >
-                    Learn More...
-                  </button>
-                </Link>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </section>

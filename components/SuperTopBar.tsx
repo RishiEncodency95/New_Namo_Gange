@@ -15,7 +15,8 @@ const SuperTopBar = () => {
   };
 
   const dropdownBase =
-    "absolute right-0 mt-[2px] w-44 bg-white text-gray-800 rounded-md shadow-xl z-60 overflow-hidden border border-gray-100";
+    // "absolute right-0 mt-[2px] w-44 bg-white text-gray-800 rounded-md shadow-xl z-60 overflow-hidden border border-gray-100";
+    "absolute right-0 mt-[2px] w-44 bg-white text-gray-800 rounded-md shadow-xl z-[60] overflow-hidden border border-gray-100";
 
   const dropdownItem =
     "w-full text-left px-4 py-2.5 text-xs font-medium hover:bg-[#0CACE3]/10 hover:text-[#0CACE3] transition";
@@ -42,7 +43,7 @@ const SuperTopBar = () => {
             onClick={() => router.push("/donate")}
             className="px-3 py-1 rounded-xl bg-[#DF562C] text-xs font-medium hover:opacity-90 transition"
           >
-            Donate 
+            Donate
           </button>
 
           {/* SEWA */}
