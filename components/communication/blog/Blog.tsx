@@ -16,6 +16,7 @@ interface Blog {
   description: string;
   status: string;
   createdAt: string;
+  image_alt?: string;
 }
 
 const Blog = () => {
@@ -35,7 +36,7 @@ const Blog = () => {
 
         // ✅ only Active blogs
         const activeBlogs = data.filter(
-          (item: Blog) => item.status === "Active"
+          (item: Blog) => item.status === "Active",
         );
 
         setBlogs(activeBlogs);
@@ -49,13 +50,19 @@ const Blog = () => {
     fetchBlogs();
   }, []);
 
+  const stripHtmlTags = (html: string = ""): string => {
+    if (typeof window === "undefined") return html;
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
+
   /* ================= SEARCH FILTER ================= */
   const filteredBlogs = useMemo(() => {
     if (!search) return blogs;
     return blogs.filter(
       (b) =>
         b.title.toLowerCase().includes(search.toLowerCase()) ||
-        b.category.toLowerCase().includes(search.toLowerCase())
+        b.category.toLowerCase().includes(search.toLowerCase()),
     );
   }, [blogs, search]);
 
@@ -64,7 +71,7 @@ const Blog = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentBlogs = filteredBlogs.slice(
     startIndex,
-    startIndex + itemsPerPage
+    startIndex + itemsPerPage,
   );
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -160,8 +167,12 @@ const Blog = () => {
               {/* IMAGE */}
               <div className="relative w-full h-30 md:h-48">
                 <Image
-                  src={blog.image}
-                  alt={blog.title}
+                  src={
+                    blog.image?.startsWith("http")
+                      ? blog.image
+                      : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${blog.image}`
+                  }
+                  alt={blog?.image_alt || blog.title}
                   fill
                   className="object-cover"
                 />
@@ -180,16 +191,13 @@ const Blog = () => {
                   </span>
                 </div>
 
-                <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
+                <h1 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
                   {blog.title}
-                </h3>
+                </h1>
 
-                <p
-                  className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4"
-                  dangerouslySetInnerHTML={{
-                    __html: blog.description,
-                  }}
-                />
+                <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
+                  {stripHtmlTags(blog.description)}
+                </p>
 
                 <Link
                   href={`/communication/blog/${blog.slug}`}

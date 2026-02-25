@@ -1,38 +1,76 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 
-export default function SpeakerButton() {
-  const [isMuted, setIsMuted] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+// Global singleton to prevent multiple audio instances
+let globalAudio: HTMLAudioElement | null = null;
+let isGlobalMuted = false; // Default state
+const listeners = new Set<(muted: boolean) => void>();
 
-  // Auto-play audio once page loads (allowed after first interaction)
+export default function SpeakerButton() {
+  const [isMuted, setIsMuted] = useState(isGlobalMuted);
+
   useEffect(() => {
-    if (audioRef.current && !isMuted) {
-      audioRef.current.volume = 0.7;
-      audioRef.current.play().catch(() => {});
+    // Initialize audio only once on client side
+    if (!globalAudio && typeof window !== "undefined") {
+      globalAudio = new Audio("/audio/bg-audio.mp3");
+      globalAudio.loop = true;
+      globalAudio.volume = 0.7;
+      globalAudio.muted = isGlobalMuted;
+
+      // Try to autoplay
+      if (!isGlobalMuted) {
+        const playPromise = globalAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay prevented. Add listener to play on first interaction.
+            const enableAudio = () => {
+              if (globalAudio && !isGlobalMuted) {
+                globalAudio
+                  .play()
+                  .catch((e) => console.error("Play failed:", e));
+              }
+              document.removeEventListener("click", enableAudio);
+              document.removeEventListener("keydown", enableAudio);
+            };
+            document.addEventListener("click", enableAudio);
+            document.addEventListener("keydown", enableAudio);
+          });
+        }
+      }
     }
-  }, [isMuted]);
+
+    // Sync local state with global state
+    setIsMuted(isGlobalMuted);
+
+    const handleStateChange = (muted: boolean) => {
+      setIsMuted(muted);
+    };
+
+    listeners.add(handleStateChange);
+    return () => {
+      listeners.delete(handleStateChange);
+    };
+  }, []);
 
   const toggleMute = () => {
-    if (!audioRef.current) return;
+    if (!globalAudio) return;
 
-    if (isMuted) {
-      audioRef.current.muted = false;
-      audioRef.current.play();
-    } else {
-      audioRef.current.muted = true;
+    const newMutedState = !isGlobalMuted;
+    isGlobalMuted = newMutedState;
+    globalAudio.muted = newMutedState;
+
+    if (!newMutedState) {
+      globalAudio.play().catch((e) => console.error("Play failed:", e));
     }
 
-    setIsMuted(!isMuted);
+    // Notify all instances
+    listeners.forEach((listener) => listener(newMutedState));
   };
 
   return (
     <div className="relative flex items-center">
-      {/* Actual Audio Element */}
-      <audio ref={audioRef} src="/audio/bg-audio.mp3" loop />
-
       {/* Button */}
       <button
         onClick={toggleMute}

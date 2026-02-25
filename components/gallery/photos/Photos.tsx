@@ -10,6 +10,7 @@ interface CategoryItem {
   title: string;
   slug: string;
   image: string;
+  image_alt?: string;
   order_by: number;
   status: string;
   createdAt: string;
@@ -68,7 +69,7 @@ const photos = () => {
       {/* ================= CONTENT ================= */}
       <div className="w-full relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12 text-center">
         <div className="text-center">
-        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+          <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             Our Photos{" "}
             <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
               & Gallery
@@ -124,8 +125,12 @@ const photos = () => {
               >
                 <div className="relative">
                   <Image
-                    src={cat.image}
-                    alt={cat.title}
+                    src={
+                      cat.image?.startsWith("http")
+                        ? cat.image
+                        : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${cat.image}`
+                    }
+                    alt={cat?.image_alt || cat.title}
                     width={400}
                     height={300}
                     className="w-full h-56 object-cover transition-transform duration-300"

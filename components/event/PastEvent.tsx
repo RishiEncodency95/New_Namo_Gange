@@ -165,12 +165,13 @@ const PastEvent = () => {
                   {formatDate(item.fromDate)} – {formatDate(item.toDate)}
                 </p>
 
-                <Link
-                  href={item.link}
-                  className="mt-auto px-2 pb-2 md:px-5 md:pb-4 flex justify-center md:block"
-                >
-                  <button
-                    className="
+                {item.link && (
+                  <Link
+                    href={item.link}
+                    className="mt-auto px-2 pb-2 md:px-5 md:pb-4 flex justify-center md:block"
+                  >
+                    <button
+                      className="
       w-1/2 md:w-full
       md:py-1.5
       py-1
@@ -182,10 +183,11 @@ const PastEvent = () => {
       hover:bg-[#0a4786]
       transition
     "
-                  >
-                    View Details
-                  </button>
-                </Link>
+                    >
+                      View Details
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           ))}
