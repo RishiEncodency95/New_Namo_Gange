@@ -39,15 +39,6 @@ const AboutNGTrust = () => {
     fetchAbout();
   }, []);
 
-  const stripHtmlTags = (html: string = ""): string => {
-    if (typeof window === "undefined") return html;
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
-
-  const paraStyle =
-    "text-gray-700 text-xs md:text-[14px] leading-relaxed font-normal text-justify";
-
   if (loading) {
     return (
       <div className="flex justify-center items-center py-10">
@@ -80,9 +71,23 @@ const AboutNGTrust = () => {
                 {item.title}
               </h2>
 
-              <div className="space-y-2">
-                <p className={paraStyle}>{stripHtmlTags(item.desc)}</p>
-              </div>
+              <div
+                className="
+                  text-gray-700 text-xs md:text-[14px] leading-relaxed font-normal text-justify
+                  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+                  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+                  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+                  [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+                  [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+                  [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+                  [&_p]:mb-3 [&_p]:leading-relaxed
+                  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+                  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+                  [&_strong]:font-semibold
+                  [&_a]:text-blue-600 [&_a]:underline
+                "
+                dangerouslySetInnerHTML={{ __html: item.desc || "" }}
+              />
 
               {item.link && item.link.trim() !== "" && (
                 <Link href={item.link}>

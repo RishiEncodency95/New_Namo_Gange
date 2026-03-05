@@ -50,12 +50,6 @@ const ObjectiveOfTrust = () => {
     fetchObjectives();
   }, []);
 
-  const stripHtmlTags = (html: string = ""): string => {
-    if (typeof window === "undefined") return html;
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
-
   return (
     <section className="relative py-2 md:py-6 lg:py-6 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
       <div className="w-full mx-auto px-2 md:px-12 lg:px-12 text-center">
@@ -159,9 +153,25 @@ const ObjectiveOfTrust = () => {
                   {item.title}
                 </h1>
 
-                <div className="text-gray-600 text-xs md:text-sm leading-relaxed text-justify line-clamp-4">
-                  {stripHtmlTags(item?.description)}
-                </div>
+                <div
+                  className="text-gray-600 text-xs md:text-sm leading-relaxed text-justify line-clamp-4
+                 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+  [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+  [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+  [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+
+  [&_p]:mb-3 [&_p]:leading-relaxed
+
+  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+
+  [&_strong]:font-semibold
+  [&_a]:text-blue-600 [&_a]:underline
+  "
+                  dangerouslySetInnerHTML={{ __html: item?.description || "" }}
+                />
 
                 <Link href={item.link || "#"} className="flex justify-end mt-1">
                   <span className="text-sm font-normal text-[#0C55A0] hover:text-[#08467c] inline-flex items-center gap-1 transition-all group-hover:underline">
