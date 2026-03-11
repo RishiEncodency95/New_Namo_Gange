@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import VolunteerRegistrationForm from "@/components/join/volunteer/VolunteerRegistrationForm";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ const Volunteer = () => {
         style={{ backgroundImage: "url('/banner/volunteer.jpg')" }}
       >
         {/* Overlay */}
-        <div className="bg-black/10 w-full h-full md:h-[250px] py-10 md:py-16">
+        <div className="bg-black/10 w-full h-full md:h-[300px] py-10 md:py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
               VOLUNTEER REGISTRATION
@@ -29,7 +29,7 @@ const Volunteer = () => {
       </div>
       <VolunteerRegistrationForm />
     </div>
-  )
-}
+  );
+};
 
-export default Volunteer
+export default Volunteer;
