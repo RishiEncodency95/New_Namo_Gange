@@ -25,15 +25,22 @@ interface TrustBodyCard {
   image_alt?: string;
 }
 
+interface SEOData {
+  page_banner?: string;
+  banner_alt?: string;
+  h1tag?: string;
+}
+
 const AboutNamoGange = () => {
   const [trustBodies, setTrustBodies] = useState<TrustBodyCard[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
+  const [seoLoading, setSeoLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchTrustBodies = async () => {
       try {
         const res = await axiosClient.get("/trust-bodies");
-
         const data: TrustBody[] = res?.data?.data || [];
 
         const activeItems: TrustBodyCard[] = data
@@ -43,15 +50,13 @@ const AboutNamoGange = () => {
               new Date(a.createdAt || "").getTime() -
               new Date(b.createdAt || "").getTime(),
           )
-          .map((item) => {
-            return {
-              id: item._id,
-              title: item.name,
-              text: item.description || "",
-              image: item.image,
-              image_alt: item.image_alt,
-            };
-          });
+          .map((item) => ({
+            id: item._id,
+            title: item.name,
+            text: item.description || "",
+            image: item.image,
+            image_alt: item.image_alt,
+          }));
 
         setTrustBodies(activeItems);
       } catch (error) {
@@ -64,27 +69,70 @@ const AboutNamoGange = () => {
     fetchTrustBodies();
   }, []);
 
+  // Separate useEffect for SEO data
+  useEffect(() => {
+    const fetchSEOData = async () => {
+      try {
+        // Fix the API endpoint - use the correct path format
+        const res = await axiosClient.get(
+          `/seo/page/${encodeURIComponent("/about")}`,
+        );
+        console.log("SEO API Response:", res); // Debug log
+
+        const seo = res?.data?.data;
+        console.log("SEO Data:", seo); // Debug log
+
+        if (seo) {
+          setSeoData({
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+          console.log("seoData set:", {
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+        } else {
+          console.log("No SEO data found in response");
+        }
+      } catch (error) {
+        console.error("Error fetching SEO data:", error);
+      } finally {
+        setSeoLoading(false);
+      }
+    };
+
+    fetchSEOData();
+  }, []);
+
+  console.log("Current seoData state:", seoData); // This will show the updated state
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
-      {/* Header */}
+      {/* Header with dynamic SEO data */}
       <div
-        className="w-full bg-cover bg-center bg-no-repeat"
+        className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: "url('/about/about1.jpg')",
+          backgroundImage: `url('${seoData?.page_banner || "/about/about1.jpg"}')`,
           backgroundAttachment: "fixed",
         }}
       >
-        <div className="bg-black/50 w-full h-full md:h-[300px] flex items-center py-10 md:py-16 backdrop-blur-[2px]">
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30" />
+
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="w-full px-4 text-center"
+            className="w-full px-4 text-center z-10"
           >
-            <h2 className="text-2xl md:text-4xl font-bold text-white tracking-wide drop-shadow-lg">
-              ABOUT US
-            </h2>
+            {/* Dynamic H1 from SEO data */}
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+              {seoData?.h1tag || "ABOUT US"}
+            </h1>
 
             <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
               <Link
@@ -93,7 +141,7 @@ const AboutNamoGange = () => {
               >
                 Home
               </Link>{" "}
-              - About Us
+              - {seoData?.h1tag || "About Us"}
             </p>
           </motion.div>
         </div>
@@ -245,34 +293,27 @@ const AboutNamoGange = () => {
                   viewport={{ once: true }}
                   className="flex flex-col w-full md:w-[60%] text-center md:text-left"
                 >
-                  <h1 className="text-lg md:text-xl font-medium text-gray-900 mb-4 relative inline-block">
+                  <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-4 relative inline-block">
                     {activity.title}
                     <span className="absolute bottom-0 left-0 w-1/3 h-[2px] bg-[#DF562C] rounded-full"></span>
-                  </h1>
+                  </h3>
                   <div
                     className="
-  text-xs md:text-[15px] text-gray-700 font-normal text-justify
-
-  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
-  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
-  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
-  [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
-  [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
-  [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
-
-  [&_p]:mb-3 [&_p]:leading-relaxed
-
-  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
-  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
-
-  [&_strong]:font-semibold
-  [&_a]:text-blue-600 [&_a]:underline
-  "
+                      text-xs md:text-[15px] text-gray-700 font-normal text-justify
+                      [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+                      [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+                      [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+                      [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+                      [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+                      [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+                      [&_p]:mb-3 [&_p]:leading-relaxed
+                      [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+                      [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+                      [&_strong]:font-semibold
+                      [&_a]:text-blue-600 [&_a]:underline
+                    "
                     dangerouslySetInnerHTML={{ __html: activity?.text || "" }}
                   />
-                  {/* <p className="text-gray-600 text-justify text-sm md:text-base leading-relaxed">
-                    {stripHtmlTags(activity.text)}
-                  </p> */}
                 </motion.div>
               </div>
             ))}

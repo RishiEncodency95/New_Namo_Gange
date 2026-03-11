@@ -114,7 +114,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
 
         setObjective(matchedObjective || null);
       } catch (error) {
-        console.error("❌ Error fetching objective page data:", error);
+        console.error("Error fetching objective page data:", error);
       } finally {
         setLoading(false);
       }
@@ -147,14 +147,14 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
           backgroundAttachment: "fixed",
         }}
       >
-        <div className="bg-black/50 w-full h-full md:h-[300px] py-16 md:py-24 backdrop-blur-[2px]">
+          <div className="bg-black/30 w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-7xl mx-auto px-4 text-center text-white"
           >
-            <h1 className="text-2xl md:text-4xl font-bold uppercase tracking-wider drop-shadow-lg">
+            <h1 className="text-xl md:text-2xl font-medium uppercase tracking-wider drop-shadow-lg">
               {slug.replace(/-/g, " ")}
             </h1>
             <p className="text-sm md:text-lg mt-2 font-light tracking-wide">
@@ -327,7 +327,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
                             "
                     >
                       <span className="relative text-xs z-10 transition-colors duration-300 group-hover/btn:text-white">
-                        Explore →
+                        Read More →
                       </span>
                       <div className="absolute inset-y-0 left-0 w-0 bg-[#0C55A0] transition-all duration-500 ease-out group-hover/btn:w-full" />
                     </div>

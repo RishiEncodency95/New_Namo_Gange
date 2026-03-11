@@ -14,10 +14,17 @@ type GalleryItem = {
   status: string;
 };
 
+interface SEOData {
+  page_banner?: string;
+  banner_alt?: string;
+  h1tag?: string;
+}
+
 export default function PhotoSlugClient({ slug }: { slug: string }) {
   const [data, setData] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<string | null>(null);
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
 
   const title = slug
     ? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
@@ -51,35 +58,62 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
     fetchGallery();
   }, [slug]);
 
+  // Separate useEffect for SEO data
+  useEffect(() => {
+    const fetchSEOData = async () => {
+      try {
+        const res = await axiosClient.get(
+          `/seo/page/${encodeURIComponent("/gallery/photos")}`,
+        );
+        const seo = res?.data?.data;
+        if (seo) {
+          setSeoData({
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching SEO data for photos:", error);
+      }
+    };
+    fetchSEOData();
+  }, []);
+
   return (
     <section className="bg-gray-50 min-h-screen">
       {/* ===== HEADER ===== */}
       <div
-        className="w-full bg-cover bg-center"
+        className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: "url('/ourActivities/ourActivities5.jpg')",
+          backgroundImage: `url('${seoData?.page_banner || "/ourActivities/ourActivities5.jpg"}')`,
           backgroundAttachment: "fixed",
         }}
       >
-        <div className="bg-black/50 py-10 md:h-[300px] md:py-16 backdrop-blur-[2px] flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="max-w-7xl mx-auto px-4 text-center"
+            className="w-full px-4 text-center z-10"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider drop-shadow-lg">
-              {title}
-            </h2>
-            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wide">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+              {seoData?.h1tag || "Photos Gallery"}
+            </h1>
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
+              {" "}
               <Link
-                href="/gallery/photos"
+                href="/"
                 className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
-                Back
+                Home
               </Link>{" "}
-              - {title}
+              -{" "}
+              <Link href="/gallery/photos" className="hover:underline">
+                {seoData?.h1tag || "Photos Gallery"}
+              </Link>
             </p>
           </motion.div>
         </div>
@@ -94,7 +128,7 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-900">
+          <h1 className="text-xl md:text-2xl font-medium text-gray-900">
             {title} <span className="text-[#DF562C]">Gallery</span>
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-[#DF562C] to-[#f89a36] mx-auto mt-4 rounded-full" />

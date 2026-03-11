@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axiosClient from "@/lib/axiosClient";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 interface Objective {
   _id: string;
@@ -127,14 +128,26 @@ const ObjectiveOfTrust = () => {
               <motion.div
                 key={item._id || i}
                 variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                  hidden: { opacity: 0, y: 40 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.6, ease: "easeOut" },
+                  },
                 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 p-4 flex flex-col text-center"
+                whileHover={{ y: -12, transition: { duration: 0.3 } }}
+                className="group relative bg-white rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden h-full flex flex-col"
               >
-                <div className="flex justify-center mb:1 md:mb-2">
-                  <div className="flex items-center justify-center rounded-full bg-gray-50 border border-gray-200 shadow-inner transition-all duration-300 group-hover:scale-105">
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                {/* Image Container */}
+                <div className="relative flex justify-center py-2 md:py-4 ">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "tween", duration: 0.2 }}
+                    className="flex items-center justify-center rounded-full bg-white ring-2 ring-gray-200 shadow-lg hover:ring-blue-200"
+                  >
                     <Image
                       src={
                         item.logo?.startsWith("http")
@@ -144,43 +157,66 @@ const ObjectiveOfTrust = () => {
                       alt={item.logo_alt || item.title}
                       width={100}
                       height={100}
-                      className="w-20 h-20 md:w-24 md:h-24 p-2 rounded-full object-cover"
+                      className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover"
                     />
-                  </div>
+                  </motion.div>
                 </div>
 
-                <h2 className="text-sm md:text-base font-medium text-gray-900 md:py-2 py-1 tracking-wide">
+                {/* Title */}
+                <motion.h2
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.1 }}
+                  className="relative z-10 text-base md:text-lg font-normal text-gray-900 px-4  text-center tracking-tight leading-snug"
+                >
                   {item.title}
-                </h2>
+                </motion.h2>
 
+                {/* Description */}
                 <div
-                  className="text-gray-600 text-xs md:text-sm text-center  line-clamp-4
-                 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
-  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
-  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
-  [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
-  [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
-  [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+                  className="relative z-10 px-4 py-2 text-gray-600 text-xs md:text-sm text-center overflow-hidden"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 4,
+                    WebkitBoxOrient: "vertical",
+                    maxHeight: "6rem",
+                  }}
+                >
+                  <div
+                    className="[&_h1]:text-lg [&_h1]:font-bold [&_h1]:mb-2
+  [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mb-2
+  [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mb-1
+  [&_h4]:text-xs [&_h4]:font-semibold [&_h4]:mb-1
+  [&_h5]:text-xs [&_h5]:font-semibold [&_h5]:mb-1
+  [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-1
 
   [&_p]:mb-3 [&_p]:leading-relaxed
 
-  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
-  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+  [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:mb-2
+  [&_ol]:list-decimal [&_ol]:pl-4 [&_ol]:mb-2
 
-  [&_strong]:font-semibold
-  [&_a]:text-blue-600 [&_a]:underline
-  "
-                  dangerouslySetInnerHTML={{ __html: item?.description || "" }}
-                />
+  [&_strong]:font-semibold [&_strong]:text-gray-900
+  [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800"
+                    dangerouslySetInnerHTML={{
+                      __html: item?.description || "",
+                    }}
+                  />
+                </div>
 
-                <Link href={item.link || "#"} className="flex justify-end mt-1">
-                  <span className="text-sm font-normal text-[#0C55A0] hover:text-[#08467c] inline-flex items-center gap-1 transition-all group-hover:underline">
-                    Read More
-                    <span className="transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </span>
-                </Link>
+                {/* Button Container */}
+                <div className="relative z-10 flex justify-center w-full px-4 pt-2 pb-2 md:pb-4">
+                  <Link href={item.link || "#"} className="w-full">
+                    <motion.button
+                      type="button"
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ type: "tween", duration: 0.2 }}
+                      className="w-full inline-flex items-center justify-center gap-2 px-5 py-1 rounded-lg bg-gradient-to-r from-[#0C55A0] via-[#1073C0] to-[#1e7ed3] text-white font-normal hover:font-medium text-sm shadow-md hover:shadow-lg transition-shadow duration-200 group"
+                    >
+                      <span className="relative">Read More</span>
+                      <ArrowRight size={18} className="text-white" />
+                    </motion.button>
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </motion.div>

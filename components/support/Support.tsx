@@ -1,6 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import axiosClient from "@/lib/axiosClient";
+
 interface SupportFormData {
   name: string;
   email: string;
@@ -29,8 +32,15 @@ const initialForm: SupportFormData = {
   message: "",
 };
 
+interface SEOData {
+  page_banner?: string;
+  banner_alt?: string;
+  h1tag?: string;
+}
+
 const Support = () => {
   const [form, setForm] = useState<SupportFormData>(initialForm);
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
 
   // Separate OTP States for Phone
   const [phoneOtp, setPhoneOtp] = useState<string>("");
@@ -46,10 +56,32 @@ const Support = () => {
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [otpStep, setOtpStep] = useState<"verify" | "success">("verify");
 
+  // Separate useEffect for SEO data
+  useEffect(() => {
+    const fetchSEOData = async () => {
+      try {
+        const res = await axiosClient.get(
+          `/seo/page/${encodeURIComponent("/support")}`,
+        );
+        const seo = res?.data?.data;
+        if (seo) {
+          setSeoData({
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching SEO data for support page:", error);
+      }
+    };
+    fetchSEOData();
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     // Reset phone verification status if phone is changed
     if (e.target.name === "phone") {
@@ -172,25 +204,36 @@ const Support = () => {
   return (
     <section>
       <div
-        className="w-full  bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/banner/support.png')" }}
+        className="w-full bg-cover bg-center bg-no-repeat relative"
+        style={{
+          backgroundImage: `url('${seoData?.page_banner || "/banner/support.png"}')`,
+          backgroundAttachment: "fixed",
+        }}
       >
         {/* Overlay */}
-        <div className="bg-black/20 w-full h-full md:h-[250px] py-10 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
-              Our Support
-            </h2>
-            <p className="text-sm md:text-base text-white mt-1">
+        <div className="absolute inset-0 bg-black/30" />
+
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="w-full px-4 text-center z-10"
+          >
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+              {seoData?.h1tag || "Our Support"}
+            </h1>
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
               <Link
                 href="/"
-                className="text-[#DF562C] font-medium hover:underline"
+                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
                 Home
               </Link>{" "}
-              - Our Support
+              - {seoData?.h1tag || "Our Support"}
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="w-full px-2 md:px-12  lg:px-12 relative py-4 md:py-6 overflow-hidden">
@@ -229,7 +272,7 @@ const Support = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-2 md:gap-8 bg-gray-50 py-2 md:py-4 px-2 md:px-4 rounded">
+        <div className="flex flex-col lg:flex-row gap-2 md:gap-8 bg-gray-50 py-2 md:py-4 px-2 md:px-4 rounded-lg shadow-inner">
           {/* ================= LEFT INFO PANEL ================= */}
           <div
             className="
@@ -239,15 +282,16 @@ const Support = () => {
     text-white
     p-4 lg:p-10
     flex flex-col justify-between
-    shadow-lg
+    shadow-xl
+    relative overflow-hidden
   "
           >
-            <div>
-              <h3 className="text-lg lg:text-2xl font-medium md:font-semibold mb-4 tracking-wide">
+            <div className="relative z-10">
+              <h3 className="text-lg lg:text-2xl font-semibold mb-6 tracking-wide">
                 Support Our Mission
               </h3>
 
-              <p className="text-xs md:text-[15px] leading-relaxed text-white/95 mb-4">
+              <p className="text-sm md:text-base leading-relaxed text-white/95 mb-6">
                 By submitting this form, you step into a purpose-driven journey
                 dedicated to compassion, responsibility, and service to
                 humanity. Your involvement enables us to design, implement, and
@@ -255,7 +299,7 @@ const Support = () => {
                 at the grassroots level.
               </p>
 
-              <p className="text-xs md:text-[15px] leading-relaxed text-white/90 mb-5">
+              <p className="text-sm md:text-base leading-relaxed text-white/90 mb-8">
                 Every contribution—whether through time, skills, resources, or
                 strategic partnerships—strengthens our collective mission.
                 Together, we work toward empowering communities, uplifting
@@ -263,30 +307,30 @@ const Support = () => {
                 ethical values and shared responsibility.
               </p>
 
-              <ul className="space-y-3 text-xs md:text-[15px] text-white/95">
-                <li className="flex gap-3">
-                  <span>✔</span>
+              <ul className="space-y-4 text-sm md:text-base text-white/95">
+                <li className="flex gap-3 items-start">
+                  <span className="text-green-400 text-lg">✓</span>
                   <span>
                     Volunteer in social, environmental, and humanitarian
                     initiatives
                   </span>
                 </li>
-                <li className="flex gap-3">
-                  <span>✔</span>
+                <li className="flex gap-3 items-start">
+                  <span className="text-green-400 text-lg">✓</span>
                   <span>
                     Contribute professional skills, expertise, or mentorship
                     support
                   </span>
                 </li>
-                <li className="flex gap-3">
-                  <span>✔</span>
+                <li className="flex gap-3 items-start">
+                  <span className="text-green-400 text-lg">✓</span>
                   <span>
                     Support programs through donations, resources, or funding
                     assistance
                   </span>
                 </li>
-                <li className="flex gap-3">
-                  <span>✔</span>
+                <li className="flex gap-3 items-start">
+                  <span className="text-green-400 text-lg">✓</span>
                   <span>
                     Partner with us for long-term, high-impact community
                     development
@@ -295,11 +339,9 @@ const Support = () => {
               </ul>
             </div>
 
-            {/* <p className="mt-8 text-xs md:text-sm text-white/70 border-t border-white/20 pt-4 leading-relaxed">
-    * All information shared through this form is kept strictly confidential
-    and is used solely for coordination, communication, and engagement related
-    to our initiatives.
-  </p> */}
+            {/* Decorative element */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
           </div>
 
           {/* ================= RIGHT FORM PANEL ================= */}
@@ -311,15 +353,16 @@ const Support = () => {
       rounded-2xl
       shadow-[0_10px_40px_rgba(0,0,0,0.08)]
       p-4 md:p-7 lg:p-9
+      relative overflow-hidden
     "
           >
-            <form className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-4">
+            <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 md:gap-4">
               {/* FORM TITLE */}
-              <div className="lg:col-span-3 mb-2 text-center">
-                <h2 className="text-base md:text-xl font-medium text-gray-800">
+              <div className="flex items-center justify-between md:col-span-2 lg:col-span-2 border-b border-gray-200 ">
+                <h2 className="text-lg md:text-xl font-semibold text-gray-800">
                   Support Form
                 </h2>
-                <p className="text-xs md:text-sm text-gray-500 mt-1 border-t border-gray-200 pt-2">
+                <p className="text-xs md:text-sm text-gray-500">
                   Fields marked with <span className="text-red-500">*</span> are
                   required
                 </p>
@@ -327,7 +370,7 @@ const Support = () => {
 
               {/* Full Name */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   Full Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -336,14 +379,14 @@ const Support = () => {
                   value={form.name}
                   onChange={handleChange}
                   required
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm focus:border-[#1e7ed3] outline-none"
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
                   placeholder="Enter your full name"
                 />
               </div>
 
               {/* Email */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   Email ID <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -353,8 +396,8 @@ const Support = () => {
                   onChange={handleChange}
                   required
                   disabled={isEmailVerified}
-                  className={`border rounded-md px-3 py-1 md:py-1.5 text-sm focus:border-[#1e7ed3] outline-none ${
-                    isEmailVerified ? "bg-gray-100" : ""
+                  className={`border border-gray-300 rounded px-4 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200 ${
+                    isEmailVerified ? "bg-gray-100 cursor-not-allowed" : ""
                   }`}
                   placeholder="Enter your email"
                 />
@@ -362,7 +405,7 @@ const Support = () => {
 
               {/* Mobile */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   Mobile Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -373,8 +416,8 @@ const Support = () => {
                   onChange={handlePhoneChange}
                   required
                   disabled={isPhoneVerified}
-                  className={`border rounded-md px-3 py-1 md:py-1.5 text-sm focus:border-[#1e7ed3] outline-none ${
-                    isPhoneVerified ? "bg-gray-100" : ""
+                  className={`border border-gray-300 rounded px-4 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200 ${
+                    isPhoneVerified ? "bg-gray-100 cursor-not-allowed" : ""
                   }`}
                   placeholder="10-digit mobile number"
                 />
@@ -382,7 +425,7 @@ const Support = () => {
 
               {/* Gender */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   Gender <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -390,7 +433,7 @@ const Support = () => {
                   value={form.gender}
                   onChange={handleChange}
                   required
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
                 >
                   <option value="">Select gender</option>
                   <option value="Male">Male</option>
@@ -401,8 +444,8 @@ const Support = () => {
 
               {/* DOB */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
-                  DOB <span className="text-red-500">*</span>
+                <label className="text-sm font-medium text-gray-700 mb-2">
+                  Date of Birth <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="date"
@@ -410,29 +453,13 @@ const Support = () => {
                   value={form.ageGroup}
                   onChange={handleChange}
                   required
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
-                />
-              </div>
-
-              {/* Address */}
-              <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
-                  Full Address <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="address"
-                  value={form.address}
-                  onChange={handleChange}
-                  required
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm outline-none"
-                  placeholder="Enter your complete address"
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
                 />
               </div>
 
               {/* State */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   State <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -440,7 +467,7 @@ const Support = () => {
                   value={form.state}
                   onChange={handleChange}
                   required
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
                 >
                   <option value="">Select State</option>
                   <option value="Uttar Pradesh">Uttar Pradesh</option>
@@ -451,7 +478,7 @@ const Support = () => {
 
               {/* City */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   City <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -459,7 +486,7 @@ const Support = () => {
                   value={form.city}
                   onChange={handleChange}
                   required
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
                 >
                   <option value="">Select City</option>
                   <option value="Delhi">Delhi</option>
@@ -468,8 +495,8 @@ const Support = () => {
               </div>
 
               {/* Contribution */}
-              <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+              <div className="flex flex-col md:col-span-1 lg:col-span-1">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   Preferred Contribution <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -477,7 +504,7 @@ const Support = () => {
                   value={form.contribution}
                   onChange={handleChange}
                   required
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm bg-white outline-none"
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm bg-white focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
                 >
                   <option value="">Choose contribution</option>
                   <option value="Time">Time (Volunteering)</option>
@@ -487,9 +514,25 @@ const Support = () => {
                 </select>
               </div>
 
+              {/* Address */}
+              <div className="flex flex-col md:col-span-2 lg:col-span-2">
+                <label className="text-sm font-medium text-gray-700 mb-2">
+                  Full Address <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  value={form.address}
+                  onChange={handleChange}
+                  required
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
+                  placeholder="Enter your complete address"
+                />
+              </div>
+
               {/* Message */}
-              <div className="flex flex-col md:col-span-3 lg:col-span-3">
-                <label className="text-sm font-medium text-gray-600 mb-1">
+              <div className="flex flex-col md:col-span-2 lg:col-span-2">
+                <label className="text-sm font-medium text-gray-700 mb-2">
                   Message / Reason to Support{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -498,22 +541,22 @@ const Support = () => {
                   value={form.message}
                   onChange={handleChange}
                   required
-                  rows={3}
-                  className="border rounded-md px-3 py-1 md:py-1.5 text-sm outline-none"
+                  rows={4}
+                  className="border border-gray-300 rounded px-4 py-1.5 text-sm focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200 resize-none"
                   placeholder="Write your message"
                 />
               </div>
 
               {/* Submit */}
-              <div className="lg:col-span-3 flex justify-center mt-4">
+              <div className="md:col-span-2 lg:col-span-2 flex justify-center mt-6">
                 <button
                   type="submit"
                   onClick={handleInitialSubmit}
                   disabled={!isFormComplete}
-                  className={`px-12 py-1 md:py-1.5 text-sm md:text-[15px] font-medium rounded-md shadow transition ${
+                  className={`px-8 py-1.5 text-sm md:text-base font-medium rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105 ${
                     !isFormComplete
                       ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                      : "bg-[#0C55A0] hover:bg-[#08467c] text-white"
+                      : "bg-gradient-to-r from-[#0C55A0] to-[#08467c] hover:from-[#08467c] hover:to-[#0C55A0] text-white"
                   }`}
                 >
                   Submit Support Form
@@ -524,17 +567,24 @@ const Support = () => {
         </div>
 
         {showOtpModal && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white w-[90%] md:w-[400px] rounded-xl p-6 shadow-xl">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-white w-full max-w-md rounded-2xl p-8 shadow-2xl transform transition-all duration-300 scale-100">
               {otpStep === "verify" ? (
                 <>
-                  <h3 className="text-lg font-semibold text-center mb-4">
-                    Verify Your Details
-                  </h3>
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      Verify Your Details
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      We've sent OTPs to your email and mobile number
+                    </p>
+                  </div>
 
                   {/* Email OTP */}
-                  <div className="mb-3">
-                    <label className="text-sm font-medium">Email OTP</label>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email OTP
+                    </label>
                     <input
                       type="text"
                       maxLength={6}
@@ -542,14 +592,16 @@ const Support = () => {
                       onChange={(e) =>
                         setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))
                       }
-                      className="w-full border rounded px-3 py-2 text-sm mt-1"
-                      placeholder="Enter Email OTP"
+                      className="w-full border border-gray-300 rounded px-4 py-1.5 text-center text-lg font-mono tracking-widest focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
+                      placeholder="000000"
                     />
                   </div>
 
                   {/* Phone OTP */}
-                  <div className="mb-4">
-                    <label className="text-sm font-medium">Mobile OTP</label>
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Mobile OTP
+                    </label>
                     <input
                       type="text"
                       maxLength={6}
@@ -557,8 +609,8 @@ const Support = () => {
                       onChange={(e) =>
                         setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))
                       }
-                      className="w-full border rounded px-3 py-2 text-sm mt-1"
-                      placeholder="Enter Mobile OTP"
+                      className="w-full border border-gray-300 rounded px-4 py-1.5 text-center text-lg font-mono tracking-widest focus:border-[#1e7ed3] focus:ring-2 focus:ring-[#1e7ed3]/20 outline-none transition-all duration-200"
+                      placeholder="000000"
                     />
                   </div>
 
@@ -575,18 +627,33 @@ const Support = () => {
                         alert("Invalid OTPs. Please try again.");
                       }
                     }}
-                    className="w-full bg-[#0C55A0] hover:bg-[#08467c] text-white py-2 rounded-md"
+                    className="w-full bg-gradient-to-r from-[#0C55A0] to-[#08467c] hover:from-[#08467c] hover:to-[#0C55A0] text-white py-3 rounded-lg font-semibold shadow-lg transition-all duration-200 transform hover:scale-105"
                   >
                     Verify & Submit
                   </button>
                 </>
               ) : (
                 /* SUCCESS SCREEN */
-                <div className="text-center py-6">
-                  <h3 className="text-xl font-semibold text-green-600 mb-2">
-                    ✔ Support Submitted Successfully
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg
+                      className="w-8 h-8 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-green-600 mb-2">
+                    Support Submitted Successfully!
                   </h3>
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 mb-6">
                     Thank you for supporting Namo Gange Trust. We truly
                     appreciate your contribution and commitment.
                   </p>
@@ -597,7 +664,7 @@ const Support = () => {
                       setForm(initialForm);
                       setOtpStep("verify");
                     }}
-                    className="mt-4 bg-[#0C55A0] text-white px-6 py-2 rounded-md"
+                    className="bg-gradient-to-r from-[#0C55A0] to-[#08467c] hover:from-[#08467c] hover:to-[#0C55A0] text-white px-8 py-3 rounded-lg font-semibold shadow-lg transition-all duration-200 transform hover:scale-105"
                   >
                     Close
                   </button>

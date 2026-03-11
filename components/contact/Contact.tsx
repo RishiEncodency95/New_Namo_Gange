@@ -1,14 +1,21 @@
 "use client";
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { Mail, MapPin, Phone, Send, User, MessageSquare } from "lucide-react";
 import axiosClient from "@/lib/axiosClient";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface ContactFormData {
   name: string;
   email: string;
   phone: string;
   message: string;
+}
+
+interface SEOData {
+  page_banner?: string;
+  banner_alt?: string;
+  h1tag?: string;
 }
 
 const Contact: React.FC = () => {
@@ -20,10 +27,35 @@ const Contact: React.FC = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
+  const [seoLoading, setSeoLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSEOData = async () => {
+      try {
+        const res = await axiosClient.get(
+          `/seo/page/${encodeURIComponent("/contact")}`,
+        );
+        const seo = res?.data?.data;
+        if (seo) {
+          setSeoData({
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching SEO data for contact page:", error);
+      } finally {
+        setSeoLoading(false);
+      }
+    };
+    fetchSEOData();
+  }, []);
 
   /* ================= HANDLE CHANGE ================= */
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -61,25 +93,36 @@ const Contact: React.FC = () => {
   return (
     <section>
       <div
-        className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home/contact.jpg')" }}
+        className="w-full bg-cover bg-center bg-no-repeat relative"
+        style={{
+          backgroundImage: `url('${seoData?.page_banner || "/home/contact.jpg"}')`,
+          backgroundAttachment: "fixed",
+        }}
       >
         {/* Overlay */}
-        <div className="bg-black/30 w-full h-full md:h-[250px] py-10 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-white uppercase">
-              Connect
-            </h2>
-            <p className="text-sm md:text-base text-white mt-1">
+        <div className="absolute inset-0 bg-black/30" />
+
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="w-full px-4 text-center z-10"
+          >
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+              {seoData?.h1tag || "Connect"}
+            </h1>
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
               <Link
                 href="/"
-                className="text-[#DF562C] font-medium hover:underline"
+                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
                 Home
               </Link>{" "}
-              - Connect
+              - {seoData?.h1tag || "Connect"}
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="relative bg-gray-50 py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">

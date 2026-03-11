@@ -1,13 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Phone, Mail, MapPin, Briefcase } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import axiosClient from "@/lib/axiosClient";
+
+interface SEOData {
+  page_banner?: string;
+  banner_alt?: string;
+  h1tag?: string;
+}
 
 const Career = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState<null | (typeof jobs)[0]>(null);
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
+  const [seoLoading, setSeoLoading] = useState(true);
 
+  // Static job data
   const jobs = [
     {
       title: "Telemarketing Executive",
@@ -48,31 +59,68 @@ const Career = () => {
       ],
     },
   ];
+
+  // Fetch SEO data
+  useEffect(() => {
+    const fetchSEOData = async () => {
+      try {
+        const res = await axiosClient.get(
+          `/seo/page/${encodeURIComponent("/career")}`,
+        );
+        const seo = res?.data?.data;
+        if (seo) {
+          setSeoData({
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching SEO data for career page:", error);
+      } finally {
+        setSeoLoading(false);
+      }
+    };
+    fetchSEOData();
+  }, []);
+
   return (
     <>
       <div
-        className="w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/career/career.jpeg')" }}
+        className="w-full bg-cover bg-center bg-no-repeat relative"
+        style={{
+          backgroundImage: `url('${seoData?.page_banner || "/career/career.jpeg"}')`,
+          backgroundAttachment: "fixed",
+        }}
       >
-        <div className="bg-black/20 py-12 md:h-[250px] md:py-20">
-          <div className="w-full px-4 text-center">
-            <h2 className="text-2xl md:text-2xl font-medium uppercase text-white">
-              Our <span className="text-[#DF562C]">Career</span>
-            </h2>
-
-            <p className="text-sm md:text-base text-white mt-2">
-              <Link href="/" className="text-[#DF562C] hover:underline">
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="w-full px-4 text-center z-10"
+          >
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+              {seoData?.h1tag || "Career"}
+            </h1>
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
+              <Link
+                href="/"
+                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
+              >
                 Home
               </Link>{" "}
-              / Career
+              - {seoData?.h1tag || "Career"}
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="w-full relative py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden text-center">
         {/* HEADER */}
         <div className="">
-        <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+          <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             <span>
               Our{" "}
               <span className="bg-gradient-to-r from-[#DF562C] to-[#0C55A0] bg-clip-text text-transparent">
@@ -164,11 +212,11 @@ const Career = () => {
 
             {/* BUTTON */}
             <button
-  onClick={() => {
-    setSelectedJob(job);
-    setOpenModal(true);
-  }}
-  className="
+              onClick={() => {
+                setSelectedJob(job);
+                setOpenModal(true);
+              }}
+              className="
     w-1/2 md:w-full
     mx-auto md:mx-0
     mt-3 md:mt-5
@@ -186,10 +234,9 @@ const Career = () => {
     focus:outline-none
     focus:ring-2 focus:ring-[#0C55A0]/40
   "
->
-  Apply Now
-</button>
-
+            >
+              Apply Now
+            </button>
           </div>
         ))}
       </div>

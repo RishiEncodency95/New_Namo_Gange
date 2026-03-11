@@ -13,9 +13,17 @@ interface EventType {
   image_alt?: string;
 }
 
+interface SEOData {
+  page_banner?: string;
+  banner_alt?: string;
+  h1tag?: string;
+}
+
 const UpcomingEvent = () => {
   const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
+  const [seoLoading, setSeoLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -90,6 +98,31 @@ const UpcomingEvent = () => {
     fetchEvents();
   }, []);
 
+  // Separate useEffect for SEO data
+  useEffect(() => {
+    const fetchSEOData = async () => {
+      try {
+        const res = await axiosClient.get(
+          `/seo/page/${encodeURIComponent("/event/upcoming")}`,
+        );
+        const seo = res?.data?.data;
+        if (seo) {
+          setSeoData({
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching SEO data:", error);
+      } finally {
+        setSeoLoading(false);
+      }
+    };
+
+    fetchSEOData();
+  }, []);
+
   const stripHtmlTags = (html: string = ""): string => {
     if (typeof window === "undefined") return html;
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -100,32 +133,35 @@ const UpcomingEvent = () => {
     <section className="bg-[#f6f6f9] pb-8">
       {/* ----------- STATIC DESIGN SAME ----------- */}
       <div
-        className="w-full bg-cover bg-center bg-no-repeat"
+        className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: "url('/home/events.jpg')",
+          backgroundImage: `url('${seoData?.page_banner || "/home/events.jpg"}')`,
           backgroundAttachment: "fixed",
         }}
       >
-        <div className="bg-black/40 w-full h-full md:h-[250px] py-10 md:py-16 backdrop-blur-[2px]">
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30" />
+
+        <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="max-w-7xl mx-auto text-center"
+            className="w-full px-4 text-center z-10"
           >
-            <h2 className="text-2xl md:text-4xl font-bold text-white uppercase tracking-wider drop-shadow-lg">
-              Upcoming Events
-            </h2>
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
+              {seoData?.h1tag || "Upcoming Events"}
+            </h1>
 
-            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wide">
+            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
               <Link
                 href="/"
                 className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
               >
                 Home
               </Link>{" "}
-              - Upcoming Events
+              - {seoData?.h1tag || "Upcoming Events"}
             </p>
           </motion.div>
         </div>
@@ -230,7 +266,7 @@ const UpcomingEvent = () => {
                 </div>
 
                 <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-gray-900 font-bold text-lg md:text-2xl mb-3 relative inline-block">
+                  <h3 className="text-gray-900 font-medium text-base md:text-xl mb-3 relative inline-block">
                     {activity.title}
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#DF562C] transition-all duration-500 group-hover:w-full"></span>
                   </h3>
@@ -246,7 +282,7 @@ const UpcomingEvent = () => {
                       rel="noopener noreferrer"
                     >
                       <div
-                        className="relative overflow-hidden inline-flex items-center justify-center px-6 py-2 rounded-lg text-sm font-medium text-white bg-[#0C55A0] 
+                        className="relative overflow-hidden inline-flex items-center justify-center px-6 py-1 rounded text-sm font-normal text-white bg-[#0C55A0] 
                         shadow-md hover:shadow-lg transition-all duration-300 group/btn"
                       >
                         <span className="relative z-10 flex items-center gap-2">
