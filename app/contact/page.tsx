@@ -11,6 +11,9 @@ export async function generateMetadata() {
     title: seo.metaTitle,
     description: seo.metaDescription,
     keywords: seo.metaKeywords,
+    alternates: {
+      canonical: "/career",
+    },
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription,
@@ -21,7 +24,7 @@ export async function generateMetadata() {
 const page = () => {
   return (
     <div>
-     
+
       <Contact />
     </div>
   );

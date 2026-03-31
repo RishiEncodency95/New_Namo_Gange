@@ -11,6 +11,9 @@ export async function generateMetadata() {
     title: seo.metaTitle,
     description: seo.metaDescription,
     keywords: seo.metaKeywords,
+    alternates: {
+      canonical: "/initiatives",
+    },
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription,
@@ -20,9 +23,9 @@ export async function generateMetadata() {
 
 const page = () => {
   return (
-   <div>
-    <Initiatives />
-   </div>
+    <div>
+      <Initiatives />
+    </div>
   );
 };
 

@@ -11,6 +11,9 @@ export async function generateMetadata() {
     title: seo.metaTitle,
     description: seo.metaDescription,
     keywords: seo.metaKeywords,
+    alternates: {
+      canonical: "/communication/blog",
+    },
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription,

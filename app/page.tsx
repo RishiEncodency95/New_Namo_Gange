@@ -20,6 +20,9 @@ export async function generateMetadata() {
     title: seo.metaTitle,
     description: seo.metaDescription,
     keywords: seo.metaKeywords,
+    alternates: {
+      canonical: "/",
+    },
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription,
