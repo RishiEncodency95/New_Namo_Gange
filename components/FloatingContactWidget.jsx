@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
 import axiosClient from "@/lib/axiosClient";
+import { trackSocialClick } from "@/lib/trackSocialClick";
 
 /* CUSTOM WHATSAPP SVG ICON */
 function WhatsappSVG(props) {
@@ -102,6 +103,7 @@ function SocialIcon({
         href={href}
         target="_blank"
         rel="noreferrer"
+        onClick={() => trackSocialClick(label)}
         className="rounded-full bg-white/90 backdrop-blur-sm shadow-xl border border-gray-200 
              flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
         style={{

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 import axiosClient from "@/lib/axiosClient";
+import { trackSocialClick } from "@/lib/trackSocialClick";
 
 export default function SocialFixedBar() {
   const [socialData, setSocialData] = useState(null);
@@ -98,6 +99,7 @@ function SocialIcon({ label, href, Icon, color, delay }) {
         href={href}
         target="_blank"
         rel="noreferrer"
+        onClick={() => trackSocialClick(label)}
         className="w-9 h-9 rounded-full bg-gray-50 shadow-lg flex items-center justify-center hover:scale-110 transition"
       >
         <Icon className={`w-5 h-5 ${color}`} />
