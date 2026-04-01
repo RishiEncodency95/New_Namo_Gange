@@ -17,48 +17,100 @@ const Career = () => {
   const [selectedJob, setSelectedJob] = useState<null | (typeof jobs)[0]>(null);
   const [seoData, setSeoData] = useState<SEOData | null>(null);
   const [seoLoading, setSeoLoading] = useState(true);
+  const [jobs, setJobs] = useState([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    city: "",
+    state: "",
+    currentLocation: "",
+    role: "",
+    message: "",
+  });
 
   // Static job data
-  const jobs = [
-    {
-      title: "Telemarketing Executive",
-      exp: "Minimum 1 Year",
-      salary: "Not disclosed",
-      location: "Ghaziabad",
-      desc: [
-        "Strong communication and persuasive skills.",
-        "Experience in cold calling and lead generation.",
-        "Ability to handle objections and negotiate effectively.",
-        "Target-driven with focus on achieving goals.",
-        "Basic knowledge of exhibitions, events & stall marketing.",
-      ],
-    },
-    {
-      title: "Receptionist",
-      exp: "Minimum 1 Year",
-      salary: "Not disclosed",
-      location: "Ghaziabad",
-      desc: [
-        "Must have good communication skills.",
-        "Should be presentable.",
-        "Should have ability to manage guests.",
-        "Manage front desk.",
-      ],
-    },
-    {
-      title: "Sr. Accountant",
-      exp: "2 - 3 Years",
-      salary: "Not disclosed",
-      location: "Ghaziabad",
-      desc: [
-        "Daily accounting functions.",
-        "Balance sheet preparation.",
-        "Income Tax, GST, TDS handling.",
-        "Account reconciliation.",
-        "Statutory compliance & audits.",
-      ],
-    },
-  ];
+  // const jobs = [
+  //   {
+  //     title: "Telemarketing Executive",
+  //     exp: "Minimum 1 Year",
+  //     salary: "Not disclosed",
+  //     location: "Ghaziabad",
+  //     desc: [
+  //       "Strong communication and persuasive skills.",
+  //       "Experience in cold calling and lead generation.",
+  //       "Ability to handle objections and negotiate effectively.",
+  //       "Target-driven with focus on achieving goals.",
+  //       "Basic knowledge of exhibitions, events & stall marketing.",
+  //     ],
+  //   },
+  //   {
+  //     title: "Receptionist",
+  //     exp: "Minimum 1 Year",
+  //     salary: "Not disclosed",
+  //     location: "Ghaziabad",
+  //     desc: [
+  //       "Must have good communication skills.",
+  //       "Should be presentable.",
+  //       "Should have ability to manage guests.",
+  //       "Manage front desk.",
+  //     ],
+  //   },
+  //   {
+  //     title: "Sr. Accountant",
+  //     exp: "2 - 3 Years",
+  //     salary: "Not disclosed",
+  //     location: "Ghaziabad",
+  //     desc: [
+  //       "Daily accounting functions.",
+  //       "Balance sheet preparation.",
+  //       "Income Tax, GST, TDS handling.",
+  //       "Account reconciliation.",
+  //       "Statutory compliance & audits.",
+  //     ],
+  //   },
+  // ];
+
+  const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prev) => ({ ...prev, [name]: value }));
+};
+
+const handleSubmit = async () => {
+  try {
+    await axiosClient.post("/job-apply/create", formData);
+
+    alert("Application submitted successfully");
+
+    setOpenModal(false);
+
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      city: "",
+      state: "",
+      currentLocation: "",
+      role: "",
+      message: "",
+    });
+  } catch (error) {
+    console.error("Apply error:", error);
+    alert("Something went wrong");
+  }
+};
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await axiosClient.get("/jobs/list");
+        setJobs(res.data.data || []);
+      } catch (error) {
+        console.error("Job fetch error:", error);
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   // Fetch SEO data
   useEffect(() => {
@@ -214,6 +266,10 @@ const Career = () => {
             <button
               onClick={() => {
                 setSelectedJob(job);
+                setFormData((prev) => ({
+                  ...prev,
+                  role: job?.title, // 👈 auto fill role
+                }));
                 setOpenModal(true);
               }}
               className="
@@ -389,7 +445,10 @@ const Career = () => {
 
               {/* FIXED BUTTON (Always bottom) */}
               <div className="mt-4 border-t pt-4 flex justify-center">
-                <button className="bg-[#0C55A0] hover:bg-[#08467c] text-white px-8 py-2 rounded shadow-md text-sm flex items-center gap-2">
+                <button
+                  onClick={handleSubmit}
+                  className="bg-[#0C55A0] hover:bg-[#08467c] text-white px-8 py-2 rounded shadow-md text-sm flex items-center gap-2"
+                >
                   Submit →
                 </button>
               </div>
