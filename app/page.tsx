@@ -26,6 +26,12 @@ export async function generateMetadata() {
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription,
+      images: [
+        {
+          url: seo.open_graph,
+          alt: seo.metaTitle,
+        },
+      ],
     },
   };
 }

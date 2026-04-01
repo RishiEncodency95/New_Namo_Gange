@@ -3,7 +3,7 @@ import React from "react";
 import { getSeo } from "@/lib/getSeo";
 
 export async function generateMetadata() {
-  const seo = await getSeo("/career");
+  const seo = await getSeo("/contact");
 
   if (!seo) return {};
 
@@ -12,11 +12,17 @@ export async function generateMetadata() {
     description: seo.metaDescription,
     keywords: seo.metaKeywords,
     alternates: {
-      canonical: "/career",
+      canonical: "/contact",
     },
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription,
+      images: [
+        {
+          url: seo.open_graph,
+          alt: seo.metaTitle,
+        },
+      ],
     },
   };
 }

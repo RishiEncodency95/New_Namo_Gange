@@ -12,11 +12,17 @@ export async function generateMetadata() {
     description: seo.metaDescription,
     keywords: seo.metaKeywords,
     alternates: {
-      canonical: "/gallery/videosg",
+      canonical: "/gallery/videos",
     },
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription,
+      images: [
+        {
+          url: seo.open_graph,
+          alt: seo.metaTitle,
+        },
+      ],
     },
   };
 }
