@@ -12,12 +12,21 @@ interface SEOData {
   h1tag?: string;
 }
 
+interface Job {
+  _id?: string;
+  title: string;
+  exp: string;
+  salary: string;
+  location: string;
+  desc: string[];
+}
+
 const Career = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState<null | (typeof jobs)[0]>(null);
   const [seoData, setSeoData] = useState<SEOData | null>(null);
   const [seoLoading, setSeoLoading] = useState(true);
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -71,7 +80,7 @@ const Career = () => {
   //   },
   // ];
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
