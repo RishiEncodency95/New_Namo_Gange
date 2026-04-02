@@ -195,9 +195,9 @@ const Videos = () => {
                   <h3 className="text-gray-900 font-normal text-sm md:text-base mb-1 line-clamp-1">
                     {video.title}
                   </h3>
-                  <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
-                    📅 {new Date(video.date).toLocaleDateString()}
-                  </p>
+                  {/* <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-4">
+                    📅 {new Date(video.date).toLocaleDateString() || ""}
+                  </p> */}
                 </div>
               </motion.div>
             ))}
