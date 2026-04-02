@@ -15,6 +15,7 @@ interface Blog {
   createdAt?: string;
   status?: string;
   image_alt?: string;
+  slug?: string;
 }
 
 interface BlogCard {
@@ -24,6 +25,7 @@ interface BlogCard {
   description: string;
   date: string;
   image_alt?: string;
+  slug?: string;
 }
 
 const NewsUpdate = () => {
@@ -58,6 +60,7 @@ const NewsUpdate = () => {
               image: item.image,
               image_alt: item.image_alt,
               description: description.replace(/<[^>]+>/g, ""),
+              slug: item?.slug,
               date: new Date(item.createdAt || "").toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -198,7 +201,7 @@ const NewsUpdate = () => {
                   </p>
 
                   <Link
-                    href="/communication/blog"
+                    href={`/communication/blog/${item?.slug || "#"}`}
                     className="mt-auto pt-2 border-t border-gray-100 text-right block"
                   >
                     <span className="text-sm font-medium text-[#0C55A0] group-hover:text-[#f36b2a] transition-colors duration-300">

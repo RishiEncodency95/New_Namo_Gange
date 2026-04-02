@@ -62,6 +62,136 @@ const toSlug = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+const InitiativeItem = ({ item, index }: { item: Initiative; index: number }) => {
+  const isEven = index % 2 === 0;
+  // Start with float layout by default so large text wraps correctly
+  const [isLongText, setIsLongText] = useState(true);
+  const textRef = React.useRef<HTMLDivElement>(null);
+  const imgRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const checkHeight = () => {
+      if (textRef.current && imgRef.current) {
+        const textH = textRef.current.offsetHeight;
+        const imgH = imgRef.current.offsetHeight;
+        if (textH > imgH + 20) {
+          setIsLongText(true);
+        } else {
+          setIsLongText(false);
+        }
+      }
+    };
+
+    // Small delay to ensure styles and layouts are applied
+    timeoutId = setTimeout(checkHeight, 150);
+    window.addEventListener("resize", checkHeight);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", checkHeight);
+    };
+  }, [item]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className={
+        isLongText
+          ? "w-full mb-10 md:mb-16 text-center md:text-left clear-both flow-root transition-all"
+          : "w-full grid grid-cols-1 md:grid-cols-10 items-center gap-5 md:gap-10 lg:gap-10 mb-8 transition-all"
+      }
+    >
+      {/* IMAGE SIDE */}
+      <div
+        ref={imgRef}
+        className={
+          isLongText
+            ? `w-full md:w-[30%] lg:w-[28%] relative mb-5 md:mb-2 md:mt-1 ${
+                isEven ? "md:float-right md:ml-6 lg:ml-8" : "md:float-left md:mr-6 lg:mr-8"
+              }`
+            : `w-full md:col-span-3 relative ${isEven ? "md:order-2" : "md:order-1"}`
+        }
+      >
+        {item.image && (
+          <div className="overflow-hidden rounded shadow-lg hover:shadow-xl transition-all duration-500 group relative flex items-center justify-center bg-white border border-gray-100">
+            <Image
+              src={
+                item.image.startsWith("http")
+                  ? item.image
+                  : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
+              }
+              alt={item.logo_alt || item.title}
+              width={600}
+              height={400}
+              onLoad={() => {
+                if (textRef.current && imgRef.current) {
+                  const textH = textRef.current.offsetHeight;
+                  const imgH = imgRef.current.offsetHeight;
+                  if (textH > imgH + 20) {
+                    setIsLongText(true);
+                  } else {
+                    setIsLongText(false);
+                  }
+                }
+              }}
+              className="w-full h-auto max-h-[180px] md:max-h-[220px] lg:max-h-[240px] object-contain p-2 md:p-3 transform transition-transform duration-700 ease-in-out group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+          </div>
+        )}
+
+        <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded-3xl -z-10 opacity-70"></div>
+      </div>
+
+      {/* TEXT SIDE */}
+      <div
+        ref={textRef}
+        className={
+          isLongText
+            ? ""
+            : `w-full md:col-span-7 text-center md:text-left ${
+                isEven ? "md:order-1" : "md:order-2"
+              }`
+        }
+      >
+        <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-2 leading-tight">
+          {item.title}
+        </h3>
+
+        <div
+          className="
+            text-gray-700 text-xs md:text-[14px] leading-relaxed font-normal text-justify
+            [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+            [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+            [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+            [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+            [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+            [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+            [&_p]:mb-3 [&_p]:leading-relaxed
+            [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+            [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+            [&_strong]:font-semibold
+            [&_a]:text-blue-600 [&_a]:underline
+          "
+          dangerouslySetInnerHTML={{ __html: item.description || "" }}
+        />
+
+        {item.link && item.link !== "#" && (
+          <Link href={item.link}>
+            <button className="mt-2 md:mt-4 relative overflow-hidden px-4 py-1 rounded md:px-6 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
+              Read More
+            </button>
+          </Link>
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
 export default function ObjectiveSlugClient({ slug }: { slug: string }) {
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
   const [objective, setObjective] = useState<Objective | null>(null);
@@ -140,7 +270,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
           backgroundAttachment: "fixed",
         }}
       >
-          <div className="bg-black/30 w-full h-42 md:h-56 flex items-center justify-center">
+        <div className="bg-black/30 w-full h-42 md:h-56 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -215,88 +345,9 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
           </p>
         ) : (
           <div className="space-y-12 md:space-y-16 py-8">
-            {initiatives.map((item, index) => {
-              const isEven = index % 2 === 0;
-
-              return (
-                <div
-                  key={index}
-                  className={`w-full flex flex-col ${
-                    isEven ? "md:flex-row" : "md:flex-row-reverse"
-                  } items-center gap-5 md:gap-10 lg:gap-10 mb-8`}
-                >
-                  {/* TEXT SIDE */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    viewport={{ once: true }}
-                    className="flex-1 text-center md:text-left"
-                  >
-                    <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-2 leading-tight">
-                      {item.title}
-                    </h3>
-
-                    <div
-                      className="
-                        text-gray-700 text-xs md:text-[14px] leading-relaxed font-normal text-justify
-                        [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
-                        [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
-                        [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
-                        [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
-                        [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
-                        [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
-                        [&_p]:mb-3 [&_p]:leading-relaxed
-                        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
-                        [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
-                        [&_strong]:font-semibold
-                        [&_a]:text-blue-600 [&_a]:underline
-                      "
-                      dangerouslySetInnerHTML={{ __html: item.description || "" }}
-                    />
-
-                    {item.link && item.link !== "#" && (
-                      <Link href={item.link}>
-                        <button className="mt-2 md:mt-4 relative overflow-hidden px-4 py-1 rounded md:px-6 md:py-1.5 text-xs md:text-sm text-white font-medium shadow-md bg-[#DF562C] hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
-                          Read More
-                        </button>
-                      </Link>
-                    )}
-                  </motion.div>
-
-                  {/* IMAGE SIDE */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    viewport={{ once: true }}
-                    className="flex-1 relative w-full"
-                  >
-                    {item.image && (
-                      <div className="overflow-hidden rounded shadow-lg hover:shadow-xl transition-all duration-500 group relative bg-white aspect-video flex items-center justify-center p-4">
-                        <Image
-                          src={
-                            item.image.startsWith("http")
-                              ? item.image
-                              : `${
-                                  process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""
-                                }${item.image}`
-                          }
-                          alt={item.logo_alt || item.title}
-                          width={600}
-                          height={400}
-                          className="max-w-full max-h-full object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-105"
-                        />
-                        {/* Shine Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                      </div>
-                    )}
-
-                    <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded-3xl -z-10 opacity-70"></div>
-                  </motion.div>
-                </div>
-              );
-            })}
+            {initiatives.map((item, index) => (
+              <InitiativeItem key={index} item={item} index={index} />
+            ))}
           </div>
         )}
       </div>

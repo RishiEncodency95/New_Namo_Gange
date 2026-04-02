@@ -35,7 +35,7 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
 
     const fetchBlog = async () => {
       try {
-        const res = await axiosClient.get("/communication/blog");
+        const res = await axiosClient.get("/blog");
         const data = res?.data?.data || [];
 
         const matched = data.find(

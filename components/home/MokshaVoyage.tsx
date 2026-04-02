@@ -63,9 +63,9 @@ const MokshaVoyage = () => {
         {/* ================= LEFT SIDE TEXT ================= */}
         <div className=" flex-1 md:w-[60%]">
           <div className=" text-center">
-            <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
+            <h1 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
               {hero?.title}
-            </h2>
+            </h1>
             <div className="w-full h-[2px] my-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3]" />
           </div>
 

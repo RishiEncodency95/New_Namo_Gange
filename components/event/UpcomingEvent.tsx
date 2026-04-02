@@ -19,6 +19,141 @@ interface SEOData {
   h1tag?: string;
 }
 
+const stripHtmlTags = (html: string = ""): string => {
+  if (typeof window === "undefined") return html;
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.body.textContent || "";
+};
+
+const UpcomingEventItem = ({ item, index }: { item: EventType; index: number }) => {
+  const isEven = index % 2 === 0;
+  const [isLongText, setIsLongText] = useState(true);
+  const textRef = React.useRef<HTMLDivElement>(null);
+  const imgRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const checkHeight = () => {
+      if (textRef.current && imgRef.current) {
+        const textH = textRef.current.offsetHeight;
+        const imgH = imgRef.current.offsetHeight;
+        if (textH > imgH + 20) {
+          setIsLongText(true);
+        } else {
+          setIsLongText(false);
+        }
+      }
+    };
+
+    timeoutId = setTimeout(checkHeight, 150);
+    window.addEventListener("resize", checkHeight);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", checkHeight);
+    };
+  }, [item]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-50px" }}
+      className={
+        isLongText
+          ? "w-full mb-10 md:mb-16 p-4 md:p-6 text-center md:text-left clear-both flow-root transition-all bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl group overflow-hidden relative"
+          : "w-full grid grid-cols-1 md:grid-cols-10 items-center p-4 md:p-6 gap-6 md:gap-12 lg:gap-16 mb-8 transition-all bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl group overflow-hidden relative"
+      }
+    >
+      {/* Decorative background blob */}
+      <div
+        className={`absolute top-0 ${isEven ? "right-0" : "left-0"
+          } w-64 h-64 bg-gradient-to-br from-orange-100/50 to-blue-100/50 rounded-full blur-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+      />
+
+      {/* IMAGE SIDE */}
+      <div
+        ref={imgRef}
+        className={
+          isLongText
+            ? `w-full md:w-[30%] lg:w-[28%] relative mb-5 md:mb-2 md:mt-1 ${isEven ? "md:float-right md:ml-6 lg:ml-8" : "md:float-left md:mr-6 lg:mr-8"
+            }`
+            : `w-full md:col-span-3 relative ${isEven ? "md:order-2" : "md:order-1"}`
+        }
+      >
+        {item.image && (
+          <div className="overflow-hidden rounded-xl transition-all duration-500 relative flex items-center justify-center">
+            <Image
+              src={
+                item.image.startsWith("http")
+                  ? item.image
+                  : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${item.image}`
+              }
+              alt={item.image_alt || item.title}
+              width={800}
+              height={400}
+              onLoad={() => {
+                if (textRef.current && imgRef.current) {
+                  const textH = textRef.current.offsetHeight;
+                  const imgH = imgRef.current.offsetHeight;
+                  if (textH > imgH + 20) {
+                    setIsLongText(true);
+                  } else {
+                    setIsLongText(false);
+                  }
+                }
+              }}
+              className="w-full h-auto object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-105 rounded-xl"
+            />
+            {/* Shine Effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+          </div>
+        )}
+
+        <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded-3xl -z-10 opacity-70"></div>
+      </div>
+
+      {/* TEXT SIDE */}
+      <div
+        ref={textRef}
+        className={
+          isLongText
+            ? ""
+            : `w-full md:col-span-7 text-center md:text-left ${isEven ? "md:order-1" : "md:order-2"
+            }`
+        }
+      >
+        <h3 className="text-gray-900 font-medium text-base md:text-xl mb-3 relative inline-block">
+          {item.title}
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#DF562C] transition-all duration-500 group-hover:w-full"></span>
+        </h3>
+
+        <p className="text-gray-600 text-justify text-sm md:text-base leading-relaxed mb-6">
+          {stripHtmlTags(item.text)}
+        </p>
+
+        {item.link && item.link !== "#" && (
+          <Link href={item.link} target="_blank" rel="noopener noreferrer">
+            <div
+              className="relative overflow-hidden inline-flex items-center justify-center px-6 py-1 rounded text-sm font-normal text-white bg-[#0C55A0] 
+                shadow-md hover:shadow-lg transition-all duration-300 group/btn"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Learn More{" "}
+                <span className="transition-transform group-hover/btn:translate-x-1">
+                  →
+                </span>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#DF562C] to-[#f89a36] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+            </div>
+          </Link>
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
 const UpcomingEvent = () => {
   const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -123,11 +258,7 @@ const UpcomingEvent = () => {
     fetchSEOData();
   }, []);
 
-  const stripHtmlTags = (html: string = ""): string => {
-    if (typeof window === "undefined") return html;
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
+
 
   return (
     <section className="bg-[#f6f6f9] pb-8">
@@ -226,77 +357,7 @@ const UpcomingEvent = () => {
             </div>
           ) : (
             upcomingEvents.map((activity, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-50px" }}
-                className={`relative flex flex-col ${
-                  i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                } items-center p-4 md:p-6 rounded-2xl gap-6 md:gap-12 lg:gap-16
-                bg-white border border-gray-100 shadow-lg transition-all duration-500
-                hover:shadow-2xl group overflow-hidden`}
-              >
-                {/* Decorative background blob */}
-                <div
-                  className={`absolute top-0 ${
-                    i % 2 === 0 ? "right-0" : "left-0"
-                  } w-64 h-64 bg-gradient-to-br from-orange-100/50 to-blue-100/50 rounded-full blur-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
-                />
-
-                <div className="flex-1 relative w-full">
-                  <div className="absolute -inset-3 bg-gradient-to-r from-[#f36b2a]/20 to-[#1e7ed3]/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-
-                  <div className="relative overflow-hidden rounded-xl shadow-md bg-white border border-gray-100 transition-all duration-700 group-hover:shadow-xl w-full aspect-video">
-                    <Image
-                      src={
-                        activity.image?.startsWith("http")
-                          ? activity.image
-                          : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${activity.image}`
-                      }
-                      alt={activity.image_alt || activity.title}
-                      width={800}
-                      height={500}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
-                    />
-                    {/* Shine Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                  </div>
-                </div>
-
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-gray-900 font-medium text-base md:text-xl mb-3 relative inline-block">
-                    {activity.title}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#DF562C] transition-all duration-500 group-hover:w-full"></span>
-                  </h3>
-
-                  <p className="text-gray-600 text-justify text-sm md:text-base leading-relaxed mb-6">
-                    {stripHtmlTags(activity.text)}
-                  </p>
-
-                  {activity.link && (
-                    <Link
-                      href={activity.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <div
-                        className="relative overflow-hidden inline-flex items-center justify-center px-6 py-1 rounded text-sm font-normal text-white bg-[#0C55A0] 
-                        shadow-md hover:shadow-lg transition-all duration-300 group/btn"
-                      >
-                        <span className="relative z-10 flex items-center gap-2">
-                          Learn More{" "}
-                          <span className="transition-transform group-hover/btn:translate-x-1">
-                            →
-                          </span>
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#DF562C] to-[#f89a36] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                      </div>
-                    </Link>
-                  )}
-                </div>
-              </motion.div>
+              <UpcomingEventItem key={i} item={activity} index={i} />
             ))
           )}
         </div>

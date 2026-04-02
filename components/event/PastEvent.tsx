@@ -30,6 +30,12 @@ const formatDate = (date: string) =>
     year: "numeric",
   });
 
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center min-h-[60vh]">
+    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#DF562C]"></div>
+  </div>
+);
+
 const PastEvent = () => {
   const [pastEvents, setPastEvents] = useState<PastEventType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -119,6 +125,10 @@ const PastEvent = () => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   };
+
+  if (loading || seoLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className="bg-[#f6f6f9] py-2 md:py-4">

@@ -115,38 +115,38 @@ const HomeSlider = () => {
                 </div>
               )} */}
               {banners.length === 0 && (
-  <div className="flex flex-col items-center text-center justify-center w-full h-[190px] md:h-[530px] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-    
-    {/* Glow Background Effect */}
-    <div className="absolute w-72 h-72 bg-orange-200 rounded-full blur-3xl opacity-30 top-[-50px] left-[-50px]" />
-    <div className="absolute w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30 bottom-[-50px] right-[-50px]" />
+                <div className="flex flex-col items-center text-center justify-center w-full h-[190px] md:h-[530px] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
 
-    {/* Content */}
-    <div className="z-10 flex flex-col items-center text-center px-4">
-      
-      {/* Icon */}
-      <div className="text-5xl mb-3">📢</div>
+                  {/* Glow Background Effect */}
+                  <div className="absolute w-72 h-72 bg-orange-200 rounded-full blur-3xl opacity-30 top-[-50px] left-[-50px]" />
+                  <div className="absolute w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30 bottom-[-50px] right-[-50px]" />
 
-      {/* Title */}
-      <h2 className="text-lg md:text-2xl font-semibold text-gray-700">
-        No Active Banners
-      </h2>
+                  {/* Content */}
+                  <div className="z-10 flex flex-col items-center text-center px-4">
 
-      {/* Subtitle */}
-      <p className="text-sm md:text-base text-gray-500 mt-1">
-        Currently there are no banners to display.
-      </p>
+                    {/* Icon */}
+                    <div className="text-5xl mb-3">📢</div>
 
-      {/* Optional Button */}
-      <button
-        onClick={() => window.location.reload()}
-        className="mt-4 px-4 py-2 text-sm bg-[#DF562C] text-white rounded-md hover:bg-[#c94c26] transition"
-      >
-        Refresh
-      </button>
-    </div>
-  </div>
-)}
+                    {/* Title */}
+                    <h2 className="text-lg md:text-2xl font-semibold text-gray-700">
+                      No Active Banners
+                    </h2>
+
+                    {/* Subtitle */}
+                    <p className="text-sm md:text-base text-gray-500 mt-1">
+                      Currently there are no banners to display.
+                    </p>
+
+                    {/* Optional Button */}
+                    <button
+                      onClick={() => window.location.reload()}
+                      className="mt-4 px-4 py-2 text-sm bg-[#DF562C] text-white rounded-md hover:bg-[#c94c26] transition"
+                    >
+                      Refresh
+                    </button>
+                  </div>
+                </div>
+              )}
             </Slider>
           </motion.div>
         )}
@@ -155,15 +155,16 @@ const HomeSlider = () => {
       {/* ================= GLASS INFO CARDS ================= */}
       <div className="relative -mt-1 md:-mt-14 left-1/2 -translate-x-1/2 w-full px-2 md:px-12 z-30">
         <div
-          className="
-            grid grid-cols-1 md:grid-cols-3
-            rounded-md
-            overflow-hidden
-             bg-gradient-to-r from-orange-100/50 via-cyan-100/50 to-blue-100/50
-            shadow-md
-            border border-white/30
-            text-gray-700
-          "
+          className="bg-orange-600 text-white grid grid-cols-1 md:grid-cols-3 rounded-xs overflow-hidden"
+        // className="
+        // grid grid-cols-1 md:grid-cols-3
+        // rounded-md
+        // overflow-hidden
+        //  bg-gradient-to-r from-orange-100/50 via-cyan-100/50 to-blue-100/50
+        // shadow-md
+        // border border-white/30
+        // text-gray-700
+        // "
         >
           {/* CSR HEADS */}
           <div className="px-4 py-1 md:px-6 border-b md:border-b-0 md:border-r border-gray-200">
