@@ -1,25 +1,30 @@
 import React from "react";
 import Career from "@/components/career/Career";
-import { getSeo } from "@/lib/getSeo";
+import { getSeo, parseOpenGraph, cleanHtmlString, extractSchemaScript } from "@/lib/getSeo";
 
 export async function generateMetadata() {
   const seo = await getSeo("/career");
 
   if (!seo) return {};
 
+  const ogTags = parseOpenGraph(seo.openGraphTags);
+
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
-    keywords: seo.metaKeywords,
+    keywords: seo.metaKeywords || "",
     alternates: {
       canonical: "/career",
     },
     openGraph: {
-      title: seo.metaTitle,
-      description: seo.metaDescription,
+      title: ogTags.title || seo.metaTitle,
+      description: ogTags.description || seo.metaDescription,
+      url: ogTags.url,
+      siteName: ogTags.site_name,
+      type: (ogTags.type as any) || "website",
       images: [
         {
-          url: seo.open_graph,
+          url: seo.open_graph || ogTags.image,
           alt: seo.metaTitle,
         },
       ],
@@ -27,10 +32,14 @@ export async function generateMetadata() {
   };
 }
 
-export default function MokshaSewaPage() {
+export default async function MokshaSewaPage() {
+  const seo = await getSeo("/career");
   return (
     <section className="bg-gray-50 pb-16">
       <Career />
+      {seo?.schemaMarkup && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: extractSchemaScript(seo.schemaMarkup) }} />
+      )}
     </section>
   );
 }

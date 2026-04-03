@@ -207,7 +207,7 @@ const OurInitiatives = () => {
                 </motion.h3>
 
                 <div
-                  className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-3 text-justify
+                  className="text-gray-600 text-xs md:text-[13px] leading-relaxed line-clamp-3 mb-3
                     [&_h1]:text-lg [&_h1]:font-bold [&_h1]:mb-1
                     [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mb-1
                     [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mb-1

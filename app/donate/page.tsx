@@ -1,5 +1,5 @@
 import React from "react";
-import { getSeo } from "@/lib/getSeo";
+import { getSeo, parseOpenGraph, cleanHtmlString, extractSchemaScript } from "@/lib/getSeo";
 import Donate from "@/components/donate/Donate"
 
 export async function generateMetadata() {
@@ -7,19 +7,24 @@ export async function generateMetadata() {
 
   if (!seo) return {};
 
+  const ogTags = parseOpenGraph(seo.openGraphTags);
+
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
-    keywords: seo.metaKeywords,
+    keywords: seo.metaKeywords || "",
     alternates: {
       canonical: "/donate",
     },
     openGraph: {
-      title: seo.metaTitle,
-      description: seo.metaDescription,
+      title: ogTags.title || seo.metaTitle,
+      description: ogTags.description || seo.metaDescription,
+      url: ogTags.url,
+      siteName: ogTags.site_name,
+      type: (ogTags.type as any) || "website",
       images: [
         {
-          url: seo.open_graph,
+          url: seo.open_graph || ogTags.image,
           alt: seo.metaTitle,
         },
       ],
@@ -27,11 +32,15 @@ export async function generateMetadata() {
   };
 }
 
-const page = () => {
+const page = async () => {
+  const seo = await getSeo("/donate");
   return (
     <div>
 
       <Donate />
+      {seo?.schemaMarkup && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: extractSchemaScript(seo.schemaMarkup) }} />
+      )}
     </div>
   );
 };

@@ -1,13 +1,14 @@
 import React from 'react'
 import AboutJoin from "@/components/about/AboutJoin";
 import AboutNamoGange from "@/components/about/AboutNamoGange";
-import { getSeo } from "@/lib/getSeo";
+import { getSeo, parseOpenGraph, cleanHtmlString, extractSchemaScript } from "@/lib/getSeo";
 
 export async function generateMetadata() {
   const seo = await getSeo("/about");
 
   if (!seo) return {};
 
+  const ogTags = parseOpenGraph(seo.openGraphTags);
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
@@ -16,8 +17,11 @@ export async function generateMetadata() {
       canonical: "/about",
     },
     openGraph: {
-      title: seo.metaTitle,
-      description: seo.metaDescription,
+      title: ogTags.title || seo.metaTitle,
+      description: ogTags.description || seo.metaDescription,
+      url: ogTags.url,
+      siteName: ogTags.site_name,
+      type: (ogTags.type as any),
       images: [
         {
           url: seo.open_graph,
@@ -27,12 +31,17 @@ export async function generateMetadata() {
     },
   };
 }
-const page = () => {
+const page = async () => {
+  const seo = await getSeo("/about");
+  console.log(" __html: extractSchemaScript(seo.schemaMarkup)", { __html: extractSchemaScript(seo.schemaMarkup) })
   return (
-    <div>
+    <>
       <AboutNamoGange />
       <AboutJoin />
-    </div>
+      {seo?.schemaMarkup && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: extractSchemaScript(seo.schemaMarkup) }} />
+      )}
+    </>
   )
 }
 
