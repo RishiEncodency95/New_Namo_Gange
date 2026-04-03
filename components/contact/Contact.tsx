@@ -19,7 +19,9 @@ interface SEOData {
 }
 interface SocialMediaData {
   mail: string;
+  mail2: string;
   callNumber: string;
+  callNumber2: string;
   address: string;
 }
 
@@ -200,6 +202,9 @@ const Contact: React.FC = () => {
                   <p className="text-sm opacity-90">
                     {socialData?.callNumber || ""}
                   </p>
+                  {socialData?.callNumber2 ? <p className="text-sm opacity-90">
+                    {socialData?.callNumber2 || ""}
+                  </p> : ""}
                 </div>
               </div>
 
@@ -212,6 +217,9 @@ const Contact: React.FC = () => {
                   <p className="text-sm opacity-90">
                     {socialData?.mail || ""}
                   </p>
+                  {socialData?.mail2 ? <p className="text-sm opacity-90">
+                    {socialData?.mail2 || ""}
+                  </p> : ""}
                 </div>
               </div>
 

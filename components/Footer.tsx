@@ -9,6 +9,8 @@ import axiosClient from "@/lib/axiosClient";
 interface SocialMediaData {
   mail: string;
   callNumber: string;
+  mail2: string;
+  callNumber2: string;
   address: string;
 }
 
@@ -118,7 +120,15 @@ export default function Footer() {
                 {socialData?.mail || ""}
               </a>
             </li>
-
+            {socialData?.mail2 ? <li className="flex items-center gap-3">
+              <Mail className="w-5 h-5 text-[#1e7ed3]" />
+              <a
+                href={socialData?.mail2 || "#"}
+                className="hover:text-[#DF562C]"
+              >
+                {socialData?.mail2 || ""}
+              </a>
+            </li> : ""}
             <li className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-[#1e7ed3]" />
               <a
@@ -128,6 +138,15 @@ export default function Footer() {
                 {socialData?.callNumber || ""}
               </a>
             </li>
+            {socialData?.callNumber2 ? <li className="flex items-center gap-3">
+              <Phone className="w-5 h-5 text-[#1e7ed3]" />
+              <a
+                href={socialData?.callNumber2 || "#"}
+                className="hover:text-[#DF562C]"
+              >
+                {socialData?.callNumber2 || ""}
+              </a>
+            </li> : ""}
           </ul>
         </div>
       </div>
