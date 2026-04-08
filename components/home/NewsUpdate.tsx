@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays } from "lucide-react";
-import { motion } from "framer-motion";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 
 interface Blog {
   _id: string;
@@ -35,7 +34,7 @@ const NewsUpdate = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axiosClient.get("/blog");
+        const res = await fetchClient.get("/blog");
 
         const data: Blog[] = res?.data?.data || [];
 
@@ -84,11 +83,11 @@ const NewsUpdate = () => {
     <section className="w-full relative py-6 md:py-12 bg-gray-50 overflow-hidden">
       <div className="w-full px-4 md:px-12 lg:px-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="text-center"
         >
           <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
@@ -100,14 +99,14 @@ const NewsUpdate = () => {
           <p className="text-[13px] md:text-[15px] text-medium text-gray-800 italic py-1">
             “Serving Humanity, Preserving Nature, Awakening Divinity.”
           </p>
-        </motion.div>
+        </div>
 
         {/* Top Text */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="flex justify-center w-full mt-4 mb-8"
         >
           <div className="w-full mx-auto relative overflow-hidden text-center rounded-lg">
@@ -123,7 +122,7 @@ const NewsUpdate = () => {
               welfare, and sustainable development.
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Loading */}
         {loading ? (
@@ -145,27 +144,18 @@ const NewsUpdate = () => {
             No blog updates available.
           </p>
         ) : (
-          <motion.div
+          <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              visible: { transition: { staggerChildren: 0.2 } },
-            }}
+
+
+
+
           >
             {blogs.map((item, i) => (
-              <motion.div
+              <div
                 key={item.id}
-                variants={{
-                  hidden: { opacity: 0, y: 50 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.7, ease: "easeOut" },
-                  },
-                }}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+
+
                 className="group relative bg-white rounded-xl border border-gray-100 overflow-hidden shadow-md 
                 hover:shadow-2xl transition-shadow duration-400 flex flex-col"
               >
@@ -203,24 +193,25 @@ const NewsUpdate = () => {
                   <Link
                     href={`/communication/blog/${item?.slug || "#"}`}
                     className="mt-auto pt-2 border-t border-gray-100 text-right block"
+                    aria-label={`Read more about ${item.title}`}
                   >
                     <span className="text-sm font-medium text-[#0C55A0] group-hover:text-[#f36b2a] transition-colors duration-300">
                       Read More...
                     </span>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
 
         {/* View More Button */}
         {/* {blogs.length > 0 && !loading && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="flex justify-center mt-10 md:mt-12"
           >
             <Link href="/communication/blog">
@@ -233,7 +224,7 @@ const NewsUpdate = () => {
                 View More →
               </button>
             </Link>
-          </motion.div>
+          </div>
         )} */}
       </div>
     </section>

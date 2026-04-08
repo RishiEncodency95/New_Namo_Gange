@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
 import logo from "@/public/logo.png";
 import { useRouter, usePathname } from "next/navigation";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 import SpeakerButton from "./SpeakerButton";
@@ -69,7 +69,7 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     const fetchObjectives = async () => {
       try {
-        const res = await axiosClient.get("/objectives");
+        const res = await fetchClient.get("/objectives");
         if (Array.isArray(res.data?.data)) {
           setObjectiveDropdown(
             res.data.data

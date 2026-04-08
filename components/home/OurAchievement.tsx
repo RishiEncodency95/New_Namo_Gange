@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 interface Achievement {
   _id: string;
@@ -24,7 +23,7 @@ const OurAchievement = () => {
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const res = await axiosClient.get("/achievements");
+        const res = await fetchClient.get("/achievements");
 
         const data: Achievement[] = res?.data?.data || [];
 
@@ -51,11 +50,11 @@ const OurAchievement = () => {
     <section className="w-full relative py-1.5 md:py-3 bg-gray-50 overflow-hidden">
       <div className="px-2 lg:px-12 md:px-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 text-center leading-tight">
             Our{" "}
@@ -67,13 +66,13 @@ const OurAchievement = () => {
           <p className="text-[13px] md:text-[15px] text-center text-medium text-gray-800 italic py-1">
             “Serving Humanity, Preserving Nature, Awakening Divinity.”
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="flex justify-center w-full mb-6"
         >
           <div className="w-full py-2 relative overflow-hidden text-center rounded-lg">
@@ -86,7 +85,7 @@ const OurAchievement = () => {
               of people and the preservation of our natural world.
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* LOADING STATE */}
         {loading ? (
@@ -120,11 +119,11 @@ const OurAchievement = () => {
                 } items-center gap-1 md:gap-10 lg:gap-10`}
               >
                 {/* IMAGE */}
-                <motion.div
-                  initial={{ opacity: 0, x: i % 2 === 1 ? 100 : -100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true }}
+                <div
+
+
+
+
                   className="flex-1 relative group w-full"
                 >
                   <div className="absolute -inset-2 bg-gradient-to-r from-[#f36b2a]/30 to-[#1e7ed3]/30 rounded blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
@@ -144,14 +143,14 @@ const OurAchievement = () => {
                       className="w-full md:h-75 object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
                     />
                   </div>
-                </motion.div>
+                </div>
 
                 {/* TEXT */}
-                <motion.div
-                  initial={{ opacity: 0, x: i % 2 === 1 ? -100 : 100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true }}
+                <div
+
+
+
+
                   className="flex-1 text-center md:text-left"
                 >
                   <h2 className="text-base md:text-xl font-normal text-gray-900">
@@ -177,7 +176,7 @@ const OurAchievement = () => {
                   />
 
                   {activity.link && activity.link.trim() !== "" && (
-                    <Link href={activity.link}>
+                    <Link href={activity.link} aria-label={`Read more about ${activity.title}`}>
                       <button
                         className="relative overflow-hidden px-4 py-1 rounded md:py-1.5 lg:py-1.5 text-xs md:text-sm lg:text-sm text-white bg-[#0C55A0] hover:bg-[#08467c]
                         hover:shadow-lg transition-all duration-300"
@@ -186,7 +185,7 @@ const OurAchievement = () => {
                       </button>
                     </Link>
                   )}
-                </motion.div>
+                </div>
               </div>
             ))}
           </div>

@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import NextImage from "next/image";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 
 interface ApiVideo {
   _id: string;
@@ -45,7 +44,7 @@ const Videos = () => {
   useEffect(() => {
     const fetchGalleryVideos = async () => {
       try {
-        const res = await axiosClient.get("/gallery-video");
+        const res = await fetchClient.get("/gallery-video");
         const videos = res?.data?.videos || [];
 
         const activeVideos = videos
@@ -67,7 +66,7 @@ const Videos = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/gallery/videos")}`,
         );
         const seo = res?.data?.data;
@@ -111,11 +110,11 @@ const Videos = () => {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -130,7 +129,7 @@ const Videos = () => {
               </Link>{" "}
               - {seoData?.h1tag || "Videos"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
@@ -199,12 +198,12 @@ const Videos = () => {
           {/* ===== REAL VIDEOS ===== */}
           {!loading &&
             apiVideos.map((video, i) => (
-              <motion.div
+              <div
                 key={video._id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
+
+
+
+
                 className="bg-white rounded overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-[#f36b2a]/10"
               >
                 {/* Video */}
@@ -227,7 +226,7 @@ const Videos = () => {
                     📅 {new Date(video.date).toLocaleDateString() || ""}
                   </p> */}
                 </div>
-              </motion.div>
+              </div>
             ))}
         </div>
       </div>

@@ -4,8 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 interface Banner {
   image: string;
@@ -22,7 +21,7 @@ const HomeSlider = () => {
   useEffect(() => {
     const fetchSliderImages = async () => {
       try {
-        const res = await axiosClient.get("/banner");
+        const res = await fetchClient.get("/banner");
         const bannersList = res?.data?.data || [];
 
         const activeBanners = bannersList.filter(
@@ -66,73 +65,75 @@ const HomeSlider = () => {
       <div className="relative w-full overflow-hidden z-0">
         {loading ? (
           <div className="flex items-center justify-center w-full h-[190px] md:h-[530px] bg-gray-100">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            <div
+
+
               className="w-12 h-12 border-4 border-gray-300 border-t-[#DF562C] rounded-full"
             />
           </div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+          <div
+
+
+
           >
             <Slider ref={sliderRef} {...settings}>
               {banners.map((item, i) => (
-                <div key={i}>
+                <div key={i} className="w-full">
                   <Link
                     href={item.link || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative w-full h-full  block overflow-hidden bg-gray-200"
+                    className="relative w-full block overflow-hidden bg-gray-50"
                   >
                     <Image
-                      fill
                       src={item.image}
                       alt={item.alt_text || item.title || `slide-${i}`}
-                      className="w-full h-full object-contain md:object-cover lg:object-contain"
+                      width={1920}
+                      height={800}
+                      className="w-full h-auto max-h-[600px] object-contain"
+                      priority={i === 0}
                     />
                   </Link>
                 </div>
               ))}
 
               {banners.length === 0 && (
-                <motion.div
+                <div
                   className="flex flex-col items-center text-center justify-center w-full h-[190px] sm:h-[280px] md:h-[400px] lg:h-[530px] bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8 }}
+
+
+
                 >
                   {/* Animated Background */}
-                  <motion.div
+                  <div
                     className="absolute w-72 h-72 bg-orange-200 rounded-full blur-3xl opacity-30"
-                    animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity }}
+
+
                     style={{ top: "10%", left: "10%" }}
                   />
-                  <motion.div
+                  <div
                     className="absolute w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30"
-                    animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, delay: 0.5 }}
+
+
                     style={{ bottom: "10%", right: "10%" }}
                   />
 
                   {/* Content */}
-                  <motion.div
+                  <div
                     className="z-10 flex flex-col items-center text-center px-4"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.6 }}
+
+
+
                   >
                     {/* Icon */}
-                    <motion.div
+                    <div
                       className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-2 sm:mb-3"
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+
+
                     >
                       📢
-                    </motion.div>
+                    </div>
 
                     {/* Title */}
                     <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold text-gray-700">
@@ -145,22 +146,19 @@ const HomeSlider = () => {
                     </p>
 
                     {/* Button */}
-                    <motion.button
+                    <button
                       onClick={() => window.location.reload()}
                       className="mt-3 sm:mt-4 md:mt-6 px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base bg-[#DF562C] text-white rounded-lg font-semibold transition-all"
-                      whileHover={{
-                        scale: 1.08,
-                        boxShadow: "0 10px 25px rgba(223, 86, 44, 0.4)",
-                      }}
-                      whileTap={{ scale: 0.95 }}
+
+
                     >
                       🔄 Refresh
-                    </motion.button>
-                  </motion.div>
-                </motion.div>
+                    </button>
+                  </div>
+                </div>
               )}
             </Slider>
-          </motion.div>
+          </div>
         )}
       </div>
 

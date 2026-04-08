@@ -15,9 +15,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { showSuccess, showError } from "@/utils/toast";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 export default function SignuPage() {
   const [loading, setLoading] = useState(false);
@@ -91,7 +90,7 @@ export default function SignuPage() {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/send-mobile-otp", { mobile: formData.mobile });
+      const res = await fetchClient.post("/otp/send-mobile-otp", { mobile: formData.mobile });
       if (res.data.success) {
         setIsPhoneOtpSent(true);
         setPhoneTimer(30);
@@ -110,7 +109,7 @@ export default function SignuPage() {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/send-email-otp", { email: formData.email });
+      const res = await fetchClient.post("/otp/send-email-otp", { email: formData.email });
       if (res.data.success) {
         setIsEmailOtpSent(true);
         setEmailTimer(30);
@@ -129,7 +128,7 @@ export default function SignuPage() {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/verify-otp", { mobile: formData.mobile, otp: phoneOtp });
+      const res = await fetchClient.post("/otp/verify-otp", { mobile: formData.mobile, otp: phoneOtp });
       if (res.data.success) {
         setIsPhoneVerified(true);
         showSuccess("Phone verified successfully!");
@@ -147,7 +146,7 @@ export default function SignuPage() {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/verify-otp", { email: formData.email, otp: emailOtp });
+      const res = await fetchClient.post("/otp/verify-otp", { email: formData.email, otp: emailOtp });
       if (res.data.success) {
         setIsEmailVerified(true);
         showSuccess("Email verified successfully!");
@@ -179,7 +178,7 @@ export default function SignuPage() {
         if (value) data.append(key, value as any);
       });
 
-      await axiosClient.post("/members/create", data);
+      await fetchClient.post("/members/create", data);
       setIsSuccess(true);
       showSuccess("Registration successful!");
     } catch (error: any) {
@@ -277,7 +276,7 @@ export default function SignuPage() {
                     {isEmailVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
                   </div>
                   {isEmailOtpSent && !isEmailVerified && (
-                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mt-2 flex gap-2">
+                    <div className="mt-2 flex gap-2">
                       <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
                         <input
                           type="text"
@@ -295,7 +294,7 @@ export default function SignuPage() {
                       >
                         VERIFY
                       </button>
-                    </motion.div>
+                    </div>
                   )}
                 </div>
               </div>
@@ -330,7 +329,7 @@ export default function SignuPage() {
                     {isPhoneVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
                   </div>
                   {isPhoneOtpSent && !isPhoneVerified && (
-                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mt-2 flex gap-2">
+                    <div className="mt-2 flex gap-2">
                       <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
                         <input
                           type="text"
@@ -348,7 +347,7 @@ export default function SignuPage() {
                       >
                         VERIFY
                       </button>
-                    </motion.div>
+                    </div>
                   )}
                 </div>
               </div>

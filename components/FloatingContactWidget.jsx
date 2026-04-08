@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import { trackSocialClick } from "@/lib/trackSocialClick";
 
 /* CUSTOM WHATSAPP SVG ICON */
@@ -16,14 +15,14 @@ function WhatsappSVG(props) {
 
 /* MAIN COMPONENT */
 export default function FloatingContactWidget() {
-  const ICON_SIZE = 22;
+  const ICON_SIZE = 20;
 
   const [socialData, setSocialData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/social-media/get");
+        const res = await fetchClient.get("/social-media/get");
         // Assuming the API returns an array and we need the first item
         setSocialData(res.data.data[0]);
       } catch (error) {
@@ -79,30 +78,27 @@ function SocialIcon({
   extraClass = "",
 }) {
   return (
-    <motion.div
+    <div
       className="relative group flex items-center justify-end"
-      animate={{ y: [0, -8, 0] }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay,
-      }}
+
+
     >
       {/* Tooltip */}
-      <motion.span
+      <span
         className="absolute left-16 bg-black text-white text-sm py-1 px-3 rounded shadow-md opacity-0 group-hover:opacity-100 pointer-events-none"
-        initial={{ x: 12 }}
-        animate={{ x: 0 }}
+
+
       >
         {label}
-      </motion.span>
+      </span>
 
       {/* Icon Button */}
       <a
         href={href}
         target="_blank"
         rel="noreferrer"
+        aria-label={label}
+        title={label}
         onClick={() => trackSocialClick(label)}
         className="rounded-full bg-white/90 backdrop-blur-sm shadow-xl border border-gray-200 
              flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
@@ -119,6 +115,6 @@ function SocialIcon({
           }}
         />
       </a>
-    </motion.div>
+    </div>
   );
 }

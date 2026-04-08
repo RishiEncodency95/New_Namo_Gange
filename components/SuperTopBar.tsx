@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import {
   Mail,
   Phone,
@@ -29,7 +29,7 @@ const SuperTopBar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/social-media/get");
+        const res = await fetchClient.get("/social-media/get");
         // setSocialData(res.data.data);
         setSocialData(res.data.data[0]);
       } catch (error) {

@@ -1,9 +1,8 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { Mail, MapPin, Phone, Send, User, MessageSquare } from "lucide-react";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { showSuccess, showError } from "@/utils/toast";
 import Image from "next/image";
 
@@ -43,7 +42,7 @@ const Contact: React.FC = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/contact")}`,
         );
         const seo = res?.data?.data;
@@ -66,7 +65,7 @@ const Contact: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/social-media/get");
+        const res = await fetchClient.get("/social-media/get");
         // setSocialData(res.data.data);
         setSocialData(res.data.data[0]);
       } catch (error) {
@@ -121,7 +120,7 @@ const Contact: React.FC = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/send-mobile-otp", { mobile: formData.phone });
+      const res = await fetchClient.post("/otp/send-mobile-otp", { mobile: formData.phone });
       if (res.data.success) {
         setIsPhoneOtpSent(true);
         setPhoneTimer(30);
@@ -141,7 +140,7 @@ const Contact: React.FC = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/send-email-otp", { email: formData.email });
+      const res = await fetchClient.post("/otp/send-email-otp", { email: formData.email });
       if (res.data.success) {
         setIsEmailOtpSent(true);
         setEmailTimer(30);
@@ -160,7 +159,7 @@ const Contact: React.FC = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/verify-otp", { mobile: formData.phone, otp: phoneOtp });
+      const res = await fetchClient.post("/otp/verify-otp", { mobile: formData.phone, otp: phoneOtp });
       if (res.data.success) {
         setIsPhoneVerified(true);
         showSuccess("Phone Verified Successfully!");
@@ -178,7 +177,7 @@ const Contact: React.FC = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/verify-otp", { email: formData.email, otp: emailOtp });
+      const res = await fetchClient.post("/otp/verify-otp", { email: formData.email, otp: emailOtp });
       if (res.data.success) {
         setIsEmailVerified(true);
         showSuccess("Email Verified Successfully!");
@@ -200,7 +199,7 @@ const Contact: React.FC = () => {
 
     setLoading(true);
     try {
-      await axiosClient.post("/enquire-list/create", {
+      await fetchClient.post("/enquire-list/create", {
         name: formData.name,
         email: formData.email,
         mobile: formData.phone,
@@ -241,11 +240,11 @@ const Contact: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -260,7 +259,7 @@ const Contact: React.FC = () => {
               </Link>{" "}
               - {seoData?.h1tag || "Connect"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
       <div className="relative bg-gray-50 py-1.5 md:py-3 px-2 md:px-12  lg:px-12  bg-white overflow-hidden">
@@ -408,9 +407,9 @@ const Contact: React.FC = () => {
                   </div>
 
                   {isEmailOtpSent && !isEmailVerified && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                    <div
+
+
                       className="mt-2 flex gap-2 items-center"
                     >
                       <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
@@ -430,7 +429,7 @@ const Contact: React.FC = () => {
                       >
                         VERIFY
                       </button>
-                    </motion.div>
+                    </div>
                   )}
                 </div>
 
@@ -467,9 +466,9 @@ const Contact: React.FC = () => {
                   </div>
 
                   {isPhoneOtpSent && !isPhoneVerified && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                    <div
+
+
                       className="mt-2 flex gap-2 items-center"
                     >
                       <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
@@ -489,7 +488,7 @@ const Contact: React.FC = () => {
                       >
                         VERIFY
                       </button>
-                    </motion.div>
+                    </div>
                   )}
                 </div>
 

@@ -1,4 +1,4 @@
-import axiosClient from "./axiosClient";
+import fetchClient from "./fetchClient";
 
 export interface InitiativeFromAPI {
   _id: string;
@@ -28,7 +28,7 @@ export interface ObjectiveFromAPI {
 export const apiService = {
   getInitiatives: async (): Promise<InitiativeFromAPI[]> => {
     try {
-      const response = await axiosClient.get('/initiatives');
+      const response = await fetchClient.get('/initiatives');
       const resData = response.data;
       if (resData && Array.isArray(resData.data)) return resData.data.filter((b: InitiativeFromAPI) => b.status === 'Active');
       return [];
@@ -40,7 +40,7 @@ export const apiService = {
 
   getActiveBanners: async (): Promise<BannerFromAPI[]> => {
     try {
-      const response = await axiosClient.get('/banner');
+      const response = await fetchClient.get('/banner');
       const bannersList: BannerFromAPI[] = response.data?.banners || [];
       return bannersList.filter((b) => b.status === 'Active');
     } catch (error) {
@@ -51,7 +51,7 @@ export const apiService = {
 
     getObjectives: async (): Promise<ObjectiveFromAPI[]> => {
     try {
-      const response = await axiosClient.get('/objectives');
+      const response = await fetchClient.get('/objectives');
       const resData = response.data;
       if (resData && Array.isArray(resData.data)) return resData.data.filter((b: InitiativeFromAPI) => b.status === 'Active');
       return [];
@@ -63,7 +63,7 @@ export const apiService = {
 
   getObjectiveBySlug: async (slug: string): Promise<ObjectiveFromAPI | null> => {
     try {
-      const response = await axiosClient.get(`/objectives/${slug}`);
+      const response = await fetchClient.get(`/objectives/${slug}`);
       // The API might return the object directly or nested.
       return response.data?.data || response.data || null;
     } catch (error) {

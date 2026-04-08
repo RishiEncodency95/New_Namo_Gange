@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 interface Newsletter {
   _id: string;
@@ -35,7 +34,7 @@ const NewsLetter = () => {
   useEffect(() => {
     const fetchNewsletters = async () => {
       try {
-        const res = await axiosClient.get("/newsletters");
+        const res = await fetchClient.get("/newsletters");
         const data = res?.data?.data || [];
 
         const activeData = data
@@ -60,7 +59,7 @@ const NewsLetter = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/communication/newsLetter")}`,
         );
         const seo = res?.data?.data;
@@ -124,11 +123,11 @@ const NewsLetter = () => {
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -143,18 +142,18 @@ const NewsLetter = () => {
               </Link>{" "}
               / {seoData?.h1tag || "News Letter"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       <div className="relative py-2 md:py-4 px-4 md:px-12 lg:px-12 bg-white overflow-hidden">
         {/* ================= HEADER ================= */}
         <div className="w-full text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
           >
             <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
               News Letter{" "}
@@ -168,20 +167,20 @@ const NewsLetter = () => {
               activities, and inspiring moments from our mission-driven
               journey.”
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full h-1  bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
           />
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="py-1 md:py-2"
           >
             <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
@@ -199,7 +198,7 @@ const NewsLetter = () => {
                 spreading awareness, positivity, and collective growth.
               </strong>
             </p>
-          </motion.div>
+          </div>
         </div>
 
         {/* ================= GRID ================= */}
@@ -214,33 +213,17 @@ const NewsLetter = () => {
             </p>
           )}
 
-          <motion.div
+          <div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-            initial="hidden"
-            animate={!loading && newsletters.length > 0 ? "visible" : "hidden"}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.12 },
-              },
-            }}
+
+
+
           >
             {newsletters.map((item, index) => (
-              <motion.div
+              <div
                 key={item._id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
-                  },
-                }}
-                whileHover={{
-                  y: -8,
-                  transition: { duration: 0.2, ease: "easeOut" },
-                }}
+
+
                 className="group relative bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-transparent hover:shadow-[0_20px_40px_-15px_rgba(12,85,160,0.3)] transition-all duration-300 flex flex-col w-full"
               >
                 {/* Modern Gradient Overlay on Hover */}
@@ -295,9 +278,9 @@ const NewsLetter = () => {
                     </a>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>

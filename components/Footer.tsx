@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Logo from "@/public/footer-logo.png"; // 👈 logo path check kar lena
 import React, { useState, useEffect } from "react";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 
 interface SocialMediaData {
   mail: string;
@@ -19,7 +19,7 @@ export default function Footer() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/social-media/get");
+        const res = await fetchClient.get("/social-media/get");
         // setSocialData(res.data.data);
         setSocialData(res.data.data[0]);
       } catch (error) {
@@ -40,7 +40,9 @@ export default function Footer() {
           <Image
             src={Logo}
             alt="Namo Gange Trust"
-            className="w-48 mb-4"
+            className="w-48 h-auto mb-4"
+            sizes="192px"
+            quality={70}
             priority
           />
 

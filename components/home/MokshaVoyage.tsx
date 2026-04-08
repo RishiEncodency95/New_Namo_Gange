@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 
 interface Hero {
   title: string;
@@ -24,7 +23,7 @@ const MokshaVoyage = () => {
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        const res = await axiosClient.get("/heroes");
+        const res = await fetchClient.get("/heroes");
         const heroList = res?.data?.data || [];
 
         const activeHero = heroList.find((b: any) => b.status === "Active");
@@ -99,7 +98,7 @@ const MokshaVoyage = () => {
 
             {/* Read More Button */}
             {hero?.link ? (
-              <Link href={hero?.link || "#"}>
+              <Link href={hero?.link || "#"} aria-label={`Read more about ${hero?.title || 'this topic'}`}>
                 <button
                   className="mt-2 md:mt-5 lg:mt-5 relative rounded overflow-hidden px-4 md:px-6 py-1 text-[12px] md:text-sm text-white font-normal 
                 shadow-md bg-[#0C55A0] cursor-pointer
@@ -115,11 +114,11 @@ const MokshaVoyage = () => {
         </div>
 
         {/* ================= RIGHT SIDE IMAGE ================= */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="lg:w-[40%] w-full relative flex md:justify-center justify-end items-end"
         >
           {/* Decorative Background */}
@@ -137,14 +136,14 @@ const MokshaVoyage = () => {
                     : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${hero.image}`
                 }
                 alt={hero?.alt_text || hero?.title || "Hero Image"}
-                height={100}
-                width={100}
-                unoptimized
-                className="w-full h-auto objective-cover md:object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-102"
+                height={600}
+                width={800}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                className="w-full h-auto object-cover md:object-contain transform transition-transform duration-700 ease-in-out group-hover:scale-105"
               />
             )}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

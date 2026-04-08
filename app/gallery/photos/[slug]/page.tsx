@@ -1,11 +1,11 @@
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import PhotoSlugClient from "../../../../components/gallery/photos/PhotoSlugClient";
 // import PhotoSlugClient from "@/components/gallery/PhotoSlugClient";
 
 export async function generateStaticParams() {
   try {
     // Assuming '/gallery' endpoint returns all photo items
-    const res = await axiosClient.get("/category-image");
+    const res = await fetchClient.get("/category-image");
     const data = res?.data?.data || [];
 
     return data

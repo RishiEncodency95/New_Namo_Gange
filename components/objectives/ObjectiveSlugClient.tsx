@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 /* ================= TYPES ================= */
 
@@ -100,11 +99,11 @@ const InitiativeItem = ({
   }, [item]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true }}
+    <div
+
+
+
+
       className={
         isLongText
           ? "w-full mb-10 md:mb-16 text-center md:text-left clear-both flow-root transition-all"
@@ -196,7 +195,7 @@ const InitiativeItem = ({
           </Link>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -213,7 +212,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
     const fetchData = async () => {
       try {
         /* ===== INITIATIVES ===== */
-        const res1 = await axiosClient.get("/initiatives");
+        const res1 = await fetchClient.get("/initiatives");
         const data1: InitiativeApi[] = res1?.data?.data || [];
 
         const parser = new DOMParser();
@@ -236,7 +235,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
         setInitiatives(filteredInitiatives);
 
         /* ===== OBJECTIVES ===== */
-        const res2 = await axiosClient.get("/objectives");
+        const res2 = await fetchClient.get("/objectives");
         const data2: ObjectiveApi[] = res2?.data?.data || [];
 
         const matchedObjective = data2.find(
@@ -279,10 +278,10 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
         }}
       >
         <div className="bg-black/30 w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+          <div
+
+
+
             className="max-w-7xl mx-auto px-4 text-center text-white"
           >
             <h1 className="text-xl md:text-2xl font-medium uppercase tracking-wider drop-shadow-lg">
@@ -300,17 +299,17 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
                 .replace(/-/g, " ")
                 .replace(/\b\w/g, (char) => char.toUpperCase())}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* ================= CONTENT ================= */}
       <div className="w-full px-4 md:px-12 lg:px-12 py-2 md:py-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           <h2 className="text-lg md:text-xl lg:text-xl font-medium text-gray-900 leading-tight">
             {slug
@@ -322,29 +321,29 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
             “The embodies the spirit of selfless service, guiding individuals
             toward inner peace, spiritual growth, and compassionate living.”
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
         />
 
         {/* ===== OBJECTIVE DESCRIPTION ===== */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full py-2 md:py-3 leading-relaxed space-y-4 text-justify"
         >
           <div
             className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal"
             dangerouslySetInnerHTML={{ __html: objective?.desc || "" }}
           />
-        </motion.div>
+        </div>
 
         {/* ================= GRID ================= */}
         {initiatives.length === 0 ? (

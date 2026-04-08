@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 import { ArrowRight } from "lucide-react";
 
 interface Objective {
@@ -24,7 +23,7 @@ const ObjectiveOfTrust = () => {
   useEffect(() => {
     const fetchObjectives = async () => {
       try {
-        const res = await axiosClient.get("/objectives");
+        const res = await fetchClient.get("/objectives");
 
         if (res.data && Array.isArray(res.data.data)) {
           const filteredData: Objective[] = res.data.data
@@ -61,11 +60,11 @@ const ObjectiveOfTrust = () => {
   return (
     <section className="relative py-2 md:py-6 lg:py-6 bg-gradient-to-b from-white via-gray-50 to-[#f8fafc] overflow-hidden">
       <div className="w-full mx-auto px-2 md:px-12 lg:px-12 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           <h2 className="text-sm md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             Objective Of{" "}
@@ -97,7 +96,7 @@ const ObjectiveOfTrust = () => {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
@@ -118,31 +117,18 @@ const ObjectiveOfTrust = () => {
             ))}
           </div>
         ) : (
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.15 },
-              },
-            }}
+          <div
+
+
+
+
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1 md:gap-2"
           >
             {objectives.map((item, i) => (
-              <motion.div
+              <div
                 key={item._id || i}
-                variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.6, ease: "easeOut" },
-                  },
-                }}
-                whileHover={{ y: -12, transition: { duration: 0.3 } }}
+
+
                 className="group relative bg-white rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden h-full flex flex-col"
               >
                 {/* Gradient overlay on hover */}
@@ -150,9 +136,9 @@ const ObjectiveOfTrust = () => {
 
                 {/* Image Container */}
                 <div className="relative flex justify-center py-2 md:py-4 ">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "tween", duration: 0.2 }}
+                  <div
+
+
                     className="flex items-center justify-center rounded-full bg-white ring-2 ring-gray-200 shadow-lg hover:ring-blue-200"
                   >
                     <Image
@@ -166,18 +152,18 @@ const ObjectiveOfTrust = () => {
                       height={100}
                       className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover"
                     />
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Title */}
-                <motion.h2
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.1 }}
+                <h2
+
+
+
                   className="relative z-10 text-base md:text-lg font-normal text-gray-900 px-4  text-center tracking-tight leading-snug"
                 >
                   {item.title}
-                </motion.h2>
+                </h2>
 
                 {/* Description */}
                 <div
@@ -213,20 +199,20 @@ const ObjectiveOfTrust = () => {
 
                 {/* Button Container */}
                 <div className="relative z-10 flex justify-center w-full px-4 pt-2 pb-2 md:pb-4">
-                  <Link href={item.link || "#"} className="w-full">
-                    <motion.button
+                  <Link href={item.link || "#"} className="w-full" aria-label={`Read more about ${item.title}`}>
+                    <button
                       type="button"
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ type: "tween", duration: 0.2 }}
+
+
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-1 rounded-lg bg-gradient-to-r from-[#0C55A0] via-[#1073C0] to-[#1e7ed3] text-white font-normal hover:font-medium text-sm shadow-md hover:shadow-lg transition-shadow duration-200 group"
                     >
                       <span className="relative">Read More...</span>
-                    </motion.button>
+                    </button>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

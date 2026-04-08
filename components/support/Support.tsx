@@ -1,9 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import NextImage from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { showSuccess, showError } from "@/utils/toast";
 
 interface SupportFormData {
@@ -63,7 +62,7 @@ const Support = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/support")}`,
         );
         const seo = res?.data?.data;
@@ -119,7 +118,7 @@ const Support = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/send-mobile-otp", { mobile: form.mobile });
+      const res = await fetchClient.post("/otp/send-mobile-otp", { mobile: form.mobile });
       if (res.data.success) {
         setIsPhoneOtpSent(true);
         setPhoneTimer(30);
@@ -139,7 +138,7 @@ const Support = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/verify-otp", { mobile: form.mobile, otp: phoneOtp });
+      const res = await fetchClient.post("/otp/verify-otp", { mobile: form.mobile, otp: phoneOtp });
       if (res.data.success) {
         setIsPhoneVerified(true);
         showSuccess("Mobile Verified Successfully!");
@@ -159,7 +158,7 @@ const Support = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/send-email-otp", { email: form.email });
+      const res = await fetchClient.post("/otp/send-email-otp", { email: form.email });
       if (res.data.success) {
         setIsEmailOtpSent(true);
         setEmailTimer(30);
@@ -179,7 +178,7 @@ const Support = () => {
       return;
     }
     try {
-      const res = await axiosClient.post("/otp/verify-otp", { email: form.email, otp: emailOtp });
+      const res = await fetchClient.post("/otp/verify-otp", { email: form.email, otp: emailOtp });
       if (res.data.success) {
         setIsEmailVerified(true);
         showSuccess("Email Verified Successfully!");
@@ -202,7 +201,7 @@ const Support = () => {
     setLoading(true);
     try {
       // API call to submit form
-      await axiosClient.post("/support/create", form);
+      await fetchClient.post("/support/create", form);
       setIsSuccess(true);
       setForm(initialForm);
       setIsPhoneVerified(false);
@@ -254,11 +253,11 @@ const Support = () => {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -273,7 +272,7 @@ const Support = () => {
               </Link>{" "}
               - {seoData?.h1tag || "Our Support"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
@@ -353,12 +352,12 @@ const Support = () => {
                       {isEmailVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
                     </div>
                     {isEmailOtpSent && !isEmailVerified && (
-                      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mt-2 flex gap-2">
+                      <div className="mt-2 flex gap-2">
                         <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
                           <input type="text" maxLength={6} placeholder="EMAIL OTP" value={emailOtp} onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))} className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal" />
                         </div>
                         <button type="button" onClick={handleVerifyEmailOtp} className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all">Verify</button>
-                      </motion.div>
+                      </div>
                     )}
                   </div>
                   <div className="flex flex-col">
@@ -378,12 +377,12 @@ const Support = () => {
                       {isPhoneVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
                     </div>
                     {isPhoneOtpSent && !isPhoneVerified && (
-                      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mt-2 flex gap-2">
+                      <div className="mt-2 flex gap-2">
                         <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
                           <input type="text" maxLength={6} placeholder="MOBILE OTP" value={phoneOtp} onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))} className="w-full bg-transparent outline-none text-[#f1a06a] text-sm text-center font-bold tracking-[0.2em] placeholder:text-[#f1a06a]/50 placeholder:font-normal placeholder:tracking-normal" />
                         </div>
                         <button type="button" onClick={handleVerifyPhoneOtp} className="px-4 py-1.5 bg-[#DF562C] text-white text-[10px] font-bold rounded-md shadow-sm hover:bg-[#c54d21] active:scale-95 transition-all">Verify</button>
-                      </motion.div>
+                      </div>
                     )}
                   </div>
                   <div className="flex flex-col">
