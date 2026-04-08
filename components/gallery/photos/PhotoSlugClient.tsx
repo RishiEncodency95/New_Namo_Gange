@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import axiosClient from "@/lib/axiosClient";
-import { motion, AnimatePresence } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 type GalleryItem = {
   _id: string;
@@ -44,8 +43,8 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
         const fullSEOPath = `/gallery/photos/${currentSlug}`;
 
         const [galleryRes, seoRes] = await Promise.all([
-          axiosClient.get(galleryPath).catch(() => null),
-          axiosClient.get(`/seo/page/${encodeURIComponent(fullSEOPath)}?t=${Date.now()}`).catch(() => null)
+          fetchClient.get(galleryPath).catch(() => null),
+          fetchClient.get(`/seo/page/${encodeURIComponent(fullSEOPath)}?t=${Date.now()}`).catch(() => null)
         ]);
 
         if (!isMounted) return;
@@ -90,7 +89,7 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
         let seo = seoRes?.data?.data;
         if (!seo) {
           try {
-            const baseSeoRes = await axiosClient.get(`/seo/page/${encodeURIComponent("/gallery/photos")}`);
+            const baseSeoRes = await fetchClient.get(`/seo/page/${encodeURIComponent("/gallery/photos")}`);
             seo = baseSeoRes.data?.data;
           } catch (err) {}
         }
@@ -137,11 +136,11 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -160,25 +159,25 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
                 {seoData?.h1tag || "Photos Gallery"}
               </Link>
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
 
       {/* ===== CONTENT ===== */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="text-center mb-8"
         >
           <h1 className="text-xl md:text-2xl font-medium text-gray-900">
             {title} <span className="text-[#DF562C]">Gallery</span>
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-[#DF562C] to-[#f89a36] mx-auto mt-4 rounded-full" />
-        </motion.div>
+        </div>
 
         {loading && (
           <p className="text-center text-gray-500 mt-6">Loading...</p>
@@ -190,31 +189,17 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
           </p>
         )}
 
-        <motion.div
+        <div
           className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-          initial="hidden"
-          animate={!loading && data.length > 0 ? "visible" : "hidden"}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1 },
-            },
-          }}
+
+
+
         >
           {data.map((item, idx) => (
-            <motion.div
+            <div
               key={item._id}
-              variants={{
-                hidden: { opacity: 0, y: 30, scale: 0.9 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  transition: { type: "spring", stiffness: 100, damping: 15 },
-                },
-              }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+
+
               onClick={() => setSelected(item.image)}
               className="cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white border border-gray-100 group relative"
             >
@@ -243,38 +228,38 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* ===== LIGHTBOX ===== */}
-      <AnimatePresence>
+      <>
         {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+          <div
+
+
+
+
             className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 backdrop-blur-sm"
             onClick={() => setSelected(null)}
           >
-            <motion.button
-              initial={{ opacity: 0, rotate: -90 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              exit={{ opacity: 0, rotate: 90 }}
-              transition={{ duration: 0.3 }}
+            <button
+
+
+
+
               className="absolute top-6 right-6 text-white/80 hover:text-[#DF562C] text-4xl transition-colors z-50"
               onClick={() => setSelected(null)}
             >
               ✕
-            </motion.button>
+            </button>
 
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            <div
+
+
+
+
               className="relative w-[90vw] max-w-6xl h-[85vh]"
               onClick={(e) => e.stopPropagation()}
             >
@@ -284,10 +269,10 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
                 fill
                 className="object-contain drop-shadow-2xl"
               />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
+      </>
     </section>
   );
 }

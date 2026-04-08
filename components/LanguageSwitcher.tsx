@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Languages } from "lucide-react"; // New clean icon
-import { motion, AnimatePresence } from "framer-motion";
 import Portal from "./Portal";
 
 interface Language {
@@ -59,13 +58,13 @@ export default function LanguageSwitcher() {
 
       {/* DROPDOWN IN PORTAL */}
       <Portal>
-        <AnimatePresence>
+        <>
           {open && (
-            <motion.ul
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              transition={{ duration: 0.18 }}
+            <ul
+
+
+
+
               className="
                 fixed bg-white shadow-lg rounded-md 
                 border border-gray-200 
@@ -91,9 +90,9 @@ export default function LanguageSwitcher() {
                   {lang.label}
                 </li>
               ))}
-            </motion.ul>
+            </ul>
           )}
-        </AnimatePresence>
+        </>
       </Portal>
     </div>
   );

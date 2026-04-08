@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 
 // Global singleton to prevent multiple audio instances
@@ -74,8 +73,10 @@ export default function SpeakerButton() {
       {/* Button */}
       <button
         onClick={toggleMute}
+        aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+        title={isMuted ? "Unmute audio" : "Mute audio"}
         className="
-    w-7 h-7 rounded-full
+    w-8 h-8 rounded-full
     bg-white backdrop-blur-md
     shadow-md shadow-black/10
     hover:bg-white/40 hover:shadow-lg
@@ -93,17 +94,10 @@ export default function SpeakerButton() {
 
       {/* Sound Wave Animation (shows only when not muted) */}
       {/* {!isMuted && (
-        <motion.span
+        <span
           className="absolute right-[-5px] h-3 w-3 rounded-full border-2 border-[#0C55A0]"
-          animate={{
-            scale: [1, 1.8, 1],
-            opacity: [0.8, 0.2, 0.8],
-          }}
-          transition={{
-            duration: 1.4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+
+
         />
       )} */}
     </div>

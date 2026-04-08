@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
 interface BankAccountImageModalProps {
@@ -12,11 +11,11 @@ export default function BankAccountImageModal({
 }: BankAccountImageModalProps) {
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        transition={{ duration: 0.3 }}
+      <div
+
+
+
+
         className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center"
       >
         {/* Close Button */}
@@ -75,7 +74,7 @@ export default function BankAccountImageModal({
             Close
           </button>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

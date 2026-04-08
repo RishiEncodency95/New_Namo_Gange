@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 
 /* ================= TYPES ================= */
 interface PastEventType {
@@ -45,7 +44,7 @@ const PastEvent = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await axiosClient.get("/events");
+        const res = await fetchClient.get("/events");
         const data = res?.data?.data || [];
 
         const today = new Date();
@@ -99,7 +98,7 @@ const PastEvent = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/event/past")}`,
         );
         const seo = res?.data?.data;
@@ -154,11 +153,11 @@ const PastEvent = () => {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
+            <div
+
+
+
+
               className="text-center"
             >
               <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -174,18 +173,18 @@ const PastEvent = () => {
                 </Link>{" "}
                 - {seoData?.h1tag || "Past Events"}
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="w-full px-4 md:px-12 lg:px-12 text-center py-1 md:py-2">
         {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           <h2 className="text-sm text-center md:text-lg lg:text-lg mt-1 font-medium text-gray-900 leading-tight">
             <span>
@@ -200,21 +199,21 @@ const PastEvent = () => {
             spirituality, and community upliftment—creating lasting impact
             across health, culture, and environmental awareness."
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className=" w-full  h-1 md:mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
         />
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
+        <p
+
+
+
+
           className="text-gray-700 py-4 text-xs md:text-[15px] text-justify leading-relaxed font-normal"
         >
           Our past events stand as meaningful milestones in our journey of
@@ -224,34 +223,21 @@ const PastEvent = () => {
           and cultural celebrations to environmental drives and spiritual
           gatherings, these events have brought people together to learn, serve,
           and create lasting positive impact across society.
-        </motion.p>
+        </p>
 
         {/* GRID */}
-        <motion.div
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1 },
-            },
-          }}
+
+
+
+
         >
           {pastEvents.map((item) => (
-            <motion.div
+            <div
               key={item.id}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.5, ease: "easeOut" },
-                },
-              }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+
+
               className="group bg-white rounded-2xl border border-gray-200 shadow-md
               hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col relative"
             >
@@ -297,9 +283,9 @@ const PastEvent = () => {
                   </Link>
                 )}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

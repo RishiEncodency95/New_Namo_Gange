@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 // ✅ Fixed Interface Type
 interface Initiative {
@@ -29,7 +28,7 @@ const Initiatives = () => {
   useEffect(() => {
     const fetchInitiatives = async () => {
       try {
-        const res = await axiosClient.get("/initiatives");
+        const res = await fetchClient.get("/initiatives");
         if (res.data && Array.isArray(res.data.data)) {
           const fetchedData = res.data.data
             .filter((item: any) => item.status === "Active")
@@ -64,7 +63,7 @@ const Initiatives = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/initiatives")}`,
         );
         const seo = res?.data?.data;
@@ -107,11 +106,11 @@ const Initiatives = () => {
         <div className="absolute inset-0 bg-black/30" />
 
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             {/* Dynamic H1 from SEO data */}
@@ -128,16 +127,16 @@ const Initiatives = () => {
               </Link>{" "}
               - {seoData?.h1tag || "Our Initiatives"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       <section className="relative py-4 md:py-6 lg:py-8 px-4 sm:px-6 md:px-8 lg:px-12 bg-transparent overflow-hidden">
         <div className="w-full text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+          <div
+
+
+
           >
             <h2 className="text-base md:text-xl lg:text-2xl font-medium text-gray-900 leading-tight">
               Our{" "}
@@ -149,20 +148,20 @@ const Initiatives = () => {
               "Creating positive change through service, awareness, and
               sustainable community development."
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          <div
+
+
+
             className="flex justify-center w-full mt-3 md:mt-4"
           >
             <div className="w-full relative overflow-hidden text-center">
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
+              <div
+
+
+
+
                 className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
               />
               <p className="text-gray-700 text-xs md:text-[14px] lg:text-[15px] text-justify leading-relaxed font-normal mt-3 md:mt-4 px-2">
@@ -183,7 +182,7 @@ const Initiatives = () => {
                 </span>
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {loading ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3 md:py-4 mt-6 md:mt-8">
@@ -200,38 +199,25 @@ const Initiatives = () => {
               ))}
             </div>
           ) : (
-            <motion.div
+            <div
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 md:py-4 gap-2 md:gap-3 mt-6 md:mt-8"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.1, delayChildren: 0.3 },
-                },
-              }}
+
+
+
             >
               {initiativeList?.map((item, i) => (
-                <motion.div
+                <div
                   key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 40 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.6, ease: "easeOut" },
-                    },
-                  }}
-                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+
+
                   className="group relative bg-white rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 flex flex-col overflow-hidden h-full"
                 >
                   <Link href={item.link} className="flex flex-col h-full">
                     {/* IMAGE */}
                     <div className="w-full h-24 sm:h-28 md:h-36 lg:h-40 relative flex items-center justify-center bg-gray-50 overflow-hidden">
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ type: "tween", duration: 0.3 }}
+                      <div
+
+
                         className="w-full h-full relative flex items-center justify-center p-2 sm:p-3"
                       >
                         <Image
@@ -246,24 +232,24 @@ const Initiatives = () => {
                           className="object-contain transition-transform duration-300"
                           priority={false}
                         />
-                      </motion.div>
+                      </div>
                     </div>
 
                     {/* CONTENT */}
                     <div className="flex flex-col flex-1 py-2 px-2 sm:px-3 text-center">
-                      <motion.h3
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.1 }}
+                      <h3
+
+
+
                         className="text-gray-900 font-normal text-xs sm:text-sm md:text-base mb-1 line-clamp-2"
                       >
                         {item.title}
-                      </motion.h3>
+                      </h3>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           )}
         </div>
       </section>

@@ -1,9 +1,9 @@
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import BlogSlugClient from "../../../../components/communication/blog/BlogSlugClient";
 
 export async function generateStaticParams() {
   try {
-    const res = await axiosClient.get("/blog");
+    const res = await fetchClient.get("/blog");
     const data = res?.data?.data || [];
 
     return data.map((objective: any) => ({

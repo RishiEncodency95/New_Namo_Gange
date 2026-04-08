@@ -1,4 +1,4 @@
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import { MetadataRoute } from "next";
 
 // Force static generation for static export mode
@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 2. Fetch Routes from SEO API
   try {
-    const seoRes = await axiosClient.get("/seo");;
+    const seoRes = await fetchClient.get("/seo");;
     const seoData = seoRes.data;
 
     if (seoData?.success && Array.isArray(seoData.data) && seoData.data.length > 0) {

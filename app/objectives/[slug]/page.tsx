@@ -1,11 +1,11 @@
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import ObjectiveSlugClient from "../../../components/objectives/ObjectiveSlugClient";
 // import ObjectiveSlugClient from "@/components/objectives/ObjectiveSlugClient";
 
 /* ================= STATIC PARAMS ================= */
 export async function generateStaticParams() {
     try {
-        const res = await axiosClient.get("/objectives");
+        const res = await fetchClient.get("/objectives");
         const data = res?.data?.data || [];
 
         return data.map((objective: any) => ({

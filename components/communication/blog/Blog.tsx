@@ -4,8 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, MessageCircle, Loader2 } from "lucide-react";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 interface Blog {
   _id: string;
@@ -43,7 +42,7 @@ const Blog = () => {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
-        const res = await axiosClient.get("/blog");
+        const res = await fetchClient.get("/blog");
 
         // Add null check for response
         if (!res?.data?.data) {
@@ -79,7 +78,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/communication/blog")}`,
         );
         const seo = res?.data?.data;
@@ -215,11 +214,11 @@ const Blog = () => {
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -234,17 +233,17 @@ const Blog = () => {
               </Link>{" "}
               - {seoData?.h1tag || "Blogs"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* ================= CONTENT ================= */}
       <div className="relative py-1.5 md:py-3 px-2 md:px-12 lg:px-12 bg-white overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full text-center"
         >
           <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
@@ -258,21 +257,21 @@ const Blog = () => {
             "Each event reflects our mission to uplift society through
             spirituality, health, culture, and community empowerment."
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full mt-2"
         />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           {/* <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
@@ -301,14 +300,14 @@ const Blog = () => {
               understanding, and guide you on a path of purpose and growth.
             </strong>
           </p>
-        </motion.div>
+        </div>
 
         {/* ================= SEARCH ================= */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full flex justify-end py-1 md:py-3"
         >
           <div className="relative w-full md:w-[30%] lg:w-[25%] group">
@@ -326,7 +325,7 @@ const Blog = () => {
               className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-[#0C55A0] transition-colors"
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* ================= LOADING STATE ================= */}
         {loading && (
@@ -339,9 +338,9 @@ const Blog = () => {
 
         {/* ================= EMPTY STATE ================= */}
         {!loading && filteredBlogs.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <div
+
+
             className="text-center py-12"
           >
             <p className="text-gray-500 text-lg">
@@ -357,36 +356,23 @@ const Blog = () => {
                 Clear search
               </button>
             )}
-          </motion.div>
+          </div>
         )}
 
         {/* ================= BLOG GRID ================= */}
         {!loading && filteredBlogs.length > 0 && (
-          <motion.div
+          <div
             className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.15 },
-              },
-            }}
+
+
+
+
           >
             {currentBlogs.map((blog) => (
-              <motion.div
+              <div
                 key={blog._id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
-                  },
-                }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+
+
                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col relative"
               >
                 {/* IMAGE */}
@@ -451,9 +437,9 @@ const Blog = () => {
                     </span>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
 
         {/* ================= PAGINATION ================= */}

@@ -3,8 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState, useMemo } from "react";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 import { Calendar, Image as ImageIcon, Loader2 } from "lucide-react";
 
 interface CategoryItem {
@@ -37,7 +36,7 @@ const Photos = () => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        const res = await axiosClient.get("/category-image");
+        const res = await fetchClient.get("/category-image");
 
         // Add null check for response
         if (!res?.data?.data) {
@@ -75,7 +74,7 @@ const Photos = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/gallery/photos")}`,
         );
         const seo = res?.data?.data;
@@ -183,11 +182,11 @@ const Photos = () => {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -202,18 +201,18 @@ const Photos = () => {
               </Link>{" "}
               - {seoData?.h1tag || "Photos Gallery"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
 
       {/* ================= CONTENT ================= */}
       <div className="relative py-1.5 md:py-3 px-2 md:px-12 lg:px-12 bg-white overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="text-center"
         >
           <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
@@ -227,21 +226,21 @@ const Photos = () => {
             culture, spirituality, health awareness, and meaningful social
             service."
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
         />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           {/* <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             Acharya Jagdishji Maharaj is a revered spiritual guide whose life
@@ -272,7 +271,7 @@ const Photos = () => {
     on the community.
   </span>
 </p>
-        </motion.div>
+        </div>
 
         {/* ================= LOADING STATE ================= */}
         {loading && (
@@ -285,9 +284,9 @@ const Photos = () => {
 
         {/* ================= EMPTY STATE ================= */}
         {!loading && sortedCategories.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <div
+
+
             className="text-center py-12"
           >
             <div className="flex justify-center mb-4">
@@ -296,36 +295,23 @@ const Photos = () => {
             <p className="text-gray-500 text-lg">
               No gallery categories available.
             </p>
-          </motion.div>
+          </div>
         )}
 
         {/* ================= GRID ================= */}
         {!loading && sortedCategories.length > 0 && (
-          <motion.div
+          <div
             className="w-full py-1 md:py-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.1 },
-              },
-            }}
+
+
+
+
           >
             {sortedCategories.map((cat) => (
-              <motion.div
+              <div
                 key={cat?._id || cat?.slug || `cat-${Math.random()}`}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
-                  },
-                }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+
+
                 className="h-full"
               >
                 <Link
@@ -370,9 +356,9 @@ const Photos = () => {
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

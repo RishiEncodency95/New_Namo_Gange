@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import AboutNGTrust from "../home/AboutNGTrust";
-import { motion } from "framer-motion";
 
 interface TrustBody {
   _id: string;
@@ -40,7 +39,7 @@ const AboutNamoGange = () => {
   useEffect(() => {
     const fetchTrustBodies = async () => {
       try {
-        const res = await axiosClient.get("/trust-bodies");
+        const res = await fetchClient.get("/trust-bodies");
         const data: TrustBody[] = res?.data?.data || [];
 
         const activeItems: TrustBodyCard[] = data
@@ -74,7 +73,7 @@ const AboutNamoGange = () => {
     const fetchSEOData = async () => {
       try {
         // Fix the API endpoint - use the correct path format
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/about")}`,
         );
         console.log("SEO API Response:", res); // Debug log
@@ -127,11 +126,11 @@ const AboutNamoGange = () => {
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             {/* Dynamic H1 from SEO data */}
@@ -148,16 +147,16 @@ const AboutNamoGange = () => {
               </Link>{" "}
               - {seoData?.h1tag || "About Us"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       <div className="w-full px-4 md:px-12 lg:px-12 py-2 md:py-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full text-center"
         >
           <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
@@ -168,17 +167,17 @@ const AboutNamoGange = () => {
             "We serve communities through wellness, culture, women empowerment,
             compassionate service, and environmental care."
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full h-1 mt-3 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
         />
 
-        <motion.div className="w-full py-2 md:py-3 leading-relaxed space-y-4 text-justify">
+        <div className="w-full py-2 md:py-3 leading-relaxed space-y-4 text-justify">
           <p className="text-gray-700 text-sm md:text-[15px] leading-relaxed font-normal">
             The Trust Bodies guided by{" "}
             <span className="font-medium text-[#DF562C]">
@@ -195,18 +194,18 @@ const AboutNamoGange = () => {
             compassion, the Trust Bodies continue to strengthen society by
             uniting spirituality with meaningful action.
           </p>
-        </motion.div>
+        </div>
       </div>
 
       <AboutNGTrust />
 
       {/* Trust Bodies */}
       <div className="w-full py-8 md:py-12 px-4 md:px-12 lg:px-12 bg-white overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full py-2 text-center"
         >
           <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
@@ -217,13 +216,13 @@ const AboutNamoGange = () => {
             "Organizations united in service, spirituality, and social
             upliftment."
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full "
         />
         <p className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal py-2">
@@ -267,11 +266,11 @@ const AboutNamoGange = () => {
                 } items-center gap-4 md:gap-6 lg:gap-12`}
               >
                 {/* IMAGE SIDE */}
-                <motion.div
-                  initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true }}
+                <div
+
+
+
+
                   className="w-full md:w-[70%] lg:w-[45%] relative group" // ✅ Fixed: md:w-[80] → md:w-[70%]
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-lg bg-white border border-gray-100 w-full aspect-video">
@@ -290,14 +289,14 @@ const AboutNamoGange = () => {
                     {/* Shine Effect */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   </div>
-                </motion.div>
+                </div>
 
                 {/* TEXT SIDE */}
-                <motion.div
-                  initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                  viewport={{ once: true }}
+                <div
+
+
+
+
                   className="flex flex-col w-full lg:w-[55%]"
                 >
                   <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-4 relative pb-2 border-b-2 border-[#DF562C]">
@@ -320,7 +319,7 @@ const AboutNamoGange = () => {
           "
                     dangerouslySetInnerHTML={{ __html: activity?.text || "" }}
                   />
-                </motion.div>
+                </div>
               </div>
             ))}
           </div>

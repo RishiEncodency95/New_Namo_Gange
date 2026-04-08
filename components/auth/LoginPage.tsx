@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Phone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { showSuccess, showError } from "@/utils/toast";
 import Image from "next/image";
 
@@ -177,9 +176,9 @@ export default function LoginPage() {
 
           {/* ---------------- STEP 2: OTP ---------------- */}
           {step === "otp" && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+            <div
+
+
               className="mt-6"
             >
               <p className="text-sm text-center text-gray-600">
@@ -224,7 +223,7 @@ export default function LoginPage() {
               >
                 Login
               </button>
-            </motion.div>
+            </div>
           )}
         </div>
       </div>

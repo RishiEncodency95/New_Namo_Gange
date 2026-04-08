@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 
 interface Blog {
   _id: string;
@@ -35,7 +35,7 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
 
     const fetchBlog = async () => {
       try {
-        const res = await axiosClient.get("/blog");
+        const res = await fetchClient.get("/blog");
         const data = res?.data?.data || [];
 
         const matched = data.find(
@@ -57,7 +57,7 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/blog")}`,
         );
         const seo = res?.data?.data;

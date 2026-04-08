@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 interface AboutNGT {
   _id: string;
@@ -23,7 +22,7 @@ const AboutNGTrust = () => {
   useEffect(() => {
     const fetchAbout = async () => {
       try {
-        const res = await axiosClient.get("/about-us");
+        const res = await fetchClient.get("/about-us");
         const data: AboutNGT[] = res?.data?.data || [];
 
         const activeItems = data.filter((item) => item.status === "Active");
@@ -60,11 +59,11 @@ const AboutNGTrust = () => {
             } items-center gap-5 lg:gap-10 lg:mb-4 mb-4`} // ✅ Fixed: mb:4 → mb-4
           >
             {/* TEXT SIDE */}
-            <motion.div
-              initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
+            <div
+
+
+
+
               className="flex-1 lg:w-[60%]"
             >
               <h2 className="text-sm md:text-lg lg:text-lg font-semibold text-gray-900 py-2 leading-tight">
@@ -96,14 +95,14 @@ const AboutNGTrust = () => {
                   </button>
                 </Link>
               )}
-            </motion.div>
+            </div>
 
             {/* IMAGE SIDE */}
-            <motion.div
-              initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
+            <div
+
+
+
+
               className="flex-1 lg:w-[40%] relative"
             >
               {item.image && (
@@ -128,7 +127,7 @@ const AboutNGTrust = () => {
               )}
 
               <div className="absolute -inset-3 bg-gradient-to-r from-[#DF562C]/20 via-transparent to-[#1e7ed3]/20 blur-2xl rounded-3xl -z-10 opacity-70" />
-            </motion.div>
+            </div>
           </div>
         );
       })}

@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Search, Calendar, User, Loader2 } from "lucide-react";
 
 interface NewsItem {
@@ -46,8 +45,8 @@ export default function LatestNewsPage() {
       try {
         setLoading(true);
         const [newsRes, pubRes] = await Promise.all([
-          axiosClient.get("/recent-updates"),
-          axiosClient.get("/published"),
+          fetchClient.get("/recent-updates"),
+          fetchClient.get("/published"),
         ]);
 
         // Process news data with proper validation
@@ -125,7 +124,7 @@ export default function LatestNewsPage() {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/communication/latestNews")}`,
         );
         const seo = res?.data?.data;
@@ -249,11 +248,11 @@ export default function LatestNewsPage() {
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative w-full h-42 md:h-56 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+
+
+
+
             className="w-full px-4 text-center z-10"
           >
             <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -268,18 +267,18 @@ export default function LatestNewsPage() {
               </Link>{" "}
               - {seoData?.h1tag || "Latest News"}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* ================= CONTENT ================= */}
       <div className="relative py-2 md:py-4 px-4 md:px-12 lg:px-12 bg-white overflow-hidden">
         {/* ---------- HEADING ---------- */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="text-center"
         >
           <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
@@ -293,21 +292,21 @@ export default function LatestNewsPage() {
             important updates that reflect our ongoing mission toward social
             upliftment and community well-being.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full h-1 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full mt-2"
         />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           {/* <p className="text-gray-700 mt-2 text-xs md:text-[15px] text-justify leading-relaxed font-normal">
             This initiative reflects a deep commitment to spiritual awareness,
@@ -335,14 +334,14 @@ export default function LatestNewsPage() {
     efforts toward positive change and meaningful contribution.
   </strong>
 </p>
-        </motion.div>
+        </div>
 
         {/* ---------- FILTERS ---------- */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="w-full flex flex-col md:flex-row justify-between gap-4 mt-8 mb-6"
         >
           <div className="relative w-full md:w-56 group">
@@ -378,7 +377,7 @@ export default function LatestNewsPage() {
               className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-[#DF562C] transition-colors"
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* ---------- LOADING STATE ---------- */}
         {loading && (
@@ -391,9 +390,9 @@ export default function LatestNewsPage() {
 
         {/* ---------- EMPTY STATE ---------- */}
         {!loading && filteredNews.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <div
+
+
             className="text-center py-12"
           >
             <p className="text-gray-500 text-lg">
@@ -412,32 +411,23 @@ export default function LatestNewsPage() {
                 Clear all filters
               </button>
             )}
-          </motion.div>
+          </div>
         )}
 
         {/* ---------- NEWS LIST ---------- */}
         {!loading && filteredNews.length > 0 && (
-          <motion.div
+          <div
             className="w-full space-y-6 py-2"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.15 },
-              },
-            }}
+
+
+
+
           >
             {filteredNews.map((item) => (
-              <motion.div
+              <div
                 key={item.id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-                }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+
+
                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl p-4 md:p-6 flex flex-col md:flex-row gap-6 border border-gray-100 transition-all duration-300"
               >
                 {/* LEFT IMAGE */}
@@ -517,9 +507,9 @@ export default function LatestNewsPage() {
                     </span>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

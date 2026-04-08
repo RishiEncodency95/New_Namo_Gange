@@ -1,12 +1,12 @@
-import axios from "axios";
-import axiosClient from "./axiosClient";
+
+import fetchClient from "./fetchClient";
 
 export const trackSocialClick = async (iconName: string) => {
   try {
     // const ipRes = await axios.get("https://api.ipify.org?format=json");
     // const ipAddress = ipRes.data.ip;
 
-    await axiosClient.post("/click-analytics/create", {
+    await fetchClient.post("/click-analytics/create", {
       iconName,
       // ipAddress,
     });

@@ -2,12 +2,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Slider from "react-slick";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 
 interface Testimonial {
   _id: string;
@@ -19,27 +18,27 @@ interface Testimonial {
 }
 
 const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
-  <motion.button
+  <button
     onClick={onClick}
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.95 }}
+    aria-label="Previous Testimonial"
+    title="Previous"
     className="absolute left-0 md:left-2 lg:left-4 top-1/2 -translate-y-1/2 z-20
-    bg-white/70 hover:bg-white text-gray-700 p-2 rounded-full shadow transition"
+    bg-white/70 hover:bg-white text-gray-700 w-10 h-10 flex items-center justify-center rounded-full shadow transition"
   >
     <ChevronLeft size={18} />
-  </motion.button>
+  </button>
 );
 
 const NextArrow = ({ onClick }: { onClick?: () => void }) => (
-  <motion.button
+  <button
     onClick={onClick}
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.95 }}
+    aria-label="Next Testimonial"
+    title="Next"
     className="absolute right-0 md:right-2 lg:right-4 top-1/2 -translate-y-1/2 z-20
-    bg-white/70 hover:bg-white text-gray-700 p-2 rounded-full shadow transition"
+    bg-white/70 hover:bg-white text-gray-700 w-10 h-10 flex items-center justify-center rounded-full shadow transition"
   >
     <ChevronRight size={18} />
-  </motion.button>
+  </button>
 );
 
 const WhatPeople = () => {
@@ -50,7 +49,7 @@ const WhatPeople = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const res = await axiosClient.get("/testimonials");
+        const res = await fetchClient.get("/testimonials");
 
         const data: Testimonial[] = res?.data?.data || [];
 
@@ -116,11 +115,11 @@ const WhatPeople = () => {
     <section className="w-full relative py-6 overflow-hidden">
       <div className="w-full px-3 md:px-12 lg:px-12 text-center">
         {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="mb-2"
         >
           <h2 className="text-lg md:text-xl font-medium text-gray-900 leading-tight">
@@ -133,14 +132,14 @@ const WhatPeople = () => {
             "Creating positive change through service, awareness, and
             sustainable community development."
           </p>
-        </motion.div>
+        </div>
 
         {/* TOP CONTENT BLOCK */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className="flex justify-center w-full md:mb-4 px-2 md:px-0"
         >
           <div className="w-full bg-white py-2 md:py-2 relative overflow-hidden text-center rounded-lg ">
@@ -155,7 +154,7 @@ const WhatPeople = () => {
               .
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* LOADING STATE */}
         {loading ? (
@@ -183,29 +182,11 @@ const WhatPeople = () => {
                   key={person._id}
                   className="px-1 md:px-2 py-2 md:py-4 h-full"
                 >
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 20,
-                        duration: 0.6,
-                      },
-                    }}
-                    whileHover={{
-                      y: -6,
-                      scale: 1.02,
-                      boxShadow: "0 30px 40px -20px rgba(0,0,0,0.3)",
-                      transition: {
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 17,
-                      },
-                    }}
-                    viewport={{ once: true, margin: "-30px" }}
+                  <div
+
+
+
+
                     className="group bg-white rounded-xl md:rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl overflow-hidden h-full flex flex-col relative"
                   >
                     {/* Premium Gradient Overlay on Hover */}
@@ -245,30 +226,22 @@ const WhatPeople = () => {
                     {/* Content Section */}
                     <div className="p-3 md:p-4 lg:p-5 flex-1 flex flex-col relative bg-white/90 backdrop-blur-sm">
                       {/* Quote Icon */}
-                      <motion.div
+                      <div
                         className="absolute top-3 right-3 text-gray-200 group-hover:text-orange-200 transition-colors duration-300"
-                        animate={{
-                          rotate: [0, 3, -3, 0],
-                          scale: [1, 1.05, 1],
-                        }}
-                        transition={{
-                          duration: 6,
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                          ease: "easeInOut",
-                        }}
+
+
                       >
                         <Quote size={16} fill="currentColor" />
-                      </motion.div>
+                      </div>
 
                       {/* Name */}
-                      <motion.h2
+                      <h2
                         className="text-xs md:text-sm lg:text-base font-semibold text-gray-800 mb-2 relative inline-block"
-                        whileHover={{ x: 3 }}
-                        transition={{ type: "spring", stiffness: 400 }}
+
+
                       >
                         <span className="relative z-10">{person.name}</span>
-                      </motion.h2>
+                      </h2>
 
                       {/* Description */}
                       <div className="relative z-10 flex-1 overflow-hidden">
@@ -290,13 +263,13 @@ const WhatPeople = () => {
                     </div>
 
                     {/* Bottom Gradient Accent */}
-                    <motion.div
+                    <div
                       className="h-1 bg-gradient-to-r from-orange-400 via-cyan-400 to-blue-400"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      transition={{ duration: 0.8, delay: 0.2 }}
+
+
+
                     />
-                  </motion.div>
+                  </div>
                 </div>
               ))}
             </Slider>

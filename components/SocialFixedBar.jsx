@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
-import axiosClient from "@/lib/axiosClient";
+import fetchClient from "@/lib/fetchClient";
 import { trackSocialClick } from "@/lib/trackSocialClick";
 
 export default function SocialFixedBar() {
@@ -11,7 +10,7 @@ export default function SocialFixedBar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/social-media/get");
+        const res = await fetchClient.get("/social-media/get");
         setSocialData(res.data.data[0]);
       } catch (error) {
         console.error("Failed to fetch social media data", error);
@@ -74,36 +73,33 @@ export default function SocialFixedBar() {
 /* REUSABLE COMPONENT */
 function SocialIcon({ label, href, Icon, color, delay }) {
   return (
-    <motion.div
+    <div
       className="relative group flex items-center justify-end"
-      animate={{ y: [0, -8, 0] }}
-      transition={{
-        duration: 2.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: delay,
-      }}
+
+
     >
       {/* LABEL */}
-      <motion.span
+      <span
         className="absolute right-14 bg-black text-white text-sm py-1 px-3 rounded shadow-md opacity-0 group-hover:opacity-100 pointer-events-none"
-        initial={{ x: 10 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.3 }}
+
+
+
       >
         {label}
-      </motion.span>
+      </span>
 
       {/* ICON */}
       <a
         href={href}
         target="_blank"
         rel="noreferrer"
+        aria-label={label}
+        title={label}
         onClick={() => trackSocialClick(label)}
-        className="w-9 h-9 rounded-full bg-gray-50 shadow-lg flex items-center justify-center hover:scale-110 transition"
+        className="w-8 h-8 rounded-full bg-gray-50 shadow-lg flex items-center justify-center hover:scale-110 transition"
       >
         <Icon className={`w-5 h-5 ${color}`} />
       </a>
-    </motion.div>
+    </div>
   );
 }

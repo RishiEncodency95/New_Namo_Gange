@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axiosClient from "@/lib/axiosClient";
-import { motion } from "framer-motion";
+import fetchClient from "@/lib/fetchClient";
 
 interface EventType {
   title: string;
@@ -58,11 +57,11 @@ const UpcomingEventItem = ({ item, index }: { item: EventType; index: number }) 
   }, [item]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      viewport={{ once: true, margin: "-50px" }}
+    <div
+
+
+
+
       className={
         isLongText
           ? "w-full mb-10 md:mb-16 p-4 md:p-6 text-center md:text-left clear-both flow-root transition-all bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl group overflow-hidden relative"
@@ -174,7 +173,7 @@ const UpcomingEventItem = ({ item, index }: { item: EventType; index: number }) 
           </Link>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -187,7 +186,7 @@ const UpcomingEvent = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await axiosClient.get("/events");
+        const res = await fetchClient.get("/events");
         const data = res?.data?.data || [];
 
         const parser = new DOMParser();
@@ -264,7 +263,7 @@ const UpcomingEvent = () => {
   useEffect(() => {
     const fetchSEOData = async () => {
       try {
-        const res = await axiosClient.get(
+        const res = await fetchClient.get(
           `/seo/page/${encodeURIComponent("/event/upcoming")}`,
         );
         const seo = res?.data?.data;
@@ -311,11 +310,11 @@ const UpcomingEvent = () => {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
+            <div
+
+
+
+
               className="text-center"
             >
               <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
@@ -331,18 +330,18 @@ const UpcomingEvent = () => {
                 </Link>{" "}
                 - {seoData?.h1tag || "Upcoming Events"}
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="w-full px-2 md:px-12  lg:px-12 py-1.5 md:py-3  text-center">
         {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
         >
           <h2 className="text-sm text-center md:text-lg lg:text-lg font-medium text-gray-900 leading-tight">
             <span>
@@ -357,21 +356,21 @@ const UpcomingEvent = () => {
             together health, culture, nature, and community for collective
             upliftment."
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+
+
+
+
           className=" w-full  h-1 mt-2 bg-gradient-to-r from-[#DF562C] via-[#f89a36] to-[#1e7ed3] rounded-full"
         />
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
+        <p
+
+
+
+
           className="text-gray-700 text-xs md:text-[15px] text-justify leading-relaxed font-normal py-2 md:py-4"
         >
           Our upcoming events are thoughtfully curated to inspire positive
@@ -382,7 +381,7 @@ const UpcomingEvent = () => {
           programs and cultural celebrations to environmental initiatives and
           spiritual gatherings, every event offers a platform to learn, connect,
           and contribute.
-        </motion.p>
+        </p>
         {/* STATIC HEADER SAME */}
 
         {/* Activities List */}
