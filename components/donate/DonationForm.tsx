@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import fetchClient from "@/lib/fetchClient";
 
 const donationOptions: Record<
   string,
@@ -56,6 +57,7 @@ const initialForm: DonationFormData = {
 
 export default function DonationForm() {
   const [form, setForm] = useState(initialForm);
+  const [loading, setLoading] = useState(false);
 
   /* ------------------------- HANDLE CHANGE ------------------------ */
   const handleChange = (
@@ -104,10 +106,19 @@ export default function DonationForm() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Donation Submitted Successfully!");
-    console.log(form);
+    setLoading(true);
+    try {
+      await fetchClient.post("/donations", form);
+      alert("Donation Submitted Successfully! Thank you for your support.");
+      setForm(initialForm);
+    } catch (error: any) {
+      console.error("Donation Error:", error);
+      alert("Something went wrong while submitting donation. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -160,22 +171,14 @@ export default function DonationForm() {
             <div>
               <label className="text-sm font-medium">Phone *</label>
               <input
-                type="text"
+                type="tel"
                 maxLength={10}
                 name="phone"
                 required
                 value={form.phone}
-                onChange={(e) =>
-                  handleChange({
-                    ...e,
-                    target: {
-                      ...e.target,
-                      value: e.target.value.replace(/\D/g, ""),
-                    },
-                  })
-                }
-                className="w-full border rounded px-3 py-2 mt-1 text-sm 
-             focus:outline-none focus:ring-0 focus:border-gray-400"
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-sm
+              focus:outline-none focus:ring-0 focus:border-gray-400"
                 placeholder="10-digit number"
               />
             </div>
@@ -349,9 +352,10 @@ export default function DonationForm() {
             <div className="md:col-span-3 text-center mt-2">
               <button
                 type="submit"
-                className="px-6 py-1.5 md:py-2.5 lg:py-2.5 bg-[#DF562C] text-white rounded text-sm font-semibold shadow hover:bg-orange-600"
+                disabled={loading}
+                className="px-6 py-1.5 md:py-2.5 lg:py-2.5 bg-[#DF562C] text-white rounded text-sm font-semibold shadow hover:bg-orange-600 disabled:bg-gray-400"
               >
-                Proceed to Donate
+                {loading ? "Processing..." : "Proceed to Donate"}
               </button>
             </div>
           </form>

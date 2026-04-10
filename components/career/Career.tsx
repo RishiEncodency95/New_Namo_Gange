@@ -376,29 +376,29 @@ const Career = () => {
               <h3 className="text-base md:text-lg font-bold text-[#0C55A0] mb-3 group-hover:text-[#DF562C] transition-colors">
                 {job?.title}
               </h3>
-  
+
               {/* Job Info */}
               <div className="text-sm text-gray-700 space-y-2 border-b border-gray-100 pb-4">
                 <p className="flex items-center gap-2.5 font-medium">
                   <Briefcase size={16} className="text-[#DF562C]" /> {job?.exp}
                 </p>
-  
+
                 <p className="flex items-center gap-2.5 font-medium">
                   <span className="ml-1 font-bold text-[#DF562C]">₹</span> {job?.salary}
                 </p>
-  
+
                 <p className="flex items-center gap-2.5 font-medium">
                   <MapPin size={16} className="text-[#DF562C]" /> {job?.location}
                 </p>
               </div>
-  
+
               {/* Description */}
               <div className="mt-4 text-xs md:text-sm text-gray-600 text-justify space-y-1.5 leading-relaxed flex-1">
                 {job?.desc?.map((line, i) => (
                   <p key={i}>• {line}</p>
                 ))}
               </div>
-  
+
               {/* BUTTON */}
               <button
                 onClick={() => {
@@ -434,280 +434,286 @@ const Career = () => {
       {/* ========= POPUP MODAL ========= */}
       {openModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-2 md:p-6">
-          <div 
+          <div
             className="w-full max-w-5xl h-[95vh] md:h-[90vh] rounded-3xl p-[2px] shadow-[0_10px_40px_rgba(0,0,0,0.2)] relative flex"
             style={{ background: "linear-gradient(135deg, #0C55A0, #f89a36, #DF562C)" }}
           >
             <div className="bg-white w-full h-full rounded-[22px] overflow-hidden relative flex">
-            {/* Close Button */}
-            <button
-              onClick={() => setOpenModal(false)}
-              className="absolute right-6 top-6 text-gray-600 text-2xl hover:text-black z-50"
-            >
-              ✕
-            </button>
+              {/* Close Button */}
+              <button
+                onClick={() => setOpenModal(false)}
+                className="absolute right-6 top-6 text-gray-600 text-2xl hover:text-black z-50"
+              >
+                ✕
+              </button>
 
-            {/* LEFT IMAGE SECTION */}
-            <div className="hidden md:flex w-[40%] h-full relative overflow-hidden">
-              {/* Background Image */}
-              <Image
-                src="/career/career.jpeg"
-                alt="Namo Gange Trust"
-                fill
-                priority
-                className="object-cover"
-              />
+              {/* LEFT IMAGE SECTION */}
+              <div className="hidden md:flex w-[40%] h-full relative overflow-hidden">
+                {/* Background Image */}
+                <Image
+                  src="/career/career.jpeg"
+                  alt="Namo Gange Trust"
+                  fill
+                  priority
+                  className="object-cover"
+                />
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0C55A0]/80 via-[#0C55A0]/40 to-transparent"></div>
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C55A0]/80 via-[#0C55A0]/40 to-transparent"></div>
 
-              {/* Text Content */}
-              <div className="relative z-10 p-6 text-white flex flex-col justify-end text-center w-full h-full">
-                <h3 className="text-xl font-semibold tracking-wide">
-                  Namo Gange Trust
-                </h3>
-                <p className="text-sm mt-2 opacity-90 leading-relaxed">
-                  Join a mission-driven organisation working for social,
-                  cultural, environmental & spiritual upliftment.
-                </p>
-              </div>
-            </div>
-
-            {/* RIGHT FORM SECTION */}
-            <div className="w-full md:w-[60%] flex flex-col p-8">
-              {isSuccess ? (
-                <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800">Application Submitted!</h3>
-                  <p className="text-sm text-gray-600">
-                    Thank you for applying. We will review your profile and get back to you soon.
+                {/* Text Content */}
+                <div className="relative z-10 p-6 text-white flex flex-col justify-end text-center w-full h-full">
+                  <h3 className="text-xl font-semibold tracking-wide">
+                    Namo Gange Trust
+                  </h3>
+                  <p className="text-sm mt-2 opacity-90 leading-relaxed">
+                    Join a mission-driven organisation working for social,
+                    cultural, environmental & spiritual upliftment.
                   </p>
-                  <button
-                    onClick={() => {
-                      setIsSuccess(false);
-                      setOpenModal(false);
-                    }}
-                    className="bg-[#0C55A0] text-white px-8 py-2 rounded shadow-md text-sm font-semibold hover:bg-[#08467c]"
-                  >
-                    Close
-                  </button>
                 </div>
-              ) : (
-                <>
-                  {/* Title */}
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-                    Join Our Team
-                  </h2>
-                  <p className="italic text-sm md:text-[15px] w-full text-gray-700 text-center mb-2">
-                    “This form is intended for individuals who wish to associate
-                    with us through a spirit of selfless service and sincere
-                    dedication. We encourage you to proceed only if your intent is
-                    guided by seva (service), compassion, and a desire to contribute
-                    meaningfully — not by commercial expectations or personal gain.”
-                  </p>
+              </div>
 
-                  <form onSubmit={handleSubmit} className="flex-1 flex flex-col min-h-0">
-                    {/* Scrollable Form Area */}
-                    <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        {/* NAME */}
-                        <div className="flex flex-col">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Your Name</label>
-                          <input
-                            required
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            type="text"
-                            placeholder="E.g. John Doe"
-                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
-                          />
-                        </div>
+              {/* RIGHT FORM SECTION */}
+              <div className="w-full md:w-[60%] flex flex-col p-8">
+                {isSuccess ? (
+                  <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                      <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800">Application Submitted!</h3>
+                    <p className="text-sm text-gray-600">
+                      Thank you for applying. We will review your profile and get back to you soon.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setIsSuccess(false);
+                        setOpenModal(false);
+                      }}
+                      className="bg-[#0C55A0] text-white px-8 py-2 rounded shadow-md text-sm font-semibold hover:bg-[#08467c]"
+                    >
+                      Close
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    {/* Title */}
+                    <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                      Join Our Team
+                    </h2>
+                    <p className="italic text-sm md:text-[15px] w-full text-gray-700 text-center mb-2">
+                      “This form is intended for individuals who wish to associate
+                      with us through a spirit of selfless service and sincere
+                      dedication. We encourage you to proceed only if your intent is
+                      guided by seva (service), compassion, and a desire to contribute
+                      meaningfully — not by commercial expectations or personal gain.”
+                    </p>
 
-                        {/* EMAIL */}
-                        <div className="flex flex-col">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Email</label>
-                          <div className="flex gap-2">
+                    <form onSubmit={handleSubmit} className="flex-1 flex flex-col min-h-0">
+                      {/* Scrollable Form Area */}
+                      <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                          {/* NAME */}
+                          <div className="flex flex-col">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Your Name</label>
                             <input
                               required
-                              name="email"
-                              value={formData.email}
+                              name="name"
+                              value={formData.name}
                               onChange={handleChange}
-                              type="email"
-                              disabled={isEmailVerified}
-                              placeholder="E.g. john@example.com"
-                              className={`flex-1 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 ${isEmailVerified ? "text-green-700 font-semibold bg-green-50/50 border-green-400" : "text-gray-900 placeholder:text-gray-400"}`}
+                              type="text"
+                              placeholder="E.g. John Doe"
+                              className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
                             />
-                            {!isEmailVerified && (
-                              <button
-                                type="button"
-                                onClick={handleSendEmailOtp}
-                                disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
-                                className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold rounded-xl uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"}`}
-                              >
-                                {isEmailOtpSent ? (emailTimer > 0 ? `RESEND IN ${emailTimer}S` : "RESEND OTP") : "SEND OTP"}
-                              </button>
-                            )}
-                            {isEmailVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
                           </div>
-                          {isEmailOtpSent && !isEmailVerified && (
-                            <div className="mt-2 flex gap-2">
-                              <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
-                                <input
-                                  type="text"
-                                  maxLength={6}
-                                  placeholder="EMAIL OTP"
-                                  value={emailOtp}
-                                  onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                                  className="w-full bg-[#f8faff] border border-blue-200 rounded-xl px-4 py-2.5 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
-                                />
-                              </div>
-                              <button
-                                type="button"
-                                onClick={handleVerifyEmailOtp}
-                                className="px-5 py-2.5 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
-                              >
-                                VERIFY
-                              </button>
-                            </div>
-                          )}
-                        </div>
 
-                        {/* PHONE */}
-                        <div className="flex flex-col">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Phone Number</label>
-                          <div className="flex gap-2">
+                          {/* EMAIL */}
+                          <div className="flex flex-col">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Email</label>
+                            <div className="relative flex items-center group">
+                              <input
+                                required
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                type="email"
+                                disabled={isEmailVerified}
+                                placeholder="E.g. john@example.com"
+                                className={`w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] rounded-xl pl-4 pr-28 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 ${isEmailVerified ? "text-green-700 font-semibold bg-green-50/50 border-green-400" : "text-gray-900 placeholder:text-gray-400"}`}
+                              />
+                              <div className="absolute right-1.5 flex items-center">
+                                {!isEmailVerified ? (
+                                  <button
+                                    type="button"
+                                    onClick={handleSendEmailOtp}
+                                    disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
+                                    className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-lg uppercase tracking-tight transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-gray-100 text-gray-300 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"}`}
+                                  >
+                                    {isEmailOtpSent ? (emailTimer > 0 ? `IN ${emailTimer}S` : "RESEND") : "SEND OTP"}
+                                  </button>
+                                ) : (
+                                  <span className="text-green-600 text-[10px] font-bold px-2 whitespace-nowrap">VERIFIED ✓</span>
+                                )}
+                              </div>
+                            </div>
+                            {isEmailOtpSent && !isEmailVerified && (
+                              <div className="mt-2 flex gap-2">
+                                <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
+                                  <input
+                                    type="text"
+                                    maxLength={6}
+                                    placeholder="EMAIL OTP"
+                                    value={emailOtp}
+                                    onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                                    className="w-full bg-[#f8faff] border border-blue-200 rounded-xl px-4 py-2.5 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                  />
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={handleVerifyEmailOtp}
+                                  className="px-5 py-2.5 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
+                                >
+                                  VERIFY
+                                </button>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* PHONE */}
+                          <div className="flex flex-col">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Phone Number</label>
+                            <div className="relative flex items-center group">
+                              <input
+                                required
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                type="tel"
+                                maxLength={10}
+                                disabled={isPhoneVerified}
+                                placeholder="E.g. 9876543210"
+                                className={`w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] rounded-xl pl-4 pr-28 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 ${isPhoneVerified ? "text-green-700 font-semibold bg-green-50/50 border-green-400" : "text-gray-900 placeholder:text-gray-400"}`}
+                              />
+                              <div className="absolute right-1.5 flex items-center">
+                                {!isPhoneVerified ? (
+                                  <button
+                                    type="button"
+                                    onClick={handleSendPhoneOtp}
+                                    disabled={phoneTimer > 0 || formData.phone.length !== 10}
+                                    className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-lg uppercase tracking-tight transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-gray-100 text-gray-300 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"}`}
+                                  >
+                                    {isPhoneOtpSent ? (phoneTimer > 0 ? `IN ${phoneTimer}S` : "RESEND") : "SEND OTP"}
+                                  </button>
+                                ) : (
+                                  <span className="text-green-600 text-[10px] font-bold px-2 whitespace-nowrap">VERIFIED ✓</span>
+                                )}
+                              </div>
+                            </div>
+                            {isPhoneOtpSent && !isPhoneVerified && (
+                              <div className="mt-2 flex gap-2">
+                                <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
+                                  <input
+                                    type="text"
+                                    maxLength={6}
+                                    placeholder="MOBILE OTP"
+                                    value={phoneOtp}
+                                    onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                                    className="w-full bg-[#f8faff] border border-blue-200 rounded-xl px-4 py-2.5 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                  />
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={handleVerifyPhoneOtp}
+                                  className="px-5 py-2.5 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
+                                >
+                                  VERIFY
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                          {/* City */}
+                          <div className="flex flex-col">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">City</label>
                             <input
                               required
-                              name="phone"
-                              value={formData.phone}
+                              name="city"
+                              value={formData.city}
                               onChange={handleChange}
-                              type="tel"
-                              maxLength={10}
-                              disabled={isPhoneVerified}
-                              placeholder="Enter mobile number"
-                              className={`flex-1 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 ${isPhoneVerified ? "text-green-700 font-semibold bg-green-50/50 border-green-400" : "text-gray-900 placeholder:text-gray-400"}`}
+                              type="text"
+                              placeholder="City"
+                              className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
                             />
-                            {!isPhoneVerified && (
-                              <button
-                                type="button"
-                                onClick={handleSendPhoneOtp}
-                                disabled={phoneTimer > 0 || formData.phone.length !== 10}
-                                className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold rounded-xl uppercase transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"}`}
-                              >
-                                {isPhoneOtpSent ? (phoneTimer > 0 ? `RESEND IN ${phoneTimer}S` : "RESEND OTP") : "SEND OTP"}
-                              </button>
-                            )}
-                            {isPhoneVerified && <span className="text-green-600 text-[10px] font-bold flex items-center px-2">VERIFIED ✓</span>}
                           </div>
-                          {isPhoneOtpSent && !isPhoneVerified && (
-                            <div className="mt-2 flex gap-2">
-                              <div className="flex-1 bg-[#fff9f4] border border-[#fca5a5]/50 px-4 py-2 rounded-sm flex items-center">
-                                <input
-                                  type="text"
-                                  maxLength={6}
-                                  placeholder="MOBILE OTP"
-                                  value={phoneOtp}
-                                  onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                                  className="w-full bg-[#f8faff] border border-blue-200 rounded-xl px-4 py-2.5 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
-                                />
-                              </div>
-                              <button
-                                type="button"
-                                onClick={handleVerifyPhoneOtp}
-                                className="px-5 py-2.5 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
-                              >
-                                VERIFY
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                        {/* City */}
-                        <div className="flex flex-col">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">City</label>
-                          <input
-                            required
-                            name="city"
-                            value={formData.city}
-                            onChange={handleChange}
-                            type="text"
-                            placeholder="City"
-                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
-                          />
-                        </div>
-                        {/* STATE */}
-                        <div className="flex flex-col">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">State</label>
-                          <input
-                            required
-                            name="state"
-                            value={formData.state}
-                            onChange={handleChange}
-                            type="text"
-                            placeholder="State"
-                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
-                          />
-                        </div>
+                          {/* STATE */}
+                          <div className="flex flex-col">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">State</label>
+                            <input
+                              required
+                              name="state"
+                              value={formData.state}
+                              onChange={handleChange}
+                              type="text"
+                              placeholder="State"
+                              className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
+                            />
+                          </div>
 
-                        {/* CURRENT LOCATION */}
-                        <div className="flex flex-col">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Current Location</label>
-                          <input
-                            required
-                            name="currentLocation"
-                            value={formData.currentLocation}
-                            onChange={handleChange}
-                            type="text"
-                            placeholder="Current Location"
-                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
-                          />
-                        </div>
+                          {/* CURRENT LOCATION */}
+                          <div className="flex flex-col">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Current Location</label>
+                            <input
+                              required
+                              name="currentLocation"
+                              value={formData.currentLocation}
+                              onChange={handleChange}
+                              type="text"
+                              placeholder="Current Location"
+                              className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300"
+                            />
+                          </div>
 
-                        {/* ROLE */}
-                        <div className="flex flex-col md:col-span-2">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Role Applying For</label>
-                          <input
-                            name="role"
-                            value={formData.role}
-                            type="text"
-                            readOnly
-                            className="w-full bg-gray-100 border border-gray-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-600 rounded-xl px-4 py-2.5 text-sm outline-none cursor-not-allowed font-medium"
-                          />
-                        </div>
+                          {/* ROLE */}
+                          <div className="flex flex-col md:col-span-2">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Role Applying For</label>
+                            <input
+                              name="role"
+                              value={formData.role}
+                              type="text"
+                              readOnly
+                              className="w-full bg-gray-100 border border-gray-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-600 rounded-xl px-4 py-2.5 text-sm outline-none cursor-not-allowed font-medium"
+                            />
+                          </div>
 
-                        {/* MESSAGE */}
-                        <div className="flex flex-col md:col-span-2">
-                          <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Your Message</label>
-                          <textarea
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            placeholder="Write your message..."
-                            className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 h-28 resize-none"
-                          />
+                          {/* MESSAGE */}
+                          <div className="flex flex-col md:col-span-2">
+                            <label className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-1 ml-1">Your Message</label>
+                            <textarea
+                              name="message"
+                              value={formData.message}
+                              onChange={handleChange}
+                              placeholder="Write your message..."
+                              className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-gray-900 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/15 transition-all duration-300 h-28 resize-none"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* FIXED BUTTON (Always bottom) */}
-                    <div className="mt-4 border-t pt-4 flex justify-center">
-                      <button
-                        type="submit"
-                        disabled={loading || !isPhoneVerified || !isEmailVerified}
-                        className="w-full md:w-auto bg-gradient-to-r from-[#DF562C] to-[#f89a36] hover:from-[#c54d21] hover:to-[#e6831d] text-white px-10 py-3 rounded-xl shadow-lg hover:shadow-orange-500/30 text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed active:scale-95"
-                      >
-                        {loading ? "Submitting..." : "Apply Now"}
-                      </button>
-                    </div>
-                  </form>
-                </>
-              )}
+                      {/* FIXED BUTTON (Always bottom) */}
+                      <div className="mt-4 border-t pt-4 flex justify-center">
+                        <button
+                          type="submit"
+                          disabled={loading || !isPhoneVerified || !isEmailVerified}
+                          className="w-full md:w-auto bg-gradient-to-r from-[#DF562C] to-[#f89a36] hover:from-[#c54d21] hover:to-[#e6831d] text-white px-10 py-3 rounded-xl shadow-lg hover:shadow-orange-500/30 text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed active:scale-95"
+                        >
+                          {loading ? "Submitting..." : "Apply Now"}
+                        </button>
+                      </div>
+                    </form>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
           </div>
         </div>
       )}

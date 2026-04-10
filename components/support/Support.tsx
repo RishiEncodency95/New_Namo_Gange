@@ -338,13 +338,13 @@ const Support = () => {
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Email ID <span className="text-red-500">*</span></label>
                     <div className="flex gap-2">
-                      <input type="email" name="email" value={form.email} onChange={handleChange} required disabled={isEmailVerified} className={`flex-1 border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm transition-all ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Email Address" />
+                      <input type="email" name="email" value={form.email} onChange={handleChange} required disabled={isEmailVerified} className={`flex-1 min-w-0 border border-gray-300 rounded px-4 py-1.5 text-sm outline-none ${isEmailVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Email Address" />
                       {!isEmailVerified && (
                         <button
                           type="button"
                           onClick={handleSendEmailOtp}
                           disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)}
-                          className={`whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md uppercase transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) ? "border border-gray-300 rounded text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
+                          className={`w-full sm:w-auto whitespace-nowrap px-3 py-1.5 text-[10px] font-bold rounded-md ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) ? "border border-gray-300 rounded text-blue-300 cursor-not-allowed" : "bg-[#DF562C] text-white hover:bg-[#c54d21]"}`}
                         >
                           {isEmailOtpSent ? (emailTimer > 0 ? `RESEND IN ${emailTimer}S` : "RESEND OTP") : "SEND OTP"}
                         </button>
@@ -363,7 +363,7 @@ const Support = () => {
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Mobile <span className="text-red-500">*</span></label>
                     <div className="flex gap-2">
-                      <input type="tel" name="mobile" maxLength={10} value={form.mobile} onChange={handlePhoneChange} required disabled={isPhoneVerified} className={`flex-1 border border-gray-300 rounded px-4 py-1.5 text-sm outline-none rounded-sm transition-all ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Mobile Number" />
+                      <input type="tel" name="mobile" maxLength={10} value={form.mobile} onChange={handlePhoneChange} required disabled={isPhoneVerified} className={`flex-1 min-w-0 border border-gray-300 rounded px-4 py-1.5 text-sm outline-none ${isPhoneVerified ? "text-green-600 font-semibold italic" : "text-gray-800 placeholder:text-gray-400"}`} placeholder="Mobile Number" />
                       {!isPhoneVerified && (
                         <button
                           type="button"
@@ -417,7 +417,7 @@ const Support = () => {
                     <button
                       type="submit"
                       disabled={loading || !isFormComplete || !isPhoneVerified || !isEmailVerified}
-                      className="bg-[#DF562C] text-white px-12 py-2.5 rounded-md font-bold uppercase tracking-widest disabled:opacity-50 hover:bg-[#c54d21] transition-all"
+                      className="bg-[#DF562C] text-white px-12 py-2.5 rounded-md font-bold uppercase tracking-widest disabled:opacity-50 hover:bg-[#c54d21] transition-all w-full md:col-span-2"
                     >
                       {loading ? "Submitting..." : "Submit Support"}
                     </button>

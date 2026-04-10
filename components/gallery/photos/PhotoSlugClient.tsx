@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import fetchClient from "@/lib/fetchClient";
+import { notFound } from "next/navigation";
 
 type GalleryItem = {
   _id: string;
@@ -18,12 +19,17 @@ interface SEOData {
   banner_alt?: string;
   h1tag?: string;
 }
-
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center min-h-[60vh]">
+    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#DF562C]"></div>
+  </div>
+);
 export default function PhotoSlugClient({ slug }: { slug: string }) {
   const [data, setData] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<string | null>(null);
   const [seoData, setSeoData] = useState<SEOData | null>(null);
+  const [categoryNotFound, setCategoryNotFound] = useState(false);
 
   const title = slug
     ? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
@@ -56,32 +62,36 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
 
           const matchedCategory = galleryArray.find(
             (item: any) =>
-              item && 
+              item &&
               item.slug?.trim().toLowerCase() === currentSlug &&
               item.status === "Active"
           );
 
-          if (matchedCategory && Array.isArray(matchedCategory.images) && matchedCategory.images.length > 0) {
-            const formattedImages = matchedCategory.images.map((img: any, index: number) => {
-              const url = typeof img === "string" ? img : img.url;
-              const alt = typeof img === "object" ? img.alt : null;
+          if (matchedCategory) {
+            if (Array.isArray(matchedCategory.images) && matchedCategory.images.length > 0) {
+              const formattedImages = matchedCategory.images.map((img: any, index: number) => {
+                const url = typeof img === "string" ? img : img.url;
+                const alt = typeof img === "object" ? img.alt : null;
 
-              const imageUrl = url.startsWith("http")
-                ? url
-                : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${url}`;
+                const imageUrl = url.startsWith("http")
+                  ? url
+                  : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${url}`;
 
-              return {
-                _id: `${matchedCategory._id}-${index}`,
-                title: alt || matchedCategory.category || matchedCategory.image_alt || "Gallery Image",
-                image: imageUrl,
-                slug: matchedCategory.slug,
-                status: matchedCategory.status
-              };
-            });
-            setData(formattedImages);
+                return {
+                  _id: `${matchedCategory._id}-${index}`,
+                  title: alt || matchedCategory.category || matchedCategory.image_alt || "Gallery Image",
+                  image: imageUrl,
+                  slug: matchedCategory.slug,
+                  status: matchedCategory.status
+                };
+              });
+              setData(formattedImages);
+            } else {
+              setData([]);
+            }
           } else {
             console.warn(`❌ No matching Active gallery found for slug: ${currentSlug}`);
-            setData([]);
+            setCategoryNotFound(true);
           }
         }
 
@@ -91,7 +101,7 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
           try {
             const baseSeoRes = await fetchClient.get(`/seo/page/${encodeURIComponent("/gallery/photos")}`);
             seo = baseSeoRes.data?.data;
-          } catch (err) {}
+          } catch (err) { }
         }
 
         if (seo && isMounted) {
@@ -111,6 +121,12 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
     fetchData();
     return () => { isMounted = false; };
   }, [slug]);
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  if (categoryNotFound) {
+    return notFound();
+  }
 
   return (
     <section className="bg-gray-50 min-h-screen">
@@ -136,33 +152,33 @@ export default function PhotoSlugClient({ slug }: { slug: string }) {
 
           {/* Content */}
           <div className="relative w-full h-full flex items-center justify-center z-10 px-4">
-          <div
+            <div
 
 
 
 
-            className="w-full px-4 text-center z-10"
-          >
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
-              {seoData?.h1tag || "Photos Gallery"}
-            </h1>
-            <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
-              {" "}
-              <Link
-                href="/"
-                className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
-              >
-                Home
-              </Link>{" "}
-              -{" "}
-              <Link href="/gallery/photos" className="hover:underline">
+              className="w-full px-4 text-center z-10"
+            >
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-white tracking-wide drop-shadow-lg">
                 {seoData?.h1tag || "Photos Gallery"}
-              </Link>
-            </p>
+              </h1>
+              <p className="text-sm md:text-lg text-white mt-2 font-light tracking-wider">
+                {" "}
+                <Link
+                  href="/"
+                  className="text-[#DF562C] font-medium hover:text-orange-400 transition-colors"
+                >
+                  Home
+                </Link>{" "}
+                -{" "}
+                <Link href="/gallery/photos" className="hover:underline">
+                  {seoData?.h1tag || "Photos Gallery"}
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
       {/* ===== CONTENT ===== */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">

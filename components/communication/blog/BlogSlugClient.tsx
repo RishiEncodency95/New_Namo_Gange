@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import fetchClient from "@/lib/fetchClient";
+import { notFound } from "next/navigation";
 
 interface Blog {
   _id: string;
@@ -55,12 +56,24 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
 
   // Separate useEffect for SEO data
   useEffect(() => {
+    if (!slug) return;
     const fetchSEOData = async () => {
       try {
+        const currentPath = `/communication/blog/${slug}`;
         const res = await fetchClient.get(
-          `/seo/page/${encodeURIComponent("/blog")}`,
+          `/seo/page/${encodeURIComponent(currentPath)}`,
         );
-        const seo = res?.data?.data;
+
+        let seo = res?.data?.data;
+
+        // If specific SEO for the blog is not found, fallback to the main blog list SEO
+        if (!seo) {
+          const fallbackRes = await fetchClient.get(
+            `/seo/page/${encodeURIComponent("/communication/blog")}`,
+          );
+          seo = fallbackRes?.data?.data;
+        }
+
         if (seo) {
           setSeoData({
             page_banner: seo.page_banner,
@@ -75,7 +88,7 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
       }
     };
     fetchSEOData();
-  }, []);
+  }, [slug]);
 
   /* ================= LOADING ================= */
   if (loading) {
@@ -88,17 +101,7 @@ export default function BlogSlugClient({ slug }: { slug: string }) {
 
   /* ================= NOT FOUND ================= */
   if (!blog) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <h2 className="text-xl font-semibold text-gray-800">Blog not found</h2>
-        <Link
-          href="/communication/blog"
-          className="mt-3 text-sm text-[#7a0d0d] hover:underline"
-        >
-          ← Back to Blogs
-        </Link>
-      </div>
-    );
+    return notFound();
   }
 
   return (

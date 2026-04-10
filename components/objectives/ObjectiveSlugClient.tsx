@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import fetchClient from "@/lib/fetchClient";
+import { notFound } from "next/navigation";
 
 /* ================= TYPES ================= */
 
@@ -24,6 +25,12 @@ interface ObjectiveApi {
   desc: string;
   meta_desc?: string;
   status: string;
+}
+
+interface SEOData {
+  page_banner?: string;
+  banner_alt?: string;
+  h1tag?: string;
 }
 
 interface Initiative {
@@ -115,11 +122,10 @@ const InitiativeItem = ({
         ref={imgRef}
         className={
           isLongText
-            ? `w-full md:w-[30%] lg:w-[28%] relative mb-5 md:mb-2 md:mt-1 ${
-                isEven
-                  ? "md:float-right md:ml-6 lg:ml-8"
-                  : "md:float-left md:mr-6 lg:mr-8"
-              }`
+            ? `w-full md:w-[30%] lg:w-[28%] relative mb-5 md:mb-2 md:mt-1 ${isEven
+              ? "md:float-right md:ml-6 lg:ml-8"
+              : "md:float-left md:mr-6 lg:mr-8"
+            }`
             : `w-full md:col-span-3 relative ${isEven ? "md:order-2" : "md:order-1"}`
         }
       >
@@ -160,9 +166,8 @@ const InitiativeItem = ({
         className={
           isLongText
             ? ""
-            : `w-full md:col-span-7 text-center md:text-left ${
-                isEven ? "md:order-1" : "md:order-2"
-              }`
+            : `w-full md:col-span-7 text-center md:text-left ${isEven ? "md:order-1" : "md:order-2"
+            }`
         }
       >
         <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-2 leading-tight">
@@ -203,6 +208,8 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
   const [objective, setObjective] = useState<Objective | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
+  const [seoLoading, setSeoLoading] = useState(true);
 
   /* ================= FETCH DATA ================= */
 
@@ -253,6 +260,37 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
     fetchData();
   }, [slug]);
 
+  // Separate useEffect for SEO data
+  useEffect(() => {
+    if (!slug) return;
+    const fetchSEOData = async () => {
+      try {
+        const currentPath = `/objectives/${slug}`;
+        const res = await fetchClient.get(
+          `/seo/page/${encodeURIComponent(currentPath)}`,
+        );
+
+        let seo = res?.data?.data;
+
+        // Optionally, you can add a fallback here if needed
+        // For example, if no specific SEO, you could fallback to a generic objectives SEO
+
+        if (seo) {
+          setSeoData({
+            page_banner: seo.page_banner,
+            banner_alt: seo.banner_alt,
+            h1tag: seo.h1tag,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching SEO data for objective:", error);
+      } finally {
+        setSeoLoading(false);
+      }
+    };
+    fetchSEOData();
+  }, [slug]);
+
   const stripHtmlTags = (html: string = ""): string => {
     if (typeof window === "undefined") return html;
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -265,15 +303,23 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
     return <LoadingSpinner />;
   }
 
+  if (!objective) {
+    return notFound();
+  }
+
   return (
     <section className="bg-gray-50 min-h-screen">
       {/* ================= BANNER ================= */}
       <div
         className="w-full bg-cover bg-center bg-no-repeat relative"
         style={{
-          backgroundImage: objective?.image
-            ? `url(${objective.image})`
-            : "url('/objectives/moksha1.jpg')",
+          backgroundImage: seoData?.page_banner
+            ? seoData.page_banner.startsWith("http")
+              ? `url(${seoData.page_banner})`
+              : `url(${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ""}${seoData.page_banner})`
+            : objective?.image
+              ? `url(${objective.image})`
+              : "url('/objectives/moksha1.jpg')",
           backgroundAttachment: "scroll",
         }}
       >
@@ -285,7 +331,7 @@ export default function ObjectiveSlugClient({ slug }: { slug: string }) {
             className="max-w-7xl mx-auto px-4 text-center text-white"
           >
             <h1 className="text-xl md:text-2xl font-medium uppercase tracking-wider drop-shadow-lg">
-              {slug.replace(/-/g, " ")}
+              {seoData?.h1tag || slug.replace(/-/g, " ")}
             </h1>
             <p className="text-sm md:text-lg mt-2 font-light tracking-wide">
               <Link

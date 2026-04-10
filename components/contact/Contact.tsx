@@ -373,186 +373,184 @@ const Contact: React.FC = () => {
 
             {/* -------- FORM -------- */}
             <div
-            className="lg:col-span-7 rounded-3xl p-[2px] shadow-2xl shadow-[#0C55A0]/15 transition-all duration-300"
-            style={{
-              background: "linear-gradient(135deg, #0C55A0, #f89a36, #DF562C)",
-            }}
-          >
-            <form
-              onSubmit={handleSubmit}
-              className="w-full h-full bg-white rounded-[22px] p-8 md:p-10 flex flex-col justify-between relative z-10"
+              className="lg:col-span-7 rounded-3xl p-[2px] shadow-2xl shadow-[#0C55A0]/15 transition-all duration-300"
+              style={{
+                background: "linear-gradient(135deg, #0C55A0, #f89a36, #DF562C)",
+              }}
             >
-              <div className="mb-6 md:mb-8 text-left">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 tracking-tight">
-                  Send Us a Message
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  We'd love to hear from you. Please fill out the form below.
-                </p>
-              </div>
-
-              <div className="space-y-5">
-                <div className="relative group">
-                  <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors" />
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your Full Name"
-                    className="w-full bg-white border border-gray-400 shadow-sm text-gray-800 rounded-xl pl-12 pr-4 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <div className="relative group">
-                    <div className="relative flex items-center">
-                      <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors z-10" />
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Email Address"
-                        disabled={isEmailVerified}
-                        className={`w-full bg-white border border-gray-400 shadow-sm rounded-xl pl-12 pr-28 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 ${isEmailVerified ? "text-green-700 font-semibold bg-green-50 border-green-400" : "text-gray-800"}`}
-                        required
-                      />
-                      <div className="absolute right-2">
-                        {!isEmailVerified ? (
-                          <button
-                            type="button"
-                            onClick={handleSendEmailOtp}
-                            disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
-                            className={`px-3 py-2 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all flex items-center justify-center ${
-                              (emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"
-                            }`}
-                          >
-                            {isEmailOtpSent ? (emailTimer > 0 ? `IN ${emailTimer}S` : "RESEND") : "SEND OTP"}
-                          </button>
-                        ) : (
-                          <div className="flex items-center px-3 text-green-600 text-[11px] font-bold tracking-wider">
-                            VERIFIED ✓
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {isEmailOtpSent && !isEmailVerified && (
-                    <div className="mt-3 flex gap-3 transform transition-all duration-300 ease-in-out">
-                      <input
-                        type="text"
-                        maxLength={6}
-                        placeholder="ENTER EMAIL OTP"
-                        value={emailOtp}
-                        onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                        className="w-full bg-blue-50/50 border border-blue-400 shadow-sm rounded-xl px-4 py-3 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
-                      />
-                      <button
-                        type="button"
-                        onClick={handleVerifyEmailOtp}
-                        className="px-6 py-3 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
-                      >
-                        VERIFY
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <div className="relative group">
-                    <div className="relative flex items-center">
-                      <Phone className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors z-10" />
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="Phone Number"
-                        disabled={isPhoneVerified}
-                        maxLength={10}
-                        className={`w-full bg-white border border-gray-400 shadow-sm rounded-xl pl-12 pr-28 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 ${isPhoneVerified ? "text-green-700 font-semibold bg-green-50 border-green-400" : "text-gray-800"}`}
-                        required
-                      />
-                      <div className="absolute right-2">
-                        {!isPhoneVerified ? (
-                          <button
-                            type="button"
-                            onClick={handleSendPhoneOtp}
-                            disabled={phoneTimer > 0 || formData.phone.length !== 10}
-                            className={`px-3 py-2 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all flex items-center justify-center ${
-                              (phoneTimer > 0 || formData.phone.length !== 10) ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"
-                            }`}
-                          >
-                            {isPhoneOtpSent ? (phoneTimer > 0 ? `IN ${phoneTimer}S` : "RESEND") : "SEND OTP"}
-                          </button>
-                        ) : (
-                          <div className="flex items-center px-3 text-green-600 text-[11px] font-bold tracking-wider">
-                            VERIFIED ✓
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {isPhoneOtpSent && !isPhoneVerified && (
-                    <div className="mt-3 flex gap-3 transform transition-all duration-300 ease-in-out">
-                      <input
-                        type="text"
-                        maxLength={6}
-                        placeholder="ENTER MOBILE OTP"
-                        value={phoneOtp}
-                        onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
-                        className="w-full bg-blue-50/50 border border-blue-300 shadow-sm rounded-xl px-4 py-3 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
-                      />
-                      <button
-                        type="button"
-                        onClick={handleVerifyPhoneOtp}
-                        className="px-6 py-3 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
-                      >
-                        VERIFY
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                <div className="relative group">
-                  <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors" />
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Write your message..."
-                    rows={4}
-                    className="w-full bg-white border border-gray-400 shadow-sm text-gray-800 rounded-xl pl-12 pr-4 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 resize-none"
-                    required
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading || !isPhoneVerified || !isEmailVerified}
-                className="mt-8 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#DF562C] to-[#f89a36] hover:from-[#c54d21] hover:to-[#e6831d] text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all duration-300 uppercase tracking-widest disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed"
+              <form
+                onSubmit={handleSubmit}
+                className="w-full h-full bg-white rounded-[22px] p-8 md:p-10 flex flex-col justify-between relative z-10"
               >
-                {loading ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending...
-                  </span>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    Submit Enquiry
-                  </>
-                )}
-              </button>
-            </form>
+                <div className="mb-6 md:mb-8 text-left">
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 tracking-tight">
+                    Send Us a Message
+                  </h3>
+                  <p className="text-gray-500 text-sm">
+                    We'd love to hear from you. Please fill out the form below.
+                  </p>
+                </div>
+
+                <div className="space-y-5">
+                  <div className="relative group">
+                    <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors" />
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your Full Name"
+                      className="w-full bg-white border border-gray-400 shadow-sm text-gray-800 rounded-xl pl-12 pr-4 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <div className="relative group">
+                      <div className="relative flex items-center">
+                        <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors z-10" />
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="Email Address"
+                          disabled={isEmailVerified}
+                          className={`w-full bg-white border border-gray-400 shadow-sm rounded-xl pl-12 pr-28 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 ${isEmailVerified ? "text-green-700 font-semibold bg-green-50 border-green-400" : "text-gray-800"}`}
+                          required
+                        />
+                        <div className="absolute right-2">
+                          {!isEmailVerified ? (
+                            <button
+                              type="button"
+                              onClick={handleSendEmailOtp}
+                              disabled={emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
+                              className={`px-3 py-2 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all flex items-center justify-center ${(emailTimer > 0 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"
+                                }`}
+                            >
+                              {isEmailOtpSent ? (emailTimer > 0 ? `IN ${emailTimer}S` : "RESEND") : "SEND OTP"}
+                            </button>
+                          ) : (
+                            <div className="flex items-center px-3 text-green-600 text-[11px] font-bold tracking-wider">
+                              VERIFIED ✓
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {isEmailOtpSent && !isEmailVerified && (
+                      <div className="mt-3 flex gap-3 transform transition-all duration-300 ease-in-out">
+                        <input
+                          type="text"
+                          maxLength={6}
+                          placeholder="ENTER EMAIL OTP"
+                          value={emailOtp}
+                          onChange={(e) => setEmailOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                          className="w-full bg-blue-50/50 border border-blue-400 shadow-sm rounded-xl px-4 py-3 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleVerifyEmailOtp}
+                          className="px-6 py-3 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
+                        >
+                          VERIFY
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className="relative group">
+                      <div className="relative flex items-center">
+                        <Phone className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors z-10" />
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="Phone Number"
+                          disabled={isPhoneVerified}
+                          maxLength={10}
+                          className={`w-full bg-white border border-gray-400 shadow-sm rounded-xl pl-12 pr-28 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 ${isPhoneVerified ? "text-green-700 font-semibold bg-green-50 border-green-400" : "text-gray-800"}`}
+                          required
+                        />
+                        <div className="absolute right-2">
+                          {!isPhoneVerified ? (
+                            <button
+                              type="button"
+                              onClick={handleSendPhoneOtp}
+                              disabled={phoneTimer > 0 || formData.phone.length !== 10}
+                              className={`px-3 py-2 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all flex items-center justify-center ${(phoneTimer > 0 || formData.phone.length !== 10) ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-[#0C55A0]/10 text-[#0C55A0] hover:bg-[#0C55A0] hover:text-white"
+                                }`}
+                            >
+                              {isPhoneOtpSent ? (phoneTimer > 0 ? `IN ${phoneTimer}S` : "RESEND") : "SEND OTP"}
+                            </button>
+                          ) : (
+                            <div className="flex items-center px-3 text-green-600 text-[11px] font-bold tracking-wider">
+                              VERIFIED ✓
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {isPhoneOtpSent && !isPhoneVerified && (
+                      <div className="mt-3 flex gap-3 transform transition-all duration-300 ease-in-out">
+                        <input
+                          type="text"
+                          maxLength={6}
+                          placeholder="ENTER MOBILE OTP"
+                          value={phoneOtp}
+                          onChange={(e) => setPhoneOtp(e.target.value.replace(/[^0-9]/g, ""))}
+                          className="w-full bg-blue-50/50 border border-blue-300 shadow-sm rounded-xl px-4 py-3 outline-none text-[#0C55A0] text-sm text-center font-bold tracking-[0.3em] placeholder:text-blue-300 placeholder:font-medium placeholder:tracking-normal focus:ring-2 focus:ring-blue-500/20 transition-all"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleVerifyPhoneOtp}
+                          className="px-6 py-3 bg-[#0C55A0] text-white text-[11px] tracking-wider font-bold rounded-xl shadow-md hover:bg-[#08467c] hover:shadow-lg active:scale-95 transition-all"
+                        >
+                          VERIFY
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="relative group">
+                    <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#0C55A0] transition-colors" />
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Write your message..."
+                      rows={4}
+                      className="w-full bg-white border border-gray-400 shadow-sm text-gray-800 rounded-xl pl-12 pr-4 py-3.5 text-sm outline-none focus:border-[#0C55A0] focus:ring-4 focus:ring-[#0C55A0]/10 transition-all duration-300 resize-none"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading || !isPhoneVerified || !isEmailVerified}
+                  className="mt-8 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#DF562C] to-[#f89a36] hover:from-[#c54d21] hover:to-[#e6831d] text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all duration-300 uppercase tracking-widest disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed"
+                >
+                  {loading ? (
+                    <span className="flex items-center gap-2">
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Submit Enquiry
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
           </div>
 
