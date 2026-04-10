@@ -43,7 +43,7 @@ const Initiatives = () => {
                 image: item.image,
                 desc: item.desc,
                 image_alt: item?.image_alt || item.title,
-                link: item.slug ? `/initiatives/${item.slug}` : "#",
+                link: item.link ? item.link : (item.slug ? `/initiatives/${item.slug}` : "#"),
               };
             });
           console.log("setInitiativeList...", fetchedData);

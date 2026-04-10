@@ -167,13 +167,31 @@ export default function InitiativeSlugClient({ slug }: { slug: string }) {
       {/* ================= CONTENT ================= */}
       <div className="max-w-5xl mx-auto px-4 py-4 md:py-6 lg:py-6 bg-white shadow-sm my-4 rounded-md">
         <div
-          className="prose prose-lg max-w-none
-            prose-p:text-gray-700
-            prose-p:leading-relaxed
-            prose-strong:text-gray-900
-            prose-a:text-[#7a0d0d]
-            prose-a:no-underline hover:prose-a:underline"
-          dangerouslySetInnerHTML={{ __html: initiative.desc }}
+          // className="prose prose-lg max-w-none
+          //   prose-p:text-gray-700
+          //   prose-p:leading-relaxed
+          //   prose-strong:text-gray-900
+          //   prose-a:text-[#7a0d0d]
+          //   prose-a:no-underline hover:prose-a:underline"
+          className="
+  text-xs md:text-[15px] text-gray-700 font-normal text-justify
+
+  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-3
+  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3
+  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2
+  [&_h4]:text-base [&_h4]:font-semibold [&_h4]:mb-2
+  [&_h5]:text-sm [&_h5]:font-semibold [&_h5]:mb-2
+  [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:mb-2
+
+  [&_p]:mb-3 [&_p]:leading-relaxed
+
+  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+
+  [&_strong]:font-semibold
+  [&_a]:text-blue-600 [&_a]:underline
+  "
+          dangerouslySetInnerHTML={{ __html: initiative?.desc }}
         />
 
         {/* BACK LINK */}
